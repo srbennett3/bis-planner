@@ -1,0 +1,241 @@
+Spec,Gear Type,Phase,Name,Acquisition Type,Quest,Dungeon,Difficulty,Stats,Special,Notes
+Beast Mastery,Head,PreRaid,Mask of Veiled Death,Auction House,,,,220 Armor; 80 AP,,World Drop
+Beast Mastery,Head,PreRaid,Beast Lord Helm,Dungeon Drop,,Mechanar,Normal,530 Armor; 25 Agi; 21 Sta; 22 Int; 50 AP,,Pathaleon the Calculator
+Beast Mastery,Head,PreRaid,Mok'Nathal Beast-Mask,Dungeon Drop,,Auchenai Crypts,Normal,463 Armor; 23 Agi; 22 Sta; 15 Int; 44 AP,,Exarch Maladaar
+Beast Mastery,Head,PreRaid,Cryptstalker Headpiece,Quest,Cryptstalker Headpiece (Naxx),,,513 Armor; 21 Agi; 30 Sta; 12 Int; 40 AP; 3 MP5; 28 Crit,,
+Beast Mastery,Head,PreRaid,Stalker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,503 Armor; 31 Agi; 12 Sta; 8 Int; 60 AP; 4 MP5,Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Beast Mastery,Head,PreRaid,Stealther's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,226 Armor; 24 Agi; 18 Sta; 60 AP,Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Beast Mastery,Shoulder,PreRaid,Beast Lord Mantle,Dungeon Drop,,Steamvault,Normal,489 Armor; 25 Agi; 4 Sta; 12 Int; 34 AP; 5 MP5,,Warlord Kalithresh
+Beast Mastery,Shoulder,PreRaid,Mantle of Perenolde,Dungeon Drop,,Old Hillsbrad Foothills,Normal,197 Armor; 24 Sta; 20 AP,,Epoch Hunter
+Beast Mastery,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,219 Armor; 25 Agi; 13 Sta; 34 AP; 35 Hit,,Avatar of the Martyred
+Beast Mastery,Shoulder,PreRaid,Cryptstalker Spaulders,Quest,Cryptstalker Spaulders (Naxx),,,464 Armor; 20 Agi; 23 Sta; 10 Int; 38 AP; 14 Crit,,
+Beast Mastery,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,217 Armor; 25 Agi; 50 AP,,
+Beast Mastery,Back,PreRaid,Cloak of the Craft,Auction House,,,,70 Armor; 25 Agi; 20 AP,,World Drop
+Beast Mastery,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP,,
+Beast Mastery,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP,,Avatar of the Martyred
+Beast Mastery,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP,,Blackheart the Inciter
+Beast Mastery,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,,25 Badges of Justice
+Beast Mastery,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit,,
+Beast Mastery,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP,,
+Beast Mastery,Chest,PreRaid,Beast Lord Cuirass,Dungeon Drop,,Botanica,Normal,652 Armor; 20 Agi; 30 Sta; 24 Int; 40 AP; 4 MP5,,Warp Splinter
+Beast Mastery,Chest,PreRaid,Cryptstalker Tunic,Quest,Cryptstalker Tunic (Naxx),,,658 Armor; 30 Agi; 27 Sta; 15 Int; 60 AP; 4 MP5; 10 Hit; 14 Crit,,
+Beast Mastery,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP,,
+Beast Mastery,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit,,
+Beast Mastery,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,,
+Beast Mastery,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,,
+Beast Mastery,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,,Epoch Hunter
+Beast Mastery,Wrist,PreRaid,Cryptstalker Wristguards,Quest,Cryptstalker Wristguards (Naxx),,,276 Armor; 18 Agi; 16 Sta; 34 AP; 10 Hit,,
+Beast Mastery,Hands,PreRaid,Beast Lord Handguards,Dungeon Drop,,Shattered Halls,Normal,407 Armor; 25 Agi; 12 Sta; 17 Int; 34 AP,,Warchief Kargath Bladefist
+Beast Mastery,Hands,PreRaid,Ar'tor's Mainstay,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,387 Armor; 18 Agi; 11 Int; 68 AP; 3 MP5,,
+Beast Mastery,Hands,PreRaid,Cryptstalker Handguards,Quest,Cryptstalker Handguards (Naxx),,,395 Armor; 16 Agi; 21 Sta; 15 Int; 32 AP; 4 MP5; 14 Crit,,
+Beast Mastery,Hands,PreRaid,Gloves of the Nether-Stalker,Quest,Dealing with the Overmaster (NS),,,165 Armor; 16 Agi; 12 Sta; 60 AP,,
+Beast Mastery,Hands,PreRaid,General's Chain Gloves,PvP,,,,363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit,,
+Beast Mastery,Hands,PreRaid,Marshal's Chain Grips,PvP,,,,363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit,,
+Beast Mastery,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit,,
+Beast Mastery,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP; 20 Hit,,
+Beast Mastery,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,,
+Beast Mastery,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,,Ghaz'an
+Beast Mastery,Waist,PreRaid,Cryptstalker Girdle,Quest,Cryptstalker Girdle (Naxx),,,355 Armor; 16 Agi; 22 Sta; 12 Int; 30 AP; 3 MP5; 10 Hit; 14 Crit,,
+Beast Mastery,Legs,PreRaid,Beast Lord Leggings,Dungeon Drop,,Steamvault,Normal,570 Armor; 30 Agi; 25 Sta; 19 Int; 52 AP; 7 MP5,,Warlord Kalithresh
+Beast Mastery,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP,,Quagmirran
+Beast Mastery,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 35 Hit,,Nexus-Prince Shaffar
+Beast Mastery,Legs,PreRaid,Cryptstalker Legguards,Quest,Cryptstalker Legguards (Naxx),,,552 Armor; 28 Agi; 26 Sta; 10 Int; 56 AP; 6 MP5; 14 Crit,,
+Beast Mastery,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge,,
+Beast Mastery,Feet,PreRaid,The Master's Treads,Auction House,,,,191 Armor; 24 Agi; 19 Sta; 48 AP,Equip: Increases your effective stealth level by 1,World Drop
+Beast Mastery,Feet,PreRaid,Boots of the Endless Hunt,Dungeon Drop,,Botanica,Heroic,535 Armor; 26 Agi; 19 Sta; 23 Int; 48 AP; 6 MP5,,Warp Splinter
+Beast Mastery,Feet,PreRaid,Cryptstalker Boots,Quest,Cryptstalker Boots (Naxx),,,425 Armor; 22 Agi; 19 Sta; 8 Int; 44 AP; 10 Hit,,
+Beast Mastery,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,172 Armor; 16 Agi; 56 AP,,
+Beast Mastery,Neck,PreRaid,Jagged Bark Pendant,Dungeon Drop,,Botanica,Normal,26 Agi; 15 Sta; 30 AP,,Warp Splinter
+Beast Mastery,Neck,PreRaid,Prestor's Talisman of Connivery,Dungeon Drop,,Blackwing Lair,Normal,25 Agi; 22 AP; 10 Hit,,Nefarian
+Beast Mastery,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,20 Agi; 18 Sta; 42 AP,,25 Badges of Justice
+Beast Mastery,Neck,PreRaid,Earthen Mark of Razing,Quest,Gurok the Usurper (Nag),,,23 Agi; 20 AP,,
+Beast Mastery,Ring,PreRaid,Band of Unnatural Forces,Dungeon Drop,,Naxxramas,Normal,52 AP; 10 Hit; 14 Crit,,Loatheb
+Beast Mastery,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 Sta; 30 AP,,Talon King Ikiss
+Beast Mastery,Ring,PreRaid,Ring of the Cryptstalker,Dungeon Drop,,Naxxramas,Normal,20 Agi; 40 AP; 6 MP5,,Kel'Thuzad
+Beast Mastery,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP,,
+Beast Mastery,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP,,
+Beast Mastery,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,64 AP; 260 Haste,Use: Increases haste rating by 260 for 10 sec,Pathaleon the Calculator
+Beast Mastery,Trinket,PreRaid,Badge of the Swarmguard,Dungeon Drop,,Ahn'Qiraj,Normal,,,Battleguard Sartura
+Beast Mastery,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,,Temporus
+Beast Mastery,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,72 AP,Use: Increases attack power by 278 for 20 sec,41 Badges of Justice
+Beast Mastery,Trinket,PreRaid,Bladefist's Breadth,Quest,Overlord (HFP),,,200 AP,Use: Increases attack power by 200 for 15 sec,
+Beast Mastery,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP,,Shirrak the Dead Watcher
+Beast Mastery,Main Hand,PreRaid,Silithid Claw,Dungeon Drop,,Ahn'Qiraj,Normal,57.5 DPS; 30 AP; 14 Crit,,Battleguard Sartura
+Beast Mastery,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,71.58 DPS; 21 Agi; 12 Sta; 22 AP,,Nethermancer Sepethrea
+Beast Mastery,Main Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,71.56 DPS; 13 Sta; 22 AP,,High Botanist Freywinn
+Beast Mastery,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,59.81 DPS; 10 Agi; 9 Sta; 32 AP,,
+Beast Mastery,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,71.67 DPS; 8 Sta; 22 AP; 10 Hit; 14 Crit,,Sapphiron
+Beast Mastery,Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,81.25 DPS; 19 Agi; 38 AP,,The Consortium - Exalted
+Beast Mastery,Off Hand,PreRaid,Void-Talon,Vendor,,,,57.5 DPS; 14 Agi; 28 AP,,Netherstorm
+Beast Mastery,Two Hand,PreRaid,Mooncleaver,Auction House,,,,118.65 DPS; 106 AP,,
+Beast Mastery,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP,,Aeonus
+Beast Mastery,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,93.29 DPS; 35 Agi; 30 Sta; 62 AP,,Murmur
+Beast Mastery,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,85.0 DPS; 30 Agi; 22 Sta; 60 AP,,Loatheb
+Beast Mastery,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,93.33 DPS; 54 Agi; 33 Sta,,
+Beast Mastery,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,66.43 DPS; 10 Int; 22 AP,,World Drop
+Beast Mastery,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,73.7 DPS,,Opera Event (Wolf)
+Beast Mastery,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,67.5 DPS; 24 AP; 14 Crit,,Kel'Thuzad
+Beast Mastery,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,75.5 DPS; 14 Agi; 28 AP,,Warlord Kalithresh
+Beast Mastery,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP,,Thrallmar - Exalted
+Beast Mastery,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP,,Honor Hold - Exalted
+Marksmanship,Head,PreRaid,Mask of Veiled Death,Auction House,,,,220 Armor; 80 AP,,World Drop
+Marksmanship,Head,PreRaid,Beast Lord Helm,Dungeon Drop,,Mechanar,Normal,530 Armor; 25 Agi; 21 Sta; 22 Int; 50 AP,,Pathaleon the Calculator
+Marksmanship,Head,PreRaid,Mok'Nathal Beast-Mask,Dungeon Drop,,Auchenai Crypts,Normal,463 Armor; 23 Agi; 22 Sta; 15 Int; 44 AP,,Exarch Maladaar
+Marksmanship,Head,PreRaid,Cryptstalker Headpiece,Quest,Cryptstalker Headpiece (Naxx),,,513 Armor; 21 Agi; 30 Sta; 12 Int; 40 AP; 3 MP5; 28 Crit,,
+Marksmanship,Head,PreRaid,Stalker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,503 Armor; 31 Agi; 12 Sta; 8 Int; 60 AP; 4 MP5,Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Marksmanship,Head,PreRaid,Stealther's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,226 Armor; 24 Agi; 18 Sta; 60 AP,Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Marksmanship,Shoulder,PreRaid,Beast Lord Mantle,Dungeon Drop,,Steamvault,Normal,489 Armor; 25 Agi; 4 Sta; 12 Int; 34 AP; 5 MP5,,Warlord Kalithresh
+Marksmanship,Shoulder,PreRaid,Mantle of Perenolde,Dungeon Drop,,Old Hillsbrad Foothills,Normal,197 Armor; 24 Sta; 20 AP,,Epoch Hunter
+Marksmanship,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,219 Armor; 25 Agi; 13 Sta; 34 AP; 35 Hit,,Avatar of the Martyred
+Marksmanship,Shoulder,PreRaid,Cryptstalker Spaulders,Quest,Cryptstalker Spaulders (Naxx),,,464 Armor; 20 Agi; 23 Sta; 10 Int; 38 AP; 14 Crit,,
+Marksmanship,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,217 Armor; 25 Agi; 50 AP,,
+Marksmanship,Back,PreRaid,Cloak of the Craft,Auction House,,,,70 Armor; 25 Agi; 20 AP,,World Drop
+Marksmanship,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP,,
+Marksmanship,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP,,Avatar of the Martyred
+Marksmanship,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP,,Blackheart the Inciter
+Marksmanship,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,,25 Badges of Justice
+Marksmanship,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit,,
+Marksmanship,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP,,
+Marksmanship,Chest,PreRaid,Beast Lord Cuirass,Dungeon Drop,,Botanica,Normal,652 Armor; 20 Agi; 30 Sta; 24 Int; 40 AP; 4 MP5,,Warp Splinter
+Marksmanship,Chest,PreRaid,Cryptstalker Tunic,Quest,Cryptstalker Tunic (Naxx),,,658 Armor; 30 Agi; 27 Sta; 15 Int; 60 AP; 4 MP5; 10 Hit; 14 Crit,,
+Marksmanship,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP,,
+Marksmanship,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit,,
+Marksmanship,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,,
+Marksmanship,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,,
+Marksmanship,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,,Epoch Hunter
+Marksmanship,Wrist,PreRaid,Cryptstalker Wristguards,Quest,Cryptstalker Wristguards (Naxx),,,276 Armor; 18 Agi; 16 Sta; 34 AP; 10 Hit,,
+Marksmanship,Hands,PreRaid,Beast Lord Handguards,Dungeon Drop,,Shattered Halls,Normal,407 Armor; 25 Agi; 12 Sta; 17 Int; 34 AP,,Warchief Kargath Bladefist
+Marksmanship,Hands,PreRaid,Ar'tor's Mainstay,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,387 Armor; 18 Agi; 11 Int; 68 AP; 3 MP5,,
+Marksmanship,Hands,PreRaid,Cryptstalker Handguards,Quest,Cryptstalker Handguards (Naxx),,,395 Armor; 16 Agi; 21 Sta; 15 Int; 32 AP; 4 MP5; 14 Crit,,
+Marksmanship,Hands,PreRaid,Gloves of the Nether-Stalker,Quest,Dealing with the Overmaster (NS),,,165 Armor; 16 Agi; 12 Sta; 60 AP,,
+Marksmanship,Hands,PreRaid,General's Chain Gloves,PvP,,,,363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit,,
+Marksmanship,Hands,PreRaid,Marshal's Chain Grips,PvP,,,,363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit,,
+Marksmanship,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit,,
+Marksmanship,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP; 20 Hit,,
+Marksmanship,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,,
+Marksmanship,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,,Ghaz'an
+Marksmanship,Waist,PreRaid,Cryptstalker Girdle,Quest,Cryptstalker Girdle (Naxx),,,355 Armor; 16 Agi; 22 Sta; 12 Int; 30 AP; 3 MP5; 10 Hit; 14 Crit,,
+Marksmanship,Legs,PreRaid,Beast Lord Leggings,Dungeon Drop,,Steamvault,Normal,570 Armor; 30 Agi; 25 Sta; 19 Int; 52 AP; 7 MP5,,Warlord Kalithresh
+Marksmanship,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP,,Quagmirran
+Marksmanship,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 35 Hit,,Nexus-Prince Shaffar
+Marksmanship,Legs,PreRaid,Cryptstalker Legguards,Quest,Cryptstalker Legguards (Naxx),,,552 Armor; 28 Agi; 26 Sta; 10 Int; 56 AP; 6 MP5; 14 Crit,,
+Marksmanship,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge,,
+Marksmanship,Feet,PreRaid,The Master's Treads,Auction House,,,,191 Armor; 24 Agi; 19 Sta; 48 AP,Equip: Increases your effective stealth level by 1,World Drop
+Marksmanship,Feet,PreRaid,Boots of the Endless Hunt,Dungeon Drop,,Botanica,Heroic,535 Armor; 26 Agi; 19 Sta; 23 Int; 48 AP; 6 MP5,,Warp Splinter
+Marksmanship,Feet,PreRaid,Cryptstalker Boots,Quest,Cryptstalker Boots (Naxx),,,425 Armor; 22 Agi; 19 Sta; 8 Int; 44 AP; 10 Hit,,
+Marksmanship,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,172 Armor; 16 Agi; 56 AP,,
+Marksmanship,Neck,PreRaid,Jagged Bark Pendant,Dungeon Drop,,Botanica,Normal,26 Agi; 15 Sta; 30 AP,,Warp Splinter
+Marksmanship,Neck,PreRaid,Prestor's Talisman of Connivery,Dungeon Drop,,Blackwing Lair,Normal,25 Agi; 22 AP; 10 Hit,,Nefarian
+Marksmanship,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,20 Agi; 18 Sta; 42 AP,,25 Badges of Justice
+Marksmanship,Neck,PreRaid,Earthen Mark of Razing,Quest,Gurok the Usurper (Nag),,,23 Agi; 20 AP,,
+Marksmanship,Ring,PreRaid,Band of Unnatural Forces,Dungeon Drop,,Naxxramas,Normal,52 AP; 10 Hit; 14 Crit,,Loatheb
+Marksmanship,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 Sta; 30 AP,,Talon King Ikiss
+Marksmanship,Ring,PreRaid,Ring of the Cryptstalker,Dungeon Drop,,Naxxramas,Normal,20 Agi; 40 AP; 6 MP5,,Kel'Thuzad
+Marksmanship,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP,,
+Marksmanship,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP,,
+Marksmanship,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,64 AP; 260 Haste,Use: Increases haste rating by 260 for 10 sec,Pathaleon the Calculator
+Marksmanship,Trinket,PreRaid,Badge of the Swarmguard,Dungeon Drop,,Ahn'Qiraj,Normal,,,Battleguard Sartura
+Marksmanship,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,,Temporus
+Marksmanship,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,72 AP,Use: Increases attack power by 278 for 20 sec,41 Badges of Justice
+Marksmanship,Trinket,PreRaid,Bladefist's Breadth,Quest,Overlord (HFP),,,200 AP,Use: Increases attack power by 200 for 15 sec,
+Marksmanship,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP,,Shirrak the Dead Watcher
+Marksmanship,Main Hand,PreRaid,Silithid Claw,Dungeon Drop,,Ahn'Qiraj,Normal,57.5 DPS; 30 AP; 14 Crit,,Battleguard Sartura
+Marksmanship,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,71.58 DPS; 21 Agi; 12 Sta; 22 AP,,Nethermancer Sepethrea
+Marksmanship,Main Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,71.56 DPS; 13 Sta; 22 AP,,High Botanist Freywinn
+Marksmanship,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,59.81 DPS; 10 Agi; 9 Sta; 32 AP,,
+Marksmanship,Main Hand,PreRaid,Void-Talon,Vendor,,,,57.5 DPS; 14 Agi; 28 AP,,Netherstorm
+Marksmanship,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,71.67 DPS; 8 Sta; 22 AP; 10 Hit; 14 Crit,,Sapphiron
+Marksmanship,Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,81.25 DPS; 19 Agi; 38 AP,,The Consortium - Exalted
+Marksmanship,Two Hand,PreRaid,Mooncleaver,Auction House,,,,118.65 DPS; 106 AP,,
+Marksmanship,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP,,Aeonus
+Marksmanship,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,93.29 DPS; 35 Agi; 30 Sta; 62 AP,,Murmur
+Marksmanship,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,85.0 DPS; 30 Agi; 22 Sta; 60 AP,,Loatheb
+Marksmanship,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,93.33 DPS; 54 Agi; 33 Sta,,
+Marksmanship,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,66.43 DPS; 10 Int; 22 AP,,World Drop
+Marksmanship,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,73.7 DPS,,Opera Event (Wolf)
+Marksmanship,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,67.5 DPS; 24 AP; 14 Crit,,Kel'Thuzad
+Marksmanship,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,75.5 DPS; 14 Agi; 28 AP,,Warlord Kalithresh
+Marksmanship,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP,,Thrallmar - Exalted
+Marksmanship,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP,,Honor Hold - Exalted
+Survival,Head,PreRaid,Mask of Veiled Death,Auction House,,,,220 Armor; 80 AP,,World Drop
+Survival,Head,PreRaid,Beast Lord Helm,Dungeon Drop,,Mechanar,Normal,530 Armor; 25 Agi; 21 Sta; 22 Int; 50 AP,,Pathaleon the Calculator
+Survival,Head,PreRaid,Mok'Nathal Beast-Mask,Dungeon Drop,,Auchenai Crypts,Normal,463 Armor; 23 Agi; 22 Sta; 15 Int; 44 AP,,Exarch Maladaar
+Survival,Head,PreRaid,Cryptstalker Headpiece,Quest,Cryptstalker Headpiece (Naxx),,,513 Armor; 21 Agi; 30 Sta; 12 Int; 40 AP; 3 MP5; 28 Crit,,
+Survival,Head,PreRaid,Stalker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,503 Armor; 31 Agi; 12 Sta; 8 Int; 60 AP; 4 MP5,Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Survival,Head,PreRaid,Stealther's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,226 Armor; 24 Agi; 18 Sta; 60 AP,Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Survival,Shoulder,PreRaid,Beast Lord Mantle,Dungeon Drop,,Steamvault,Normal,489 Armor; 25 Agi; 4 Sta; 12 Int; 34 AP; 5 MP5,,Warlord Kalithresh
+Survival,Shoulder,PreRaid,Mantle of Perenolde,Dungeon Drop,,Old Hillsbrad Foothills,Normal,197 Armor; 24 Sta; 20 AP,,Epoch Hunter
+Survival,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,219 Armor; 25 Agi; 13 Sta; 34 AP; 35 Hit,,Avatar of the Martyred
+Survival,Shoulder,PreRaid,Cryptstalker Spaulders,Quest,Cryptstalker Spaulders (Naxx),,,464 Armor; 20 Agi; 23 Sta; 10 Int; 38 AP; 14 Crit,,
+Survival,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,217 Armor; 25 Agi; 50 AP,,
+Survival,Back,PreRaid,Cloak of the Craft,Auction House,,,,70 Armor; 25 Agi; 20 AP,,World Drop
+Survival,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP,,
+Survival,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP,,Avatar of the Martyred
+Survival,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP,,Blackheart the Inciter
+Survival,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,,25 Badges of Justice
+Survival,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP,,
+Survival,Chest,PreRaid,Beast Lord Cuirass,Dungeon Drop,,Botanica,Normal,652 Armor; 20 Agi; 30 Sta; 24 Int; 40 AP; 4 MP5,,Warp Splinter
+Survival,Chest,PreRaid,Cryptstalker Tunic,Quest,Cryptstalker Tunic (Naxx),,,658 Armor; 30 Agi; 27 Sta; 15 Int; 60 AP; 4 MP5; 10 Hit; 14 Crit,,
+Survival,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP,,
+Survival,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,,
+Survival,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,,
+Survival,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,,Epoch Hunter
+Survival,Wrist,PreRaid,Cryptstalker Wristguards,Quest,Cryptstalker Wristguards (Naxx),,,276 Armor; 18 Agi; 16 Sta; 34 AP; 10 Hit,,
+Survival,Hands,PreRaid,Beast Lord Handguards,Dungeon Drop,,Shattered Halls,Normal,407 Armor; 25 Agi; 12 Sta; 17 Int; 34 AP,,Warchief Kargath Bladefist
+Survival,Hands,PreRaid,Ar'tor's Mainstay,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,387 Armor; 18 Agi; 11 Int; 68 AP; 3 MP5,,
+Survival,Hands,PreRaid,Cryptstalker Handguards,Quest,Cryptstalker Handguards (Naxx),,,395 Armor; 16 Agi; 21 Sta; 15 Int; 32 AP; 4 MP5; 14 Crit,,
+Survival,Hands,PreRaid,Gloves of the Nether-Stalker,Quest,Dealing with the Overmaster (NS),,,165 Armor; 16 Agi; 12 Sta; 60 AP,,
+Survival,Hands,PreRaid,General's Chain Gloves,PvP,,,,363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit,,
+Survival,Hands,PreRaid,Marshal's Chain Grips,PvP,,,,363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit,,
+Survival,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP; 20 Hit,,
+Survival,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,,
+Survival,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,,Ghaz'an
+Survival,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP,,Aeonus
+Survival,Waist,PreRaid,Cryptstalker Girdle,Quest,Cryptstalker Girdle (Naxx),,,355 Armor; 16 Agi; 22 Sta; 12 Int; 30 AP; 3 MP5; 10 Hit; 14 Crit,,
+Survival,Legs,PreRaid,Beast Lord Leggings,Dungeon Drop,,Steamvault,Normal,570 Armor; 30 Agi; 25 Sta; 19 Int; 52 AP; 7 MP5,,Warlord Kalithresh
+Survival,Legs,PreRaid,Emerald-Scale Greaves,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,570 Armor; 28 Agi; 20 Int; 56 AP; 5 MP5,,Captain Skarloc
+Survival,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP,,Quagmirran
+Survival,Legs,PreRaid,Scaled Greaves of Patience,Dungeon Drop,,Old Hillsbrad Foothills,Normal,513 Armor; 28 Agi; 24 Sta; 13 Int; 46 AP; 4 MP5,,Captain Skarloc
+Survival,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 35 Hit,,Nexus-Prince Shaffar
+Survival,Legs,PreRaid,Cryptstalker Legguards,Quest,Cryptstalker Legguards (Naxx),,,552 Armor; 28 Agi; 26 Sta; 10 Int; 56 AP; 6 MP5; 14 Crit,,
+Survival,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge,,
+Survival,Feet,PreRaid,The Master's Treads,Auction House,,,,191 Armor; 24 Agi; 19 Sta; 48 AP,Equip: Increases your effective stealth level by 1,World Drop
+Survival,Feet,PreRaid,Boots of the Endless Hunt,Dungeon Drop,,Botanica,Heroic,535 Armor; 26 Agi; 19 Sta; 23 Int; 48 AP; 6 MP5,,Warp Splinter
+Survival,Feet,PreRaid,Cryptstalker Boots,Quest,Cryptstalker Boots (Naxx),,,425 Armor; 22 Agi; 19 Sta; 8 Int; 44 AP; 10 Hit,,
+Survival,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,172 Armor; 16 Agi; 56 AP,,
+Survival,Neck,PreRaid,Jagged Bark Pendant,Dungeon Drop,,Botanica,Normal,26 Agi; 15 Sta; 30 AP,,Warp Splinter
+Survival,Neck,PreRaid,Prestor's Talisman of Connivery,Dungeon Drop,,Blackwing Lair,Normal,25 Agi; 22 AP; 10 Hit,,Nefarian
+Survival,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,20 Agi; 18 Sta; 42 AP,,25 Badges of Justice
+Survival,Neck,PreRaid,Earthen Mark of Razing,Quest,Gurok the Usurper (Nag),,,23 Agi; 20 AP,,
+Survival,Ring,PreRaid,Pathfinder's Band,Auction House,,,,25 Agi; 34 AP,,World Drop
+Survival,Ring,PreRaid,Truestrike Ring,Auction House,,,,21 Agi; 40 AP; 7 MP5,,World Drop
+Survival,Ring,PreRaid,Band of Reanimation,Dungeon Drop,,Naxxramas,Normal,22 Agi; 46 AP,,Patchwerk
+Survival,Ring,PreRaid,Band of Unnatural Forces,Dungeon Drop,,Naxxramas,Normal,52 AP; 10 Hit; 14 Crit,,Loatheb
+Survival,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 Sta; 30 AP,,Talon King Ikiss
+Survival,Ring,PreRaid,Band of Anguish,Quest,News of Victory (SMV),,,13 Agi; 50 AP,,
+Survival,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP,,
+Survival,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP,,
+Survival,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,64 AP; 260 Haste,Use: Increases haste rating by 260 for 10 sec,Pathaleon the Calculator
+Survival,Trinket,PreRaid,Badge of the Swarmguard,Dungeon Drop,,Ahn'Qiraj,Normal,,,Battleguard Sartura
+Survival,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,,Temporus
+Survival,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,72 AP,Use: Increases attack power by 278 for 20 sec,41 Badges of Justice
+Survival,Trinket,PreRaid,Bladefist's Breadth,Quest,Overlord (HFP),,,200 AP,Use: Increases attack power by 200 for 15 sec,
+Survival,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP,,Shirrak the Dead Watcher
+Survival,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,71.58 DPS; 21 Agi; 12 Sta; 22 AP,,Nethermancer Sepethrea
+Survival,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,59.81 DPS; 10 Agi; 9 Sta; 32 AP,,
+Survival,Main Hand,PreRaid,Void-Talon,Vendor,,,,57.5 DPS; 14 Agi; 28 AP,,Netherstorm
+Survival,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,71.67 DPS; 8 Sta; 22 AP; 10 Hit; 14 Crit,,Sapphiron
+Survival,Off Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,71.56 DPS; 13 Sta; 22 AP,,High Botanist Freywinn
+Survival,Off Hand,PreRaid,Talon of Anzu,Dungeon Drop,,Sethekk Halls,Heroic,71.67 DPS; 10 Agi; 3 Sta; 36 AP,,Anzu
+Survival,Two Hand,PreRaid,Mooncleaver,Auction House,,,,118.65 DPS; 106 AP,,
+Survival,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP,,Aeonus
+Survival,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,93.29 DPS; 35 Agi; 30 Sta; 62 AP,,Murmur
+Survival,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,85.0 DPS; 30 Agi; 22 Sta; 60 AP,,Loatheb
+Survival,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,93.33 DPS; 54 Agi; 33 Sta,,
+Survival,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,66.43 DPS; 10 Int; 22 AP,,World Drop
+Survival,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,73.7 DPS,,Opera Event (Wolf)
+Survival,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,67.5 DPS; 24 AP; 14 Crit,,Kel'Thuzad
+Survival,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,75.5 DPS; 14 Agi; 28 AP,,Warlord Kalithresh
+Survival,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP,,Thrallmar - Exalted
+Survival,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP,,Honor Hold - Exalted
+Survival,Main Hand~Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,81.25 DPS; 19 Agi; 38 AP,,The Consortium - Exalted
