@@ -93,8 +93,8 @@ CSV_FIELDS = [
 
 SHEET_FIELDS = [
     "Interest", "Spec", "Gear Type", "Name", "Phase", "Acquisition Type",
-    "Quest", "Dungeon", "Difficulty", "Stats", "Comparison",
-    "Special", "Notes",
+    "Quest", "Dungeon", "Difficulty", "Stats", "Equip",
+    "Comparison", "Special", "Notes",
 ]
 
 INTEREST_OPTIONS = ["Pass", "Consider", "Need", "Equipped"]
@@ -870,6 +870,10 @@ def export_xlsx(csv_path, spec_order):
     total_db_items = db_row - 2
     log(f"  ItemDB: {total_db_items} items")
 
+    db_end_col_letter = get_column_letter(db_num_cols)
+    itemdb_last_row = max(2, db_row - 1)
+    itemdb_range_bounded = f"ItemDB!A$2:{db_end_col_letter}${itemdb_last_row}"
+
     # -- Current Equipment sheet (first tab) --
     ws_ce = wb.create_sheet(title="Current Equipment")
     ws_ce.sheet_properties.tabColor = "455A64"
@@ -887,7 +891,6 @@ def export_xlsx(csv_path, spec_order):
         ws_ce.column_dimensions[get_column_letter(ci)].width = 9
     ws_ce.freeze_panes = "C2"
 
-    db_end_col_letter = get_column_letter(db_num_cols)
     ce_spec_rows = {}
     ce_row = 2
     for spec_name in spec_order:
@@ -906,7 +909,7 @@ def export_xlsx(csv_path, spec_order):
             for si, stat_key in enumerate(STAT_COLUMNS):
                 db_col = 3 + si
                 formula = (
-                    f'=IFERROR(VLOOKUP(B{ce_row},ItemDB!A:{db_end_col_letter},'
+                    f'=IFERROR(VLOOKUP(B{ce_row},{itemdb_range_bounded},'
                     f'{db_col},FALSE),"")'
                 )
                 ws_ce.cell(row=ce_row, column=3 + si, value=formula)
@@ -941,16 +944,19 @@ def export_xlsx(csv_path, spec_order):
 
     # -- Single BIS Planner sheet --
     # A=Interest B=Spec C=Gear Type D=Name E=Phase F=Acq Type
-    # G=Quest H=Dungeon I=Difficulty J=Stats K=Comparison L=Special M=Notes
+    # G=Quest H=Dungeon I=Difficulty J=Stats K=Equip L=Comparison M=Special N=Notes
     ws = wb.create_sheet(title="BIS Planner")
     ws.sheet_properties.tabColor = "1565C0"
 
+    equip_col_letter = _col_letter(SHEET_FIELDS.index("Equip") + 1)
+
     col_widths = {
         "A": 12, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
-        "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 26, "M": 14,
+        "G": 16, "H": 13, "I": 12, "J": 34, "K": 2, "L": 34, "M": 26, "N": 14,
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
+    ws.column_dimensions[equip_col_letter].hidden = True
 
     for ci, field in enumerate(SHEET_FIELDS, 1):
         cell = ws.cell(row=1, column=ci, value=field)
@@ -977,9 +983,14 @@ def export_xlsx(csv_path, spec_order):
         font = Font(color="FFFFFF", size=10) if dark_bg else Font(size=10)
 
         for ci, field in enumerate(SHEET_FIELDS, 1):
-            if field == "Comparison":
+            if field == "Equip":
+                formula = _build_equip_name_formula(
+                    excel_row, ce_spec_rows, spec_order
+                )
+                cell = ws.cell(row=excel_row, column=ci, value=formula)
+            elif field == "Comparison":
                 formula = _build_comparison_formula(
-                    excel_row, db_num_cols, ce_spec_rows, spec_order
+                    excel_row, equip_col_letter, itemdb_range_bounded
                 )
                 cell = ws.cell(row=excel_row, column=ci, value=formula)
             elif field == "Interest":
@@ -1007,16 +1018,9 @@ def export_xlsx(csv_path, spec_order):
     log(f"Excel -> {xlsx_path} ({len(all_rows)} items, {total_db_items} in ItemDB)")
 
 
-def _build_comparison_formula(row, db_cols, ce_spec_rows, spec_order):
-    """Build a TEXTJOIN formula comparing item stats vs Current Equipment.
-
-    Single-sheet layout: A=Interest B=Spec C=Gear Type D=Name ...
-    CE layout: A=Gear Type B=Item Name C+=stats
-    Uses IFS to pick the correct spec section based on column B.
-    """
-    db_end_col = _col_letter(db_cols)
+def _build_equip_name_formula(row, ce_spec_rows, spec_order):
+    """Equipped item name from Current Equipment (one IFS+INDEX+MATCH per row)."""
     ce = "'Current Equipment'"
-
     equipped_checks = []
     for spec_name in spec_order:
         ce_start, ce_end = ce_spec_rows[spec_name]
@@ -1025,31 +1029,29 @@ def _build_comparison_formula(row, db_cols, ce_spec_rows, spec_order):
             f'INDEX({ce}!B{ce_start}:B{ce_end},'
             f'MATCH(C{row},{ce}!A{ce_start}:A{ce_end},0))'
         )
-    equipped_name = f'IFERROR(IFS({",".join(equipped_checks)}),"")'
+    return f'=IFERROR(IFS({",".join(equipped_checks)}),"")'
 
+
+def _build_comparison_formula(row, helper_col_letter, itemdb_range):
+    """TEXTJOIN of stat diffs; equipped stats via VLOOKUP(helper, ItemDB) vs planned VLOOKUP(D, ItemDB)."""
     parts = []
     for si, stat_key in enumerate(STAT_COLUMNS):
         db_col_num = 3 + si
-        ce_stat_col = _col_letter(3 + si)
-
-        item_stat = f'IFERROR(VLOOKUP(D{row},ItemDB!A:{db_end_col},{db_col_num},FALSE),0)'
-
-        ifs_args = []
-        for spec_name in spec_order:
-            ce_start, ce_end = ce_spec_rows[spec_name]
-            ifs_args.append(
-                f'B{row}="{spec_name}",'
-                f'INDEX({ce}!{ce_stat_col}{ce_start}:{ce_stat_col}{ce_end},'
-                f'MATCH(C{row},{ce}!A{ce_start}:A{ce_end},0))'
-            )
-        equip_stat = f'IFERROR(IFS({",".join(ifs_args)}),0)'
-
-        diff = f'{item_stat}-{equip_stat}'
+        item_stat = (
+            f'IFERROR(VLOOKUP(D{row},{itemdb_range},{db_col_num},FALSE),0)'
+        )
+        equip_stat = (
+            f'IFERROR(VLOOKUP({helper_col_letter}{row},{itemdb_range},'
+            f'{db_col_num},FALSE),0)'
+        )
+        diff = f"{item_stat}-{equip_stat}"
         part = f'IF({diff}<>0,TEXT({diff},"+#;-#")&" {stat_key}","")'
         parts.append(part)
 
     inner = f'TEXTJOIN(", ",TRUE,{",".join(parts)})'
-    return f'=IF({equipped_name}="","Current Equipment Not Specified",{inner})'
+    return (
+        f'=IF({helper_col_letter}{row}="","Current Equipment Not Specified",{inner})'
+    )
 
 
 def _col_letter(n):

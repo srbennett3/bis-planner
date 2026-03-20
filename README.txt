@@ -59,6 +59,7 @@ All BIS and pre-BIS items for the class, with every spec combined on one sheet.
 | **Dungeon** | Dungeon name (blank for non-dungeon items) |
 | **Difficulty** | Normal or Heroic (blank for non-dungeon items) |
 | **Stats** | Item stats (e.g., `142 Armor; 24 Sta; 23 Int`) |
+| **Equip** | (Hidden column) Equipped item name for this row’s spec + slot from Current Equipment; speeds up Comparison. Do not delete. |
 | **Comparison** | Stat difference vs your currently equipped gear (e.g., `+25 Sta, -10 Int`) |
 | **Special** | Procs, use effects, and equip effects |
 | **Notes** | Source details (boss name, badge cost, reputation, etc.) |
@@ -66,7 +67,7 @@ All BIS and pre-BIS items for the class, with every spec combined on one sheet.
 **Features:**
 
 - **Interest dropdown**: Setting an item to **Equipped** automatically updates the Current Equipment sheet and bolds the cell. Only one item per spec + gear type can be Equipped at a time — setting a new one clears the old.
-- **Comparison column**: Shows stat differences vs your currently equipped gear. Displays "Current Equipment Not Specified" until you equip something for that slot/spec.
+- **Comparison column**: Shows stat differences vs your currently equipped gear. Displays "Current Equipment Not Specified" until you equip something for that slot/spec. The hidden **Equip** column resolves the equipped item name once per row so the sheet recalculates faster in Google Sheets (formulas use comma-style US syntax; upload the `.xlsx` and open with Google Sheets). Regenerate the workbook from this project after pulling updates so column layout matches.
 - **Filter/Sort**: Use the header dropdowns to filter by Spec, Gear Type, Acquisition Type, etc.
 - **Frozen columns**: Interest, Spec, Gear Type, and Name (columns A-D) stay visible while scrolling.
 - **Color-coded rows**: Each row is colored by acquisition type (see Row Colors below).
