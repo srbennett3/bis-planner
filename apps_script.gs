@@ -20,6 +20,11 @@ var GG_NAME     = 4;  // D
 var CE_GEARTYPE = 1;  // A
 var CE_ITEMNAME = 2;  // B
 
+// BIS Planner: CmpRaw (formula) = L, Comparison (rich text in Google Sheets) = M
+var CMP_RAW_COL = 12;
+var CMP_DISP_COL = 13;
+var CMP_RAW_LETTER = "L";
+
 function normalizeItemName(v) {
   if (v == null || v === "") return "";
   return String(v).trim();
@@ -57,6 +62,13 @@ function onEdit(e) {
   }
 }
 
+function onOpen() {
+  var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
+  if (bp) {
+    refreshComparisonRichText(bp);
+  }
+}
+
 // ============================================================
 // BIS Planner edits (Interest column)
 // ============================================================
@@ -64,24 +76,34 @@ function onEdit(e) {
 function handleBISPlannerEdit(e, bpSheet) {
   var col = e.range.getColumn();
   var row = e.range.getRow();
-  if (col !== GG_INTEREST || row <= 1) return;
+  if (row <= 1) return;
 
-  var newValue = e.range.getValue();
-  var spec = bpSheet.getRange(row, GG_SPEC).getValue();
-  var gearType = bpSheet.getRange(row, GG_GEARTYPE).getValue();
-  var itemName = normalizeItemName(bpSheet.getRange(row, GG_NAME).getValue());
+  if (col === GG_INTEREST) {
+    var newValue = e.range.getValue();
+    var spec = bpSheet.getRange(row, GG_SPEC).getValue();
+    var gearType = bpSheet.getRange(row, GG_GEARTYPE).getValue();
+    var itemName = normalizeItemName(bpSheet.getRange(row, GG_NAME).getValue());
 
-  if (!normalizeItemName(spec) || !normalizeItemName(gearType)) return;
+    if (!normalizeItemName(spec) || !normalizeItemName(gearType)) return;
 
-  if (newValue === "Equipped") {
-    e.range.setFontWeight("bold");
-    clearOtherEquipped(bpSheet, row, spec, gearType);
-    setCEItem(spec, gearType, itemName);
-  } else {
-    e.range.setFontWeight("normal");
-    if (e.oldValue === "Equipped") {
-      clearCEItemIfMatch(spec, gearType, itemName);
+    if (newValue === "Equipped") {
+      e.range.setFontWeight("bold");
+      clearOtherEquipped(bpSheet, row, spec, gearType);
+      setCEItem(spec, gearType, itemName);
+    } else {
+      e.range.setFontWeight("normal");
+      if (e.oldValue === "Equipped") {
+        clearCEItemIfMatch(spec, gearType, itemName);
+      }
     }
+    SpreadsheetApp.flush();
+    refreshComparisonRichText(bpSheet);
+    return;
+  }
+
+  if (col <= GG_NAME) {
+    SpreadsheetApp.flush();
+    refreshComparisonRichText(bpSheet);
   }
 }
 
@@ -129,6 +151,9 @@ function handleCurrentEquipEdit(e, ceSheet) {
   if (newItemName) {
     setInterestForItem(bpSheet, spec, gearType, newItemName);
   }
+
+  SpreadsheetApp.flush();
+  refreshComparisonRichText(bpSheet);
 }
 
 function findSpecForCERow(ceSheet, targetRow) {
@@ -228,4 +253,90 @@ function clearInterestForItem(bpSheet, spec, gearType, itemName) {
       bpSheet.getRange(r, GG_INTEREST).setFontWeight("normal");
     }
   }
+}
+
+// ============================================================
+// Comparison column: Rich Text (Google Sheets only; CmpRaw = L, Comparison = M)
+// ============================================================
+
+/**
+ * Applies green/red Rich Text to Comparison (column M) from CmpRaw display (column L).
+ * In Excel, column M remains =L (plain); after upload, onOpen and onEdit refresh formatting.
+ */
+function refreshComparisonRichText(bpSheet) {
+  var lastRow = bpSheet.getLastRow();
+  if (lastRow < 2) return;
+
+  var displays = bpSheet.getRange(2, CMP_RAW_COL, lastRow, CMP_RAW_COL).getDisplayValues();
+  for (var i = 0; i < displays.length; i++) {
+    var r = i + 2;
+    var rawDisplay = displays[i][0];
+    var rich = buildComparisonRichTextValue(rawDisplay);
+    if (rich) {
+      bpSheet.getRange(r, CMP_DISP_COL).setRichTextValue(rich);
+    } else {
+      bpSheet.getRange(r, CMP_DISP_COL).setFormula("=" + CMP_RAW_LETTER + r);
+    }
+  }
+}
+
+function buildComparisonRichTextValue(display) {
+  if (display == null) return null;
+  var text = String(display);
+  if (text === "") return null;
+
+  var nl = text.indexOf("\n");
+  var line1 = nl === -1 ? text : text.substring(0, nl);
+  var line2 = nl === -1 ? "" : text.substring(nl + 1);
+
+  var segs = line1.split(",").map(function (s) {
+    return s.trim();
+  }).filter(function (s) {
+    return s.length > 0;
+  });
+
+  var out = "";
+  var runs = [];
+  var si;
+  for (si = 0; si < segs.length; si++) {
+    if (si > 0) {
+      out += ", ";
+    }
+    var segStart = out.length;
+    out += segs[si];
+    var s = segs[si];
+    var c = null;
+    if (s.charAt(0) === "+") c = "#0d652d";
+    else if (s.charAt(0) === "-") c = "#c5221f";
+    if (c) {
+      runs.push({ start: segStart, end: out.length, color: c });
+    }
+  }
+
+  var line2Start = 0;
+  if (line2) {
+    if (out) out += "\n";
+    line2Start = out.length;
+    out += line2;
+  }
+
+  if (out === "") return null;
+
+  var builder = SpreadsheetApp.newRichTextValue().setText(out);
+  for (var j = 0; j < runs.length; j++) {
+    var rr = runs[j];
+    builder.setTextStyle(
+      rr.start,
+      rr.end,
+      SpreadsheetApp.newTextStyle().setForegroundColor(rr.color).build()
+    );
+  }
+  if (line2) {
+    builder.setTextStyle(
+      line2Start,
+      out.length,
+      SpreadsheetApp.newTextStyle().setForegroundColor("#0d652d").build()
+    );
+  }
+  return builder.build();
 }

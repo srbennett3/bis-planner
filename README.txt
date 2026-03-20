@@ -58,16 +58,16 @@ All BIS and pre-BIS items for the class, with every spec combined on one sheet.
 | **Quest** | Quest name (blank for non-quest items) |
 | **Dungeon** | Dungeon name (blank for non-dungeon items) |
 | **Difficulty** | Normal or Heroic (blank for non-dungeon items) |
-| **Stats** | Item stats (e.g., `142 Armor; 24 Sta; 23 Int`) |
+| **Stats** | Item stats (e.g., `142 Armor; 24 Sta; 23 Int`) and, when present, on-use / equip **Attributes** text after a single space |
 | **Equip** | (Hidden column) Equipped item name for this row’s spec + slot from Current Equipment; speeds up Comparison. Do not delete. |
-| **Comparison** | Stat difference vs your currently equipped gear (e.g., `+25 Sta, -10 Int`) |
-| **Special** | Procs, use effects, and equip effects |
+| **CmpRaw** | (Hidden column) Plain-text comparison + equipped Attributes from ItemDB; drives the visible Comparison column. Do not delete. |
+| **Comparison** | Stat differences vs equipped gear; in **Google Sheets**, Apps Script colors `+` segments green and `-` red, and shows equipped **Attributes** in green on the line below (upload `.xlsx` and paste the latest `apps_script.gs`). In Excel, this column is `=L` (same text as CmpRaw). |
 | **Notes** | Source details (boss name, badge cost, reputation, etc.) |
 
 **Features:**
 
 - **Interest dropdown**: Setting an item to **Equipped** automatically updates the Current Equipment sheet and bolds the cell. Only one item per spec + gear type can be Equipped at a time — setting a new one clears the old.
-- **Comparison column**: Shows stat differences vs your currently equipped gear. Displays "Current Equipment Not Specified" until you equip something for that slot/spec. The hidden **Equip** column resolves the equipped item name once per row so the sheet recalculates faster in Google Sheets (formulas use comma-style US syntax; upload the `.xlsx` and open with Google Sheets). Regenerate the workbook from this project after pulling updates so column layout matches.
+- **Comparison column**: Built from hidden **CmpRaw** (column L). In Google Sheets, the script applies green/red to stat deltas and green for the equipped **Attributes** line under the stats. Comparison stats use ItemDB **Attributes** (same source as CE when items are chosen from the list). Regenerate the workbook after pulling updates so column layout matches.
 - **Filter/Sort**: Use the header dropdowns to filter by Spec, Gear Type, Acquisition Type, etc.
 - **Frozen columns**: Interest, Spec, Gear Type, and Name (columns A-D) stay visible while scrolling.
 - **Color-coded rows**: Each row is colored by acquisition type (see Row Colors below).
@@ -164,6 +164,8 @@ python3 generate_bis_planner.py --build-db --test paladin
 python3 generate_bis_planner.py paladin
 python3 generate_bis_planner.py warrior
 python3 generate_bis_planner.py druid
+python3 generate_bis_planner.py --all          # every class (CSV + xlsx in output/)
+python3 generate_bis_planner.py all            # same as --all
 ```
 
 Output goes to `output/{Class}_BIS_Planner.csv` and `output/{Class}_BIS_Planner.xlsx`.

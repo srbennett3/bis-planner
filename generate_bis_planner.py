@@ -88,13 +88,13 @@ STAT_COLUMNS = [
 
 CSV_FIELDS = [
     "Spec", "Gear Type", "Phase", "Name", "Acquisition Type",
-    "Quest", "Dungeon", "Difficulty", "Stats", "Special", "Notes",
+    "Quest", "Dungeon", "Difficulty", "Stats", "Notes",
 ]
 
 SHEET_FIELDS = [
     "Interest", "Spec", "Gear Type", "Name", "Phase", "Acquisition Type",
     "Quest", "Dungeon", "Difficulty", "Stats", "Equip",
-    "Comparison", "Special", "Notes",
+    "CmpRaw", "Comparison", "Notes",
 ]
 
 INTEREST_OPTIONS = ["Pass", "Consider", "Need", "Equipped"]
@@ -456,19 +456,25 @@ def parse_tooltip_to_dict(html):
     return stats, special_str, slot, ilvl
 
 
-def stats_dict_to_string(stats, special=""):
-    """Convert a stats dict + special string to the readable Stats column."""
+def stats_dict_to_string(stats, attributes=""):
+    """Convert a stats dict + attribute string to the readable Stats column.
+
+    Stat lines use '; ' between pairs; a space separates the stat block from
+    on-use / equip attribute text when both are present.
+    """
     parts = []
     for key in STAT_COLUMNS:
         val = stats.get(key)
         if val:
             parts.append(f"{val} {key}")
     result = "; ".join(parts)
-    if special:
-        if result:
-            result += "; " + special
-        else:
-            result = special
+    if attributes:
+        at = attributes.strip()
+        if at:
+            if result:
+                result += " " + at
+            else:
+                result = at
     return result
 
 
@@ -699,8 +705,8 @@ def generate_csv(max_phase, class_name, output_csv):
         acq_type, quest, dungeon, difficulty, notes = classify_acquisition(src)
         db_entry = id_to_stats.get(item["item_id"], {})
         stats_d = db_entry.get("stats", {})
-        special = db_entry.get("special", "")
-        stats_str = stats_dict_to_string(stats_d, "")
+        attributes = db_entry.get("special", "")
+        stats_str = stats_dict_to_string(stats_d, attributes)
         rows.append({
             "Spec": item["spec"],
             "Gear Type": item["gear_type"],
@@ -711,7 +717,6 @@ def generate_csv(max_phase, class_name, output_csv):
             "Dungeon": dungeon,
             "Difficulty": difficulty,
             "Stats": stats_str,
-            "Special": special,
             "Notes": notes,
         })
 
@@ -808,7 +813,12 @@ def export_xlsx(csv_path, spec_order):
     all_rows = []
     with open(csv_path, "r") as f:
         for row in csv.DictReader(f):
-            all_rows.append(row)
+            r = dict(row)
+            legacy_sp = (r.pop("Special", None) or "").strip()
+            if legacy_sp:
+                st = (r.get("Stats") or "").strip()
+                r["Stats"] = (st + " " + legacy_sp).strip() if st else legacy_sp
+            all_rows.append(r)
 
     if not all_rows:
         log("No rows to export.")
@@ -831,7 +841,7 @@ def export_xlsx(csv_path, spec_order):
 
     # -- ItemDB sheet (hidden) --
     ws_db = wb.create_sheet(title="ItemDB")
-    db_headers = ["Name", "Slot"] + STAT_COLUMNS + ["Special"]
+    db_headers = ["Name", "Slot"] + STAT_COLUMNS + ["Attributes"]
     db_num_cols = len(db_headers)
     for ci, h in enumerate(db_headers, 1):
         ws_db.cell(row=1, column=ci, value=h)
@@ -944,19 +954,21 @@ def export_xlsx(csv_path, spec_order):
 
     # -- Single BIS Planner sheet --
     # A=Interest B=Spec C=Gear Type D=Name E=Phase F=Acq Type
-    # G=Quest H=Dungeon I=Difficulty J=Stats K=Equip L=Comparison M=Special N=Notes
+    # G=Quest H=Dungeon I=Difficulty J=Stats K=Equip L=CmpRaw M=Comparison N=Notes
     ws = wb.create_sheet(title="BIS Planner")
     ws.sheet_properties.tabColor = "1565C0"
 
     equip_col_letter = _col_letter(SHEET_FIELDS.index("Equip") + 1)
+    cmp_raw_col_letter = _col_letter(SHEET_FIELDS.index("CmpRaw") + 1)
 
     col_widths = {
         "A": 12, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
-        "G": 16, "H": 13, "I": 12, "J": 34, "K": 2, "L": 34, "M": 26, "N": 14,
+        "G": 16, "H": 13, "I": 12, "J": 34, "K": 2, "L": 2, "M": 34, "N": 14,
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
     ws.column_dimensions[equip_col_letter].hidden = True
+    ws.column_dimensions[cmp_raw_col_letter].hidden = True
 
     for ci, field in enumerate(SHEET_FIELDS, 1):
         cell = ws.cell(row=1, column=ci, value=field)
@@ -988,11 +1000,20 @@ def export_xlsx(csv_path, spec_order):
                     excel_row, ce_spec_rows, spec_order
                 )
                 cell = ws.cell(row=excel_row, column=ci, value=formula)
-            elif field == "Comparison":
-                formula = _build_comparison_formula(
-                    excel_row, equip_col_letter, itemdb_range_bounded
+            elif field == "CmpRaw":
+                formula = _build_cmp_raw_formula(
+                    excel_row,
+                    equip_col_letter,
+                    itemdb_range_bounded,
+                    db_num_cols,
                 )
                 cell = ws.cell(row=excel_row, column=ci, value=formula)
+            elif field == "Comparison":
+                cell = ws.cell(
+                    row=excel_row,
+                    column=ci,
+                    value=f"={cmp_raw_col_letter}{excel_row}",
+                )
             elif field == "Interest":
                 cell = ws.cell(row=excel_row, column=ci, value="")
                 interest_dv.add(cell)
@@ -1032,8 +1053,8 @@ def _build_equip_name_formula(row, ce_spec_rows, spec_order):
     return f'=IFERROR(IFS({",".join(equipped_checks)}),"")'
 
 
-def _build_comparison_formula(row, helper_col_letter, itemdb_range):
-    """TEXTJOIN of stat diffs; equipped stats via VLOOKUP(helper, ItemDB) vs planned VLOOKUP(D, ItemDB)."""
+def _build_cmp_raw_formula(row, helper_col_letter, itemdb_range, attr_col_num):
+    """Plain-text comparison + equipped Attributes (ItemDB last col); Google Sheets Apps Script adds colors in Comparison column."""
     parts = []
     for si, stat_key in enumerate(STAT_COLUMNS):
         db_col_num = 3 + si
@@ -1048,9 +1069,17 @@ def _build_comparison_formula(row, helper_col_letter, itemdb_range):
         part = f'IF({diff}<>0,TEXT({diff},"+#;-#")&" {stat_key}","")'
         parts.append(part)
 
-    inner = f'TEXTJOIN(", ",TRUE,{",".join(parts)})'
+    tj = f'TEXTJOIN(", ",TRUE,{",".join(parts)})'
+    v_attr = (
+        f'IFERROR(VLOOKUP({helper_col_letter}{row},{itemdb_range},'
+        f'{attr_col_num},FALSE),"")'
+    )
+    combined = (
+        f'IF(AND({tj}="",{v_attr}=""),"",'
+        f'IF({v_attr}="",{tj},IF({tj}="",{v_attr},{tj}&CHAR(10)&{v_attr})))'
+    )
     return (
-        f'=IF({helper_col_letter}{row}="","Current Equipment Not Specified",{inner})'
+        f'=IF({helper_col_letter}{row}="","Current Equipment Not Specified",{combined})'
     )
 
 
@@ -1067,6 +1096,18 @@ def _col_letter(n):
 # MAIN
 # ============================================================
 
+
+def list_guide_classes():
+    """Lowercase class names that have at least one guide file in Guides/."""
+    classes = set()
+    for fname in os.listdir(GUIDES_DIR):
+        if fname.endswith(".lua"):
+            m = re.match(r"([A-Z][a-z]+)", fname)
+            if m:
+                classes.add(m.group(1).lower())
+    return sorted(classes)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="BIS Planner — TBC Classic Gear Spreadsheet Generator",
@@ -1075,14 +1116,17 @@ def main():
             "Workflow:\n"
             "  1. python3 generate_bis_planner.py --build-db       # fetch item stats (once)\n"
             "  2. python3 generate_bis_planner.py paladin           # generate Paladin sheet\n"
-            "     python3 generate_bis_planner.py warrior           # generate Warrior sheet\n"
+            "     python3 generate_bis_planner.py --all              # generate every class\n"
+            "     python3 generate_bis_planner.py all               # same as --all\n"
             "\n"
             "  Classes: druid, hunter, mage, paladin, priest, rogue, shaman, warlock, warrior\n"
             "  Phase 0 (default) = PreRaid. Phase 1 = PreRaid + Phase 1 items (cumulative).\n"
         ),
     )
     parser.add_argument("class_name", nargs="?", default=None,
-                        help="Class to generate (e.g., paladin, warrior, druid)")
+                        help="Class to generate (e.g., paladin, warrior, druid), or 'all' for every class")
+    parser.add_argument("--all", action="store_true",
+                        help="Generate CSV and Excel for every class that has guide files")
     parser.add_argument("--build-db", action="store_true",
                         help="Fetch item stats from Wowhead and build item_database.json")
     parser.add_argument("--test", action="store_true",
@@ -1097,16 +1141,30 @@ def main():
         build_item_database(test_mode=args.test, test_class=args.class_name)
         return
 
+    run_all = args.all or (
+        args.class_name is not None and args.class_name.strip().lower() == "all"
+    )
+    if run_all:
+        if args.output:
+            log("ERROR: --output cannot be used with --all or 'all' (each class writes its own file).")
+            sys.exit(1)
+        classes = list_guide_classes()
+        log(f"Generating all {len(classes)} classes: {', '.join(classes)}")
+        for cn in classes:
+            class_title = cn.strip().title()
+            output_csv = os.path.join(OUTPUT_DIR, f"{class_title}_BIS_Planner.csv")
+            rows, spec_order = generate_csv(args.phase, cn, output_csv)
+            if not args.no_excel:
+                export_xlsx(output_csv, spec_order)
+        log("Done (all classes).")
+        return
+
     if not args.class_name:
-        available = set()
-        for fname in os.listdir(GUIDES_DIR):
-            if fname.endswith(".lua"):
-                m = re.match(r"([A-Z][a-z]+)", fname)
-                if m:
-                    available.add(m.group(1).lower())
+        available = list_guide_classes()
         log("ERROR: Please specify a class name.")
-        log(f"  Available classes: {', '.join(sorted(available))}")
+        log(f"  Available classes: {', '.join(available)}")
         log(f"  Example: python3 generate_bis_planner.py paladin")
+        log(f"  Or all: python3 generate_bis_planner.py --all")
         sys.exit(1)
 
     class_title = args.class_name.strip().title()

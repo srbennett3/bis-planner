@@ -1,0 +1,209 @@
+Spec,Gear Type,Phase,Name,Acquisition Type,Quest,Dungeon,Difficulty,Stats,Notes
+Holy,Head,PreRaid,Whitemend Hood,Auction House,,,,145 Armor; 15 Sta; 15 Int; 79 Healing; 27 Spell Dmg; 11 MP5,
+Holy,Head,PreRaid,Hallowed Crown,Dungeon Drop,,Arcatraz,Normal,127 Armor; 12 Sta; 24 Int; 26 Spi; 57 Healing; 19 Spell Dmg,Harbinger Skyriss
+Holy,Head,PreRaid,Scintillating Headdress of Second Sight,Dungeon Drop,,Auchenai Crypts,Heroic,127 Armor; 24 Sta; 27 Int; 32 Spi; 73 Healing; 25 Spell Dmg,Shirrak the Dead Watcher
+Holy,Head,PreRaid,Cowl of Naaru Blessings,Dungeon Token,,,,151 Armor; 28 Sta; 29 Int; 23 Spi; 66 Healing; 22 Spell Dmg,50 Badges of Justice
+Holy,Head,PreRaid,Circlet of Faith,Quest,Circlet of Faith (Naxx),,,123 Armor; 22 Sta; 22 Int; 22 Spi; 75 Healing; 25 Spell Dmg; 5 MP5,
+Holy,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Spell Dmg/Heal Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Holy,Head,PreRaid,Watcher's Cowl,Reputation,,,,127 Armor; 21 Sta; 36 Int; 14 Spi; 79 Healing; 27 Spell Dmg,Cenarion Expedition - Revered
+Holy,Shoulder,PreRaid,Primal Mooncloth Shoulders,Auction House,,,,133 Armor; 16 Int; 15 Spi; 92 Healing; 31 Spell Dmg; 7 MP5,
+Holy,Shoulder,PreRaid,Hallowed Pauldrons,Dungeon Drop,,Shadow Labyrinth,Normal,117 Armor; 10 Sta; 17 Int; 20 Spi; 42 Healing; 14 Spell Dmg,Grandmaster Vorpil
+Holy,Shoulder,PreRaid,Pauldrons of Sufferance,Dungeon Drop,,Old Hillsbrad Foothills,Normal,105 Armor; 18 Sta; 13 Int; 19 Spi; 35 Healing; 12 Spell Dmg,Epoch Hunter
+Holy,Shoulder,PreRaid,Vestia's Pauldrons of Inner Grace,Dungeon Drop,,Mechanar,Normal,117 Armor; 24 Sta; 25 Int; 48 Healing; 16 Spell Dmg; 8 MP5,The Gatewatchers
+Holy,Shoulder,PreRaid,Shoulderpads of Faith,Quest,Shoulderpads of Faith (Naxx),,,111 Armor; 17 Sta; 18 Int; 17 Spi; 51 Healing; 17 Spell Dmg; 3 MP5,
+Holy,Back,PreRaid,Lifegiving Cloak,Auction House,,,,85 Armor; 13 Int; 64 Healing; 22 Spell Dmg; 5 MP5,World Drop
+Holy,Back,PreRaid,White Remedy Cape,Auction House,,,,76 Armor; 59 Healing; 20 Spell Dmg; 7 MP5,
+Holy,Back,PreRaid,Cloak of Scintillating Auras,Dungeon Drop,,Arcatraz,Normal,78 Armor; 12 Sta; 16 Int; 18 Spi; 42 Healing; 14 Spell Dmg,Zereketh the Unbound
+Holy,Back,PreRaid,Cloak of Whispering Shells,Dungeon Drop,,Steamvault,Normal,76 Armor; 15 Sta; 16 Int; 40 Healing; 14 Spell Dmg; 4 MP5,Hydromancer Thespia
+Holy,Back,PreRaid,Light-Touched Stole of Altruism,Dungeon Drop,,Auchenai Crypts,Heroic,93 Armor; 22 Sta; 21 Int; 55 Healing; 19 Spell Dmg,Exarch Maladaar
+Holy,Back,PreRaid,Bishop's Cloak,Dungeon Token,,,,93 Armor; 16 Sta; 17 Int; 46 Healing; 16 Spell Dmg; 8 MP5,25 Badges of Justice
+Holy,Chest,PreRaid,Primal Mooncloth Robe,Auction House,,,,202 Armor; 20 Int; 20 Spi; 121 Healing; 41 Spell Dmg; 10 MP5,
+Holy,Chest,PreRaid,Hallowed Garments,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 12 Sta; 26 Int; 26 Spi; 57 Healing; 19 Spell Dmg,Murmur
+Holy,Chest,PreRaid,Raiments of Divine Authority,Dungeon Drop,,Blood Furnace,Normal,122 Armor; 16 Sta; 21 Int; 18 Spi; 46 Healing; 16 Spell Dmg,Keli'dan the Breaker
+Holy,Chest,PreRaid,Robe of Effervescent Light,Dungeon Drop,,Blood Furnace,Heroic,156 Armor; 25 Sta; 33 Int; 18 Spi; 73 Healing; 25 Spell Dmg; 7 MP5,Keli'dan the Breaker
+Holy,Chest,PreRaid,Robe of Faith,Quest,Robe of Faith (Naxx),,,158 Armor; 26 Sta; 27 Int; 21 Spi; 64 Healing; 22 Spell Dmg; 5 MP5,
+Holy,Wrist,PreRaid,Bracers of Havok,Auction House,,,,67 Armor; 12 Int; 30 Spell Dmg/Heal,
+Holy,Wrist,PreRaid,Bands of the Benevolent,Dungeon Drop,,Sethekk Halls,Heroic,81 Armor; 18 Sta; 20 Int; 18 Spi; 46 Healing; 16 Spell Dmg,Talon King Ikiss
+Holy,Wrist,PreRaid,Bracelets of Royal Redemption,Dungeon Drop,,Ahn'Qiraj,Normal,61 Armor; 8 Sta; 10 Int; 9 Spi; 53 Healing; 18 Spell Dmg,Emperor Vek'nilash
+Holy,Wrist,PreRaid,Bindings of Faith,Quest,Bindings of Faith (Naxx),,,66 Armor; 11 Sta; 15 Int; 17 Spi; 40 Healing; 14 Spell Dmg,
+Holy,Wrist,PreRaid,Shattrath Wraps,Quest (Dung),The Soul Devices (SL),,,68 Armor; 15 Sta; 15 Int; 21 Spell Dmg/Heal,
+Holy,Wrist,PreRaid,Bindings of the Timewalker,Reputation,,,,78 Armor; 24 Sta; 12 Int; 64 Healing; 22 Spell Dmg,Keepers of Time - Exalted
+Holy,Hands,PreRaid,Bloody Surgeon's Mitts,Dungeon Drop,,Blood Furnace,Normal,76 Armor; 10 Sta; 20 Int; 12 Spi; 31 Healing; 11 Spell Dmg,Broggok
+Holy,Hands,PreRaid,Hallowed Handwraps,Dungeon Drop,,Shattered Halls,Normal,97 Armor; 19 Sta; 20 Int; 26 Spi; 51 Healing; 17 Spell Dmg,Warchief Kargath Bladefist
+Holy,Hands,PreRaid,Prismatic Mittens of Mending,Dungeon Drop,,Botanica,Normal,97 Armor; 23 Sta; 26 Int; 55 Healing; 19 Spell Dmg; 7 MP5,Commander Sarannis
+Holy,Hands,PreRaid,Gloves of Faith,Quest,Gloves of Faith (Naxx),,,95 Armor; 16 Sta; 21 Int; 22 Spi; 40 Healing; 14 Spell Dmg; 4 MP5,
+Holy,Hands,PreRaid,Gloves of Penitence,Quest (Dung),Levixus the Soul Caller (AC),,,83 Armor; 18 Sta; 20 Int; 18 Spi; 46 Healing; 16 Spell Dmg,
+Holy,Waist,PreRaid,Primal Mooncloth Belt,Auction House,,,,109 Armor; 12 Int; 11 Spi; 81 Healing; 27 Spell Dmg; 8 MP5,
+Holy,Waist,PreRaid,Cord of Belief,Dungeon Drop,,Slave Pens,Heroic,88 Armor; 23 Int; 20 Spi; 46 Healing; 16 Spell Dmg; 8 MP5,Mennu the Betrayer
+Holy,Waist,PreRaid,Cord of Sanctification,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,105 Armor; 25 Sta; 24 Int; 62 Healing; 21 Spell Dmg; 7 MP5,Epoch Hunter
+Holy,Waist,PreRaid,Glyph-Lined Sash,Dungeon Drop,,Mana Tombs,Heroic,88 Armor; 21 Sta; 23 Int; 30 Spell Dmg/Heal,Nexus-Prince Shaffar
+Holy,Waist,PreRaid,Grasp of the Old God,Dungeon Drop,,Ahn'Qiraj,Normal,85 Armor; 15 Sta; 19 Int; 59 Healing; 20 Spell Dmg; 7 MP5,C'Thun
+Holy,Legs,PreRaid,Kamaei's Cerulean Skirt,Auction House,,,,149 Armor; 25 Int; 21 Spi; 118 Healing; 37 Spell Dmg,World Drop
+Holy,Legs,PreRaid,Whitemend Pants,Auction House,,,,156 Armor; 21 Sta; 21 Int; 62 Healing; 21 Spell Dmg; 11 MP5,
+Holy,Legs,PreRaid,Hallowed Trousers,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 25 Sta; 33 Int; 18 Spi; 73 Healing; 25 Spell Dmg; 7 MP5,Talon King Ikiss
+Holy,Legs,PreRaid,Khadgar's Kilt of Abjuration,Dungeon Drop,,Black Morass,Normal,133 Armor; 20 Sta; 22 Int; 15 Spi; 36 Spell Dmg/Heal,Temporus
+Holy,Legs,PreRaid,Lifegiver Britches,Dungeon Drop,,Hellfire Ramparts,Normal,103 Armor; 16 Sta; 25 Int; 12 Spi; 44 Healing; 15 Spell Dmg,Vazruden
+Holy,Legs,PreRaid,Pontifex Kilt,Dungeon Drop,,Steamvault,Heroic,163 Armor; 25 Sta; 29 Int; 27 Spi; 66 Healing; 22 Spell Dmg,Warlord Kalithresh
+Holy,Legs,PreRaid,Pontiff's Pantaloons of Prophecy,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,136 Armor; 12 Sta; 27 Int; 24 Spi; 55 Healing; 19 Spell Dmg,Captain Skarloc
+Holy,Legs,PreRaid,Pants of the Naaru,Quest,Special Delivery to Shattrath City (Shattrath City),,,130 Armor; 27 Sta; 22 Int; 25 Spi; 77 Healing; 26 Spell Dmg,
+Holy,Feet,PreRaid,Boots of the Pious,Dungeon Drop,,Mechanar,Heroic,128 Armor; 24 Sta; 26 Int; 23 Spi; 62 Healing; 21 Spell Dmg,Pathaleon the Calculator
+Holy,Feet,PreRaid,Jeweled Boots of Sanctification,Dungeon Drop,,Shattered Halls,Normal,105 Armor; 22 Sta; 25 Int; 55 Healing; 19 Spell Dmg; 6 MP5,Warbringer O'mrogg
+Holy,Feet,PreRaid,Slippers of Serenity,Dungeon Drop,,Auchenai Crypts,Normal,94 Armor; 10 Sta; 22 Int; 15 Spi; 35 Healing; 12 Spell Dmg,Exarch Maladaar
+Holy,Feet,PreRaid,Curate's Boots,Quest (Dung),Fel Embers (SH),,,106 Armor; 25 Int; 25 Spi; 53 Healing; 18 Spell Dmg,
+Holy,Feet,PreRaid,Shattrath Jumpers,Quest (Dung),Into the Heart of the Labyrinth (SL),,,107 Armor; 25 Sta; 17 Int; 29 Spell Dmg/Heal,
+Holy,Neck,PreRaid,Choker of Fluid Thought,Dungeon Drop,,Arcatraz,Normal,15 Sta; 17 Int; 17 Spi; 35 Healing; 12 Spell Dmg,Harbinger Skyriss
+Holy,Neck,PreRaid,Necklace of Necropsy,Dungeon Drop,,Naxxramas,Normal,10 Sta; 11 Int; 10 Spi; 53 Healing; 18 Spell Dmg,Heigan the Unclean
+Holy,Neck,PreRaid,Necklace of Resplendent Hope,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,53 Healing; 18 Spell Dmg; 9 MP5,Epoch Hunter
+Holy,Neck,PreRaid,Swampstone Necklace,Dungeon Drop,,Underbog,Heroic,14 Sta; 15 Int; 18 Spi; 40 Healing; 14 Spell Dmg,Swamplord Musel'ek
+Holy,Neck,PreRaid,Necklace of Eternal Hope,Dungeon Token,,,,22 Sta; 21 Int; 48 Healing; 16 Spell Dmg; 4 MP5,25 Badges of Justice
+Holy,Neck,PreRaid,Amulet of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,11 Sta; 57 Healing; 19 Spell Dmg; 6 MP5,
+Holy,Neck,PreRaid,Karja's Medallion,Quest,Shutting Down Manaforge Ara (NS),,,15 Int; 10 Spi; 55 Healing; 19 Spell Dmg,
+Holy,Neck,PreRaid,Natasha's Guardian Cord,Quest,The Hound-Master (BEM),,,10 Int; 55 Healing; 19 Spell Dmg; 6 MP5,
+Holy,Neck,PreRaid,Sethekk Oracle's Focus,Quest (Dung),Brother Against Brother (Seth),,,19 Int; 35 Healing; 12 Spell Dmg; 8 MP5,
+Holy,Ring,PreRaid,Band of the Crystalline Void,Dungeon Drop,,Mana-Tombs,Heroic,20 Int; 44 Healing; 15 Spell Dmg; 8 MP5,Yor
+Holy,Ring,PreRaid,Cosmic Lifeband,Dungeon Drop,,Mechanar,Normal,57 Healing; 19 Spell Dmg; 7 MP5,Nethermancer Sepethrea
+Holy,Ring,PreRaid,Ring of Fabled Hope,Dungeon Drop,,Underbog,Normal,12 Int; 11 Spi; 59 Healing; 20 Spell Dmg,The Black Stalker
+Holy,Ring,PreRaid,Band of Halos,Dungeon Token,,,,22 Sta; 21 Int; 46 Healing; 16 Spell Dmg; 6 MP5,25 Badges of Justice
+Holy,Ring,PreRaid,Celestial Jewel Ring,Quest,Hitting the Motherlode (NS),,,13 Int; 55 Healing; 19 Spell Dmg; 4 MP5,
+Holy,Ring,PreRaid,Spiritualist's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,12 Spi; 64 Healing; 22 Spell Dmg,
+Holy,Ring,PreRaid,Keeper's Ring of Piety,Quest (Dung),Hero of the Brood (BM),,,18 Spi; 42 Healing; 14 Spell Dmg; 7 MP5,
+Holy,Ring,PreRaid,Ancestral Band,Reputation,,,,15 Int; 57 Healing; 19 Spell Dmg; 4 MP5,Thrallmar - Revered
+Holy,Ring,PreRaid,Ring of Convalescence,Reputation,,,,15 Int; 57 Healing; 19 Spell Dmg; 4 MP5,Honor Hold - Revered
+Holy,Trinket,PreRaid,Bangle of Endless Blessings,Dungeon Drop,,Botanica,Normal,Use: Increases your Spirit by 130 for 20 sec; Equip: Your spell casts have a chance to allow [15 - Max(,Warp Splinter
+Holy,Trinket,PreRaid,Eye of the Dead,Dungeon Drop,,Naxxramas,Normal,70 Healing; 24 Spell Dmg Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec,Sapphiron
+Holy,Trinket,PreRaid,Rejuvenating Gem,Dungeon Drop,,Blackwing Lair,Normal,66 Healing; 22 Spell Dmg; 9 MP5,Three Drakes
+Holy,Trinket,PreRaid,Scarab Brooch,Dungeon Drop,,Ahn'Qiraj,Normal,Use: Your magical heals provide the target with a shield that absorbs damage equal to 15% of the amount healed for 30 sec,Viscidus
+Holy,Trinket,PreRaid,Scarab of the Infinite Cycle,Dungeon Drop,,Black Morass,Normal,70 Healing; 24 Spell Dmg,Aeonus
+Holy,Trinket,PreRaid,Essence of the Martyr,Dungeon Token,,,,84 Healing; 28 Spell Dmg Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec,41 Badges of Justice
+Holy,Trinket,PreRaid,Darkmoon Card: Blue Dragon,Quest,Darkmoon Beast Deck (Darkmoon Faire),,,Equip: 2% chance on successful spellcast to allow 100% of your Mana regeneration to continue while casting for 15 sec,
+Holy,Trinket,PreRaid,Oshu'gun Relic,Quest,Gava'xi (Nag),,,53 Healing; 18 Spell Dmg Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec,
+Holy,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,70 Healing; 24 Spell Dmg Use: Your heals each cost 22 less mana for the next 15 sec,Lower City - Revered
+Holy,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
+Holy,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
+Holy,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
+Holy,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,41.11 DPS; 13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
+Holy,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,41.11 DPS; 16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
+Holy,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,41.58 DPS; 8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
+Holy,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
+Holy,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5,Murmur
+Holy,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
+Holy,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,59 Healing; 20 Spell Dmg; 7 MP5,Omor the Unscarred
+Holy,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5,Dalliah the Doomsayer
+Holy,Off Hand,PreRaid,Lordaeron Medical Guide,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,12 Sta; 10 Int; 16 Spi; 46 Healing; 16 Spell Dmg,Lieutenant Drake
+Holy,Off Hand,PreRaid,Noth's Frigid Heart,Dungeon Drop,,Naxxramas,Normal,12 Int; 13 Spi; 53 Healing; 18 Spell Dmg,Noth the Plaguebringer
+Holy,Off Hand,PreRaid,Sapphiron's Right Eye,Dungeon Drop,,Naxxramas,Normal,9 Sta; 10 Int; 62 Healing; 21 Spell Dmg; 4 MP5,Sapphiron
+Holy,Off Hand,PreRaid,Swamplight Lantern,Dungeon Drop,,Slave Pens,Heroic,22 Int; 40 Healing; 14 Spell Dmg; 6 MP5,Quagmirran
+Holy,Off Hand,PreRaid,Tears of Heaven,Dungeon Token,,,,75 Healing; 25 Spell Dmg; 6 MP5,25 Badges of Justice
+Holy,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the Netherwing (SMV),,,15 Int; 15 Spi; 33 Healing; 11 Spell Dmg; 6 MP5,
+Holy,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,16 Int; 12 Spi; 64 Healing; 22 Spell Dmg,Cenarion Expedition - Exalted
+Holy,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,59.79 DPS; 37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
+Holy,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,59.79 DPS; 27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
+Holy,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 28 Sta; 28 Int; 27 Spi Use: Creates a portal, teleporting group members that use it to Karazhan; Equip: Increases your spell damage by up to 120 and your healing by up to 300",
+Holy,Two Hand,PreRaid,Seer's Cane,Reputation,,,,62.62 DPS; 28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
+Holy,Ranged/Relic,PreRaid,Soul-Wand of the Aldor,Dungeon Drop,,Shadow Labyrinth,Normal,125.28 DPS; 9 Sta; 8 Int; 10 Spi; 22 Healing; 8 Spell Dmg,Ambassador Hellmaw
+Holy,Ranged/Relic,PreRaid,Wand of the Whispering Dead,Dungeon Drop,,Naxxramas,Normal,113.67 DPS; 10 Int; 9 Spi; 22 Healing; 8 Spell Dmg,Instructor Razuvious
+Holy,Ranged/Relic,PreRaid,Rejuvenating Scepter,Quest,Ar'kelos the Guardian (NS),,,102.14 DPS; 31 Healing; 11 Spell Dmg; 2 MP5,
+Holy,Ranged/Relic,PreRaid,Wand of the Seer,Quest,Turning Point (NS),,,121.15 DPS; 8 Int; 5 Spi; 18 Spell Dmg/Heal,
+Shadow,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Spell Dmg/Heal,
+Shadow,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Spell Dmg/Heal,Harbinger Skyriss
+Shadow,Head,PreRaid,Mana-Etched Crown,Dungeon Drop,,Black Morass,Normal,127 Armor; 27 Sta; 20 Int; 34 Spell Dmg/Heal; 35 Spell Hit Equip: Increases your spell penetration by 15,Aeonus
+Shadow,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Spell Dmg/Heal Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Shadow,Head,PreRaid,Mag'hari Ritualist's Horns,Quest,Hero of the Mag'har (Nag),,,114 Armor; 18 Sta; 16 Int; 50 Spell Dmg/Heal,
+Shadow,Head,PreRaid,Hydromancer's Headwrap,Quest (Dung),The Warlord's Hideout (SV),,,127 Armor; 21 Sta; 27 Int; 33 Spell Dmg/Heal,
+Shadow,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,133 Armor; 21 Sta; 15 Int,
+Shadow,Shoulder,PreRaid,Incanter's Pauldrons,Dungeon Drop,,Steamvault,Normal,117 Armor; 24 Sta; 17 Int; 16 Spi; 20 Spell Dmg/Heal,Warlord Kalithresh
+Shadow,Shoulder,PreRaid,Spaulders of Oblivion,Dungeon Drop,,Shadow Labyrinth,Normal,117 Armor; 25 Sta; 17 Int; 29 Spell Dmg/Heal,Murmur
+Shadow,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Spell Dmg/Heal,
+Shadow,Back,PreRaid,Cloak of the Black Void,Auction House,,,,76 Armor; 11 Int; 35 Spell Dmg/Heal,
+Shadow,Back,PreRaid,Cloak of the Devoured,Dungeon Drop,,Ahn'Qiraj,Normal,76 Armor; 11 Sta; 10 Int; 30 Spell Dmg/Heal; 8 Spell Hit,C'Thun
+Shadow,Back,PreRaid,Torn-heart Cloak,Quest,The Cipher of Damnation - The Second Fragment Recovered (SMV),,,70 Armor; 13 Sta; 12 Int; 27 Spell Dmg/Heal,
+Shadow,Chest,PreRaid,Frozen Shadoweave Robe,Auction House,,,,178 Armor; 30 Sta; 20 Int,
+Shadow,Chest,PreRaid,Robe of the Crimson Order,Auction House,,,,152 Armor; 23 Int; 50 Spell Dmg/Heal,World Drop
+Shadow,Chest,PreRaid,Bloodfyre Robes of Annihilation,Dungeon Drop,,Mechanar,Normal,156 Armor; 27 Sta; 27 Int; 54 Spell Dmg/Heal,The Gatewatchers
+Shadow,Chest,PreRaid,Crystal Webbed Robe,Dungeon Drop,,Naxxramas,Normal,147 Armor; 25 Sta; 19 Int; 53 Spell Dmg/Heal,Maexxna
+Shadow,Chest,PreRaid,Robe of Oblivion,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 30 Sta; 20 Int; 40 Spell Dmg/Heal,Murmur
+Shadow,Chest,PreRaid,Robes of the Augurer,Dungeon Drop,,Underbog,Normal,129 Armor; 18 Sta; 18 Int; 11 Spi; 28 Spell Dmg/Heal,The Black Stalker
+Shadow,Chest,PreRaid,Warp Infused Drape,Dungeon Drop,,Botanica,Normal,156 Armor; 27 Sta; 28 Int; 30 Spell Dmg/Heal,Warp Splinter
+Shadow,Chest,PreRaid,Auchenai Anchorite's Robe,Quest (Dung),Everything Will Be Alright (AC),,,136 Armor; 24 Int; 28 Spell Dmg/Heal,
+Shadow,Chest,PreRaid,Anchorite's Robes,Reputation,,,,156 Armor; 16 Sta; 38 Int; 18 Spi; 29 Spell Dmg/Heal,The Aldor - Honored
+Shadow,Wrist,PreRaid,Bracers of Havok,Auction House,,,,67 Armor; 12 Int; 30 Spell Dmg/Heal,
+Shadow,Wrist,PreRaid,Arcanium Signet Bands,Dungeon Drop,,Underbog,Normal,68 Armor; 14 Sta; 15 Int; 30 Spell Dmg/Heal,Hungarfen
+Shadow,Wrist,PreRaid,Bands of Negation,Dungeon Drop,,Mana Tombs,Heroic,81 Armor; 25 Sta; 22 Int; 29 Spell Dmg/Heal,Nexus-Prince Shaffar
+Shadow,Wrist,PreRaid,Crimson Bracers of Gloom,Dungeon Drop,,Hellfire Ramparts,Heroic,68 Armor; 18 Sta; 18 Int; 22 Spell Dmg/Heal,Omor the Unscarred
+Shadow,Wrist,PreRaid,Shattrath Wraps,Quest (Dung),The Soul Devices (SL),,,68 Armor; 15 Sta; 15 Int; 21 Spell Dmg/Heal,
+Shadow,Hands,PreRaid,Dark Storm Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,95 Armor; 19 Sta; 15 Int; 37 Spell Dmg/Heal; 8 Spell Hit,C'Thun
+Shadow,Hands,PreRaid,Ebony Flame Gloves,Dungeon Drop,,Blackwing Lair,Normal,82 Armor; 17 Sta; 12 Int,Ebonroc
+Shadow,Hands,PreRaid,Energis Armwraps,Dungeon Drop,,Botanica,Normal,97 Armor; 27 Sta; 26 Int; 34 Spell Dmg/Heal,High Botanist Freywinn
+Shadow,Hands,PreRaid,Gloves of the Deadwatcher,Dungeon Drop,,Auchenai Crypts,Heroic,97 Armor; 24 Sta; 24 Int; 29 Spell Dmg/Heal,Shirrak the Dead Watcher
+Shadow,Hands,PreRaid,Jaedenfire Gloves of Annihilation,Dungeon Drop,,Shadow Labyrinth,Normal,95 Armor; 25 Sta; 25 Int,Ambassador Hellmaw
+Shadow,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Spell Dmg/Heal; 35 Spell Hit,Omor the Unscarred
+Shadow,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Spell Dmg/Heal,Hungarfen
+Shadow,Hands,PreRaid,Uvuros Hide Gloves,Quest,"Wanted: Uvuros, Scourge of Shadowmoon (SMV)",,,88 Armor; 16 Sta; 12 Int; 11 Spi; 35 Spell Dmg/Heal,
+Shadow,Hands,PreRaid,Tempest's Touch,Quest (Dung),Return to Andormu (CoT),,,88 Armor; 10 Sta; 20 Int; 6 Spi; 27 Spell Dmg/Heal Equip: Increases your spell penetration by 10,
+Shadow,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Spell Dmg/Heal,
+Shadow,Waist,PreRaid,Belt of Depravity,Dungeon Drop,,Arcatraz,Heroic,105 Armor; 31 Sta; 27 Int; 34 Spell Dmg/Heal,Harbinger Skyriss
+Shadow,Waist,PreRaid,Eyestalk Waist Cord,Dungeon Drop,,Ahn'Qiraj,Normal,85 Armor; 10 Sta; 9 Int; 41 Spell Dmg/Heal; 14 Spell Crit,C'Thun
+Shadow,Waist,PreRaid,Glyph-Lined Sash,Dungeon Drop,,Mana Tombs,Heroic,88 Armor; 21 Sta; 23 Int; 30 Spell Dmg/Heal,Nexus-Prince Shaffar
+Shadow,Waist,PreRaid,Mindfire Waistband,Dungeon Drop,,Blood Furnace,Normal,68 Armor; 10 Sta; 14 Int; 8 Spi; 21 Spell Dmg/Heal,Keli'dan the Breaker
+Shadow,Waist,PreRaid,Akama's Sash,Quest,Akama's Promise (SMV),,,195 Armor; 10 Sta; 7 Int; 18 Spi; 40 Spell Dmg/Heal,
+Shadow,Waist,PreRaid,A'dal's Gift,Quest (Dung),How to Break Into the Arcatraz (TK),,,88 Armor; 25 Int; 34 Spell Dmg/Heal,
+Shadow,Legs,PreRaid,Spellstrike Pants,Auction House,,,,156 Armor; 12 Sta; 8 Int; 46 Spell Dmg/Heal,
+Shadow,Legs,PreRaid,Breeches of the Occultist,Dungeon Drop,,Black Morass,Heroic,163 Armor; 37 Sta; 22 Int; 36 Spell Dmg/Heal,Aeonus
+Shadow,Legs,PreRaid,Devil-Stitched Leggings,Dungeon Drop,,Botanica,Normal,136 Armor; 32 Sta; 28 Int; 29 Spell Dmg/Heal,Laj
+Shadow,Legs,PreRaid,Khadgar's Kilt of Abjuration,Dungeon Drop,,Black Morass,Normal,133 Armor; 20 Sta; 22 Int; 15 Spi; 36 Spell Dmg/Heal,Temporus
+Shadow,Legs,PreRaid,Kirin Tor Master's Trousers,Dungeon Drop,,Shadow Labyrinth,Heroic,163 Armor; 27 Sta; 29 Int; 25 Spi; 36 Spell Dmg/Heal,Murmur
+Shadow,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Spell Dmg/Heal,Talon King Ikiss
+Shadow,Feet,PreRaid,Frozen Shadoweave Boots,Auction House,,,,122 Armor; 15 Sta; 9 Int,
+Shadow,Feet,PreRaid,Rocket Boots Xtreme Lite,Auction House,,,,105 Armor; 47 Spell Dmg/Heal Use: Engage the rocket boots to greatly increase your speed... most of the time,
+Shadow,Feet,PreRaid,Boots of the Darkwalker,Dungeon Drop,,Hellfire Ramparts,Heroic,107 Armor; 36 Sta; 25 Int,Watchkeeper Gargolmar
+Shadow,Feet,PreRaid,Embroidered Spellpyre Boots,Dungeon Drop,,Blood Furnace,Heroic,107 Armor; 21 Sta; 21 Int; 41 Spell Dmg/Heal,Broggok
+Shadow,Feet,PreRaid,Sigil-Laced Boots,Dungeon Drop,,Arcatraz,Normal,107 Armor; 24 Sta; 18 Int; 20 Spell Dmg/Heal,Harbinger Skyriss
+Shadow,Feet,PreRaid,Shattrath Jumpers,Quest (Dung),Into the Heart of the Labyrinth (SL),,,107 Armor; 25 Sta; 17 Int; 29 Spell Dmg/Heal,
+Shadow,Neck,PreRaid,Chain of the Twilight Owl,Auction House,,,,19 Int; 21 Spell Dmg/Heal Use: Increases the spell critical hit chance of nearby party members by 2% for 30 min,
+Shadow,Neck,PreRaid,Eye of the Night,Auction House,,,,Use: Increases spell damage by up to 34 for all nearby party members. Lasts 30 min; Equip: Increases your spell penetration by 15,
+Shadow,Neck,PreRaid,Jade Pendant of Blasting,Auction House,,,,3 Int; 8 Spell Dmg/Heal Use: Increases spell damage done by nearby party members by up to 15 for 30 min,
+Shadow,Neck,PreRaid,Brooch of Heightened Potential,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 22 Spell Dmg/Heal,Blackheart the Inciter
+Shadow,Neck,PreRaid,Choker of the Fire Lord,Dungeon Drop,,Molten Core,Normal,7 Sta; 7 Int; 34 Spell Dmg/Heal,Ragnaros
+Shadow,Neck,PreRaid,Natasha's Arcane Filament,Quest,The Hound-Master (BEM),,,22 Sta; 10 Int; 29 Spell Dmg/Heal,
+Shadow,Neck,PreRaid,Natasha's Ember Necklace,Quest,The Hound-Master (BEM),,,15 Int; 29 Spell Dmg/Heal,
+Shadow,Neck,PreRaid,Pendant of Dominance,PvP,,,,31 Sta; 12 Int; 26 Spell Dmg/Heal,
+Shadow,Ring,PreRaid,Band of Dominion,Auction House,,,,28 Spell Dmg/Heal,World Drop
+Shadow,Ring,PreRaid,Band of Dark Dominion,Dungeon Drop,,Blackwing Lair,Normal,12 Sta; 6 Int,Trash Drop
+Shadow,Ring,PreRaid,Band of the Inevitable,Dungeon Drop,,Naxxramas,Normal,36 Spell Dmg/Heal; 8 Spell Hit,Noth the Plaguebringer
+Shadow,Ring,PreRaid,Cobalt Band of Tyrigosa,Dungeon Drop,,Mana Tombs,Heroic,19 Sta; 17 Int; 35 Spell Dmg/Heal,Nexus-Prince Shaffar
+Shadow,Ring,PreRaid,Ring of Spell Power,Dungeon Drop,,Molten Core,Normal,33 Spell Dmg/Heal,Trash Drop
+Shadow,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Spell Dmg/Heal,50 Spirit Shards
+Shadow,Ring,PreRaid,Evoker's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Int; 29 Spell Dmg/Heal,
+Shadow,Ring,PreRaid,Manastorm Band,Quest,Shutting Down Manaforge Ara (NS),,,15 Int; 29 Spell Dmg/Heal,
+Shadow,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Spell Dmg/Heal; 8 Spell Hit,
+Shadow,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Spell Dmg/Heal,Cenarion Expedition - Exalted
+Shadow,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Spell Dmg/Heal,The Scryers - Exalted
+Shadow,Trinket,PreRaid,Arcanist's Stone,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,167 Spell Dmg/Heal Use: Increases damage and healing done by magical spells and effects by up to 167 for 20 sec,Epoch Hunter
+Shadow,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Spell Dmg/Heal; 16 Spell Hit,Nefarian
+Shadow,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,37 Spell Dmg/Heal,Quagmirran
+Shadow,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,40 Spell Dmg/Heal Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec,Sapphiron
+Shadow,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,43 Spell Dmg/Heal Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec,41 Badges of Justice
+Shadow,Trinket,PreRaid,Ancient Crystal Talisman,Quest,A Spirit Ally? (ZM),,,26 Spell Dmg/Heal Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec,
+Shadow,Trinket,PreRaid,Glowing Crystal Insignia,Quest,Overlord Gorefist (ZM),,,26 Spell Dmg/Heal Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec,
+Shadow,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,,
+Shadow,Trinket,PreRaid,Starkiller's Bauble,Quest,The Horrors of Pollution (NS),,,Use: Increases spell damage by up to 125 for 15 sec,
+Shadow,Trinket,PreRaid,Terokkar Tablet of Vim,Quest,Torgos! (TF),,,Use: Increases spell damage by up to 84 and healing by up to 156 for 15 sec,
+Shadow,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec,The Scryers - Revered
+Shadow,Trinket,PreRaid,Mark of Defiance,PvP,,,,32 Spell Dmg/Heal,
+Shadow,Trinket,PreRaid,Mark of Defiance,PvP,,,,32 Spell Dmg/Heal,
+Shadow,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,41.76 DPS; 19 Int; 168 Spell Dmg/Heal,
+Shadow,Main Hand,PreRaid,Bleeding Hollow Warhammer,Dungeon Drop,,Slave Pens,Heroic,41.25 DPS; 12 Sta; 17 Int; 121 Spell Dmg/Heal,Quagmirran
+Shadow,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,39.67 DPS; 12 Sta; 11 Int; 121 Spell Dmg/Heal,Warbringer O'mrogg
+Shadow,Main Hand,PreRaid,Sky Breaker,Dungeon Drop,,Auchenai Crypts,Heroic,41.11 DPS; 13 Sta; 20 Int; 132 Spell Dmg/Heal,Avatar of the Martyred
+Shadow,Main Hand,PreRaid,Starlight Dagger,Dungeon Drop,,Slave Pens,Heroic,41.67 DPS; 15 Sta; 15 Int; 121 Spell Dmg/Heal,Mennu the Betrayer
+Shadow,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Spell Dmg/Heal,Lower City - Exalted
+Shadow,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Spell Dmg/Heal,
+Shadow,Main Hand,PreRaid,Gladiator's Spellblade,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Spell Dmg/Heal,
+Shadow,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Spell Dmg/Heal,25 Badges of Justice
+Shadow,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,18 Sta,25 Badges of Justice
+Shadow,Off Hand,PreRaid,The Saga of Terokk,Quest (Dung),Terokk's Legacy (Seth),,,23 Int; 28 Spell Dmg/Heal,
+Shadow,Off Hand,PreRaid,Tome of Shadow Force,PvP,,,,8 Sta,
+Shadow,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Spell Dmg/Heal,Dalliah the Doomsayer
+Shadow,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Spell Dmg/Heal,The Black Stalker
+Shadow,Ranged/Relic,PreRaid,Wand of the Netherwing,Dungeon Drop,,Shadow Labyrinth,Normal,125.28 DPS; 19 Sta; 16 Spell Dmg/Heal,Blackheart the Inciter
+Shadow,Ranged/Relic,PreRaid,Wand of the Seer,Quest,Turning Point (NS),,,121.15 DPS; 8 Int; 5 Spi; 18 Spell Dmg/Heal,
