@@ -10,6 +10,10 @@
 var BIS_PLANNER_SHEET = "BIS Planner";
 var CURRENT_EQUIP_SHEET = "Current Equipment";
 
+// First data row on each sheet (must match generate_bis_planner.py export_xlsx intro rows)
+var BIS_FIRST_DATA_ROW = 5;
+var CE_FIRST_DATA_ROW = 6;
+
 // BIS Planner columns (1-indexed)
 var GG_INTEREST = 1;  // A
 var GG_SPEC     = 2;  // B
@@ -76,7 +80,7 @@ function onOpen() {
 function handleBISPlannerEdit(e, bpSheet) {
   var col = e.range.getColumn();
   var row = e.range.getRow();
-  if (row <= 1) return;
+  if (row < BIS_FIRST_DATA_ROW) return;
 
   if (col === GG_INTEREST) {
     var newValue = e.range.getValue();
@@ -109,10 +113,10 @@ function handleBISPlannerEdit(e, bpSheet) {
 
 function clearOtherEquipped(bpSheet, currentRow, spec, gearType) {
   var lastRow = bpSheet.getLastRow();
-  var data = bpSheet.getRange(2, 1, lastRow - 1, GG_NAME).getValues();
+  var data = bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, lastRow - 1, GG_NAME).getValues();
 
   for (var i = 0; i < data.length; i++) {
-    var r = i + 2;
+    var r = i + BIS_FIRST_DATA_ROW;
     if (r === currentRow) continue;
     if (data[i][GG_INTEREST - 1] === "Equipped" &&
         normalizeItemName(data[i][GG_SPEC - 1]) === normalizeItemName(spec) &&
@@ -130,7 +134,7 @@ function clearOtherEquipped(bpSheet, currentRow, spec, gearType) {
 function handleCurrentEquipEdit(e, ceSheet) {
   var col = e.range.getColumn();
   var row = e.range.getRow();
-  if (col !== CE_ITEMNAME || row <= 1) return;
+  if (col !== CE_ITEMNAME || row < CE_FIRST_DATA_ROW) return;
 
   var gearType = normalizeItemName(ceSheet.getRange(row, CE_GEARTYPE).getValue());
   if (!gearType || gearType.indexOf("---") === 0) return;
@@ -217,10 +221,10 @@ function setInterestForItem(bpSheet, spec, gearType, itemName) {
   if (!want) return;
 
   var lastRow = bpSheet.getLastRow();
-  var data = bpSheet.getRange(2, 1, lastRow - 1, GG_NAME).getValues();
+  var data = bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, lastRow - 1, GG_NAME).getValues();
 
   for (var i = 0; i < data.length; i++) {
-    var r = i + 2;
+    var r = i + BIS_FIRST_DATA_ROW;
     if (normalizeItemName(data[i][GG_SPEC - 1]) === normalizeItemName(spec) &&
         normalizeItemName(data[i][GG_GEARTYPE - 1]) === normalizeItemName(gearType)) {
       if (normalizeItemName(data[i][GG_NAME - 1]) === want) {
@@ -241,10 +245,10 @@ function clearInterestForItem(bpSheet, spec, gearType, itemName) {
   if (!want) return;
 
   var lastRow = bpSheet.getLastRow();
-  var data = bpSheet.getRange(2, 1, lastRow - 1, GG_NAME).getValues();
+  var data = bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, lastRow - 1, GG_NAME).getValues();
 
   for (var i = 0; i < data.length; i++) {
-    var r = i + 2;
+    var r = i + BIS_FIRST_DATA_ROW;
     if (normalizeItemName(data[i][GG_SPEC - 1]) === normalizeItemName(spec) &&
         normalizeItemName(data[i][GG_GEARTYPE - 1]) === normalizeItemName(gearType) &&
         normalizeItemName(data[i][GG_NAME - 1]) === want &&
@@ -265,11 +269,11 @@ function clearInterestForItem(bpSheet, spec, gearType, itemName) {
  */
 function refreshComparisonRichText(bpSheet) {
   var lastRow = bpSheet.getLastRow();
-  if (lastRow < 2) return;
+  if (lastRow < BIS_FIRST_DATA_ROW) return;
 
-  var displays = bpSheet.getRange(2, CMP_RAW_COL, lastRow, CMP_RAW_COL).getDisplayValues();
+  var displays = bpSheet.getRange(BIS_FIRST_DATA_ROW, CMP_RAW_COL, lastRow, CMP_RAW_COL).getDisplayValues();
   for (var i = 0; i < displays.length; i++) {
-    var r = i + 2;
+    var r = i + BIS_FIRST_DATA_ROW;
     var rawDisplay = displays[i][0];
     var rich = buildComparisonRichTextValue(rawDisplay);
     if (rich) {
@@ -285,15 +289,33 @@ function buildComparisonRichTextValue(display) {
   var text = String(display);
   if (text === "") return null;
 
-  var nl = text.indexOf("\n");
-  var line1 = nl === -1 ? text : text.substring(0, nl);
-  var line2 = nl === -1 ? "" : text.substring(nl + 1);
+  // Stats vs attributes: CmpRaw uses two newlines; fall back to one for older sheets
+  var attSep = text.indexOf("\n\n");
+  var line1;
+  var line2;
+  if (attSep !== -1) {
+    line1 = text.substring(0, attSep);
+    line2 = text.substring(attSep + 2);
+  } else {
+    var nl = text.indexOf("\n");
+    line1 = nl === -1 ? text : text.substring(0, nl);
+    line2 = nl === -1 ? "" : text.substring(nl + 1);
+  }
 
-  var segs = line1.split(",").map(function (s) {
-    return s.trim();
-  }).filter(function (s) {
-    return s.length > 0;
-  });
+  // CmpRaw uses ", " between diff segments; merge fragments that lack a leading +/- so commas inside stat text don't split runs.
+  var rawParts = line1.split(", ");
+  var segs = [];
+  for (var pi = 0; pi < rawParts.length; pi++) {
+    var p = rawParts[pi].trim();
+    if (p.length === 0) continue;
+    if (/^[+-]/.test(p)) {
+      segs.push(p);
+    } else if (segs.length > 0) {
+      segs[segs.length - 1] += ", " + p;
+    } else {
+      segs.push(p);
+    }
+  }
 
   var out = "";
   var runs = [];
@@ -315,7 +337,7 @@ function buildComparisonRichTextValue(display) {
 
   var line2Start = 0;
   if (line2) {
-    if (out) out += "\n";
+    if (out) out += "\n\n";
     line2Start = out.length;
     out += line2;
   }

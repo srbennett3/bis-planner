@@ -453,13 +453,49 @@ def parse_tooltip_to_dict(html):
     if ilvl_m:
         ilvl = int(ilvl_m.group(1))
 
+    normalize_spell_stats(stats)
+
     return stats, special_str, slot, ilvl
+
+
+def normalize_spell_stats(stats):
+    """Unify Spell Dmg/Heal vs Healing+Spell Dmg so ItemDB and Comparison diffs stay consistent.
+
+    Order: resolve combined+split conflicts; fill Spell Dmg/Heal from heal_m split lines unless
+    this row was expanded from combined-only green text (tracked with _spell_from_combined_green);
+    then expand remaining combined-only rows into Healing + Spell Dmg and set that flag.
+
+    _spell_from_combined_green is stored in item_database.json so reload stays idempotent.
+    """
+    if not stats:
+        return
+
+    if "Spell Dmg/Heal" in stats and (
+        "Healing" in stats or "Spell Dmg" in stats
+    ):
+        stats.pop("_spell_from_combined_green", None)
+        del stats["Spell Dmg/Heal"]
+        stats["Spell Dmg/Heal"] = (stats.get("Healing") or 0) + (stats.get("Spell Dmg") or 0)
+
+    if (
+        "Spell Dmg/Heal" not in stats
+        and ("Healing" in stats or "Spell Dmg" in stats)
+        and not stats.get("_spell_from_combined_green")
+    ):
+        stats["Spell Dmg/Heal"] = (stats.get("Healing") or 0) + (stats.get("Spell Dmg") or 0)
+
+    if "Spell Dmg/Heal" in stats and "Healing" not in stats and "Spell Dmg" not in stats:
+        v = stats["Spell Dmg/Heal"]
+        stats["Healing"] = v
+        stats["Spell Dmg"] = v
+        del stats["Spell Dmg/Heal"]
+        stats["_spell_from_combined_green"] = True
 
 
 def stats_dict_to_string(stats, attributes=""):
     """Convert a stats dict + attribute string to the readable Stats column.
 
-    Stat lines use '; ' between pairs; a space separates the stat block from
+    Stat lines use '; ' between pairs; two newlines separate the stat block from
     on-use / equip attribute text when both are present.
     """
     parts = []
@@ -472,7 +508,7 @@ def stats_dict_to_string(stats, attributes=""):
         at = attributes.strip()
         if at:
             if result:
-                result += " " + at
+                result += "\n\n" + at
             else:
                 result = at
     return result
@@ -579,6 +615,9 @@ def build_item_database(test_mode=False, test_class=None):
         if slot:
             db[str_id] = entry
 
+    for entry in db.values():
+        normalize_spell_stats(entry.get("stats") or {})
+
     with open(ITEM_DB_PATH, "w") as f:
         json.dump(db, f, separators=(",", ":"))
 
@@ -591,7 +630,11 @@ def load_item_database():
         log(f"ERROR: {ITEM_DB_PATH} not found. Run --build-db first.")
         sys.exit(1)
     with open(ITEM_DB_PATH, "r") as f:
-        return json.load(f)
+        data = json.load(f)
+    for entry in data.values():
+        if isinstance(entry.get("stats"), dict):
+            normalize_spell_stats(entry["stats"])
+    return data
 
 
 # ============================================================
@@ -835,6 +878,8 @@ def export_xlsx(csv_path, spec_order):
         bottom=Side(style="thin", color="BDBDBD"),
     )
     wrap_align = Alignment(wrap_text=True, vertical="top")
+    intro_title_font = Font(bold=True, size=14, color="212121")
+    intro_body_font = Font(size=10, color="424242")
 
     wb = Workbook()
     wb.remove(wb.active)
@@ -889,8 +934,38 @@ def export_xlsx(csv_path, spec_order):
     ws_ce.sheet_properties.tabColor = "455A64"
 
     ce_headers = ["Gear Type", "Item Name"] + STAT_COLUMNS
+    ce_ncol = len(ce_headers)
+    ce_last_col = get_column_letter(ce_ncol)
+
+    ce_intro_lines = [
+        "Add your current equipment to see comparisons.",
+        (
+            'If an item in the BIS Planner sheet is set to "Equipped" in the Interest column, '
+            "it will automatically update here."
+        ),
+        (
+            "Begin typing to select from a list of stored items; if your item is not on the list, "
+            "you can manually enter the stats (integers only)."
+        ),
+    ]
+    # Row 1: title, rows 2–1+len: instructions (from column C — right of freeze A–B), then headers
+    CE_HEADER_ROW = 2 + len(ce_intro_lines)
+    ce_intro_start = 3
+    ce_intro_letter = get_column_letter(ce_intro_start)
+
+    ws_ce.merge_cells(f"{ce_intro_letter}1:{ce_last_col}1")
+    tcell = ws_ce.cell(row=1, column=ce_intro_start, value="Current Equipment")
+    tcell.font = intro_title_font
+    tcell.alignment = wrap_align
+
+    for ii, line in enumerate(ce_intro_lines, start=2):
+        ws_ce.merge_cells(f"{ce_intro_letter}{ii}:{ce_last_col}{ii}")
+        c = ws_ce.cell(row=ii, column=ce_intro_start, value=line)
+        c.font = intro_body_font
+        c.alignment = wrap_align
+
     for ci, h in enumerate(ce_headers, 1):
-        cell = ws_ce.cell(row=1, column=ci, value=h)
+        cell = ws_ce.cell(row=CE_HEADER_ROW, column=ci, value=h)
         cell.font = header_font
         cell.fill = header_fill
         cell.border = thin_border
@@ -899,10 +974,10 @@ def export_xlsx(csv_path, spec_order):
     ws_ce.column_dimensions["B"].width = 34
     for ci in range(3, 3 + len(STAT_COLUMNS)):
         ws_ce.column_dimensions[get_column_letter(ci)].width = 9
-    ws_ce.freeze_panes = "C2"
+    ws_ce.freeze_panes = f"C{CE_HEADER_ROW + 1}"
 
     ce_spec_rows = {}
-    ce_row = 2
+    ce_row = CE_HEADER_ROW + 1
     for spec_name in spec_order:
         cell = ws_ce.cell(row=ce_row, column=1, value=f"--- {spec_name.upper()} ---")
         cell.font = section_font
@@ -970,16 +1045,40 @@ def export_xlsx(csv_path, spec_order):
     ws.column_dimensions[equip_col_letter].hidden = True
     ws.column_dimensions[cmp_raw_col_letter].hidden = True
 
+    bp_ncol = len(SHEET_FIELDS)
+    bp_last_col = get_column_letter(bp_ncol)
+    bp_intro_lines = [
+        "Click the down arrow on a given column to filter values in that specific column.",
+        (
+            'If no values are displayed, click the "Remove Filter" button on the Sheets toolbar '
+            "and click again to reset the filters."
+        ),
+    ]
+    BP_HEADER_ROW = 2 + len(bp_intro_lines)
+    bp_intro_start = 5
+    bp_intro_letter = get_column_letter(bp_intro_start)
+
+    ws.merge_cells(f"{bp_intro_letter}1:{bp_last_col}1")
+    btc = ws.cell(row=1, column=bp_intro_start, value="BIS Planner")
+    btc.font = intro_title_font
+    btc.alignment = wrap_align
+
+    for ii, line in enumerate(bp_intro_lines, start=2):
+        ws.merge_cells(f"{bp_intro_letter}{ii}:{bp_last_col}{ii}")
+        bc = ws.cell(row=ii, column=bp_intro_start, value=line)
+        bc.font = intro_body_font
+        bc.alignment = wrap_align
+
     for ci, field in enumerate(SHEET_FIELDS, 1):
-        cell = ws.cell(row=1, column=ci, value=field)
+        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=field)
         cell.font = header_font
         cell.fill = header_fill
         cell.border = thin_border
         cell.alignment = wrap_align
 
-    ws.freeze_panes = "E2"  # freeze first 4 cols + header row
+    ws.freeze_panes = f"E{BP_HEADER_ROW + 1}"
     filter_end = get_column_letter(len(SHEET_FIELDS))
-    ws.auto_filter.ref = f"A1:{filter_end}1"
+    ws.auto_filter.ref = f"A{BP_HEADER_ROW}:{filter_end}{BP_HEADER_ROW}"
 
     interest_dv = DataValidation(
         type="list",
@@ -989,7 +1088,7 @@ def export_xlsx(csv_path, spec_order):
     ws.add_data_validation(interest_dv)
 
     for i, data_row in enumerate(all_rows):
-        excel_row = i + 2
+        excel_row = i + BP_HEADER_ROW + 1
         color_hex, dark_bg = _get_row_color(data_row)
         fill = PatternFill("solid", fgColor=color_hex) if color_hex else None
         font = Font(color="FFFFFF", size=10) if dark_bg else Font(size=10)
@@ -1076,7 +1175,7 @@ def _build_cmp_raw_formula(row, helper_col_letter, itemdb_range, attr_col_num):
     )
     combined = (
         f'IF(AND({tj}="",{v_attr}=""),"",'
-        f'IF({v_attr}="",{tj},IF({tj}="",{v_attr},{tj}&CHAR(10)&{v_attr})))'
+        f'IF({v_attr}="",{tj},IF({tj}="",{v_attr},{tj}&CHAR(10)&CHAR(10)&{v_attr})))'
     )
     return (
         f'=IF({helper_col_letter}{row}="","Current Equipment Not Specified",{combined})'

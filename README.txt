@@ -170,6 +170,17 @@ python3 generate_bis_planner.py all            # same as --all
 
 Output goes to `output/{Class}_BIS_Planner.csv` and `output/{Class}_BIS_Planner.xlsx`.
 
+### After changing tooltip parsing or spell-stat normalization
+
+If you edit `parse_tooltip_to_dict`, `normalize_spell_stats`, or other Wowhead parsing logic, rebuild the cached database and regenerate spreadsheets so `item_database.json` and ItemDB `VLOOKUP` columns stay aligned:
+
+```bash
+python3 generate_bis_planner.py --build-db
+python3 generate_bis_planner.py --all
+```
+
+Use `--build-db --test paladin` for a faster partial rebuild while iterating.
+
 ### Phase Support
 
 The `--phase` flag controls which content tiers to include. Phases are cumulative, matching the in-game addon's `LBIS.CurrentPhase` behavior:
