@@ -4,7 +4,9 @@ Holy,Head,PreRaid,Hallowed Crown,Dungeon Drop,,Arcatraz,Normal,127 Armor; 12 Sta
 Holy,Head,PreRaid,Scintillating Headdress of Second Sight,Dungeon Drop,,Auchenai Crypts,Heroic,127 Armor; 24 Sta; 27 Int; 32 Spi; 98 Spell Dmg/Heal; 73 Healing; 25 Spell Dmg,Shirrak the Dead Watcher
 Holy,Head,PreRaid,Cowl of Naaru Blessings,Dungeon Token,,,,151 Armor; 28 Sta; 29 Int; 23 Spi; 88 Spell Dmg/Heal; 66 Healing; 22 Spell Dmg,50 Badges of Justice
 Holy,Head,PreRaid,Circlet of Faith,Quest,Circlet of Faith (Naxx),,,123 Armor; 22 Sta; 22 Int; 22 Spi; 100 Spell Dmg/Heal; 75 Healing; 25 Spell Dmg; 5 MP5,
-Holy,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Holy,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg
+
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
 Holy,Head,PreRaid,Watcher's Cowl,Reputation,,,,127 Armor; 21 Sta; 36 Int; 14 Spi; 106 Spell Dmg/Heal; 79 Healing; 27 Spell Dmg,Cenarion Expedition - Revered
 Holy,Shoulder,PreRaid,Primal Mooncloth Shoulders,Auction House,,,,133 Armor; 16 Int; 15 Spi; 123 Spell Dmg/Heal; 92 Healing; 31 Spell Dmg; 7 MP5,
 Holy,Shoulder,PreRaid,Hallowed Pauldrons,Dungeon Drop,,Shadow Labyrinth,Normal,117 Armor; 10 Sta; 17 Int; 20 Spi; 56 Spell Dmg/Heal; 42 Healing; 14 Spell Dmg,Grandmaster Vorpil
@@ -70,14 +72,22 @@ Holy,Ring,PreRaid,Keeper's Ring of Piety,Quest (Dung),Hero of the Brood (BM),,,1
 Holy,Ring,PreRaid,Ancestral Band,Reputation,,,,15 Int; 76 Spell Dmg/Heal; 57 Healing; 19 Spell Dmg; 4 MP5,Thrallmar - Revered
 Holy,Ring,PreRaid,Ring of Convalescence,Reputation,,,,15 Int; 76 Spell Dmg/Heal; 57 Healing; 19 Spell Dmg; 4 MP5,Honor Hold - Revered
 Holy,Trinket,PreRaid,Bangle of Endless Blessings,Dungeon Drop,,Botanica,Normal,Use: Increases your Spirit by 130 for 20 sec; Equip: Your spell casts have a chance to allow [15 - Max(,Warp Splinter
-Holy,Trinket,PreRaid,Eye of the Dead,Dungeon Drop,,Naxxramas,Normal,94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec,Sapphiron
+Holy,Trinket,PreRaid,Eye of the Dead,Dungeon Drop,,Naxxramas,Normal,"94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg
+
+Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec",Sapphiron
 Holy,Trinket,PreRaid,Rejuvenating Gem,Dungeon Drop,,Blackwing Lair,Normal,88 Spell Dmg/Heal; 66 Healing; 22 Spell Dmg; 9 MP5,Three Drakes
 Holy,Trinket,PreRaid,Scarab Brooch,Dungeon Drop,,Ahn'Qiraj,Normal,Use: Your magical heals provide the target with a shield that absorbs damage equal to 15% of the amount healed for 30 sec,Viscidus
 Holy,Trinket,PreRaid,Scarab of the Infinite Cycle,Dungeon Drop,,Black Morass,Normal,94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg,Aeonus
-Holy,Trinket,PreRaid,Essence of the Martyr,Dungeon Token,,,,112 Spell Dmg/Heal; 84 Healing; 28 Spell Dmg Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec,41 Badges of Justice
+Holy,Trinket,PreRaid,Essence of the Martyr,Dungeon Token,,,,"112 Spell Dmg/Heal; 84 Healing; 28 Spell Dmg
+
+Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec",41 Badges of Justice
 Holy,Trinket,PreRaid,Darkmoon Card: Blue Dragon,Quest,Darkmoon Beast Deck (Darkmoon Faire),,,Equip: 2% chance on successful spellcast to allow 100% of your Mana regeneration to continue while casting for 15 sec,
-Holy,Trinket,PreRaid,Oshu'gun Relic,Quest,Gava'xi (Nag),,,71 Spell Dmg/Heal; 53 Healing; 18 Spell Dmg Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec,
-Holy,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg Use: Your heals each cost 22 less mana for the next 15 sec,Lower City - Revered
+Holy,Trinket,PreRaid,Oshu'gun Relic,Quest,Gava'xi (Nag),,,"71 Spell Dmg/Heal; 53 Healing; 18 Spell Dmg
+
+Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec",
+Holy,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,"94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg
+
+Use: Your heals each cost 22 less mana for the next 15 sec",Lower City - Revered
 Holy,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 423 Spell Dmg/Heal; 317 Healing; 106 Spell Dmg; 7 MP5,
 Holy,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 399 Spell Dmg/Heal; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
 Holy,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 303 Spell Dmg/Heal; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
@@ -98,7 +108,9 @@ Holy,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the Netherwi
 Holy,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,16 Int; 12 Spi; 86 Spell Dmg/Heal; 64 Healing; 22 Spell Dmg,Cenarion Expedition - Exalted
 Holy,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,59.79 DPS; 37 Sta; 35 Int; 303 Spell Dmg/Heal; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
 Holy,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,59.79 DPS; 27 Sta; 27 Int; 46 Spi; 303 Spell Dmg/Heal; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
-Holy,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 28 Sta; 28 Int; 27 Spi Use: Creates a portal, teleporting group members that use it to Karazhan; Equip: Increases your spell damage by up to 120 and your healing by up to 300",
+Holy,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 28 Sta; 28 Int; 27 Spi
+
+Use: Creates a portal, teleporting group members that use it to Karazhan; Equip: Increases your spell damage by up to 120 and your healing by up to 300",
 Holy,Two Hand,PreRaid,Seer's Cane,Reputation,,,,62.62 DPS; 28 Sta; 46 Int; 304 Spell Dmg/Heal; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
 Holy,Ranged/Relic,PreRaid,Soul-Wand of the Aldor,Dungeon Drop,,Shadow Labyrinth,Normal,125.28 DPS; 9 Sta; 8 Int; 10 Spi; 30 Spell Dmg/Heal; 22 Healing; 8 Spell Dmg,Ambassador Hellmaw
 Holy,Ranged/Relic,PreRaid,Wand of the Whispering Dead,Dungeon Drop,,Naxxramas,Normal,113.67 DPS; 10 Int; 9 Spi; 30 Spell Dmg/Heal; 22 Healing; 8 Spell Dmg,Instructor Razuvious
@@ -106,8 +118,12 @@ Holy,Ranged/Relic,PreRaid,Rejuvenating Scepter,Quest,Ar'kelos the Guardian (NS),
 Holy,Ranged/Relic,PreRaid,Wand of the Seer,Quest,Turning Point (NS),,,121.15 DPS; 8 Int; 5 Spi; 18 Healing; 18 Spell Dmg,
 Shadow,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg,
 Shadow,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
-Shadow,Head,PreRaid,Mana-Etched Crown,Dungeon Drop,,Black Morass,Normal,127 Armor; 27 Sta; 20 Int; 34 Healing; 34 Spell Dmg; 35 Spell Hit Equip: Increases your spell penetration by 15,Aeonus
-Shadow,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Shadow,Head,PreRaid,Mana-Etched Crown,Dungeon Drop,,Black Morass,Normal,"127 Armor; 27 Sta; 20 Int; 34 Healing; 34 Spell Dmg; 35 Spell Hit
+
+Equip: Increases your spell penetration by 15",Aeonus
+Shadow,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg
+
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
 Shadow,Head,PreRaid,Mag'hari Ritualist's Horns,Quest,Hero of the Mag'har (Nag),,,114 Armor; 18 Sta; 16 Int; 50 Healing; 50 Spell Dmg,
 Shadow,Head,PreRaid,Hydromancer's Headwrap,Quest (Dung),The Warlord's Hideout (SV),,,127 Armor; 21 Sta; 27 Int; 33 Healing; 33 Spell Dmg,
 Shadow,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,133 Armor; 21 Sta; 15 Int,
@@ -139,7 +155,9 @@ Shadow,Hands,PreRaid,Jaedenfire Gloves of Annihilation,Dungeon Drop,,Shadow Laby
 Shadow,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit,Omor the Unscarred
 Shadow,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Healing; 16 Spell Dmg,Hungarfen
 Shadow,Hands,PreRaid,Uvuros Hide Gloves,Quest,"Wanted: Uvuros, Scourge of Shadowmoon (SMV)",,,88 Armor; 16 Sta; 12 Int; 11 Spi; 35 Healing; 35 Spell Dmg,
-Shadow,Hands,PreRaid,Tempest's Touch,Quest (Dung),Return to Andormu (CoT),,,88 Armor; 10 Sta; 20 Int; 6 Spi; 27 Healing; 27 Spell Dmg Equip: Increases your spell penetration by 10,
+Shadow,Hands,PreRaid,Tempest's Touch,Quest (Dung),Return to Andormu (CoT),,,"88 Armor; 10 Sta; 20 Int; 6 Spi; 27 Healing; 27 Spell Dmg
+
+Equip: Increases your spell penetration by 10",
 Shadow,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg,
 Shadow,Waist,PreRaid,Belt of Depravity,Dungeon Drop,,Arcatraz,Heroic,105 Armor; 31 Sta; 27 Int; 34 Healing; 34 Spell Dmg,Harbinger Skyriss
 Shadow,Waist,PreRaid,Eyestalk Waist Cord,Dungeon Drop,,Ahn'Qiraj,Normal,85 Armor; 10 Sta; 9 Int; 41 Healing; 41 Spell Dmg; 14 Spell Crit,C'Thun
@@ -154,14 +172,20 @@ Shadow,Legs,PreRaid,Khadgar's Kilt of Abjuration,Dungeon Drop,,Black Morass,Norm
 Shadow,Legs,PreRaid,Kirin Tor Master's Trousers,Dungeon Drop,,Shadow Labyrinth,Heroic,163 Armor; 27 Sta; 29 Int; 25 Spi; 36 Healing; 36 Spell Dmg,Murmur
 Shadow,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg,Talon King Ikiss
 Shadow,Feet,PreRaid,Frozen Shadoweave Boots,Auction House,,,,122 Armor; 15 Sta; 9 Int,
-Shadow,Feet,PreRaid,Rocket Boots Xtreme Lite,Auction House,,,,105 Armor; 47 Healing; 47 Spell Dmg Use: Engage the rocket boots to greatly increase your speed... most of the time,
+Shadow,Feet,PreRaid,Rocket Boots Xtreme Lite,Auction House,,,,"105 Armor; 47 Healing; 47 Spell Dmg
+
+Use: Engage the rocket boots to greatly increase your speed... most of the time",
 Shadow,Feet,PreRaid,Boots of the Darkwalker,Dungeon Drop,,Hellfire Ramparts,Heroic,107 Armor; 36 Sta; 25 Int,Watchkeeper Gargolmar
 Shadow,Feet,PreRaid,Embroidered Spellpyre Boots,Dungeon Drop,,Blood Furnace,Heroic,107 Armor; 21 Sta; 21 Int; 41 Healing; 41 Spell Dmg,Broggok
 Shadow,Feet,PreRaid,Sigil-Laced Boots,Dungeon Drop,,Arcatraz,Normal,107 Armor; 24 Sta; 18 Int; 20 Healing; 20 Spell Dmg,Harbinger Skyriss
 Shadow,Feet,PreRaid,Shattrath Jumpers,Quest (Dung),Into the Heart of the Labyrinth (SL),,,107 Armor; 25 Sta; 17 Int; 29 Healing; 29 Spell Dmg,
-Shadow,Neck,PreRaid,Chain of the Twilight Owl,Auction House,,,,19 Int; 21 Healing; 21 Spell Dmg Use: Increases the spell critical hit chance of nearby party members by 2% for 30 min,
+Shadow,Neck,PreRaid,Chain of the Twilight Owl,Auction House,,,,"19 Int; 21 Healing; 21 Spell Dmg
+
+Use: Increases the spell critical hit chance of nearby party members by 2% for 30 min",
 Shadow,Neck,PreRaid,Eye of the Night,Auction House,,,,Use: Increases spell damage by up to 34 for all nearby party members. Lasts 30 min; Equip: Increases your spell penetration by 15,
-Shadow,Neck,PreRaid,Jade Pendant of Blasting,Auction House,,,,3 Int; 8 Healing; 8 Spell Dmg Use: Increases spell damage done by nearby party members by up to 15 for 30 min,
+Shadow,Neck,PreRaid,Jade Pendant of Blasting,Auction House,,,,"3 Int; 8 Healing; 8 Spell Dmg
+
+Use: Increases spell damage done by nearby party members by up to 15 for 30 min",
 Shadow,Neck,PreRaid,Brooch of Heightened Potential,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 22 Healing; 22 Spell Dmg,Blackheart the Inciter
 Shadow,Neck,PreRaid,Choker of the Fire Lord,Dungeon Drop,,Molten Core,Normal,7 Sta; 7 Int; 34 Healing; 34 Spell Dmg,Ragnaros
 Shadow,Neck,PreRaid,Natasha's Arcane Filament,Quest,The Hound-Master (BEM),,,22 Sta; 10 Int; 29 Healing; 29 Spell Dmg,
@@ -178,13 +202,23 @@ Shadow,Ring,PreRaid,Manastorm Band,Quest,Shutting Down Manaforge Ara (NS),,,15 I
 Shadow,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,
 Shadow,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg,Cenarion Expedition - Exalted
 Shadow,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg,The Scryers - Exalted
-Shadow,Trinket,PreRaid,Arcanist's Stone,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,167 Healing; 167 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 167 for 20 sec,Epoch Hunter
+Shadow,Trinket,PreRaid,Arcanist's Stone,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"167 Healing; 167 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 167 for 20 sec",Epoch Hunter
 Shadow,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Healing; 44 Spell Dmg; 16 Spell Hit,Nefarian
 Shadow,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,37 Healing; 37 Spell Dmg,Quagmirran
-Shadow,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,40 Healing; 40 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec,Sapphiron
-Shadow,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,43 Healing; 43 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec,41 Badges of Justice
-Shadow,Trinket,PreRaid,Ancient Crystal Talisman,Quest,A Spirit Ally? (ZM),,,26 Healing; 26 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec,
-Shadow,Trinket,PreRaid,Glowing Crystal Insignia,Quest,Overlord Gorefist (ZM),,,26 Healing; 26 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec,
+Shadow,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,"40 Healing; 40 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec",Sapphiron
+Shadow,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,"43 Healing; 43 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec",41 Badges of Justice
+Shadow,Trinket,PreRaid,Ancient Crystal Talisman,Quest,A Spirit Ally? (ZM),,,"26 Healing; 26 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec",
+Shadow,Trinket,PreRaid,Glowing Crystal Insignia,Quest,Overlord Gorefist (ZM),,,"26 Healing; 26 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec",
 Shadow,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,,
 Shadow,Trinket,PreRaid,Starkiller's Bauble,Quest,The Horrors of Pollution (NS),,,Use: Increases spell damage by up to 125 for 15 sec,
 Shadow,Trinket,PreRaid,Terokkar Tablet of Vim,Quest,Torgos! (TF),,,Use: Increases spell damage by up to 84 and healing by up to 156 for 15 sec,

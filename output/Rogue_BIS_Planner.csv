@@ -38,16 +38,30 @@ Dps,Ring,PreRaid,Band of Anguish,Quest,News of Victory (SMV),,,13 Agi; 50 AP,
 Dps,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP,
 Dps,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP,
 Dps,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
-Dps,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,64 AP; 260 Haste Use: Increases haste rating by 260 for 10 sec,Pathaleon the Calculator
+Dps,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
+
+Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
 Dps,Trinket,PreRaid,Badge of the Swarmguard,Dungeon Drop,,Ahn'Qiraj,Normal,,Battleguard Sartura
 Dps,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,Temporus
-Dps,Trinket,PreRaid,Kiss of the Spider,Dungeon Drop,,Naxxramas,Normal,10 Hit; 14 Crit; 200 Haste Use: Increases your haste rating by 200 for 15 sec,Maexxna
-Dps,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,64 AP Use: Increases attack power by 260 for 20 sec,Sapphiron
-Dps,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,72 AP Use: Increases attack power by 278 for 20 sec,41 Badges of Justice
+Dps,Trinket,PreRaid,Kiss of the Spider,Dungeon Drop,,Naxxramas,Normal,"10 Hit; 14 Crit; 200 Haste
+
+Use: Increases your haste rating by 200 for 15 sec",Maexxna
+Dps,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,"64 AP
+
+Use: Increases attack power by 260 for 20 sec",Sapphiron
+Dps,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
+
+Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Dps,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
-Dps,Main Hand,PreRaid,Blinkstrike,Auction House,,,,81.15 DPS Proc: Grants an extra attack on your next swing,World Drop
-Dps,Main Hand,PreRaid,Dragonmaw,Auction House,,,,91.11 DPS; 9 Sta; 212 Haste Proc: Increases your haste rating by 212 for 10 sec,
-Dps,Main Hand,PreRaid,The Night Blade,Auction House,,,,81.39 DPS Proc: Your attacks ignore 435 of your enemies' armor for 10 sec,World Drop
+Dps,Main Hand,PreRaid,Blinkstrike,Auction House,,,,"81.15 DPS
+
+Proc: Grants an extra attack on your next swing",World Drop
+Dps,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
+
+Proc: Increases your haste rating by 212 for 10 sec",
+Dps,Main Hand,PreRaid,The Night Blade,Auction House,,,,"81.39 DPS
+
+Proc: Your attacks ignore 435 of your enemies' armor for 10 sec",World Drop
 Dps,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,81.15 DPS; 38 AP,The Aldor - Exalted
 Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,71.79 DPS; 15 Agi; 26 AP,Aeonus
 Dps,Off Hand,PreRaid,Searing Sunblade,Dungeon Token,,,,85.38 DPS; 24 Agi; 22 Sta,50 Badges of Justice

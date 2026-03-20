@@ -3,7 +3,9 @@ Balance,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int
 Balance,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
 Balance,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg,Pathaleon the Calculator
 Balance,Head,PreRaid,Mana-Binders Cowl,Dungeon Token,,,,151 Armor; 38 Sta; 29 Int; 34 Healing; 34 Spell Dmg,50 Badges of Justice
-Balance,Head,PreRaid,Druidic Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,226 Armor; 12 Sta; 15 Int; 35 Healing; 35 Spell Dmg; 4 MP5 Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Balance,Head,PreRaid,Druidic Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"226 Armor; 12 Sta; 15 Int; 35 Healing; 35 Spell Dmg; 4 MP5
+
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
 Balance,Head,PreRaid,Mag'hari Ritualist's Horns,Quest,Hero of the Mag'har (Nag),,,114 Armor; 18 Sta; 16 Int; 50 Healing; 50 Spell Dmg,
 Balance,Head,PreRaid,Gladiator's Wyrmhide Helm,PvP,,,,356 Armor; 45 Sta; 25 Int; 43 Healing; 43 Spell Dmg; 7 MP5,
 Balance,Shoulder,PreRaid,Incanter's Pauldrons,Dungeon Drop,,Steamvault,Normal,117 Armor; 24 Sta; 17 Int; 16 Spi; 20 Healing; 20 Spell Dmg,Warlord Kalithresh
@@ -45,7 +47,9 @@ Balance,Hands,PreRaid,Gloves of the Deadwatcher,Dungeon Drop,,Auchenai Crypts,He
 Balance,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit,Omor the Unscarred
 Balance,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Healing; 16 Spell Dmg,Hungarfen
 Balance,Hands,PreRaid,Starlight Gauntlets,Dungeon Drop,,Underbog,Normal,153 Armor; 10 Sta; 21 Int; 8 Spi; 25 Healing; 25 Spell Dmg,Hungarfen
-Balance,Hands,PreRaid,Tempest's Touch,Quest (Dung),Return to Andormu (CoT),,,88 Armor; 10 Sta; 20 Int; 6 Spi; 27 Healing; 27 Spell Dmg Equip: Increases your spell penetration by 10,
+Balance,Hands,PreRaid,Tempest's Touch,Quest (Dung),Return to Andormu (CoT),,,"88 Armor; 10 Sta; 20 Int; 6 Spi; 27 Healing; 27 Spell Dmg
+
+Equip: Increases your spell penetration by 10",
 Balance,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg,
 Balance,Waist,PreRaid,Spellfire Belt,Auction House,,,,100 Armor; 4 Sta; 18 Int,
 Balance,Waist,PreRaid,Windhawk Belt,Auction House,,,,205 Armor; 17 Sta; 19 Int; 20 Spi; 56 Spell Dmg/Heal; 42 Healing; 14 Spell Dmg; 8 MP5,
@@ -90,15 +94,27 @@ Balance,Ring,PreRaid,Manastorm Band,Quest,Shutting Down Manaforge Ara (NS),,,15 
 Balance,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,
 Balance,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg,Cenarion Expedition - Exalted
 Balance,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg,The Scryers - Exalted
-Balance,Trinket,PreRaid,Arcanist's Stone,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,167 Healing; 167 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 167 for 20 sec,Epoch Hunter
+Balance,Trinket,PreRaid,Arcanist's Stone,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"167 Healing; 167 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 167 for 20 sec",Epoch Hunter
 Balance,Trinket,PreRaid,Briarwood Reed,Dungeon Drop,,Blackrock Spire,Normal,29 Healing; 29 Spell Dmg,Jed Runewatcher
 Balance,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Healing; 44 Spell Dmg; 16 Spell Hit,Nefarian
-Balance,Trinket,PreRaid,Oculus of the Hidden Eye,Dungeon Drop,,Auchenai Crypts,Normal,33 Healing; 33 Spell Dmg Use: The next opponent you kill within 10 sec that yields experience or honor will restore 900 mana,Shirrak the Dead Watcher
+Balance,Trinket,PreRaid,Oculus of the Hidden Eye,Dungeon Drop,,Auchenai Crypts,Normal,"33 Healing; 33 Spell Dmg
+
+Use: The next opponent you kill within 10 sec that yields experience or honor will restore 900 mana",Shirrak the Dead Watcher
 Balance,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,37 Healing; 37 Spell Dmg,Quagmirran
-Balance,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,40 Healing; 40 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec,Sapphiron
-Balance,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,43 Healing; 43 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec,41 Badges of Justice
-Balance,Trinket,PreRaid,Ancient Crystal Talisman,Quest,A Spirit Ally? (ZM),,,26 Healing; 26 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec,
-Balance,Trinket,PreRaid,Glowing Crystal Insignia,Quest,Overlord Gorefist (ZM),,,26 Healing; 26 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec,
+Balance,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,"40 Healing; 40 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec",Sapphiron
+Balance,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,"43 Healing; 43 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec",41 Badges of Justice
+Balance,Trinket,PreRaid,Ancient Crystal Talisman,Quest,A Spirit Ally? (ZM),,,"26 Healing; 26 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec",
+Balance,Trinket,PreRaid,Glowing Crystal Insignia,Quest,Overlord Gorefist (ZM),,,"26 Healing; 26 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 104 for 20 sec",
 Balance,Trinket,PreRaid,Starkiller's Bauble,Quest,The Horrors of Pollution (NS),,,Use: Increases spell damage by up to 125 for 15 sec,
 Balance,Trinket,PreRaid,Terokkar Tablet of Vim,Quest,Torgos! (TF),,,Use: Increases spell damage by up to 84 and healing by up to 156 for 15 sec,
 Balance,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec,The Scryers - Revered
@@ -190,17 +206,31 @@ Bear,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 S
 Bear,Ring,PreRaid,Band of the Exorcist,Dungeon Token,,,,24 Sta; 34 AP,50 Spirit Shards
 Bear,Ring,PreRaid,Ring of Unyielding Force,Dungeon Token,,,,294 Armor; 31 Sta,25 Badges of Justice
 Bear,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
-Bear,Trinket,PreRaid,Gnomish Poultryizer,Auction House,,,,"45 Sta Use: Turns the target into a chicken for 15 sec.  Well, that is assuming the transmogrification polarity has not been reversed",
-Bear,Trinket,PreRaid,Goblin Rocket Launcher,Auction House,,,,45 Sta Use: Fire a powerful rocket at the enemy that does 960 to 1440 damage and stuns them for 3 sec.  This thing has quite a kick though,
-Bear,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,64 AP; 260 Haste Use: Increases haste rating by 260 for 10 sec,Pathaleon the Calculator
-Bear,Trinket,PreRaid,Argussian Compass,Dungeon Drop,,Underbog,Normal,"36 Sta Use: Reduces damage from each attack by 68, up to a total of 1150 damage absorbed. Lasts 20 sec",The Black Stalker
+Bear,Trinket,PreRaid,Gnomish Poultryizer,Auction House,,,,"45 Sta
+
+Use: Turns the target into a chicken for 15 sec.  Well, that is assuming the transmogrification polarity has not been reversed",
+Bear,Trinket,PreRaid,Goblin Rocket Launcher,Auction House,,,,"45 Sta
+
+Use: Fire a powerful rocket at the enemy that does 960 to 1440 damage and stuns them for 3 sec.  This thing has quite a kick though",
+Bear,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
+
+Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
+Bear,Trinket,PreRaid,Argussian Compass,Dungeon Drop,,Underbog,Normal,"36 Sta
+
+Use: Reduces damage from each attack by 68, up to a total of 1150 damage absorbed. Lasts 20 sec",The Black Stalker
 Bear,Trinket,PreRaid,Drake Fang Talisman,Dungeon Drop,,Blackwing Lair,Normal,56 AP; 12 Dodge; 20 Hit,Ebonroc
 Bear,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,Temporus
 Bear,Trinket,PreRaid,Icon of Unyielding Courage,Dungeon Drop,,Blood Furnace,Heroic,Use: Your attacks ignore 600 of your enemies' armor for 20 sec,Keli'dan the Breaker
-Bear,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,64 AP Use: Increases attack power by 260 for 20 sec,Sapphiron
-Bear,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,72 AP Use: Increases attack power by 278 for 20 sec,41 Badges of Justice
+Bear,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,"64 AP
+
+Use: Increases attack power by 260 for 20 sec",Sapphiron
+Bear,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
+
+Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Bear,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
-Bear,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,320 Armor; 65.83 DPS; 35 Str; 31 Sta; 712 AP Equip: Reduces the base Mana cost of your shapeshifting spells by 200,World Drop
+Bear,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,"320 Armor; 65.83 DPS; 35 Str; 31 Sta; 712 AP
+
+Equip: Reduces the base Mana cost of your shapeshifting spells by 200",World Drop
 Bear,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,62.92 DPS; 34 Str; 32 Agi; 33 Sta; 539 AP,Avatar of the Martyred
 Bear,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,62.92 DPS; 46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
 Bear,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 71.17 DPS; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
@@ -212,7 +242,9 @@ Bear,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,62.92 DPS; 28 Str; 42 Sta; 539 
 Bear,Ranged/Relic,PreRaid,Idol of Brutality,Dungeon Drop,,Stratholme,Normal,Equip: Increases the damage dealt by your Maul ability by 50 and Swipe ability by 10,Magistrate Barthilas
 Bear,Ranged/Relic,PreRaid,Idol of Ursoc,Dungeon Drop,,Underbog,Normal,,Hungarfen
 Bear,Ranged/Relic,PreRaid,Idol of the Wild,Quest,Colossal Menace (HFP),,,Equip: Increases the damage dealt by Mangle (Cat) by 24 and the damage dealt by Mangle (Bear) by 52,
-Cat,Head,PreRaid,Wolfshead Helm,Auction House,,,,"109 Armor; 10 Spi Equip: When shapeshifting into Cat form the Druid gains 20 energy, when shapeshifting into Bear form the Druid gains 5 rage",
+Cat,Head,PreRaid,Wolfshead Helm,Auction House,,,,"109 Armor; 10 Spi
+
+Equip: When shapeshifting into Cat form the Druid gains 20 energy, when shapeshifting into Bear form the Druid gains 5 rage",
 Cat,Shoulder,PreRaid,Bladed Shoulderpads of the Merciless,Dungeon Drop,,Karazhan,Normal,273 Armor; 30 Sta; 58 AP,Chess Event
 Cat,Shoulder,PreRaid,Mantle of Perenolde,Dungeon Drop,,Old Hillsbrad Foothills,Normal,197 Armor; 24 Sta; 20 AP,Epoch Hunter
 Cat,Shoulder,PreRaid,Sun-Gilded Shouldercaps,Dungeon Drop,,Black Morass,Normal,214 Armor; 25 Agi; 26 Sta; 48 AP,Chrono Lord Deja
@@ -247,7 +279,9 @@ Cat,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor;
 Cat,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta,
 Cat,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
 Cat,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge,
-Cat,Feet,PreRaid,The Master's Treads,Auction House,,,,191 Armor; 24 Agi; 19 Sta; 48 AP Equip: Increases your effective stealth level by 1,World Drop
+Cat,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP
+
+Equip: Increases your effective stealth level by 1",World Drop
 Cat,Feet,PreRaid,Shadowstep Striders,Dungeon Drop,,Arcatraz,Heroic,240 Armor; 31 Agi; 30 Sta; 54 AP,Harbinger Skyriss
 Cat,Feet,PreRaid,Felboar Hide Shoes,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,191 Armor; 18 Agi; 15 Sta; 68 AP,
 Cat,Neck,PreRaid,Braided Eternium Chain,Auction House,,,,Use: Increases the critical strike rating of nearby party members by 28 for 30 min; Equip: +5 Weapon Damage,
@@ -263,15 +297,25 @@ Cat,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 5
 Cat,Ring,PreRaid,Overseer's Signet,Quest,Shutting Down Manaforge Ara (NS),,,25 Str; 15 Agi,
 Cat,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP,
 Cat,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
-Cat,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,64 AP; 260 Haste Use: Increases haste rating by 260 for 10 sec,Pathaleon the Calculator
+Cat,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
+
+Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
 Cat,Trinket,PreRaid,Drake Fang Talisman,Dungeon Drop,,Blackwing Lair,Normal,56 AP; 12 Dodge; 20 Hit,Ebonroc
 Cat,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,Temporus
 Cat,Trinket,PreRaid,Icon of Unyielding Courage,Dungeon Drop,,Blood Furnace,Heroic,Use: Your attacks ignore 600 of your enemies' armor for 20 sec,Keli'dan the Breaker
-Cat,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,64 AP Use: Increases attack power by 260 for 20 sec,Sapphiron
-Cat,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,72 AP Use: Increases attack power by 278 for 20 sec,41 Badges of Justice
-Cat,Trinket,PreRaid,Core of Ar'kelos,Quest,Ar'kelos the Guardian (NS),,,52 AP Use: Increases your melee and ranged attack power by 200. Effect lasts for 20 sec,
+Cat,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,"64 AP
+
+Use: Increases attack power by 260 for 20 sec",Sapphiron
+Cat,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
+
+Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
+Cat,Trinket,PreRaid,Core of Ar'kelos,Quest,Ar'kelos the Guardian (NS),,,"52 AP
+
+Use: Increases your melee and ranged attack power by 200. Effect lasts for 20 sec",
 Cat,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
-Cat,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,320 Armor; 65.83 DPS; 35 Str; 31 Sta; 712 AP Equip: Reduces the base Mana cost of your shapeshifting spells by 200,World Drop
+Cat,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,"320 Armor; 65.83 DPS; 35 Str; 31 Sta; 712 AP
+
+Equip: Reduces the base Mana cost of your shapeshifting spells by 200",World Drop
 Cat,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,62.92 DPS; 34 Str; 32 Agi; 33 Sta; 539 AP,Avatar of the Martyred
 Cat,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,62.92 DPS; 46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
 Cat,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 71.17 DPS; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
@@ -329,7 +373,9 @@ Restoration,Hands,PreRaid,Prismatic Mittens of Mending,Dungeon Drop,,Botanica,No
 Restoration,Hands,PreRaid,Wasphide Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,164 Armor; 14 Sta; 15 Int; 16 Spi; 71 Spell Dmg/Heal; 53 Healing; 18 Spell Dmg,Princess Huhuran
 Restoration,Hands,PreRaid,Cryo-mitts,Quest (Dung),Someone Else's Hard Work Pays Off (MT),,,156 Armor; 22 Int; 16 Spi; 76 Spell Dmg/Heal; 57 Healing; 19 Spell Dmg,
 Restoration,Hands,PreRaid,Gloves of Preservation,Quest (Dung),Fel Embers (SH),,,181 Armor; 25 Int; 25 Spi; 71 Spell Dmg/Heal; 53 Healing; 18 Spell Dmg,
-Restoration,Hands,PreRaid,Gladiator's Kodohide Gloves,PvP,,,,283 Armor; 33 Sta; 27 Int; 83 Spell Dmg/Heal; 62 Healing; 21 Spell Dmg; 6 MP5 Equip: Reduces the cast time of your Cyclone spell by 0,
+Restoration,Hands,PreRaid,Gladiator's Kodohide Gloves,PvP,,,,"283 Armor; 33 Sta; 27 Int; 83 Spell Dmg/Heal; 62 Healing; 21 Spell Dmg; 6 MP5
+
+Equip: Reduces the cast time of your Cyclone spell by 0",
 Restoration,Waist,PreRaid,Primal Mooncloth Belt,Auction House,,,,109 Armor; 12 Int; 11 Spi; 108 Spell Dmg/Heal; 81 Healing; 27 Spell Dmg; 8 MP5,
 Restoration,Waist,PreRaid,Windhawk Belt,Auction House,,,,205 Armor; 17 Sta; 19 Int; 20 Spi; 56 Spell Dmg/Heal; 42 Healing; 14 Spell Dmg; 8 MP5,
 Restoration,Waist,PreRaid,Cord of Belief,Dungeon Drop,,Slave Pens,Heroic,88 Armor; 23 Int; 20 Spi; 62 Spell Dmg/Heal; 46 Healing; 16 Spell Dmg; 8 MP5,Mennu the Betrayer
@@ -376,13 +422,23 @@ Restoration,Ring,PreRaid,Spiritualist's Mark of the Sha'tar,Quest,Battle of the 
 Restoration,Ring,PreRaid,Keeper's Ring of Piety,Quest (Dung),Hero of the Brood (BM),,,18 Spi; 56 Spell Dmg/Heal; 42 Healing; 14 Spell Dmg; 7 MP5,
 Restoration,Ring,PreRaid,Ancestral Band,Reputation,,,,15 Int; 76 Spell Dmg/Heal; 57 Healing; 19 Spell Dmg; 4 MP5,Thrallmar - Revered
 Restoration,Ring,PreRaid,Ring of Convalescence,Reputation,,,,15 Int; 76 Spell Dmg/Heal; 57 Healing; 19 Spell Dmg; 4 MP5,Honor Hold - Revered
-Restoration,Trinket,PreRaid,Auslese's Light Channeler,Dungeon Drop,,Blood Furnace,Normal,79 Spell Dmg/Heal; 59 Healing; 20 Spell Dmg Use: Reduces the cost of your next spell cast within 10 sec by up to 215 mana,Broggok
-Restoration,Trinket,PreRaid,Eye of the Dead,Dungeon Drop,,Naxxramas,Normal,94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec,Sapphiron
+Restoration,Trinket,PreRaid,Auslese's Light Channeler,Dungeon Drop,,Blood Furnace,Normal,"79 Spell Dmg/Heal; 59 Healing; 20 Spell Dmg
+
+Use: Reduces the cost of your next spell cast within 10 sec by up to 215 mana",Broggok
+Restoration,Trinket,PreRaid,Eye of the Dead,Dungeon Drop,,Naxxramas,Normal,"94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg
+
+Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec",Sapphiron
 Restoration,Trinket,PreRaid,Rejuvenating Gem,Dungeon Drop,,Blackwing Lair,Normal,88 Spell Dmg/Heal; 66 Healing; 22 Spell Dmg; 9 MP5,Three Drakes
 Restoration,Trinket,PreRaid,Scarab of the Infinite Cycle,Dungeon Drop,,Black Morass,Normal,94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg,Aeonus
-Restoration,Trinket,PreRaid,Essence of the Martyr,Dungeon Token,,,,112 Spell Dmg/Heal; 84 Healing; 28 Spell Dmg Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec,41 Badges of Justice
-Restoration,Trinket,PreRaid,Oshu'gun Relic,Quest,Gava'xi (Nag),,,71 Spell Dmg/Heal; 53 Healing; 18 Spell Dmg Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec,
-Restoration,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg Use: Your heals each cost 22 less mana for the next 15 sec,Lower City - Revered
+Restoration,Trinket,PreRaid,Essence of the Martyr,Dungeon Token,,,,"112 Spell Dmg/Heal; 84 Healing; 28 Spell Dmg
+
+Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec",41 Badges of Justice
+Restoration,Trinket,PreRaid,Oshu'gun Relic,Quest,Gava'xi (Nag),,,"71 Spell Dmg/Heal; 53 Healing; 18 Spell Dmg
+
+Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec",
+Restoration,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,"94 Spell Dmg/Heal; 70 Healing; 24 Spell Dmg
+
+Use: Your heals each cost 22 less mana for the next 15 sec",Lower City - Revered
 Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 423 Spell Dmg/Heal; 317 Healing; 106 Spell Dmg; 7 MP5,
 Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 399 Spell Dmg/Heal; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
 Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 303 Spell Dmg/Heal; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
@@ -404,7 +460,9 @@ Restoration,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the N
 Restoration,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,16 Int; 12 Spi; 86 Spell Dmg/Heal; 64 Healing; 22 Spell Dmg,Cenarion Expedition - Exalted
 Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,59.79 DPS; 37 Sta; 35 Int; 303 Spell Dmg/Heal; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
 Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,59.79 DPS; 27 Sta; 27 Int; 46 Spi; 303 Spell Dmg/Heal; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
-Restoration,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 28 Sta; 28 Int; 27 Spi; 400 Spell Dmg/Heal; 300 Healing; 100 Spell Dmg; 592 AP; 11 MP5 Use: Creates a portal, teleporting group members that use it to Karazhan",
+Restoration,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 28 Sta; 28 Int; 27 Spi; 400 Spell Dmg/Heal; 300 Healing; 100 Spell Dmg; 592 AP; 11 MP5
+
+Use: Creates a portal, teleporting group members that use it to Karazhan",
 Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,62.62 DPS; 28 Sta; 46 Int; 304 Spell Dmg/Heal; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
 Restoration,Ranged/Relic,PreRaid,Idol of the Emerald Queen,Dungeon Drop,,Shadow Labyrinth,Normal,Equip: Increases the periodic healing of your Lifebloom by up to 88,Ambassador Hellmaw
 Restoration,Ranged/Relic,PreRaid,Harold's Rejuvenating Broach,Quest,The Ultimate Bloodsport (Nag),,,,

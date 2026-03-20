@@ -81,7 +81,7 @@ FETCH_WORKERS = 4
 
 STAT_COLUMNS = [
     "Armor", "DPS", "Str", "Agi", "Sta", "Int", "Spi",
-    "Spell Dmg/Heal", "Healing", "Spell Dmg", "AP", "MP5",
+    "Healing", "Spell Dmg", "AP", "MP5",
     "Defense", "Dodge", "Parry", "Block Rating", "Block Value",
     "Hit", "Crit", "Spell Hit", "Spell Crit", "Haste",
 ]
@@ -459,13 +459,11 @@ def parse_tooltip_to_dict(html):
 
 
 def normalize_spell_stats(stats):
-    """Unify Spell Dmg/Heal vs Healing+Spell Dmg so ItemDB and Comparison diffs stay consistent.
+    """Map spell tooltip data to Healing + Spell Dmg only (no stored Spell Dmg/Heal key).
 
-    Order: resolve combined+split conflicts; fill Spell Dmg/Heal from heal_m split lines unless
-    this row was expanded from combined-only green text (tracked with _spell_from_combined_green);
-    then expand remaining combined-only rows into Healing + Spell Dmg and set that flag.
-
-    _spell_from_combined_green is stored in item_database.json so reload stays idempotent.
+    Parse may still set Spell Dmg/Heal from combined green text; split lines from heal_m win on
+    conflict. Combined-only tooltips become equal Healing and Spell Dmg; _spell_from_combined_green
+    marks that case for idempotent reloads.
     """
     if not stats:
         return
@@ -475,14 +473,6 @@ def normalize_spell_stats(stats):
     ):
         stats.pop("_spell_from_combined_green", None)
         del stats["Spell Dmg/Heal"]
-        stats["Spell Dmg/Heal"] = (stats.get("Healing") or 0) + (stats.get("Spell Dmg") or 0)
-
-    if (
-        "Spell Dmg/Heal" not in stats
-        and ("Healing" in stats or "Spell Dmg" in stats)
-        and not stats.get("_spell_from_combined_green")
-    ):
-        stats["Spell Dmg/Heal"] = (stats.get("Healing") or 0) + (stats.get("Spell Dmg") or 0)
 
     if "Spell Dmg/Heal" in stats and "Healing" not in stats and "Spell Dmg" not in stats:
         v = stats["Spell Dmg/Heal"]
@@ -490,6 +480,8 @@ def normalize_spell_stats(stats):
         stats["Spell Dmg"] = v
         del stats["Spell Dmg/Heal"]
         stats["_spell_from_combined_green"] = True
+
+    stats.pop("Spell Dmg/Heal", None)
 
 
 def stats_dict_to_string(stats, attributes=""):
@@ -878,8 +870,11 @@ def export_xlsx(csv_path, spec_order):
         bottom=Side(style="thin", color="BDBDBD"),
     )
     wrap_align = Alignment(wrap_text=True, vertical="top")
+    intro_title_align = Alignment(wrap_text=False, vertical="center", horizontal="left")
     intro_title_font = Font(bold=True, size=14, color="212121")
     intro_body_font = Font(size=10, color="424242")
+    intro_label_font = Font(bold=True, size=10, color="424242")
+    intro_label_align = Alignment(wrap_text=False, vertical="center", horizontal="left")
 
     wb = Workbook()
     wb.remove(wb.active)
@@ -937,32 +932,40 @@ def export_xlsx(csv_path, spec_order):
     ce_ncol = len(ce_headers)
     ce_last_col = get_column_letter(ce_ncol)
 
-    ce_intro_lines = [
-        "Add your current equipment to see comparisons.",
-        (
-            'If an item in the BIS Planner sheet is set to "Equipped" in the Interest column, '
-            "it will automatically update here."
-        ),
-        (
-            "Begin typing to select from a list of stored items; if your item is not on the list, "
-            "you can manually enter the stats (integers only)."
-        ),
-    ]
-    # Row 1: title, rows 2–1+len: instructions (from column C — right of freeze A–B), then headers
-    CE_HEADER_ROW = 2 + len(ce_intro_lines)
-    ce_intro_start = 3
-    ce_intro_letter = get_column_letter(ce_intro_start)
+    ce_intro_para1 = (
+        "Add your current equipment to see comparisons by typing in item name. "
+        "Note: Stats and comparisons will take a few seconds to update."
+    )
+    ce_intro_para2 = (
+        'If an item in the BIS Planner sheet is set to "Equipped" in the Interest column, '
+        "it will automatically update here. If your item is not on the list, you can manually "
+        "enter the stats (integers only)."
+    )
+    # Rows 1–2: title A1:B2; C1:C2 "Instructions:"; D row1 / D row2 = one paragraph each (no vertical merge of body)
+    CE_HEADER_ROW = 3
+    ce_label_col = 3
+    ce_text_start_col = 4
+    ce_text_start_letter = get_column_letter(ce_text_start_col)
 
-    ws_ce.merge_cells(f"{ce_intro_letter}1:{ce_last_col}1")
-    tcell = ws_ce.cell(row=1, column=ce_intro_start, value="Current Equipment")
-    tcell.font = intro_title_font
-    tcell.alignment = wrap_align
+    ws_ce.merge_cells("A1:B2")
+    ws_ce.cell(row=1, column=1, value="Current Equipment")
+    ws_ce.cell(row=1, column=1).font = intro_title_font
+    ws_ce.cell(row=1, column=1).alignment = intro_title_align
 
-    for ii, line in enumerate(ce_intro_lines, start=2):
-        ws_ce.merge_cells(f"{ce_intro_letter}{ii}:{ce_last_col}{ii}")
-        c = ws_ce.cell(row=ii, column=ce_intro_start, value=line)
-        c.font = intro_body_font
-        c.alignment = wrap_align
+    ws_ce.merge_cells(f"{get_column_letter(ce_label_col)}1:{get_column_letter(ce_label_col)}2")
+    lab_ce = ws_ce.cell(row=1, column=ce_label_col, value="Instructions:")
+    lab_ce.font = intro_label_font
+    lab_ce.alignment = intro_label_align
+
+    ws_ce.merge_cells(f"{ce_text_start_letter}1:{ce_last_col}1")
+    p1 = ws_ce.cell(row=1, column=ce_text_start_col, value=ce_intro_para1)
+    p1.font = intro_body_font
+    p1.alignment = wrap_align
+
+    ws_ce.merge_cells(f"{ce_text_start_letter}2:{ce_last_col}2")
+    p2 = ws_ce.cell(row=2, column=ce_text_start_col, value=ce_intro_para2)
+    p2.font = intro_body_font
+    p2.alignment = wrap_align
 
     for ci, h in enumerate(ce_headers, 1):
         cell = ws_ce.cell(row=CE_HEADER_ROW, column=ci, value=h)
@@ -972,7 +975,8 @@ def export_xlsx(csv_path, spec_order):
 
     ws_ce.column_dimensions["A"].width = 14
     ws_ce.column_dimensions["B"].width = 34
-    for ci in range(3, 3 + len(STAT_COLUMNS)):
+    ws_ce.column_dimensions["C"].width = 16
+    for ci in range(4, 3 + len(STAT_COLUMNS)):
         ws_ce.column_dimensions[get_column_letter(ci)].width = 9
     ws_ce.freeze_panes = f"C{CE_HEADER_ROW + 1}"
 
@@ -1042,32 +1046,45 @@ def export_xlsx(csv_path, spec_order):
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
+    ws.column_dimensions["E"].width = 16
     ws.column_dimensions[equip_col_letter].hidden = True
     ws.column_dimensions[cmp_raw_col_letter].hidden = True
 
     bp_ncol = len(SHEET_FIELDS)
     bp_last_col = get_column_letter(bp_ncol)
-    bp_intro_lines = [
-        "Click the down arrow on a given column to filter values in that specific column.",
-        (
-            'If no values are displayed, click the "Remove Filter" button on the Sheets toolbar '
-            "and click again to reset the filters."
-        ),
-    ]
-    BP_HEADER_ROW = 2 + len(bp_intro_lines)
-    bp_intro_start = 5
-    bp_intro_letter = get_column_letter(bp_intro_start)
+    bp_intro_row1 = (
+        "Click the down arrow on a given column to filter or sort values. "
+        'If no values are displayed, click the "Remove Filter/Filter" button on the Sheets '
+        "toolbar twice to reset the filters."
+    )
+    bp_intro_row2 = (
+        "Select field in interest column and filter most wanted items. "
+        "Note: When selecting Equipped, sheet will take a few seconds to update."
+    )
+    # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:N1 and F2:N2 instruction lines (text from F1 / F2)
+    BP_HEADER_ROW = 3
+    bp_text_start_col = 6
+    bp_text_start_letter = get_column_letter(bp_text_start_col)
 
-    ws.merge_cells(f"{bp_intro_letter}1:{bp_last_col}1")
-    btc = ws.cell(row=1, column=bp_intro_start, value="BIS Planner")
-    btc.font = intro_title_font
-    btc.alignment = wrap_align
+    ws.merge_cells("A1:B2")
+    ws.cell(row=1, column=1, value="BIS Planner")
+    ws.cell(row=1, column=1).font = intro_title_font
+    ws.cell(row=1, column=1).alignment = intro_title_align
 
-    for ii, line in enumerate(bp_intro_lines, start=2):
-        ws.merge_cells(f"{bp_intro_letter}{ii}:{bp_last_col}{ii}")
-        bc = ws.cell(row=ii, column=bp_intro_start, value=line)
-        bc.font = intro_body_font
-        bc.alignment = wrap_align
+    ws.merge_cells("E1:E2")
+    lab_bp = ws.cell(row=1, column=5, value="Instructions:")
+    lab_bp.font = intro_label_font
+    lab_bp.alignment = intro_label_align
+
+    ws.merge_cells(f"{bp_text_start_letter}1:{bp_last_col}1")
+    b1 = ws.cell(row=1, column=bp_text_start_col, value=bp_intro_row1)
+    b1.font = intro_body_font
+    b1.alignment = wrap_align
+
+    ws.merge_cells(f"{bp_text_start_letter}2:{bp_last_col}2")
+    b2 = ws.cell(row=2, column=bp_text_start_col, value=bp_intro_row2)
+    b2.font = intro_body_font
+    b2.alignment = wrap_align
 
     for ci, field in enumerate(SHEET_FIELDS, 1):
         cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=field)
@@ -1078,7 +1095,6 @@ def export_xlsx(csv_path, spec_order):
 
     ws.freeze_panes = f"E{BP_HEADER_ROW + 1}"
     filter_end = get_column_letter(len(SHEET_FIELDS))
-    ws.auto_filter.ref = f"A{BP_HEADER_ROW}:{filter_end}{BP_HEADER_ROW}"
 
     interest_dv = DataValidation(
         type="list",
@@ -1123,6 +1139,9 @@ def export_xlsx(csv_path, spec_order):
             cell.font = font
             if fill:
                 cell.fill = fill
+
+    bp_last_row = BP_HEADER_ROW + len(all_rows)
+    ws.auto_filter.ref = f"A{BP_HEADER_ROW}:{filter_end}{bp_last_row}"
 
     log(f"  BIS Planner: {len(all_rows)} items")
 

@@ -82,7 +82,7 @@ Tracks what you're currently wearing, with separate sections for each spec (e.g.
 |---|---|
 | **Gear Type** | Equipment slot (Head, Shoulder, Back, etc.) — one row per slot |
 | **Item Name** | Editable cell with a per-slot dropdown of 3,600+ TBC items |
-| **Stat columns** | Armor, DPS, Str, Agi, Sta, Int, Spi, Spell Dmg/Heal, Healing, Spell Dmg, AP, MP5, Defense, Dodge, Parry, Block Rating, Block Value, Hit, Crit, Spell Hit, Spell Crit, Haste |
+| **Stat columns** | Armor, DPS, Str, Agi, Sta, Int, Spi, Healing, Spell Dmg, AP, MP5, Defense, Dodge, Parry, Block Rating, Block Value, Hit, Crit, Spell Hit, Spell Crit, Haste |
 
 **Features:**
 

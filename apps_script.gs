@@ -11,8 +11,8 @@ var BIS_PLANNER_SHEET = "BIS Planner";
 var CURRENT_EQUIP_SHEET = "Current Equipment";
 
 // First data row on each sheet (must match generate_bis_planner.py export_xlsx intro rows)
-var BIS_FIRST_DATA_ROW = 5;
-var CE_FIRST_DATA_ROW = 6;
+var BIS_FIRST_DATA_ROW = 4;
+var CE_FIRST_DATA_ROW = 4;
 
 // BIS Planner columns (1-indexed)
 var GG_INTEREST = 1;  // A

@@ -2,7 +2,9 @@ Spec,Gear Type,Phase,Name,Acquisition Type,Quest,Dungeon,Difficulty,Stats,Notes
 Affliction,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg,
 Affliction,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
 Affliction,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg,Pathaleon the Calculator
-Affliction,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Affliction,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg
+
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
 Affliction,Head,PreRaid,Mag'hari Ritualist's Horns,Quest,Hero of the Mag'har (Nag),,,114 Armor; 18 Sta; 16 Int; 50 Healing; 50 Spell Dmg,
 Affliction,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,133 Armor; 21 Sta; 15 Int,
 Affliction,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit,Quagmirran
@@ -36,7 +38,9 @@ Affliction,Legs,PreRaid,Spellstrike Pants,Auction House,,,,156 Armor; 12 Sta; 8 
 Affliction,Legs,PreRaid,Breeches of the Occultist,Dungeon Drop,,Black Morass,Heroic,163 Armor; 37 Sta; 22 Int; 36 Healing; 36 Spell Dmg,Aeonus
 Affliction,Legs,PreRaid,Fel Infused Leggings,Dungeon Drop,,Blasted Lands,Normal,109 Armor; 21 Sta,Lord Kazzak
 Affliction,Legs,PreRaid,Leggings of Polarity,Dungeon Drop,,Naxxramas,Normal,128 Armor; 20 Sta; 14 Int; 44 Healing; 44 Spell Dmg; 28 Spell Crit,Thaddius
-Affliction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit Equip: Increases your spell penetration by 18,The Black Stalker
+Affliction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit
+
+Equip: Increases your spell penetration by 18",The Black Stalker
 Affliction,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg,Talon King Ikiss
 Affliction,Feet,PreRaid,Frozen Shadoweave Boots,Auction House,,,,122 Armor; 15 Sta; 9 Int,
 Affliction,Feet,PreRaid,Extravagant Boots of Malice,Dungeon Drop,,Mana Tombs,Heroic,107 Armor; 27 Sta; 24 Int; 30 Healing; 30 Spell Dmg,Tavarok
@@ -58,8 +62,12 @@ Affliction,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell
 Affliction,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Healing; 44 Spell Dmg; 16 Spell Hit,Nefarian
 Affliction,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,37 Healing; 37 Spell Dmg,Quagmirran
 Affliction,Trinket,PreRaid,The Black Book,Dungeon Drop,,Blackwing Lair,Normal,,Razorgore the Untamed
-Affliction,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,40 Healing; 40 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec,Sapphiron
-Affliction,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,43 Healing; 43 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec,41 Badges of Justice
+Affliction,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,"40 Healing; 40 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec",Sapphiron
+Affliction,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,"43 Healing; 43 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec",41 Badges of Justice
 Affliction,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,,
 Affliction,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec,The Scryers - Revered
 Affliction,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,41.11 DPS; 159 Healing; 159 Spell Dmg,World Drop
@@ -72,7 +80,9 @@ Affliction,Off Hand,PreRaid,Royal Scepter of Vek'lor,Dungeon Drop,,Ahn'Qiraj,Nor
 Affliction,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
 Affliction,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 Spell Dmg,25 Badges of Justice
 Affliction,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,18 Sta,25 Badges of Justice
-Affliction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit Use: Creates a portal, teleporting group members that use it to Karazhan",
+Affliction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
+
+Use: Creates a portal, teleporting group members that use it to Karazhan",
 Affliction,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,139.0 DPS; 16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
 Affliction,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Healing; 13 Spell Dmg,Dalliah the Doomsayer
 Affliction,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Healing; 20 Spell Dmg,The Black Stalker
@@ -80,7 +90,9 @@ Affliction,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,113
 Demonology,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg,
 Demonology,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
 Demonology,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg,Pathaleon the Calculator
-Demonology,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Demonology,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg
+
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
 Demonology,Head,PreRaid,Mag'hari Ritualist's Horns,Quest,Hero of the Mag'har (Nag),,,114 Armor; 18 Sta; 16 Int; 50 Healing; 50 Spell Dmg,
 Demonology,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,133 Armor; 21 Sta; 15 Int,
 Demonology,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit,Quagmirran
@@ -114,7 +126,9 @@ Demonology,Legs,PreRaid,Spellstrike Pants,Auction House,,,,156 Armor; 12 Sta; 8 
 Demonology,Legs,PreRaid,Breeches of the Occultist,Dungeon Drop,,Black Morass,Heroic,163 Armor; 37 Sta; 22 Int; 36 Healing; 36 Spell Dmg,Aeonus
 Demonology,Legs,PreRaid,Fel Infused Leggings,Dungeon Drop,,Blasted Lands,Normal,109 Armor; 21 Sta,Lord Kazzak
 Demonology,Legs,PreRaid,Leggings of Polarity,Dungeon Drop,,Naxxramas,Normal,128 Armor; 20 Sta; 14 Int; 44 Healing; 44 Spell Dmg; 28 Spell Crit,Thaddius
-Demonology,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit Equip: Increases your spell penetration by 18,The Black Stalker
+Demonology,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit
+
+Equip: Increases your spell penetration by 18",The Black Stalker
 Demonology,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg,Talon King Ikiss
 Demonology,Feet,PreRaid,Frozen Shadoweave Boots,Auction House,,,,122 Armor; 15 Sta; 9 Int,
 Demonology,Feet,PreRaid,Extravagant Boots of Malice,Dungeon Drop,,Mana Tombs,Heroic,107 Armor; 27 Sta; 24 Int; 30 Healing; 30 Spell Dmg,Tavarok
@@ -136,8 +150,12 @@ Demonology,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell
 Demonology,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Healing; 44 Spell Dmg; 16 Spell Hit,Nefarian
 Demonology,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,37 Healing; 37 Spell Dmg,Quagmirran
 Demonology,Trinket,PreRaid,The Black Book,Dungeon Drop,,Blackwing Lair,Normal,,Razorgore the Untamed
-Demonology,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,40 Healing; 40 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec,Sapphiron
-Demonology,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,43 Healing; 43 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec,41 Badges of Justice
+Demonology,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,"40 Healing; 40 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec",Sapphiron
+Demonology,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,"43 Healing; 43 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec",41 Badges of Justice
 Demonology,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,,
 Demonology,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec,The Scryers - Revered
 Demonology,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,41.11 DPS; 159 Healing; 159 Spell Dmg,World Drop
@@ -150,7 +168,9 @@ Demonology,Off Hand,PreRaid,Royal Scepter of Vek'lor,Dungeon Drop,,Ahn'Qiraj,Nor
 Demonology,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
 Demonology,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 Spell Dmg,25 Badges of Justice
 Demonology,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,18 Sta,25 Badges of Justice
-Demonology,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit Use: Creates a portal, teleporting group members that use it to Karazhan",
+Demonology,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
+
+Use: Creates a portal, teleporting group members that use it to Karazhan",
 Demonology,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,139.0 DPS; 16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
 Demonology,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Healing; 13 Spell Dmg,Dalliah the Doomsayer
 Demonology,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Healing; 20 Spell Dmg,The Black Stalker
@@ -158,7 +178,9 @@ Demonology,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,113
 Destruction,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg,
 Destruction,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
 Destruction,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg,Pathaleon the Calculator
-Destruction,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley,
+Destruction,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg
+
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
 Destruction,Head,PreRaid,Mag'hari Ritualist's Horns,Quest,Hero of the Mag'har (Nag),,,114 Armor; 18 Sta; 16 Int; 50 Healing; 50 Spell Dmg,
 Destruction,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,133 Armor; 21 Sta; 15 Int,
 Destruction,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit,Quagmirran
@@ -194,7 +216,9 @@ Destruction,Legs,PreRaid,Spellstrike Pants,Auction House,,,,156 Armor; 12 Sta; 8
 Destruction,Legs,PreRaid,Breeches of the Occultist,Dungeon Drop,,Black Morass,Heroic,163 Armor; 37 Sta; 22 Int; 36 Healing; 36 Spell Dmg,Aeonus
 Destruction,Legs,PreRaid,Fel Infused Leggings,Dungeon Drop,,Blasted Lands,Normal,109 Armor; 21 Sta,Lord Kazzak
 Destruction,Legs,PreRaid,Leggings of Polarity,Dungeon Drop,,Naxxramas,Normal,128 Armor; 20 Sta; 14 Int; 44 Healing; 44 Spell Dmg; 28 Spell Crit,Thaddius
-Destruction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit Equip: Increases your spell penetration by 18,The Black Stalker
+Destruction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit
+
+Equip: Increases your spell penetration by 18",The Black Stalker
 Destruction,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg,Talon King Ikiss
 Destruction,Feet,PreRaid,Frozen Shadoweave Boots,Auction House,,,,122 Armor; 15 Sta; 9 Int,
 Destruction,Feet,PreRaid,Extravagant Boots of Malice,Dungeon Drop,,Mana Tombs,Heroic,107 Armor; 27 Sta; 24 Int; 30 Healing; 30 Spell Dmg,Tavarok
@@ -216,8 +240,12 @@ Destruction,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spel
 Destruction,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg,The Scryers - Exalted
 Destruction,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Healing; 44 Spell Dmg; 16 Spell Hit,Nefarian
 Destruction,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,37 Healing; 37 Spell Dmg,Quagmirran
-Destruction,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,40 Healing; 40 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec,Sapphiron
-Destruction,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,43 Healing; 43 Spell Dmg Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec,41 Badges of Justice
+Destruction,Trinket,PreRaid,The Restrained Essence of Sapphiron,Dungeon Drop,,Naxxramas,Normal,"40 Healing; 40 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 130 for 20 sec",Sapphiron
+Destruction,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,"43 Healing; 43 Spell Dmg
+
+Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec",41 Badges of Justice
 Destruction,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,,
 Destruction,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec,The Scryers - Revered
 Destruction,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,41.11 DPS; 159 Healing; 159 Spell Dmg,World Drop
@@ -231,7 +259,9 @@ Destruction,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal
 Destruction,Off Hand,PreRaid,Flametongue Seal,Dungeon Token,,,,,25 Badges of Justice
 Destruction,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 Spell Dmg,25 Badges of Justice
 Destruction,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,18 Sta,25 Badges of Justice
-Destruction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit Use: Creates a portal, teleporting group members that use it to Karazhan",
+Destruction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
+
+Use: Creates a portal, teleporting group members that use it to Karazhan",
 Destruction,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,139.0 DPS; 16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
 Destruction,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Healing; 13 Spell Dmg,Dalliah the Doomsayer
 Destruction,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Healing; 20 Spell Dmg,The Black Stalker
