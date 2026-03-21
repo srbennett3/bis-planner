@@ -1209,31 +1209,29 @@ def _build_equip_name_formula(row, ce_spec_rows, spec_order):
 
 
 def _build_stat_diff_helper_formula(row, equip_col_letter, itemdb_range, stat_index):
-    """One cell: IFERROR(item_stat − equip_stat, 0) for STAT_COLUMNS[stat_index]."""
+    """One hidden cell: formatted diff fragment or blank (keeps CmpRaw short — CmpRaw TEXTJOINs the row range)."""
     db_col_num = 3 + stat_index
+    stat_key = STAT_COLUMNS[stat_index]
     item_stat = f'IFERROR(VLOOKUP(D{row},{itemdb_range},{db_col_num},0),0)'
     equip_stat = (
         f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{db_col_num},0),0)'
     )
-    return f'=IFERROR(({item_stat})-({equip_stat}),0)'
+    diff = f'IFERROR(({item_stat})-({equip_stat}),0)'
+    return (
+        f'=IF({diff}=0,"",IFERROR((IF({diff}>0,"+","-")&ROUND(ABS({diff}),4))'
+        f'&" {stat_key}",""))'
+    )
 
 
 def _build_cmp_raw_formula(row, equip_col_letter, helper_col_letters, itemdb_range, attr_col_num):
     """Plain-text comparison + equipped Attributes (ItemDB last col); Apps Script colors Comparison (K) from CmpRaw (N).
 
-    Per-stat diffs live in hidden columns after CmpRaw; CmpRaw TEXTJOINs those refs (short formula).
-    IFERROR around subtraction is in each helper cell so IF(diff<>0,...) never sees #VALUE!.
+    Helpers (hidden) emit text fragments; CmpRaw uses TEXTJOIN over one contiguous range (shorter N formula).
     Outer guard: IF(IFERROR(Equip,"")="","Current Equipment Not Specified",…).
     """
-    parts = []
-    for si, stat_key in enumerate(STAT_COLUMNS):
-        h = helper_col_letters[si]
-        ref = f"{h}{row}"
-        parts.append(
-            f'IF({ref}<>0,IFERROR((IF({ref}>0,"+","-")&ROUND(ABS({ref}),4))&" {stat_key}",""),"")'
-        )
-
-    tj = f'TEXTJOIN(", ",TRUE,{",".join(parts)})'
+    first_h = helper_col_letters[0]
+    last_h = helper_col_letters[-1]
+    tj = f'TEXTJOIN(", ",TRUE,{first_h}{row}:{last_h}{row})'
     v_attr = (
         f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
     )

@@ -28,9 +28,9 @@ class TestCmpRawFormula(unittest.TestCase):
         f = _build_cmp_raw_formula(10, "K", hletters, "ItemDB!A$2:Z$500", 25)
         self.assertTrue(f.startswith("="))
         self.assertNotIn("LET(", f)
-        self.assertIn(f"{hletters[0]}10", f)
         self.assertIn("TEXTJOIN", f)
-        self.assertIn("ROUND(ABS(", f)
+        self.assertIn(f"{hletters[0]}10:{hletters[-1]}10", f)
+        self.assertNotIn("ROUND(ABS(", f)
         self.assertIn("IFERROR(VLOOKUP(K10", f)
         # Equip #N/A must not break IF(K="",...)
         self.assertIn('IF(IFERROR(K10,"")="","Current Equipment Not Specified"', f)
@@ -42,14 +42,18 @@ class TestCmpRawFormula(unittest.TestCase):
         self.assertTrue(h.startswith("="))
         self.assertIn("IFERROR(VLOOKUP(D10", h)
         self.assertIn("IFERROR(VLOOKUP(K10", h)
+        self.assertIn("ROUND(ABS(", h)
 
     def test_cmp_raw_formula_each_stat_suffix_present(self):
         first_h = 15
         hletters = [_col_letter(first_h + i) for i in range(HELPER_DIFF_COUNT)]
         f = _build_cmp_raw_formula(4, "K", hletters, "ItemDB!A$2:Z$100", 20)
+        self.assertIn("TEXTJOIN", f)
+        self.assertIn(f"{hletters[0]}4:{hletters[-1]}4", f)
         for key in STAT_COLUMNS:
             with self.subTest(key=key):
-                self.assertIn(f'&" {key}"', f)
+                hh = _build_stat_diff_helper_formula(4, "K", "ItemDB!A$2:Z$100", STAT_COLUMNS.index(key))
+                self.assertIn(f'&" {key}"', hh)
 
 
 class TestEquipFormula(unittest.TestCase):

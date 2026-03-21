@@ -3,7 +3,7 @@
 //
 // Copy this entire file to: Extensions > Apps Script
 // Then save (Ctrl+S). The script runs automatically on cell edits.
-// Optional: run addBISPlannerToolsMenu() once from the editor (Force refresh + Show last timing log).
+// Optional: run addBISPlannerToolsMenu() once from the editor (Force refresh, Rebuild equipped index, timing log).
 //
 // Created by Steven Bennett 2026
 // ============================================================
@@ -43,6 +43,8 @@ var OPEN_SECOND_PASS_SLEEP_MS = 220;
 /** Set false after profiling. When true: Executions → View logs, or BIS Planner tools → Show last timing log. */
 var BIS_TIMING_DEBUG = true;
 var BIS_TIMING_PROP_KEY = "BIS_LAST_TIMING";
+/** JSON map: equippedSlotKey_(spec, gear) → row number (1-based). Rebuilt on onOpen; reconciles clearOtherEquipped. */
+var BIS_EQUIPPED_INDEX_PROP = "BIS_EQUIPPED_INDEX_JSON_V1";
 
 /**
  * @return {?{start:number, last:number, rows:Array<string>}}
@@ -116,6 +118,7 @@ function onEdit(e) {
 function onOpen() {
   var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
   if (!bp) return;
+  rebuildEquippedIndexFromPlanner_(bp);
   refreshComparisonAllSpecs_(bp);
 }
 
@@ -182,24 +185,47 @@ function handleBISPlannerEdit(e, bpSheet) {
       return;
     }
 
-    var plannerABCReuse = null;
+    var plannerBCReuse = null;
     if (newValue === "Equipped") {
       e.range.setFontWeight("bold");
       var lastRowEq = bpSheet.getLastRow();
       var nEq = lastRowEq - BIS_FIRST_DATA_ROW + 1;
-      plannerABCReuse =
-        nEq > 0
-          ? bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, nEq, GG_GEARTYPE).getValues()
-          : [];
-      bisTimingStep_(tCtx, "after read planner A:C (shared: clear + refresh filter)");
-      clearOtherEquipped(bpSheet, row, spec, gearType, plannerABCReuse);
-      bisTimingStep_(tCtx, "after clearOtherEquipped");
+      var eqMap = getEquippedIndexMap_();
+      var eqKey = equippedSlotKey_(spec, gearType);
+      var prevEqRow = eqMap[eqKey];
+
+      if (nEq <= 0) {
+        plannerBCReuse = [];
+        eqMap[eqKey] = row;
+        saveEquippedIndexMap_(eqMap);
+        bisTimingStep_(tCtx, "after equip: no planner data rows");
+      } else if (prevEqRow == null || prevEqRow === "") {
+        var abcCold = bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, nEq, GG_GEARTYPE).getValues();
+        bisTimingStep_(tCtx, "after read planner A:C (cold index: single read for clear + refresh)");
+        clearOtherEquipped(bpSheet, row, spec, gearType, abcCold);
+        bisTimingStep_(tCtx, "after clearOtherEquipped (cold path)");
+        plannerBCReuse = [];
+        for (var pci = 0; pci < abcCold.length; pci++) {
+          plannerBCReuse.push([
+            abcCold[pci][GG_SPEC - 1],
+            abcCold[pci][GG_GEARTYPE - 1],
+          ]);
+        }
+        eqMap[eqKey] = row;
+        saveEquippedIndexMap_(eqMap);
+      } else {
+        plannerBCReuse = bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_SPEC, nEq, 2).getValues();
+        bisTimingStep_(tCtx, "after read planner B:C (warm index: clear via index + refresh)");
+        clearOtherEquippedUsingIndex_(bpSheet, row, spec, gearType);
+        bisTimingStep_(tCtx, "after clearOtherEquippedUsingIndex_");
+      }
       setCEItem(spec, gearType, itemName);
       bisTimingStep_(tCtx, "after setCEItem");
     } else {
       e.range.setFontWeight("normal");
       if (e.oldValue === "Equipped") {
         clearCEItemIfMatch(spec, gearType, itemName);
+        clearEquippedIndexIfRow_(row, spec, gearType);
       }
       bisTimingStep_(tCtx, "after unequip branch");
     }
@@ -207,7 +233,7 @@ function handleBISPlannerEdit(e, bpSheet) {
     bisTimingStep_(tCtx, "after second flush");
     Utilities.sleep(EDIT_RECALC_WAIT_MS);
     bisTimingStep_(tCtx, "after Utilities.sleep(EDIT_RECALC_WAIT_MS)");
-    refreshComparisonRichText(bpSheet, spec, gearType, tCtx, plannerABCReuse);
+    refreshComparisonRichText(bpSheet, spec, gearType, tCtx, plannerBCReuse);
     bisTimingFinish_(tCtx, "BIS Interest edit → refreshComparisonRichText");
     return;
   }
@@ -254,6 +280,108 @@ function clearOtherEquipped(bpSheet, currentRow, spec, gearType, plannerABCOpt) 
   rl.setFontWeight("normal");
 }
 
+/** Stable key for equipped index (spec + gear); \x1f unlikely in sheet text. */
+function equippedSlotKey_(spec, gearType) {
+  return normalizeItemName(spec) + "\x1f" + normalizeItemName(gearType);
+}
+
+function getEquippedIndexMap_() {
+  try {
+    var raw = PropertiesService.getDocumentProperties().getProperty(BIS_EQUIPPED_INDEX_PROP);
+    if (!raw) return {};
+    var o = JSON.parse(raw);
+    return o && typeof o === "object" ? o : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveEquippedIndexMap_(map) {
+  try {
+    PropertiesService.getDocumentProperties().setProperty(
+      BIS_EQUIPPED_INDEX_PROP,
+      JSON.stringify(map)
+    );
+  } catch (e2) {}
+}
+
+/** Full scan A:C — source of truth for equipped row per (spec, slot). Call onOpen / repair menu. */
+function rebuildEquippedIndexFromPlanner_(bpSheet) {
+  var lastRow = bpSheet.getLastRow();
+  var n = lastRow - BIS_FIRST_DATA_ROW + 1;
+  if (n <= 0) {
+    saveEquippedIndexMap_({});
+    return;
+  }
+  var data = bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, n, GG_GEARTYPE).getValues();
+  var map = {};
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][GG_INTEREST - 1] !== "Equipped") continue;
+    var key = equippedSlotKey_(data[i][GG_SPEC - 1], data[i][GG_GEARTYPE - 1]);
+    map[key] = i + BIS_FIRST_DATA_ROW;
+  }
+  saveEquippedIndexMap_(map);
+}
+
+/**
+ * Clears other Equipped for same spec+slot using DocumentProperties index; falls back to full scan
+ * when index is cold or stale row. Updates index to currentRow.
+ */
+function clearOtherEquippedUsingIndex_(bpSheet, currentRow, spec, gearType) {
+  var key = equippedSlotKey_(spec, gearType);
+  var map = getEquippedIndexMap_();
+  var prev = map[key];
+  var specN = normalizeItemName(spec);
+  var gearN = normalizeItemName(gearType);
+
+  if (prev == null || prev === "") {
+    clearOtherEquipped(bpSheet, currentRow, spec, gearType, null);
+  } else if (prev !== currentRow) {
+    var v = bpSheet.getRange(prev, 1, 1, GG_GEARTYPE).getValues()[0];
+    if (
+      v[GG_INTEREST - 1] === "Equipped" &&
+      normalizeItemName(v[GG_SPEC - 1]) === specN &&
+      normalizeItemName(v[GG_GEARTYPE - 1]) === gearN
+    ) {
+      var rl = bpSheet.getRangeList(["A" + prev]);
+      rl.setValue("");
+      rl.setFontWeight("normal");
+    } else {
+      clearOtherEquipped(bpSheet, currentRow, spec, gearType, null);
+    }
+  }
+  map[key] = currentRow;
+  saveEquippedIndexMap_(map);
+}
+
+/** After unequipping this row, drop index entry if it pointed here. */
+function clearEquippedIndexIfRow_(row, spec, gearType) {
+  var key = equippedSlotKey_(spec, gearType);
+  var map = getEquippedIndexMap_();
+  var prev = map[key];
+  if (prev === row) {
+    delete map[key];
+    saveEquippedIndexMap_(map);
+  }
+}
+
+/** Sync index from an in-memory A:D planner block (same layout as getValues BIS_FIRST_DATA_ROW..). */
+function syncEquippedIndexForSpecGearFromPlannerData_(spec, gearType, data) {
+  var key = equippedSlotKey_(spec, gearType);
+  var map = getEquippedIndexMap_();
+  var found = null;
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][GG_INTEREST - 1] !== "Equipped") continue;
+    if (normalizeItemName(data[i][GG_SPEC - 1]) !== normalizeItemName(spec)) continue;
+    if (normalizeItemName(data[i][GG_GEARTYPE - 1]) !== normalizeItemName(gearType)) continue;
+    found = i + BIS_FIRST_DATA_ROW;
+    break;
+  }
+  if (found) map[key] = found;
+  else delete map[key];
+  saveEquippedIndexMap_(map);
+}
+
 // ============================================================
 // Current Equipment edits (Item Name column)
 // ============================================================
@@ -296,9 +424,10 @@ function handleCurrentEquipEdit(e, ceSheet) {
 }
 
 function findSpecForCERow(ceSheet, targetRow) {
-  for (var r = targetRow; r >= 1; r--) {
-    var val = ceSheet.getRange(r, CE_GEARTYPE).getValue();
-    var s = String(val).trim();
+  if (targetRow < 1) return null;
+  var vals = ceSheet.getRange(1, CE_GEARTYPE, targetRow, 1).getValues();
+  for (var idx = targetRow - 1; idx >= 0; idx--) {
+    var s = String(vals[idx][0]).trim();
     if (s.indexOf("---") === 0) {
       return specDisplayNameFromSectionHeader(s);
     }
@@ -333,11 +462,17 @@ function clearCEItemIfMatch(spec, gearType, itemName) {
   }
 }
 
-function findCERow(ceSheet, spec, gearType) {
-  var lastRow = ceSheet.getLastRow();
-  var data = ceSheet.getRange(1, CE_GEARTYPE, lastRow, 1).getValues();
+/**
+ * @param {?Array<Array<*>>} gearColValuesOpt - optional column A values from row 1..lastRow (same as getValues).
+ */
+function findCERow(ceSheet, spec, gearType, gearColValuesOpt) {
+  var data = gearColValuesOpt;
+  if (data == null) {
+    var lastRow = ceSheet.getLastRow();
+    if (lastRow < 1) return null;
+    data = ceSheet.getRange(1, CE_GEARTYPE, lastRow, 1).getValues();
+  }
   var inSection = false;
-
   for (var i = 0; i < data.length; i++) {
     var val = String(data[i][0]);
     if (val.indexOf("---") === 0) {
@@ -375,6 +510,7 @@ function setInterestForItem(bpSheet, spec, gearType, itemName) {
       }
     }
   }
+  syncEquippedIndexForSpecGearFromPlannerData_(spec, gearType, data);
 }
 
 function clearInterestForItem(bpSheet, spec, gearType, itemName) {
@@ -396,6 +532,7 @@ function clearInterestForItem(bpSheet, spec, gearType, itemName) {
       bpSheet.getRange(r, GG_INTEREST).setFontWeight("normal");
     }
   }
+  syncEquippedIndexForSpecGearFromPlannerData_(spec, gearType, data);
 }
 
 // ============================================================
@@ -534,8 +671,8 @@ function bisIndicesToRuns_(indices) {
  * @param {?string} gearTypeFilter - With specFilter, only rows whose Gear type (C) matches (same slot
  *   as a CE or Interest edit). Omit or null to refresh every row in the spec (e.g. onOpen).
  * @param {?{start:number, last:number, rows:Array<string>}} timingCtx - optional; pass null from onOpen / menu.
- * @param {?Array<Array<*>>} plannerABCReuse - optional A:C getValues snapshot (rows aligned to BIS_FIRST_DATA_ROW);
- *   when spec+gear scoped, skips a second B+C read (Interest equip path passes same snapshot as clearOtherEquipped).
+ * @param {?Array<Array<*>>} plannerABCReuse - optional B:C (2 cols) or A:C (3 cols) getValues snapshot, rows aligned
+ *   to BIS_FIRST_DATA_ROW; when spec+gear scoped, skips a second B+C read (equip path passes B:C only).
  */
 function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCtx, plannerABCReuse) {
   var specFilterNorm =
@@ -569,24 +706,24 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
     bisTimingStep_(timingCtx, "refresh: after reads (B:N display + K formulas)");
     for (var ai = 0; ai < cmpNumRows; ai++) indices.push(ai);
   } else if (specFilterNorm && gearFilterNorm) {
-    var useAbcReuse =
+    var usePlannerReuse =
       plannerABCReuse != null &&
       plannerABCReuse.length === cmpNumRows &&
       cmpNumRows > 0;
+    var reuseW = usePlannerReuse ? plannerABCReuse[0].length : 0;
+    if (reuseW !== 2 && reuseW !== 3) usePlannerReuse = false;
     var bc2 = null;
-    if (!useAbcReuse) {
+    if (!usePlannerReuse) {
       bc2 = bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_SPEC, cmpNumRows, 2).getValues();
       bisTimingStep_(timingCtx, "refresh: after read B+C (scoped)");
     } else {
-      bisTimingStep_(timingCtx, "refresh: scoped B+C from reused A:C (no read)");
+      bisTimingStep_(timingCtx, "refresh: scoped B+C from reused snapshot (no read)");
     }
+    var sIx = reuseW === 2 ? 0 : GG_SPEC - 1;
+    var gIx = reuseW === 2 ? 1 : GG_GEARTYPE - 1;
     for (var bi = 0; bi < cmpNumRows; bi++) {
-      var sCell = useAbcReuse
-        ? plannerABCReuse[bi][GG_SPEC - 1]
-        : bc2[bi][0];
-      var gCell = useAbcReuse
-        ? plannerABCReuse[bi][GG_GEARTYPE - 1]
-        : bc2[bi][1];
+      var sCell = usePlannerReuse ? plannerABCReuse[bi][sIx] : bc2[bi][0];
+      var gCell = usePlannerReuse ? plannerABCReuse[bi][gIx] : bc2[bi][1];
       if (normalizeItemName(sCell) !== specFilterNorm) continue;
       if (normalizeItemName(gCell) !== gearFilterNorm) continue;
       indices.push(bi);
@@ -823,8 +960,23 @@ function addBISPlannerToolsMenu() {
   SpreadsheetApp.getUi()
     .createMenu("BIS Planner tools")
     .addItem("Force refresh comparison colors", "forceRefreshComparisonColors")
+    .addItem("Rebuild equipped index (repair)", "rebuildEquippedIndexMenu_")
     .addItem("Show last timing log", "showLastBISTimingLog_")
     .addToUi();
+}
+
+function rebuildEquippedIndexMenu_() {
+  var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
+  if (!bp) {
+    try {
+      SpreadsheetApp.getUi().alert('No sheet named "' + BIS_PLANNER_SHEET + '".');
+    } catch (e0) {}
+    return;
+  }
+  rebuildEquippedIndexFromPlanner_(bp);
+  try {
+    SpreadsheetApp.getUi().alert("Equipped index rebuilt from column A (Interest).");
+  } catch (e1) {}
 }
 
 function showLastBISTimingLog_() {
@@ -859,6 +1011,7 @@ function forceRefreshComparisonColors() {
     } catch (e0) {}
     return;
   }
+  rebuildEquippedIndexFromPlanner_(bp);
   refreshComparisonAllSpecs_(bp);
   try {
     SpreadsheetApp.getUi().alert("Comparison column refresh finished.");
