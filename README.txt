@@ -135,18 +135,14 @@ BIS Planner/
 │   ├── Warrior_BIS_Planner.xlsx
 │   └── ...
 ├── README.md
-├── Guides/                       # LoonBestInSlot Lua guide files (all 9 classes)
-│   ├── DruidBalance.lua
-│   ├── DruidBear.lua
-│   ├── DruidCat.lua
-│   ├── DruidRestoration.lua
-│   ├── HunterBeastMastery.lua
-│   ├── ...
-│   ├── PaladinHoly.lua
-│   ├── PaladinProtection.lua
-│   ├── PaladinRetribution.lua
-│   ├── ...
-│   └── WarriorProtection.lua
+├── AddonReference/               # upstream addon files used by the generator
+│   ├── Loon/                     # LoonBestInSlot Lua guide files (all 9 classes)
+│   │   ├── DruidBalance.lua
+│   │   ├── DruidBear.lua
+│   │   ├── ...
+│   │   └── WarriorProtection.lua
+│   └── Pawn/                     # only ClassicHawsJon.lua (HawsJon TBC scales — same idea as Loon/*.lua)
+├── pawn_scales_tbc.json          # regenerated from AddonReference/Pawn on each Excel export
 └── DB/
     └── ItemSources.lua           # item source / acquisition database
 ```
@@ -177,7 +173,7 @@ python3 generate_bis_planner.py --all          # every class (CSV + xlsx in outp
 python3 generate_bis_planner.py all            # same as --all
 ```
 
-Output goes to `output/{Class}_BIS_Planner.csv` and `output/{Class}_BIS_Planner.xlsx`.
+Output goes to `output/{Class}_BIS_Planner.csv` and `output/{Class}_BIS_Planner.xlsx`. The workbook includes a **Pawn weights (TBC)** sheet (HawsJon scales from `AddonReference/Pawn/ClassicHawsJon.lua`) when that class has matching Pawn data; `pawn_scales_tbc.json` in the project root is refreshed at the same time.
 
 ### After changing tooltip parsing or spell-stat normalization
 
@@ -218,12 +214,14 @@ python3 generate_bis_planner.py paladin --no-excel         # CSV only, skip xlsx
 
 When LoonBestInSlot updates:
 
-1. Copy the updated Lua files into `Guides/` and `DB/`:
+1. Copy the updated Lua files into `AddonReference/Loon/` and `DB/`:
 
 ```bash
-cp /path/to/LoonBestInSlot/Guides/*.lua  Guides/
+cp /path/to/LoonBestInSlot/Guides/*.lua  AddonReference/Loon/
 cp /path/to/LoonBestInSlot/DB/ItemSources.lua  DB/
 ```
+
+To refresh Pawn weights, copy `ClassicHawsJon.lua` from the Pawn addon into `AddonReference/Pawn/` (replace the existing file).
 
 2. Rebuild the database (only fetches new items):
 
@@ -246,7 +244,7 @@ python3 generate_bis_planner.py warrior
 - **SSL errors**: The script bypasses SSL verification for the Wowhead API. Check your Python SSL module: `python3 -c "import ssl; print(ssl.OPENSSL_VERSION)"`
 - **404 errors**: Some items may not exist in Wowhead's TBC Classic database. Their stats will be empty.
 - **Rate limiting (429)**: The script backs off automatically. Increase `FETCH_DELAY` in the script if needed.
-- **"No guide files found"**: Make sure the Lua files for that class are in the `Guides/` folder.
+- **"No guide files found"**: Make sure the Lua files for that class are in `AddonReference/Loon/`.
 
 ---
 

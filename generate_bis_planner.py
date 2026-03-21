@@ -7,6 +7,9 @@ Two-step workflow:
   1. python3 generate_bis_planner.py --build-db         # fetch item stats from Wowhead (re-fetches stale cache)
   2. python3 generate_bis_planner.py paladin             # generate CSV + Excel (no API calls)
 
+Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights source: AddonReference/Pawn/ClassicHawsJon.lua only.
+Excel includes a "Pawn weights (TBC)" sheet when pawn_scales_tbc.json is present (refreshed from ClassicHawsJon.lua on each export).
+
 Supported classes: druid, hunter, mage, paladin, priest, rogue, shaman, warlock, warrior
 
 Requires: openpyxl  (pip install openpyxl)
@@ -26,7 +29,11 @@ import urllib.error
 import urllib.request
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-GUIDES_DIR = os.path.join(SCRIPT_DIR, "Guides")
+ADDON_REFERENCE_DIR = os.path.join(SCRIPT_DIR, "AddonReference")
+LOON_GUIDES_DIR = os.path.join(ADDON_REFERENCE_DIR, "Loon")
+PAWN_ADDON_DIR = os.path.join(ADDON_REFERENCE_DIR, "Pawn")
+PAWN_CLASSIC_HAWS_PATH = os.path.join(PAWN_ADDON_DIR, "ClassicHawsJon.lua")
+PAWN_SCALES_JSON_PATH = os.path.join(SCRIPT_DIR, "pawn_scales_tbc.json")
 DB_DIR = os.path.join(SCRIPT_DIR, "DB")
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")
 ITEM_DB_PATH = os.path.join(SCRIPT_DIR, "item_database.json")
@@ -280,10 +287,10 @@ def parse_all_guide_items():
     """Parse all guide Lua files to get item_id -> slot mapping."""
     id_to_slot = {}
     id_to_name = {}
-    for fname in os.listdir(GUIDES_DIR):
+    for fname in os.listdir(LOON_GUIDES_DIR):
         if not fname.endswith(".lua"):
             continue
-        path = os.path.join(GUIDES_DIR, fname)
+        path = os.path.join(LOON_GUIDES_DIR, fname)
         with open(path, "r") as f:
             for line in f:
                 m = re.match(
@@ -315,7 +322,7 @@ def _extract_spec_name(filepath):
 
 
 def discover_class_guides(class_name):
-    """Auto-discover spec guides for a class by scanning Guides/.
+    """Auto-discover spec guides for a class by scanning AddonReference/Loon/.
 
     Returns (spec_order, guides_list) where guides_list is
     [(spec_name, filename), ...] sorted alphabetically by spec.
@@ -323,21 +330,21 @@ def discover_class_guides(class_name):
     class_title = class_name.strip().title()
 
     guides = []
-    for fname in sorted(os.listdir(GUIDES_DIR)):
+    for fname in sorted(os.listdir(LOON_GUIDES_DIR)):
         if fname.startswith(class_title) and fname.endswith(".lua"):
-            path = os.path.join(GUIDES_DIR, fname)
+            path = os.path.join(LOON_GUIDES_DIR, fname)
             spec_name = _extract_spec_name(path)
             if spec_name:
                 guides.append((spec_name, fname))
 
     if not guides:
         available = set()
-        for fname in os.listdir(GUIDES_DIR):
+        for fname in os.listdir(LOON_GUIDES_DIR):
             if fname.endswith(".lua"):
                 m = re.match(r"([A-Z][a-z]+)", fname)
                 if m:
                     available.add(m.group(1).lower())
-        log(f"ERROR: No guide files found for class '{class_title}' in {GUIDES_DIR}")
+        log(f"ERROR: No guide files found for class '{class_title}' in {LOON_GUIDES_DIR}")
         log(f"  Available classes: {', '.join(sorted(available))}")
         sys.exit(1)
 
@@ -416,10 +423,20 @@ def _merge_anchor_specials(specials, html):
             seen.add(fl)
 
 
-def parse_tooltip_to_dict(html):
-    """Parse tooltip HTML into (stats_dict, special_str, slot_str, item_level)."""
+def _parse_socket_counts(html):
+    """Count gem sockets from Wowhead tooltip (class socket-meta / red / yellow / blue)."""
+    counts = {"meta": 0, "red": 0, "yellow": 0, "blue": 0}
     if not html:
-        return {}, "", None, 0
+        return counts
+    for m in re.finditer(r"\bsocket-(meta|red|yellow|blue)\b", html):
+        counts[m.group(1)] += 1
+    return counts
+
+
+def parse_tooltip_to_dict(html):
+    """Parse tooltip HTML into (stats_dict, special_str, slot_str, item_level, sockets_dict)."""
+    if not html:
+        return {}, "", None, 0, _parse_socket_counts("")
 
     # Strip Wowhead <!--…--> placeholders (e.g. <!--rtg32-->) so "+rating by 32" patterns match.
     html = re.sub(r"<!--.*?-->", "", html, flags=re.DOTALL)
@@ -521,7 +538,8 @@ def parse_tooltip_to_dict(html):
     normalize_spell_stats(stats)
     special_str = strip_equip_redundant_with_display_stats(stats, special_str)
 
-    return stats, special_str, slot, ilvl
+    sockets = _parse_socket_counts(html)
+    return stats, special_str, slot, ilvl, sockets
 
 
 def normalize_spell_stats(stats):
@@ -756,8 +774,15 @@ def _fetch_one_item(item_id, name, ssl_ctx):
     time.sleep(FETCH_DELAY)
     if not tooltip:
         return item_id, None
-    stats, special, slot, ilvl = parse_tooltip_to_dict(tooltip)
-    return item_id, {"name": name, "slot": slot, "stats": stats, "special": special, "ilvl": ilvl}
+    stats, special, slot, ilvl, sockets = parse_tooltip_to_dict(tooltip)
+    return item_id, {
+        "name": name,
+        "slot": slot,
+        "stats": stats,
+        "special": special,
+        "ilvl": ilvl,
+        "sockets": sockets,
+    }
 
 
 def _cache_entry_is_stale_tooltip_(entry):
@@ -791,10 +816,10 @@ def build_item_database(test_mode=False, test_class=None, force_refresh=False):
         else:
             guides = [
                 (None, f)
-                for f in os.listdir(GUIDES_DIR) if f.endswith(".lua")
+                for f in os.listdir(LOON_GUIDES_DIR) if f.endswith(".lua")
             ]
         for _, filename in guides:
-            path = os.path.join(GUIDES_DIR, filename)
+            path = os.path.join(LOON_GUIDES_DIR, filename)
             if os.path.exists(path):
                 with open(path, "r") as f:
                     for line in f:
@@ -988,7 +1013,7 @@ def generate_csv(max_phase, class_name, output_csv):
 
     all_items = []
     for spec_name, filename in guides:
-        path = os.path.join(GUIDES_DIR, filename)
+        path = os.path.join(LOON_GUIDES_DIR, filename)
         if not os.path.exists(path):
             log(f"  WARNING: {path} not found, skipping")
             continue
@@ -1078,6 +1103,254 @@ DUNGEON_COLORS_HEROIC = {
     "Naxxramas": "48A8B0", "Terokkar Forest": "80A848",
 }
 
+# WoW class IDs (retail API) — matches Pawn ClassicHawsJon.lua (no DK in TBC).
+CLASS_TITLE_TO_PAWN_CLASS_ID = {
+    "Warrior": 1,
+    "Paladin": 2,
+    "Hunter": 3,
+    "Rogue": 4,
+    "Priest": 5,
+    "Shaman": 7,
+    "Mage": 8,
+    "Warlock": 9,
+    "Druid": 11,
+}
+
+_PAWN_VARS_TBC = {
+    "HitRatingPer": 1.0,
+    "SpellHitRatingPer": 1.0,
+    "CritRatingPer": 1.0,
+    "SpellCritRatingPer": 1.0,
+    "HasteRatingPer": 1.0,
+    "SpellHasteRatingPer": 1.0,
+    "ExpertiseRatingPer": 1.0,
+    "ArmorPenetrationPer": 1.0,
+    "SpellPenetrationPer": 1.0,
+    "DefenseRatingPer": 1.0,
+    "DodgeRatingPer": 1.0,
+    "ParryRatingPer": 1.0,
+    "BlockRatingPer": 1.0,
+}
+
+
+def _pawn_eval_rhs(rhs):
+    rhs = (rhs or "").strip()
+    if rhs == "PawnIgnoreStatValue":
+        return None
+    if "*" in rhs:
+        left, right = rhs.split("*", 1)
+        left, right = left.strip(), right.strip()
+        try:
+            mult = float(_PAWN_VARS_TBC[left])
+        except KeyError:
+            mult = 1.0
+        return mult * float(right)
+    try:
+        return float(rhs)
+    except ValueError:
+        return None
+
+
+def _pawn_extract_table_body(s):
+    start = s.find("{")
+    if start < 0:
+        return None
+    depth = 0
+    for i in range(start, len(s)):
+        if s[i] == "{":
+            depth += 1
+        elif s[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return s[start + 1 : i]
+    return None
+
+
+def _pawn_parse_weights(body):
+    out = {}
+    for p in re.split(r",\s*", body):
+        p = p.strip()
+        if not p:
+            continue
+        m = re.match(r"^(\w+)\s*=\s*(.+)$", p)
+        if not m:
+            continue
+        val = _pawn_eval_rhs(m.group(2))
+        if val is not None:
+            out[m.group(1)] = val
+    return out
+
+
+def _pawn_extract_scales_from_lua(lua_text):
+    """Parse Classic + TBC branch from ClassicHawsJon.lua into scale dicts."""
+    try:
+        i0 = lua_text.index("if VgerCore.IsClassic or VgerCore.IsBurningCrusade then")
+        i1 = lua_text.index("elseif VgerCore.IsWrath", i0)
+    except ValueError:
+        return None
+    section = lua_text[i0:i1]
+    chunks = re.split(r"PawnAddPluginScaleFromTemplate\s*\(\s*", section)
+    scales = []
+    for raw in chunks[1:]:
+        lines = raw.split("\n")
+        idx = 0
+        while idx < len(lines) and "ScaleProviderName" not in lines[idx]:
+            idx += 1
+        if idx >= len(lines):
+            continue
+        idx += 1
+        while idx < len(lines) and not re.search(r"^\s*\d+\s*,\s*--", lines[idx]):
+            idx += 1
+        if idx >= len(lines):
+            continue
+        m_cls = re.search(r"^\s*(\d+)\s*,\s*--\s*(.*)$", lines[idx])
+        if not m_cls:
+            continue
+        class_id = int(m_cls.group(1))
+        class_name = m_cls.group(2).strip()
+        idx += 1
+        m_spec = re.search(r"^\s*(?:(\d+)|nil)\s*,\s*(?:--\s*(.*))?$", lines[idx])
+        if not m_spec or m_spec.group(1) is None:
+            continue
+        spec_id = int(m_spec.group(1))
+        spec_name = (m_spec.group(2) or "").strip()
+        rest = "\n".join(lines[idx:])
+        body = _pawn_extract_table_body(rest)
+        if not body:
+            continue
+        weights = _pawn_parse_weights(body)
+        scales.append(
+            {
+                "class_id": class_id,
+                "class_name": class_name,
+                "spec_id": spec_id,
+                "spec_name": spec_name,
+                "weights": weights,
+            }
+        )
+    return scales
+
+
+def refresh_pawn_scales_json():
+    """Rebuild pawn_scales_tbc.json from AddonReference/Pawn/ClassicHawsJon.lua (TBC multipliers)."""
+    if not os.path.isfile(PAWN_CLASSIC_HAWS_PATH):
+        log(
+            "  Pawn scales skipped: missing %s (copy from the Pawn addon if needed)."
+            % PAWN_CLASSIC_HAWS_PATH
+        )
+        return False
+    try:
+        with open(PAWN_CLASSIC_HAWS_PATH, "r", encoding="utf-8", errors="replace") as f:
+            lua_text = f.read()
+        scales = _pawn_extract_scales_from_lua(lua_text)
+        if not scales:
+            log("  Pawn scales: could not parse Classic/TBC block in ClassicHawsJon.lua.")
+            return False
+        payload = {
+            "source": (
+                "AddonReference/Pawn/ClassicHawsJon.lua "
+                "(Classic + Burning Crusade Classic branch, HawsJon)"
+            ),
+            "rating_multipliers": (
+                "TBC (all *Per variables = 1). For Classic Era, use multipliers "
+                "from the Lua file."
+            ),
+            "scales": scales,
+        }
+        with open(PAWN_SCALES_JSON_PATH, "w", encoding="utf-8") as out:
+            json.dump(payload, out, indent=2)
+        log("  Pawn scales -> %s (%d scales)" % (PAWN_SCALES_JSON_PATH, len(scales)))
+        return True
+    except OSError as e:
+        log("  Pawn scales error: %s" % e)
+        return False
+
+
+def _append_pawn_weights_sheet(
+    wb,
+    class_title,
+    header_font,
+    header_fill,
+    section_font,
+    section_fill,
+    thin_border,
+    wrap_align,
+):
+    from openpyxl.styles import Font
+
+    cid = CLASS_TITLE_TO_PAWN_CLASS_ID.get((class_title or "").strip().title())
+    if cid is None:
+        return
+    if not os.path.isfile(PAWN_SCALES_JSON_PATH):
+        return
+    try:
+        with open(PAWN_SCALES_JSON_PATH, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        log("  Pawn weights sheet skipped (could not read pawn_scales_tbc.json).")
+        return
+
+    scales = [s for s in payload.get("scales", []) if s.get("class_id") == cid]
+    if not scales:
+        return
+
+    ws = wb.create_sheet(title="Pawn weights (TBC)")
+    ws.sheet_properties.tabColor = "6A1B9A"
+    row = 1
+    ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=3)
+    t1 = ws.cell(
+        row=row,
+        column=1,
+        value=(
+            "Pawn stat weights (TBC Classic — HawsJon; "
+            "source: AddonReference/Pawn/ClassicHawsJon.lua)"
+        ),
+    )
+    t1.font = Font(bold=True, size=12)
+    row += 1
+    ws.cell(
+        row=row,
+        column=1,
+        value=(
+            "Regenerated on each Excel export; see pawn_scales_tbc.json in the project root."
+        ),
+    )
+    row += 2
+
+    for sc in sorted(scales, key=lambda x: (x.get("spec_id", 0), x.get("spec_name", ""))):
+        label = " — ".join(
+            [
+                sc.get("class_name", ""),
+                "spec %s" % sc.get("spec_id", ""),
+                sc.get("spec_name", ""),
+            ]
+        )
+        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=2)
+        sec = ws.cell(row=row, column=1, value=label)
+        sec.font = section_font
+        sec.fill = section_fill
+        sec.border = thin_border
+        row += 1
+        for ci, h in enumerate(("Pawn stat", "Weight"), 1):
+            cell = ws.cell(row=row, column=ci, value=h)
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.border = thin_border
+        row += 1
+        for stat, wt in sorted(sc["weights"].items(), key=lambda z: z[0].lower()):
+            c1 = ws.cell(row=row, column=1, value=stat)
+            c2 = ws.cell(row=row, column=2, value=wt)
+            c1.border = thin_border
+            c2.border = thin_border
+            c1.alignment = wrap_align
+            c2.alignment = wrap_align
+            row += 1
+        row += 1
+
+    ws.column_dimensions["A"].width = 30
+    ws.column_dimensions["B"].width = 14
+    log("  Pawn weights (TBC) sheet: %d spec scale(s)" % len(scales))
+
 
 def _get_row_color(row):
     acq = row["Acquisition Type"]
@@ -1094,7 +1367,7 @@ def _get_row_color(row):
     return ACQ_COLORS.get(acq), False
 
 
-def export_xlsx(csv_path, spec_order):
+def export_xlsx(csv_path, spec_order, class_title=None):
     try:
         from openpyxl import Workbook
         from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -1104,6 +1377,13 @@ def export_xlsx(csv_path, spec_order):
         log("WARNING: openpyxl not installed. Skipping Excel export.")
         log("  Install with: pip install openpyxl")
         return
+
+    if not class_title:
+        base = os.path.basename(csv_path)
+        m = re.match(r"^(.+)_BIS_Planner\.csv$", base, re.I)
+        class_title = m.group(1).strip().title() if m else ""
+
+    refresh_pawn_scales_json()
 
     item_db = load_item_database()
 
@@ -1489,8 +1769,19 @@ def export_xlsx(csv_path, spec_order):
 
     log(f"  BIS Planner: {len(all_rows)} items")
 
-    # Tab order: Current Equipment, BIS Planner, ItemDB (hidden)
-    target_order = ["Current Equipment", "BIS Planner", "ItemDB"]
+    _append_pawn_weights_sheet(
+        wb,
+        class_title,
+        header_font,
+        header_fill,
+        section_font,
+        section_fill,
+        thin_border,
+        wrap_align,
+    )
+
+    # Tab order: Current Equipment, BIS Planner, Pawn weights (TBC), ItemDB (hidden)
+    target_order = ["Current Equipment", "BIS Planner", "Pawn weights (TBC)", "ItemDB"]
     for idx, name in enumerate(target_order):
         if name in wb.sheetnames:
             current_idx = wb.sheetnames.index(name)
@@ -1640,9 +1931,9 @@ def _col_letter(n):
 
 
 def list_guide_classes():
-    """Lowercase class names that have at least one guide file in Guides/."""
+    """Lowercase class names that have at least one guide file in AddonReference/Loon/."""
     classes = set()
-    for fname in os.listdir(GUIDES_DIR):
+    for fname in os.listdir(LOON_GUIDES_DIR):
         if fname.endswith(".lua"):
             m = re.match(r"([A-Z][a-z]+)", fname)
             if m:
@@ -1704,7 +1995,7 @@ def main():
             output_csv = os.path.join(OUTPUT_DIR, f"{class_title}_BIS_Planner.csv")
             rows, spec_order = generate_csv(args.phase, cn, output_csv)
             if not args.no_excel:
-                export_xlsx(output_csv, spec_order)
+                export_xlsx(output_csv, spec_order, class_title=class_title)
         log("Done (all classes).")
         return
 
@@ -1722,7 +2013,7 @@ def main():
     rows, spec_order = generate_csv(args.phase, args.class_name, output_csv)
 
     if not args.no_excel:
-        export_xlsx(output_csv, spec_order)
+        export_xlsx(output_csv, spec_order, class_title=class_title)
 
 
 if __name__ == "__main__":
