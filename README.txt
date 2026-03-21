@@ -49,7 +49,7 @@ All BIS and pre-BIS items for the class, with every spec combined on one sheet.
 
 | Column | Description |
 |---|---|
-| **Interest** | Dropdown: `Pass`, `Consider`, `Need`, or `Equipped` |
+| **Interest** | Dropdown depends on **Gear Type** (C): **Ring** / **Trinket** rows get `Pass`, `Consider`, `Need`, `Equipped 1`, `Equipped 2` (no plain `Equipped`). All other rows get `Pass`, `Consider`, `Need`, `Equipped` (no `Equipped 1`/`2`). Set in the exported `.xlsx` and re-applied on open in Google Sheets by Apps Script. |
 | **Spec** | Spec name (e.g., Protection, Holy, Retribution) |
 | **Gear Type** | Equipment slot (Head, Shoulder, Back, Chest, etc.) |
 | **Name** | Item name |
@@ -59,29 +59,30 @@ All BIS and pre-BIS items for the class, with every spec combined on one sheet.
 | **Dungeon** | Dungeon name (blank for non-dungeon items) |
 | **Difficulty** | Normal or Heroic (blank for non-dungeon items) |
 | **Stats** | Item stats (e.g., `142 Armor; 24 Sta; 23 Int`) and, when present, on-use / equip **Attributes** text after a single space |
-| **Comparison** | Stat differences vs equipped gear (column **K**); in **Google Sheets**, Apps Script colors `+`/`−` and Attributes. In Excel, `=N` (same text as CmpRaw). |
+| **Comparison** | Stat differences vs equipped gear (column **K**); in **Google Sheets**, Apps Script colors `+`/`−`, **Slot 1 Comparison:** / **Slot 2 comparison** headers on Ring/Trinket rows, and Attributes. In Excel, `=O` (same text as CmpRaw). |
 | **Notes** | Source details (boss name, badge cost, reputation, etc.) — last visible column before hidden helpers. |
-| **Equip** | (Hidden, column **M**) Equipped item name for this row’s spec + slot from Current Equipment. Do not delete. |
-| **CmpRaw** | (Hidden, column **N**) Plain-text comparison + equipped Attributes from ItemDB; references **Δ** columns **O–**. Do not delete. |
-| **Δ *stat*** | (Hidden, after CmpRaw) One numeric diff per stat (item − equipped); keeps CmpRaw small. Do not delete. |
+| **Equip** | (Hidden, column **M**) First CE slot for this planner row (**Ring 1** / **Trinket 1** when Gear Type is Ring/Trinket). Do not delete. |
+| **Equip2** | (Hidden, column **N**) Second CE slot (**Ring 2** / **Trinket 2**); blank for other gear types. Do not delete. |
+| **CmpRaw** | (Hidden, column **O**) Plain-text comparison + equipped Attributes from ItemDB; references **Δ** helper columns after **O**. Do not delete. |
+| **Δ *stat*** | (Hidden, after CmpRaw) Two blocks for Ring/Trinket (diff vs **Equip**, then vs **Equip2**); one block for other slots. Do not delete. |
 
 **Features:**
 
-- **Interest dropdown**: Setting an item to **Equipped** automatically updates the Current Equipment sheet and bolds the cell. Only one item per spec + gear type can be Equipped at a time — setting a new one clears the old.
-- **Comparison column**: Visible column **K**; built from hidden **CmpRaw** (column **N**). In Google Sheets, the script applies green/red to stat deltas and green for the equipped **Attributes** line. Regenerate the workbook after pulling updates so column layout matches.
+- **Interest dropdown**: Lists are **row-specific** (see table above). **Equipped** / **Equipped 1** / **Equipped 2** update Current Equipment where applicable and bold the cell. Only one planner row per spec + slot bucket can hold each equipped state; picking a new item clears the previous row in that bucket.
+- **Comparison column**: Visible column **K**; built from hidden **CmpRaw** (column **O**). On Ring/Trinket rows, CmpRaw uses **Slot 1 Comparison:** / **Slot 2 comparison** and **Equipped slot 1:** / **Equipped slot 2** before on-use text; the script colors headers and splits inline **Use:** / **Equip:** onto new lines when present. Regenerate the workbook after pulling updates so column layout matches.
 - **Filter/Sort**: Use the header dropdowns to filter by Spec, Gear Type, Acquisition Type, etc.
 - **Frozen columns**: Interest, Spec, Gear Type, and Name (columns A-D) stay visible while scrolling.
 - **Color-coded rows**: Each row is colored by acquisition type (see Row Colors below).
 
 ### Current Equipment Sheet
 
-Tracks what you're currently wearing, with separate sections for each spec (e.g., `--- PROTECTION ---`, `--- HOLY ---`).
+Tracks what you're currently wearing, with separate sections for each spec (e.g., `--- PROTECTION ---`, `--- HOLY ---`). **Ring** and **Trinket** use two rows each: **Ring 1**, **Ring 2**, **Trinket 1**, **Trinket 2** (planner Gear Type stays a single **Ring** or **Trinket** column).
 
 **Columns:**
 
 | Column | Description |
 |---|---|
-| **Gear Type** | Equipment slot (Head, Shoulder, Back, etc.) — one row per slot |
+| **Gear Type** | Equipment slot (Head, Shoulder, Back, **Ring 1**, **Ring 2**, **Trinket 1**, **Trinket 2**, etc.) |
 | **Item Name** | Editable cell with a per-slot dropdown of 3,600+ TBC items |
 | **Stat columns** | Armor, DPS, Str, Agi, Sta, Int, Spi, Healing, Spell Dmg, AP, MP5, Defense, Dodge, Parry, Block Rating, Block Value, Hit, Crit, Spell Hit, Spell Crit, Haste |
 
@@ -90,8 +91,8 @@ Tracks what you're currently wearing, with separate sections for each spec (e.g.
 - Gear Type and Item Name columns (A-B) are frozen while scrolling.
 - Each gear slot has a dropdown with all items of that slot type from the item database.
 - Stat columns auto-populate via `VLOOKUP` when an item name is entered.
-- Manually entering an item that exists in the BIS Planner will auto-set its Interest to "Equipped" (via Apps Script).
-- Clearing or replacing an item auto-clears the old "Equipped" status in the BIS Planner (via Apps Script).
+- Manually entering an item that exists in the BIS Planner will auto-set its Interest to **Equipped** / **Equipped 1** / **Equipped 2** to match that CE row (via Apps Script).
+- Clearing or replacing an item auto-clears the matching equipped Interest on the BIS Planner (via Apps Script).
 
 ### Row Colors
 

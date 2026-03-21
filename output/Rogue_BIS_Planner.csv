@@ -1,58 +1,141 @@
 Spec,Gear Type,Phase,Name,Acquisition Type,Quest,Dungeon,Difficulty,Stats,Notes
-Dps,Head,PreRaid,Wastewalker Helm,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,237 Armor; 30 Sta; 56 AP; 35 Hit,Epoch Hunter
-Dps,Head,PreRaid,Mask of the Deceiver,Dungeon Token,,,,283 Armor; 32 Agi; 36 Sta; 64 AP,50 Badges of Justice
-Dps,Head,PreRaid,Helm of the Claw,Quest (Dung),The Warlord's Hideout (SV),,,237 Armor; 25 Agi; 21 Sta; 66 AP,
-Dps,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,219 Armor; 25 Agi; 13 Sta; 34 AP; 35 Hit,Avatar of the Martyred
-Dps,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,217 Armor; 25 Agi; 50 AP,
-Dps,Shoulder,PreRaid,Blackened Leather Spaulders,Reputation,,,,219 Armor; 20 Agi; 70 AP,Kurenai - Revered
-Dps,Shoulder,PreRaid,Talbuk Hide Spaulders,Reputation,,,,219 Armor; 20 Agi; 70 AP,The Mag'har - Revered
-Dps,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP,
-Dps,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP,Avatar of the Martyred
-Dps,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,25 Badges of Justice
-Dps,Back,PreRaid,Delicate Green Poncho,Quest,Bring Me The Egg! (Nag),,,66 Armor; 14 Agi; 19 Sta; 28 AP,
-Dps,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP,
-Dps,Chest,PreRaid,Wastewalker Tunic,Dungeon Drop,,Blood Furnace,Heroic,292 Armor; 28 Agi; 36 Sta; 56 AP; 35 Hit,Keli'dan the Breaker
-Dps,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP,
-Dps,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,
-Dps,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
-Dps,Wrist,PreRaid,Spymistress's Wristguards,Quest (Dung),The Soul Devices (SL),,,128 Armor; 18 Agi; 15 Sta,
-Dps,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 20 Dodge,
-Dps,Hands,PreRaid,Wastewalker Gloves,Dungeon Drop,,Shattered Halls,Normal,183 Armor; 32 Agi; 33 Sta; 16 AP; 35 Hit,Warchief Kargath Bladefist
-Dps,Hands,PreRaid,Gloves of the Nether-Stalker,Quest,Dealing with the Overmaster (NS),,,165 Armor; 16 Agi; 12 Sta; 60 AP,
-Dps,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,
-Dps,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP,Aeonus
-Dps,Waist,PreRaid,Socrethar's Girdle,Quest,Turning Point (NS),,,156 Armor; 23 Agi; 21 Sta; 48 AP,
-Dps,Waist,PreRaid,Naaru Belt of Precision,Quest (Dung),How to Break Into the Arcatraz (TK),,,164 Armor; 25 Agi; 44 AP,
-Dps,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 20 Dodge,
-Dps,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 35 Hit,Nexus-Prince Shaffar
-Dps,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta,
-Dps,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge,
-Dps,Feet,PreRaid,Felboar Hide Shoes,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,191 Armor; 18 Agi; 15 Sta; 68 AP,
-Dps,Neck,PreRaid,Braided Eternium Chain,Auction House,,,,Use: Increases the critical strike rating of nearby party members by 28 for 30 min; Equip: +5 Weapon Damage,
-Dps,Neck,PreRaid,Prestor's Talisman of Connivery,Dungeon Drop,,Blackwing Lair,Normal,25 Agi; 22 AP; 10 Hit,Nefarian
-Dps,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,20 Agi; 18 Sta; 42 AP,25 Badges of Justice
-Dps,Neck,PreRaid,Earthen Mark of Razing,Quest,Gurok the Usurper (Nag),,,23 Agi; 20 AP,
-Dps,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 Sta; 30 AP,Talon King Ikiss
-Dps,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,Heroic,40 AP,Yor
-Dps,Ring,PreRaid,Band of Anguish,Quest,News of Victory (SMV),,,13 Agi; 50 AP,
-Dps,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP,
-Dps,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP,
+Dps,Head,PreRaid,Wastewalker Helm,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"237 Armor; 30 Sta; 56 AP; 18 Hit; 22 Crit
+
+Equip: Increases attack power by 56",Epoch Hunter
+Dps,Head,PreRaid,Mask of the Deceiver,Dungeon Token,,,,"283 Armor; 32 Agi; 36 Sta; 64 AP; 16 Hit
+
+Equip: Increases attack power by 64",50 Badges of Justice
+Dps,Head,PreRaid,Helm of the Claw,Quest (Dung),The Warlord's Hideout (SV),,,"237 Armor; 25 Agi; 21 Sta; 66 AP; 14 Hit
+
+Equip: Increases attack power by 66",
+Dps,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,"219 Armor; 25 Agi; 13 Sta; 34 AP; 16 Hit
+
+Equip: Increases attack power by 34",Avatar of the Martyred
+Dps,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,"217 Armor; 25 Agi; 50 AP; 24 Hit
+
+Equip: Increases attack power by 50",
+Dps,Shoulder,PreRaid,Blackened Leather Spaulders,Reputation,,,,"219 Armor; 20 Agi; 70 AP; 15 Hit
+
+Equip: Increases attack power by 70",Kurenai - Revered
+Dps,Shoulder,PreRaid,Talbuk Hide Spaulders,Reputation,,,,"219 Armor; 20 Agi; 70 AP; 15 Hit
+
+Equip: Increases attack power by 70",The Mag'har - Revered
+Dps,Back,PreRaid,Vengeance Wrap,Auction House,,,,"89 Armor; 52 AP; 23 Crit
+
+Equip: Increases attack power by 52",
+Dps,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,"78 Armor; 15 Agi; 15 Sta; 36 AP; 17 Hit
+
+Equip: Increases attack power by 36",Avatar of the Martyred
+Dps,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,"93 Armor; 23 Agi; 22 Sta; 48 AP
+
+Equip: Increases attack power by 48",25 Badges of Justice
+Dps,Back,PreRaid,Delicate Green Poncho,Quest,Bring Me The Egg! (Nag),,,"66 Armor; 14 Agi; 19 Sta; 28 AP; 14 Hit
+
+Equip: Increases attack power by 28",
+Dps,Chest,PreRaid,Primalstrike Vest,Auction House,,,,"379 Armor; 38 Agi; 39 Sta; 108 AP; 12 Hit
+
+Equip: Increases attack power by 108",
+Dps,Chest,PreRaid,Wastewalker Tunic,Dungeon Drop,,Blood Furnace,Heroic,"292 Armor; 28 Agi; 36 Sta; 56 AP; 35 Hit
+
+Equip: Increases attack power by 56",Keli'dan the Breaker
+Dps,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,"278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit
+
+Equip: Increases attack power by 90",
+Dps,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,"159 Armor; 15 Agi; 21 Sta; 64 AP
+
+Equip: Increases attack power by 64",
+Dps,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"153 Armor; 24 Agi; 22 Sta; 46 AP
+
+Equip: Increases attack power by 46",Epoch Hunter
+Dps,Wrist,PreRaid,Spymistress's Wristguards,Quest (Dung),The Soul Devices (SL),,,128 Armor; 18 Agi; 15 Sta; 15 Hit,
+Dps,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,"169 Armor; 36 AP; 20 Dodge; 17 Hit; 24 Crit
+
+Equip: Increases attack power by 36",
+Dps,Hands,PreRaid,Wastewalker Gloves,Dungeon Drop,,Shattered Halls,Normal,"183 Armor; 32 Agi; 33 Sta; 16 AP; 35 Hit
+
+Equip: Increases attack power by 16",Warchief Kargath Bladefist
+Dps,Hands,PreRaid,Gloves of the Nether-Stalker,Quest,Dealing with the Overmaster (NS),,,"165 Armor; 16 Agi; 12 Sta; 60 AP; 8 Hit
+
+Equip: Increases attack power by 60",
+Dps,Waist,PreRaid,Primalstrike Belt,Auction House,,,,"205 Armor; 20 Agi; 32 Sta; 84 AP
+
+Equip: Increases attack power by 84",
+Dps,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,"196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit
+
+Equip: Increases attack power by 56",Aeonus
+Dps,Waist,PreRaid,Socrethar's Girdle,Quest,Turning Point (NS),,,"156 Armor; 23 Agi; 21 Sta; 48 AP; 20 Hit
+
+Equip: Increases attack power by 48",
+Dps,Waist,PreRaid,Naaru Belt of Precision,Quest (Dung),How to Break Into the Arcatraz (TK),,,"164 Armor; 25 Agi; 44 AP; 21 Dodge; 15 Hit
+
+Equip: Increases attack power by 44",
+Dps,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,"249 Armor; 52 AP; 20 Dodge; 25 Hit; 25 Crit
+
+Equip: Increases attack power by 52",
+Dps,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,"256 Armor; 31 Agi; 27 Sta; 28 AP; 19 Hit
+
+Equip: Increases attack power by 28",Nexus-Prince Shaffar
+Dps,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
+Dps,Feet,PreRaid,Fel Leather Boots,Auction House,,,,"196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit
+
+Equip: Increases attack power by 36",
+Dps,Feet,PreRaid,Felboar Hide Shoes,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,"191 Armor; 18 Agi; 15 Sta; 68 AP; 9 Hit
+
+Equip: Increases attack power by 68",
+Dps,Neck,PreRaid,Braided Eternium Chain,Auction House,,,,"21 Hit
+
+Use: Increases the critical strike rating of nearby party members by 28 for 30 min;
+Equip: +5 Weapon Damage",
+Dps,Neck,PreRaid,Prestor's Talisman of Connivery,Dungeon Drop,,Blackwing Lair,Normal,"25 Agi; 22 AP; 10 Hit
+
+Equip: Increases your hit rating by 10;
+Equip: Increases attack power by 22",Nefarian
+Dps,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,"20 Agi; 18 Sta; 42 AP; 18 Hit
+
+Equip: Increases attack power by 42",25 Badges of Justice
+Dps,Neck,PreRaid,Earthen Mark of Razing,Quest,Gurok the Usurper (Nag),,,"23 Agi; 20 AP; 13 Hit
+
+Equip: Increases attack power by 20",
+Dps,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,"20 Agi; 15 Sta; 30 AP; 13 Hit
+
+Equip: Increases attack power by 30",Talon King Ikiss
+Dps,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,Heroic,"40 AP; 19 Hit; 20 Crit
+
+Equip: Increases attack power by 40",Yor
+Dps,Ring,PreRaid,Band of Anguish,Quest,News of Victory (SMV),,,"13 Agi; 50 AP; 10 Hit
+
+Equip: Increases attack power by 50",
+Dps,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,"15 Agi; 50 AP; 10 Hit
+
+Equip: Increases attack power by 50",
+Dps,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,"15 Agi; 50 AP; 10 Hit
+
+Equip: Increases attack power by 50",
 Dps,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
 Dps,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
-Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
-Dps,Trinket,PreRaid,Badge of the Swarmguard,Dungeon Drop,,Ahn'Qiraj,Normal,,Battleguard Sartura
-Dps,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,,Temporus
+Use: Increases haste rating by 260 for 10 sec;
+Equip: Increases attack power by 64",Pathaleon the Calculator
+Dps,Trinket,PreRaid,Badge of the Swarmguard,Dungeon Drop,,Ahn'Qiraj,Normal,"Use: Gives a chance on melee or ranged attack to apply an armor penetration effect on you for 30 sec, lowering the target's physical armor by 200 to your own attacks. The armor penetration effect can be applied up to 6 times",Battleguard Sartura
+Dps,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,"32 Crit
+
+Equip: Chance on critical hit to increase your attack power by 300 for 10 secs. (Proc chance: 10%, 50s cooldown)",Temporus
 Dps,Trinket,PreRaid,Kiss of the Spider,Dungeon Drop,,Naxxramas,Normal,"10 Hit; 14 Crit; 200 Haste
 
-Use: Increases your haste rating by 200 for 15 sec",Maexxna
+Use: Increases your haste rating by 200 for 15 sec;
+Equip: Increases your critical strike rating by 14;
+Equip: Increases your hit rating by 10",Maexxna
 Dps,Trinket,PreRaid,Slayer's Crest,Dungeon Drop,,Naxxramas,Normal,"64 AP
 
-Use: Increases attack power by 260 for 20 sec",Sapphiron
+Use: Increases attack power by 260 for 20 sec;
+Equip: Increases attack power by 64",Sapphiron
 Dps,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
 
-Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
-Dps,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
+Use: Increases attack power by 278 for 20 sec;
+Equip: Increases attack power by 72",41 Badges of Justice
+Dps,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,"150 AP
+
+Equip: Increases attack power by 150 when fighting Undead and Demons. It also allows the acquisition of Scourgestones on behalf of the Argent Dawn",
 Dps,Main Hand,PreRaid,Blinkstrike,Auction House,,,,"81.15 DPS
 
 Proc: Grants an extra attack on your next swing",World Drop
@@ -62,10 +145,22 @@ Proc: Increases your haste rating by 212 for 10 sec",
 Dps,Main Hand,PreRaid,The Night Blade,Auction House,,,,"81.39 DPS
 
 Proc: Your attacks ignore 435 of your enemies' armor for 10 sec",World Drop
-Dps,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,81.15 DPS; 38 AP,The Aldor - Exalted
-Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,71.79 DPS; 15 Agi; 26 AP,Aeonus
+Dps,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,"81.15 DPS; 38 AP; 19 Hit
+
+Equip: Increases attack power by 38",The Aldor - Exalted
+Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,"71.79 DPS; 15 Agi; 26 AP
+
+Equip: Increases attack power by 26",Aeonus
 Dps,Off Hand,PreRaid,Searing Sunblade,Dungeon Token,,,,85.38 DPS; 24 Agi; 22 Sta,50 Badges of Justice
-Dps,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,56.82 DPS; 10 Agi; 32 AP,
-Dps,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,51.76 DPS; 7 Agi; 10 Sta; 14 AP,
-Dps,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP,Thrallmar - Exalted
-Dps,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP,Honor Hold - Exalted
+Dps,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,"56.82 DPS; 10 Agi; 32 AP; 6 Crit
+
+Equip: Increases attack power by 32",
+Dps,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,"51.76 DPS; 7 Agi; 10 Sta; 14 AP; 7 Hit
+
+Equip: Increases attack power by 14",
+Dps,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,"73.75 DPS; 12 Agi; 22 AP; 11 Hit
+
+Equip: Increases attack power by 22",Thrallmar - Exalted
+Dps,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,"73.7 DPS; 12 Agi; 22 AP; 11 Hit
+
+Equip: Increases attack power by 22",Honor Hold - Exalted

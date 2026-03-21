@@ -4,7 +4,7 @@ BIS Planner — TBC Classic Gear Spreadsheet Generator
 Created by Steven Bennett 2026
 
 Two-step workflow:
-  1. python3 generate_bis_planner.py --build-db         # fetch item stats from Wowhead (once)
+  1. python3 generate_bis_planner.py --build-db         # fetch item stats from Wowhead (re-fetches stale cache)
   2. python3 generate_bis_planner.py paladin             # generate CSV + Excel (no API calls)
 
 Supported classes: druid, hunter, mage, paladin, priest, rogue, shaman, warlock, warrior
@@ -35,6 +35,19 @@ GEAR_ORDER = [
     "Waist", "Legs", "Feet", "Neck", "Ring", "Trinket",
     "Main Hand", "Off Hand", "Two Hand", "Ranged/Relic",
 ]
+# Current Equipment rows (two ring + two trinket slots); planner CSV still uses "Ring" / "Trinket".
+CE_GEAR_ORDER = [
+    "Head", "Shoulder", "Back", "Chest", "Wrist", "Hands",
+    "Waist", "Legs", "Feet", "Neck",
+    "Ring 1", "Ring 2", "Trinket 1", "Trinket 2",
+    "Main Hand", "Off Hand", "Two Hand", "Ranged/Relic",
+]
+CE_ROW_TO_ITEMDB_SLOT = {
+    "Ring 1": "Ring",
+    "Ring 2": "Ring",
+    "Trinket 1": "Trinket",
+    "Trinket 2": "Trinket",
+}
 ACQ_ORDER = [
     "Auction House", "Dungeon Drop", "Dungeon Token",
     "Quest", "Quest (Dung)", "Reputation", "PvP",
@@ -95,13 +108,18 @@ SHEET_FIELDS = [
     "Interest", "Spec", "Gear Type", "Name", "Phase", "Acquisition Type",
     "Quest", "Dungeon", "Difficulty", "Stats",
     "Comparison", "Notes",
-    "Equip", "CmpRaw",
+    "Equip", "Equip2", "CmpRaw",
 ]
 
-# Hidden columns after CmpRaw: one numeric diff per STAT_COLUMNS entry (keeps CmpRaw short; no LET).
+# Hidden after CmpRaw: two blocks of per-stat Δ (Equip, then Equip2) for Ring/Trinket dual comparison.
 HELPER_DIFF_COUNT = len(STAT_COLUMNS)
 
-INTEREST_OPTIONS = ["Pass", "Consider", "Need", "Equipped"]
+# Ring/Trinket rows: no plain "Equipped" (use Equipped 1 / 2). Other rows: no Equipped 1/2.
+INTEREST_OPTIONS_RING_TRINKET = ["Pass", "Consider", "Need", "Equipped 1", "Equipped 2"]
+INTEREST_OPTIONS_STANDARD = ["Pass", "Consider", "Need", "Equipped"]
+INTEREST_OPTIONS = list(
+    dict.fromkeys(INTEREST_OPTIONS_STANDARD + INTEREST_OPTIONS_RING_TRINKET)
+)
 
 SLOT_MAP = {
     "Head": "Head", "Shoulder": "Shoulder", "Back": "Back",
@@ -360,10 +378,37 @@ def fetch_tooltip(item_id, ssl_ctx, retries=3):
     return None
 
 
+def _wowhead_tooltip_anchor_specials(html):
+    """Equip/Use lines whose prose is only inside <a>…</a> (Wowhead JSON tooltips)."""
+    out = []
+    for label, pat in (
+        ("Equip", r"Equip:\s*(?:<[^>]+>\s*)*<a[^>]*>([^<]{8,800})</a>"),
+        ("Use", r"Use:\s*(?:<[^>]+>\s*)*<a[^>]*>([^<]{8,800})</a>"),
+    ):
+        for m in re.finditer(pat, html, re.I):
+            text = m.group(1).strip().rstrip(".")
+            if len(text) >= 8:
+                out.append("%s: %s" % (label, text))
+    return out
+
+
+def _merge_anchor_specials(specials, html):
+    """Append anchor-only effects without duplicating existing specials."""
+    seen = {s.lower() for s in specials}
+    for frag in _wowhead_tooltip_anchor_specials(html):
+        fl = frag.lower()
+        if fl not in seen:
+            specials.append(frag)
+            seen.add(fl)
+
+
 def parse_tooltip_to_dict(html):
     """Parse tooltip HTML into (stats_dict, special_str, slot_str, item_level)."""
     if not html:
         return {}, "", None, 0
+
+    # Strip Wowhead <!--…--> placeholders (e.g. <!--rtg32-->) so "+rating by 32" patterns match.
+    html = re.sub(r"<!--.*?-->", "", html, flags=re.DOTALL)
 
     stats = {}
 
@@ -444,6 +489,8 @@ def parse_tooltip_to_dict(html):
         if not already and 10 < len(eff_clean) < 200:
             specials.append(f"Equip: {eff_clean}")
 
+    _merge_anchor_specials(specials, html)
+
     special_str = "; ".join(specials).replace("&nbsp;", " ").replace("  ", " ").strip()
 
     slot = None
@@ -488,6 +535,16 @@ def normalize_spell_stats(stats):
     stats.pop("Spell Dmg/Heal", None)
 
 
+def _break_use_equip_newlines(text: str) -> str:
+    """Ensure space-prefixed Use:/Equip: in prose start on new lines (Stats / display)."""
+    if not text or not str(text).strip():
+        return (text or "").strip()
+    t = str(text).strip()
+    t = t.replace(" Use:", "\nUse:")
+    t = t.replace(" Equip:", "\nEquip:")
+    return t
+
+
 def stats_dict_to_string(stats, attributes=""):
     """Convert a stats dict + attribute string to the readable Stats column.
 
@@ -501,7 +558,7 @@ def stats_dict_to_string(stats, attributes=""):
             parts.append(f"{val} {key}")
     result = "; ".join(parts)
     if attributes:
-        at = attributes.strip()
+        at = _break_use_equip_newlines(attributes.strip())
         if at:
             if result:
                 result += "\n\n" + at
@@ -532,7 +589,18 @@ def _fetch_one_item(item_id, name, ssl_ctx):
     return item_id, {"name": name, "slot": slot, "stats": stats, "special": special, "ilvl": ilvl}
 
 
-def build_item_database(test_mode=False, test_class=None):
+def _cache_entry_is_stale_tooltip_(entry):
+    """True if cached item likely predates current tooltip parser (empty stats + empty special but ilvl set)."""
+    if not entry or not isinstance(entry, dict):
+        return False
+    stats = entry.get("stats") or {}
+    special = (entry.get("special") or "").strip()
+    if stats or special:
+        return False
+    return int(entry.get("ilvl") or 0) > 0
+
+
+def build_item_database(test_mode=False, test_class=None, force_refresh=False):
     existing_db = {}
     if os.path.exists(ITEM_DB_PATH):
         with open(ITEM_DB_PATH, "r") as f:
@@ -583,8 +651,27 @@ def build_item_database(test_mode=False, test_class=None):
             if iid not in items_to_fetch:
                 items_to_fetch[iid] = name
 
-    to_fetch = {iid: name for iid, name in items_to_fetch.items() if str(iid) not in existing_db}
-    log(f"Items to fetch from Wowhead: {len(to_fetch)} (skipping {len(items_to_fetch) - len(to_fetch)} already cached)")
+    to_fetch = {}
+    n_new = 0
+    n_stale = 0
+    for iid, name in items_to_fetch.items():
+        sid = str(iid)
+        if sid not in existing_db:
+            to_fetch[iid] = name
+            n_new += 1
+        elif force_refresh:
+            to_fetch[iid] = name
+        elif _cache_entry_is_stale_tooltip_(existing_db.get(sid)):
+            to_fetch[iid] = name
+            n_stale += 1
+    n_skip = len(items_to_fetch) - len(to_fetch)
+    if force_refresh:
+        log(f"Items to fetch from Wowhead: {len(to_fetch)} (--refresh-db, full catalog refetch)")
+    else:
+        log(
+            f"Items to fetch from Wowhead: {len(to_fetch)} "
+            f"({n_new} new, {n_stale} stale empty-tooltip, {n_skip} cached ok)"
+        )
 
     if to_fetch:
         _fetch_counter[0] = 0
@@ -856,7 +943,8 @@ def export_xlsx(csv_path, spec_order):
             legacy_sp = (r.pop("Special", None) or "").strip()
             if legacy_sp:
                 st = (r.get("Stats") or "").strip()
-                r["Stats"] = (st + " " + legacy_sp).strip() if st else legacy_sp
+                merged = (st + " " + legacy_sp).strip() if st else legacy_sp
+                r["Stats"] = _break_use_equip_newlines(merged)
             all_rows.append(r)
 
     if not all_rows:
@@ -941,9 +1029,9 @@ def export_xlsx(csv_path, spec_order):
         "Note: Stats and comparisons will take a few seconds to update."
     )
     ce_intro_para2 = (
-        'If an item in the BIS Planner sheet is set to "Equipped" in the Interest column, '
-        "it will automatically update here. If your item is not on the list, you can manually "
-        "enter the stats (integers only)."
+        'If an item in the BIS Planner sheet is set to "Equipped", "Equipped 1", or "Equipped 2" '
+        "(rings/trinkets use two slots: Ring 1/2, Trinket 1/2), it will update here. "
+        "If your item is not on the list, you can manually enter stats (integers only)."
     )
     # Rows 1–2: title A1:B2; C1:C2 "Instructions:"; D row1 / D row2 = one paragraph each (no vertical merge of body)
     CE_HEADER_ROW = 3
@@ -996,7 +1084,7 @@ def export_xlsx(csv_path, spec_order):
         ce_row += 1
 
         spec_start = ce_row
-        for gear_type in GEAR_ORDER:
+        for gear_type in CE_GEAR_ORDER:
             ws_ce.cell(row=ce_row, column=1, value=gear_type)
 
             for si, stat_key in enumerate(STAT_COLUMNS):
@@ -1007,7 +1095,8 @@ def export_xlsx(csv_path, spec_order):
                 )
                 ws_ce.cell(row=ce_row, column=3 + si, value=formula)
 
-            col_info = slot_list_cols.get(gear_type)
+            itemdb_slot = CE_ROW_TO_ITEMDB_SLOT.get(gear_type, gear_type)
+            col_info = slot_list_cols.get(itemdb_slot)
             if col_info:
                 sl_col, sl_count = col_info
                 if sl_count > 0:
@@ -1016,8 +1105,8 @@ def export_xlsx(csv_path, spec_order):
                         formula1=f"ItemDB!${sl_col}$2:${sl_col}${sl_count + 1}",
                         allow_blank=True,
                     )
-                    dv.prompt = f"Select or type a {gear_type} item"
-                    dv.promptTitle = gear_type
+                    dv.prompt = f"Select or type a {itemdb_slot} item"
+                    dv.promptTitle = itemdb_slot
                     ws_ce.add_data_validation(dv)
                     dv.add(ws_ce.cell(row=ce_row, column=2))
 
@@ -1033,26 +1122,31 @@ def export_xlsx(csv_path, spec_order):
     credit_cell = ws_ce.cell(row=ce_row + 1, column=1, value="Created by Steven Bennett 2026")
     credit_cell.font = credit_font
 
-    log(f"  Current Equipment: {len(spec_order)} specs x {len(GEAR_ORDER)} slots")
+    log(f"  Current Equipment: {len(spec_order)} specs x {len(CE_GEAR_ORDER)} slots")
 
     # -- Single BIS Planner sheet --
     # A–J Interest…Stats (visible); K Comparison, L Notes (visible — no hidden cols before Notes).
-    # M Equip, N CmpRaw (hidden); O:AH = per-stat Δ diffs (hidden); CmpRaw references Δ only.
+    # M Equip, N Equip2, O CmpRaw (hidden); then two Δ blocks (slot1, slot2); CmpRaw references Δ only.
     ws = wb.create_sheet(title="BIS Planner")
     ws.sheet_properties.tabColor = "1565C0"
 
     equip_col_letter = _col_letter(SHEET_FIELDS.index("Equip") + 1)
+    equip2_col_letter = _col_letter(SHEET_FIELDS.index("Equip2") + 1)
     cmp_raw_col_letter = _col_letter(SHEET_FIELDS.index("CmpRaw") + 1)
     first_helper_col = len(SHEET_FIELDS) + 1
-    helper_diff_letters = [
+    helper_diff_letters_slot1 = [
         _col_letter(first_helper_col + i) for i in range(HELPER_DIFF_COUNT)
     ]
-    bp_total_cols = len(SHEET_FIELDS) + HELPER_DIFF_COUNT
+    helper_start_slot2 = first_helper_col + HELPER_DIFF_COUNT
+    helper_diff_letters_slot2 = [
+        _col_letter(helper_start_slot2 + i) for i in range(HELPER_DIFF_COUNT)
+    ]
+    bp_total_cols = len(SHEET_FIELDS) + 2 * HELPER_DIFF_COUNT
     # Instruction merges span through Notes only (last visible column before hidden block).
     bp_visible_last_col = get_column_letter(SHEET_FIELDS.index("Notes") + 1)
 
     col_widths = {
-        "A": 12, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
+        "A": 18, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
         "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 14,
         "M": 2, "N": 2,
     }
@@ -1060,8 +1154,9 @@ def export_xlsx(csv_path, spec_order):
         ws.column_dimensions[col_letter].width = width
     ws.column_dimensions["E"].width = 16
     ws.column_dimensions[equip_col_letter].hidden = True
+    ws.column_dimensions[equip2_col_letter].hidden = True
     ws.column_dimensions[cmp_raw_col_letter].hidden = True
-    for hl in helper_diff_letters:
+    for hl in helper_diff_letters_slot1 + helper_diff_letters_slot2:
         ws.column_dimensions[hl].hidden = True
         ws.column_dimensions[hl].width = 2
 
@@ -1072,7 +1167,8 @@ def export_xlsx(csv_path, spec_order):
     )
     bp_intro_row2 = (
         "Select field in interest column and filter most wanted items. "
-        "Note: When selecting Equipped, sheet will take a few seconds to update."
+        "For rings/trinkets use Equipped 1 or Equipped 2 (two slots on Current Equipment). "
+        "Note: Interest updates may take a few seconds."
     )
     # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:L1 and F2:L2 instruction lines (through Notes)
     BP_HEADER_ROW = 3
@@ -1108,7 +1204,14 @@ def export_xlsx(csv_path, spec_order):
 
     for hi, stat_key in enumerate(STAT_COLUMNS):
         ci = first_helper_col + hi
-        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=f"Δ {stat_key}")
+        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=f"Δ1 {stat_key}")
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.border = thin_border
+        cell.alignment = wrap_align
+    for hi, stat_key in enumerate(STAT_COLUMNS):
+        ci = helper_start_slot2 + hi
+        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=f"Δ2 {stat_key}")
         cell.font = header_font
         cell.fill = header_fill
         cell.border = thin_border
@@ -1117,12 +1220,18 @@ def export_xlsx(csv_path, spec_order):
     ws.freeze_panes = f"E{BP_HEADER_ROW + 1}"
     filter_end = get_column_letter(bp_total_cols)
 
-    interest_dv = DataValidation(
+    interest_dv_std = DataValidation(
         type="list",
-        formula1=f'"{",".join(INTEREST_OPTIONS)}"',
+        formula1=f'"{",".join(INTEREST_OPTIONS_STANDARD)}"',
         allow_blank=True,
     )
-    ws.add_data_validation(interest_dv)
+    interest_dv_rt = DataValidation(
+        type="list",
+        formula1=f'"{",".join(INTEREST_OPTIONS_RING_TRINKET)}"',
+        allow_blank=True,
+    )
+    ws.add_data_validation(interest_dv_std)
+    ws.add_data_validation(interest_dv_rt)
 
     for i, data_row in enumerate(all_rows):
         excel_row = i + BP_HEADER_ROW + 1
@@ -1136,11 +1245,18 @@ def export_xlsx(csv_path, spec_order):
                     excel_row, ce_spec_rows, spec_order
                 )
                 cell = ws.cell(row=excel_row, column=ci, value=formula)
+            elif field == "Equip2":
+                formula = _build_equip2_name_formula(
+                    excel_row, ce_spec_rows, spec_order
+                )
+                cell = ws.cell(row=excel_row, column=ci, value=formula)
             elif field == "CmpRaw":
                 formula = _build_cmp_raw_formula(
                     excel_row,
                     equip_col_letter,
-                    helper_diff_letters,
+                    equip2_col_letter,
+                    helper_diff_letters_slot1,
+                    helper_diff_letters_slot2,
                     itemdb_range_bounded,
                     db_num_cols,
                 )
@@ -1153,7 +1269,11 @@ def export_xlsx(csv_path, spec_order):
                 )
             elif field == "Interest":
                 cell = ws.cell(row=excel_row, column=ci, value="")
-                interest_dv.add(cell)
+                gear_type = data_row.get("Gear Type", "")
+                if gear_type in ("Ring", "Trinket"):
+                    interest_dv_rt.add(cell)
+                else:
+                    interest_dv_std.add(cell)
             else:
                 cell = ws.cell(row=excel_row, column=ci, value=data_row.get(field, ""))
             cell.border = thin_border
@@ -1167,6 +1287,20 @@ def export_xlsx(csv_path, spec_order):
             hformula = _build_stat_diff_helper_formula(
                 excel_row,
                 equip_col_letter,
+                itemdb_range_bounded,
+                hi,
+            )
+            hcell = ws.cell(row=excel_row, column=hci, value=hformula)
+            hcell.border = thin_border
+            hcell.alignment = wrap_align
+            hcell.font = font
+            if fill:
+                hcell.fill = fill
+        for hi in range(HELPER_DIFF_COUNT):
+            hci = helper_start_slot2 + hi
+            hformula = _build_stat_diff_helper_formula(
+                excel_row,
+                equip2_col_letter,
                 itemdb_range_bounded,
                 hi,
             )
@@ -1195,17 +1329,38 @@ def export_xlsx(csv_path, spec_order):
 
 
 def _build_equip_name_formula(row, ce_spec_rows, spec_order):
-    """Equipped item name from Current Equipment (one IFS+INDEX+MATCH per row)."""
+    """CE slot 1 item: Ring 1 / Trinket 1 when planner Gear Type is Ring/Trinket; else MATCH(C)."""
     ce = "'Current Equipment'"
+    slot_key = (
+        f'IF(C{row}="Ring","Ring 1",IF(C{row}="Trinket","Trinket 1",C{row}))'
+    )
     equipped_checks = []
     for spec_name in spec_order:
         ce_start, ce_end = ce_spec_rows[spec_name]
         equipped_checks.append(
             f'B{row}="{spec_name}",'
             f'INDEX({ce}!B{ce_start}:B{ce_end},'
-            f'MATCH(C{row},{ce}!A{ce_start}:A{ce_end},0))'
+            f'MATCH({slot_key},{ce}!A{ce_start}:A{ce_end},0))'
         )
     return f'=IFERROR(IFS({",".join(equipped_checks)}),"")'
+
+
+def _build_equip2_name_formula(row, ce_spec_rows, spec_order):
+    """CE slot 2: Ring 2 / Trinket 2; blank for other gear types."""
+    ce = "'Current Equipment'"
+    slot_key = f'IF(C{row}="Ring","Ring 2",IF(C{row}="Trinket","Trinket 2",""))'
+    equipped_checks = []
+    for spec_name in spec_order:
+        ce_start, ce_end = ce_spec_rows[spec_name]
+        equipped_checks.append(
+            f'B{row}="{spec_name}",'
+            f'INDEX({ce}!B{ce_start}:B{ce_end},'
+            f'MATCH({slot_key},{ce}!A{ce_start}:A{ce_end},0))'
+        )
+    inner = f'IFERROR(IFS({",".join(equipped_checks)}),"")'
+    return (
+        f'=IF(OR(C{row}="Ring",C{row}="Trinket"),{inner},"")'
+    )
 
 
 def _build_stat_diff_helper_formula(row, equip_col_letter, itemdb_range, stat_index):
@@ -1217,31 +1372,84 @@ def _build_stat_diff_helper_formula(row, equip_col_letter, itemdb_range, stat_in
         f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{db_col_num},0),0)'
     )
     diff = f'IFERROR(({item_stat})-({equip_stat}),0)'
-    return (
-        f'=IF({diff}=0,"",IFERROR((IF({diff}>0,"+","-")&ROUND(ABS({diff}),4))'
+    body = (
+        f'IF({diff}=0,"",IFERROR((IF({diff}>0,"+","-")&ROUND(ABS({diff}),4))'
         f'&" {stat_key}",""))'
     )
-
-
-def _build_cmp_raw_formula(row, equip_col_letter, helper_col_letters, itemdb_range, attr_col_num):
-    """Plain-text comparison + equipped Attributes (ItemDB last col); Apps Script colors Comparison (K) from CmpRaw (N).
-
-    Helpers (hidden) emit text fragments; CmpRaw uses TEXTJOIN over one contiguous range (shorter N formula).
-    Outer guard: IF(IFERROR(Equip,"")="","Current Equipment Not Specified",…).
-    """
-    first_h = helper_col_letters[0]
-    last_h = helper_col_letters[-1]
-    tj = f'TEXTJOIN(", ",TRUE,{first_h}{row}:{last_h}{row})'
-    v_attr = (
-        f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
-    )
-    combined = (
-        f'IF(AND({tj}="",{v_attr}=""),"",'
-        f'IF({v_attr}="",{tj},IF({tj}="",{v_attr},{tj}&CHAR(10)&CHAR(10)&{v_attr})))'
-    )
     return (
-        f'=IF(IFERROR({equip_col_letter}{row},"")="","Current Equipment Not Specified",{combined})'
+        f'=IF(TRIM(IFERROR({equip_col_letter}{row},""))="","",{body})'
     )
+
+
+def _cmp_attr_display_expr(va_expr: str) -> str:
+    """Break common ItemDB attribute prefixes onto new lines (Comparison / CmpRaw text)."""
+    return (
+        f'SUBSTITUTE(SUBSTITUTE(TRIM({va_expr}), " Use:", CHAR(10)&"Use:"), '
+        f'" Equip:", CHAR(10)&"Equip:")'
+    )
+
+
+def _build_cmp_raw_formula(
+    row,
+    equip_col_letter,
+    equip2_col_letter,
+    helpers1,
+    helpers2,
+    itemdb_range,
+    attr_col_num,
+):
+    """CmpRaw: single block for most gear; dual Slot 1/2 Comparison headers for Ring/Trinket."""
+    h1a, h1z = helpers1[0], helpers1[-1]
+    h2a, h2z = helpers2[0], helpers2[-1]
+    tj1 = f'TEXTJOIN(", ",TRUE,{h1a}{row}:{h1z}{row})'
+    tj2 = f'TEXTJOIN(", ",TRUE,{h2a}{row}:{h2z}{row})'
+    va1 = f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
+    va2 = f'IFERROR(VLOOKUP({equip2_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
+    ad1 = _cmp_attr_display_expr(va1)
+    ad2 = _cmp_attr_display_expr(va2)
+    la1 = f'IF({va1}="","","Equipped slot 1:"&CHAR(10)&{ad1})'
+    la2 = f'IF({va2}="","","Equipped slot 2"&CHAR(10)&{ad2})'
+    # One CHAR(10) between stat line and attributes (no blank paragraph).
+    inner1 = (
+        f'IF(AND({tj1}="",{va1}=""),"",'
+        f'IF({va1}="",{tj1},IF({tj1}="",{la1},{tj1}&CHAR(10)&{la1})))'
+    )
+    inner2 = (
+        f'IF(AND({tj2}="",{va2}=""),"",'
+        f'IF({va2}="",{tj2},IF({tj2}="",{la2},{tj2}&CHAR(10)&{la2})))'
+    )
+    same1 = f'TRIM(IFERROR(D{row},""))=TRIM(IFERROR({equip_col_letter}{row},""))'
+    same2 = f'TRIM(IFERROR(D{row},""))=TRIM(IFERROR({equip2_col_letter}{row},""))'
+    b1 = (
+        f'IF(OR(IFERROR({equip_col_letter}{row},"")="",{same1}),"",'
+        f'"Slot 1 Comparison:"&CHAR(10)&{inner1})'
+    )
+    b2 = (
+        f'IF(OR(IFERROR({equip2_col_letter}{row},"")="",{same2}),"",'
+        f'"Slot 2 comparison"&CHAR(10)&{inner2})'
+    )
+    dual_body = (
+        f'IF(AND({b1}="",{b2}=""),"",IF({b1}="",{b2},IF({b2}="",{b1},{b1}&CHAR(10)&{b2})))'
+    )
+    dual_guard = (
+        f'IF(AND(IFERROR({equip_col_letter}{row},"")="",IFERROR({equip2_col_letter}{row},"")=""),'
+        f'"Current Equipment Not Specified",{dual_body})'
+    )
+    is_rt = f'OR(C{row}="Ring",C{row}="Trinket")'
+
+    tj_s = tj1
+    va_s = va1
+    la_s = f'IF({va1}="","","Currently Equipped:"&CHAR(10)&{ad1})'
+    combined_s = (
+        f'IF(AND({tj_s}="",{va_s}=""),"",'
+        f'IF({va_s}="",{tj_s},IF({tj_s}="",{la_s},{tj_s}&CHAR(10)&{la_s})))'
+    )
+    same_s = same1
+    single = (
+        f'IF(IFERROR({equip_col_letter}{row},"")="","Current Equipment Not Specified",'
+        f'IF({same_s},"",{combined_s}))'
+    )
+    return f'=IF({is_rt},{dual_guard},{single})'
 
 
 def _col_letter(n):
@@ -1275,7 +1483,8 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Workflow:\n"
-            "  1. python3 generate_bis_planner.py --build-db       # fetch item stats (once)\n"
+            "  1. python3 generate_bis_planner.py --build-db       # fetch item stats\n"
+            "     (auto re-fetches cache rows with empty stats+special; use --refresh-db for full refetch)\n"
             "  2. python3 generate_bis_planner.py paladin           # generate Paladin sheet\n"
             "     python3 generate_bis_planner.py --all              # generate every class\n"
             "     python3 generate_bis_planner.py all               # same as --all\n"
@@ -1290,6 +1499,8 @@ def main():
                         help="Generate CSV and Excel for every class that has guide files")
     parser.add_argument("--build-db", action="store_true",
                         help="Fetch item stats from Wowhead and build item_database.json")
+    parser.add_argument("--refresh-db", action="store_true",
+                        help="With --build-db: refetch every catalog item (ignore cache hits)")
     parser.add_argument("--test", action="store_true",
                         help="With --build-db: only fetch items for the specified class (or all guide items)")
     parser.add_argument("--phase", type=int, default=0,
@@ -1299,7 +1510,11 @@ def main():
     args = parser.parse_args()
 
     if args.build_db:
-        build_item_database(test_mode=args.test, test_class=args.class_name)
+        build_item_database(
+            test_mode=args.test,
+            test_class=args.class_name,
+            force_refresh=args.refresh_db,
+        )
         return
 
     run_all = args.all or (
