@@ -93,9 +93,13 @@ CSV_FIELDS = [
 
 SHEET_FIELDS = [
     "Interest", "Spec", "Gear Type", "Name", "Phase", "Acquisition Type",
-    "Quest", "Dungeon", "Difficulty", "Stats", "Equip",
-    "CmpRaw", "Comparison", "Notes",
+    "Quest", "Dungeon", "Difficulty", "Stats",
+    "Comparison", "Notes",
+    "Equip", "CmpRaw",
 ]
+
+# Hidden columns after CmpRaw: one numeric diff per STAT_COLUMNS entry (keeps CmpRaw short; no LET).
+HELPER_DIFF_COUNT = len(STAT_COLUMNS)
 
 INTEREST_OPTIONS = ["Pass", "Consider", "Need", "Equipped"]
 
@@ -1032,26 +1036,35 @@ def export_xlsx(csv_path, spec_order):
     log(f"  Current Equipment: {len(spec_order)} specs x {len(GEAR_ORDER)} slots")
 
     # -- Single BIS Planner sheet --
-    # A=Interest B=Spec C=Gear Type D=Name E=Phase F=Acq Type
-    # G=Quest H=Dungeon I=Difficulty J=Stats K=Equip L=CmpRaw M=Comparison N=Notes
+    # A–J Interest…Stats (visible); K Comparison, L Notes (visible — no hidden cols before Notes).
+    # M Equip, N CmpRaw (hidden); O:AH = per-stat Δ diffs (hidden); CmpRaw references Δ only.
     ws = wb.create_sheet(title="BIS Planner")
     ws.sheet_properties.tabColor = "1565C0"
 
     equip_col_letter = _col_letter(SHEET_FIELDS.index("Equip") + 1)
     cmp_raw_col_letter = _col_letter(SHEET_FIELDS.index("CmpRaw") + 1)
+    first_helper_col = len(SHEET_FIELDS) + 1
+    helper_diff_letters = [
+        _col_letter(first_helper_col + i) for i in range(HELPER_DIFF_COUNT)
+    ]
+    bp_total_cols = len(SHEET_FIELDS) + HELPER_DIFF_COUNT
+    # Instruction merges span through Notes only (last visible column before hidden block).
+    bp_visible_last_col = get_column_letter(SHEET_FIELDS.index("Notes") + 1)
 
     col_widths = {
         "A": 12, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
-        "G": 16, "H": 13, "I": 12, "J": 34, "K": 2, "L": 2, "M": 34, "N": 14,
+        "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 14,
+        "M": 2, "N": 2,
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
     ws.column_dimensions["E"].width = 16
     ws.column_dimensions[equip_col_letter].hidden = True
     ws.column_dimensions[cmp_raw_col_letter].hidden = True
+    for hl in helper_diff_letters:
+        ws.column_dimensions[hl].hidden = True
+        ws.column_dimensions[hl].width = 2
 
-    bp_ncol = len(SHEET_FIELDS)
-    bp_last_col = get_column_letter(bp_ncol)
     bp_intro_row1 = (
         "Click the down arrow on a given column to filter or sort values. "
         'If no values are displayed, click the "Remove Filter/Filter" button on the Sheets '
@@ -1061,7 +1074,7 @@ def export_xlsx(csv_path, spec_order):
         "Select field in interest column and filter most wanted items. "
         "Note: When selecting Equipped, sheet will take a few seconds to update."
     )
-    # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:N1 and F2:N2 instruction lines (text from F1 / F2)
+    # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:L1 and F2:L2 instruction lines (through Notes)
     BP_HEADER_ROW = 3
     bp_text_start_col = 6
     bp_text_start_letter = get_column_letter(bp_text_start_col)
@@ -1076,12 +1089,12 @@ def export_xlsx(csv_path, spec_order):
     lab_bp.font = intro_label_font
     lab_bp.alignment = intro_label_align
 
-    ws.merge_cells(f"{bp_text_start_letter}1:{bp_last_col}1")
+    ws.merge_cells(f"{bp_text_start_letter}1:{bp_visible_last_col}1")
     b1 = ws.cell(row=1, column=bp_text_start_col, value=bp_intro_row1)
     b1.font = intro_body_font
     b1.alignment = wrap_align
 
-    ws.merge_cells(f"{bp_text_start_letter}2:{bp_last_col}2")
+    ws.merge_cells(f"{bp_text_start_letter}2:{bp_visible_last_col}2")
     b2 = ws.cell(row=2, column=bp_text_start_col, value=bp_intro_row2)
     b2.font = intro_body_font
     b2.alignment = wrap_align
@@ -1093,8 +1106,16 @@ def export_xlsx(csv_path, spec_order):
         cell.border = thin_border
         cell.alignment = wrap_align
 
+    for hi, stat_key in enumerate(STAT_COLUMNS):
+        ci = first_helper_col + hi
+        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=f"Δ {stat_key}")
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.border = thin_border
+        cell.alignment = wrap_align
+
     ws.freeze_panes = f"E{BP_HEADER_ROW + 1}"
-    filter_end = get_column_letter(len(SHEET_FIELDS))
+    filter_end = get_column_letter(bp_total_cols)
 
     interest_dv = DataValidation(
         type="list",
@@ -1119,6 +1140,7 @@ def export_xlsx(csv_path, spec_order):
                 formula = _build_cmp_raw_formula(
                     excel_row,
                     equip_col_letter,
+                    helper_diff_letters,
                     itemdb_range_bounded,
                     db_num_cols,
                 )
@@ -1139,6 +1161,21 @@ def export_xlsx(csv_path, spec_order):
             cell.font = font
             if fill:
                 cell.fill = fill
+
+        for hi in range(HELPER_DIFF_COUNT):
+            hci = first_helper_col + hi
+            hformula = _build_stat_diff_helper_formula(
+                excel_row,
+                equip_col_letter,
+                itemdb_range_bounded,
+                hi,
+            )
+            hcell = ws.cell(row=excel_row, column=hci, value=hformula)
+            hcell.border = thin_border
+            hcell.alignment = wrap_align
+            hcell.font = font
+            if fill:
+                hcell.fill = fill
 
     bp_last_row = BP_HEADER_ROW + len(all_rows)
     ws.auto_filter.ref = f"A{BP_HEADER_ROW}:{filter_end}{bp_last_row}"
@@ -1171,33 +1208,41 @@ def _build_equip_name_formula(row, ce_spec_rows, spec_order):
     return f'=IFERROR(IFS({",".join(equipped_checks)}),"")'
 
 
-def _build_cmp_raw_formula(row, helper_col_letter, itemdb_range, attr_col_num):
-    """Plain-text comparison + equipped Attributes (ItemDB last col); Google Sheets Apps Script adds colors in Comparison column."""
+def _build_stat_diff_helper_formula(row, equip_col_letter, itemdb_range, stat_index):
+    """One cell: IFERROR(item_stat − equip_stat, 0) for STAT_COLUMNS[stat_index]."""
+    db_col_num = 3 + stat_index
+    item_stat = f'IFERROR(VLOOKUP(D{row},{itemdb_range},{db_col_num},0),0)'
+    equip_stat = (
+        f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{db_col_num},0),0)'
+    )
+    return f'=IFERROR(({item_stat})-({equip_stat}),0)'
+
+
+def _build_cmp_raw_formula(row, equip_col_letter, helper_col_letters, itemdb_range, attr_col_num):
+    """Plain-text comparison + equipped Attributes (ItemDB last col); Apps Script colors Comparison (K) from CmpRaw (N).
+
+    Per-stat diffs live in hidden columns after CmpRaw; CmpRaw TEXTJOINs those refs (short formula).
+    IFERROR around subtraction is in each helper cell so IF(diff<>0,...) never sees #VALUE!.
+    Outer guard: IF(IFERROR(Equip,"")="","Current Equipment Not Specified",…).
+    """
     parts = []
     for si, stat_key in enumerate(STAT_COLUMNS):
-        db_col_num = 3 + si
-        item_stat = (
-            f'IFERROR(VLOOKUP(D{row},{itemdb_range},{db_col_num},FALSE),0)'
+        h = helper_col_letters[si]
+        ref = f"{h}{row}"
+        parts.append(
+            f'IF({ref}<>0,IFERROR((IF({ref}>0,"+","-")&ROUND(ABS({ref}),4))&" {stat_key}",""),"")'
         )
-        equip_stat = (
-            f'IFERROR(VLOOKUP({helper_col_letter}{row},{itemdb_range},'
-            f'{db_col_num},FALSE),0)'
-        )
-        diff = f"{item_stat}-{equip_stat}"
-        part = f'IF({diff}<>0,TEXT({diff},"+#;-#")&" {stat_key}","")'
-        parts.append(part)
 
     tj = f'TEXTJOIN(", ",TRUE,{",".join(parts)})'
     v_attr = (
-        f'IFERROR(VLOOKUP({helper_col_letter}{row},{itemdb_range},'
-        f'{attr_col_num},FALSE),"")'
+        f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
     )
     combined = (
         f'IF(AND({tj}="",{v_attr}=""),"",'
         f'IF({v_attr}="",{tj},IF({tj}="",{v_attr},{tj}&CHAR(10)&CHAR(10)&{v_attr})))'
     )
     return (
-        f'=IF({helper_col_letter}{row}="","Current Equipment Not Specified",{combined})'
+        f'=IF(IFERROR({equip_col_letter}{row},"")="","Current Equipment Not Specified",{combined})'
     )
 
 
