@@ -2,155 +2,66 @@ Spec,Gear Type,Phase,Name,Acquisition Type,Quest,Dungeon,Difficulty,Stats,Notes
 Elemental,Head,PreRaid,Lightning Crown,Auction House,,,,"577 Armor; 43 Spell Crit
 
 Equip: Increases damage done by Nature spells and effects by up to 66",World Drop
-Elemental,Head,PreRaid,Spellstrike Hood,Auction House,,,,"145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg; 16 Spell Hit; 24 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 46",
-Elemental,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,"127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 40",Harbinger Skyriss
-Elemental,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,"127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg; 19 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 29",Pathaleon the Calculator
-Elemental,Head,PreRaid,Storm Master's Helmet,Dungeon Token,,,,"632 Armor; 24 Sta; 32 Int; 37 Healing; 37 Spell Dmg; 24 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 37",50 Badges of Justice
+Elemental,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg; 16 Spell Hit; 24 Spell Crit,
+Elemental,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
+Elemental,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg; 19 Spell Crit,Pathaleon the Calculator
+Elemental,Head,PreRaid,Storm Master's Helmet,Dungeon Token,,,,632 Armor; 24 Sta; 32 Int; 37 Healing; 37 Spell Dmg; 24 Spell Crit,50 Badges of Justice
 Elemental,Head,PreRaid,Shamanistic Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"503 Armor; 12 Sta; 15 Int; 35 Healing; 35 Spell Dmg; 4 MP5; 24 Spell Crit
 
-Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley;
-Equip: Increases damage and healing done by magical spells and effects by up to 35;
-Equip: Restores 4 mana per 5 sec",
-Elemental,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,"117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 20",Quagmirran
-Elemental,Shoulder,PreRaid,Pauldrons of Wild Magic,Dungeon Drop,,Slave Pens,Heroic,"583 Armor; 21 Sta; 28 Int; 33 Healing; 33 Spell Dmg; 23 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 33",Quagmirran
-Elemental,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,"111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Healing; 40 Spell Dmg; 18 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 40",
-Elemental,Back,PreRaid,Sethekk Oracle Cloak,Dungeon Drop,,Sethekk Halls,Normal,"78 Armor; 18 Sta; 18 Int; 22 Healing; 22 Spell Dmg; 12 Spell Hit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 22",Talon King Ikiss
-Elemental,Back,PreRaid,Shawl of Shifting Probabilities,Dungeon Token,,,,"93 Armor; 18 Sta; 16 Int; 21 Healing; 21 Spell Dmg; 22 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 21",25 Badges of Justice
-Elemental,Chest,PreRaid,Netherstrike Breastplate,Auction House,,,,"846 Armor; 34 Sta; 23 Int; 37 Healing; 37 Spell Dmg; 8 MP5; 32 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 37;
-Equip: Restores 8 mana per 5 sec",
-Elemental,Chest,PreRaid,Will of Edward the Odd,Auction House,,,,"170 Armor; 30 Int; 53 Healing; 53 Spell Dmg; 30 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 53",World Drop
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
+Elemental,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Quagmirran
+Elemental,Shoulder,PreRaid,Pauldrons of Wild Magic,Dungeon Drop,,Slave Pens,Heroic,583 Armor; 21 Sta; 28 Int; 33 Healing; 33 Spell Dmg; 23 Spell Crit,Quagmirran
+Elemental,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Healing; 40 Spell Dmg; 18 Spell Crit,
+Elemental,Back,PreRaid,Sethekk Oracle Cloak,Dungeon Drop,,Sethekk Halls,Normal,78 Armor; 18 Sta; 18 Int; 22 Healing; 22 Spell Dmg; 12 Spell Hit,Talon King Ikiss
+Elemental,Back,PreRaid,Shawl of Shifting Probabilities,Dungeon Token,,,,93 Armor; 18 Sta; 16 Int; 21 Healing; 21 Spell Dmg; 22 Spell Crit,25 Badges of Justice
+Elemental,Chest,PreRaid,Netherstrike Breastplate,Auction House,,,,846 Armor; 34 Sta; 23 Int; 37 Healing; 37 Spell Dmg; 8 MP5; 32 Spell Crit,
+Elemental,Chest,PreRaid,Will of Edward the Odd,Auction House,,,,170 Armor; 30 Int; 53 Healing; 53 Spell Dmg; 30 Spell Crit,World Drop
 Elemental,Chest,PreRaid,Windhawk Hauberk,Auction House,,,,"379 Armor; 28 Sta; 29 Int; 29 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 19 Spell Crit
 
-Equip: Increases damage and healing done by magical spells and effects by up to 32;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",
-Elemental,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 35 Spell Hit; 17 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 29",Epoch Hunter
-Elemental,Wrist,PreRaid,Bracers of Havok,Auction House,,,,"67 Armor; 12 Int; 30 Healing; 30 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 30",
-Elemental,Wrist,PreRaid,Netherstrike Bracers,Auction House,,,,"355 Armor; 13 Sta; 13 Int; 20 Healing; 20 Spell Dmg; 6 MP5; 17 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 20;
-Equip: Restores 6 mana per 5 sec",
+Equip: Increases damage and healing done by magical spells and effects by up to 32",
+Elemental,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 35 Spell Hit; 17 Spell Crit,Epoch Hunter
+Elemental,Wrist,PreRaid,Bracers of Havok,Auction House,,,,67 Armor; 12 Int; 30 Healing; 30 Spell Dmg,
+Elemental,Wrist,PreRaid,Netherstrike Bracers,Auction House,,,,355 Armor; 13 Sta; 13 Int; 20 Healing; 20 Spell Dmg; 6 MP5; 17 Spell Crit,
 Elemental,Wrist,PreRaid,Windhawk Bracers,Auction House,,,,"159 Armor; 22 Sta; 17 Int; 7 Spi; 31 Healing; 11 Spell Dmg; 8 MP5; 16 Spell Crit
 
-Equip: Increases damage and healing done by magical spells and effects by up to 16;
-Equip: Increases healing done by up to 31 and damage done by up to 11 for all magical spells and effects",
-Elemental,Hands,PreRaid,Gloves of Pandemonium,Auction House,,,,"78 Armor; 15 Int; 25 Healing; 25 Spell Dmg; 10 Spell Hit; 22 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 25",World Drop
-Elemental,Hands,PreRaid,Earth Mantle Handwraps,Dungeon Drop,,Steamvault,Normal,"397 Armor; 21 Sta; 18 Int; 19 Healing; 19 Spell Dmg; 16 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 19",Mekgineer Steamrigger
-Elemental,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,"97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 20",Omor the Unscarred
-Elemental,Hands,PreRaid,Thundercaller's Gauntlets,Dungeon Drop,,Mana Tombs,Normal,"377 Armor; 16 Sta; 16 Int; 35 Healing; 35 Spell Dmg; 18 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 35",Tavarok
-Elemental,Hands,PreRaid,Grips of the Void,Quest,Enraged Spirits of Air (SMV),,,"88 Armor; 18 Sta; 11 Int; 35 Healing; 35 Spell Dmg; 10 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 35",
-Elemental,Waist,PreRaid,Girdle of Ruination,Auction House,,,,"100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg; 20 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 39",
-Elemental,Waist,PreRaid,Netherstrike Belt,Auction House,,,,"457 Armor; 10 Sta; 17 Int; 30 Healing; 30 Spell Dmg; 9 MP5; 16 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 30;
-Equip: Restores 9 mana per 5 sec",
-Elemental,Waist,PreRaid,Sash of Sealed Fate,Auction House,,,,"81 Armor; 15 Int; 35 Healing; 35 Spell Dmg; 23 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 35",World Drop
+Equip: Increases damage and healing done by magical spells and effects by up to 16",
+Elemental,Hands,PreRaid,Gloves of Pandemonium,Auction House,,,,78 Armor; 15 Int; 25 Healing; 25 Spell Dmg; 10 Spell Hit; 22 Spell Crit,World Drop
+Elemental,Hands,PreRaid,Earth Mantle Handwraps,Dungeon Drop,,Steamvault,Normal,397 Armor; 21 Sta; 18 Int; 19 Healing; 19 Spell Dmg; 16 Spell Crit,Mekgineer Steamrigger
+Elemental,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Omor the Unscarred
+Elemental,Hands,PreRaid,Thundercaller's Gauntlets,Dungeon Drop,,Mana Tombs,Normal,377 Armor; 16 Sta; 16 Int; 35 Healing; 35 Spell Dmg; 18 Spell Crit,Tavarok
+Elemental,Hands,PreRaid,Grips of the Void,Quest,Enraged Spirits of Air (SMV),,,88 Armor; 18 Sta; 11 Int; 35 Healing; 35 Spell Dmg; 10 Spell Crit,
+Elemental,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg; 20 Spell Crit,
+Elemental,Waist,PreRaid,Netherstrike Belt,Auction House,,,,457 Armor; 10 Sta; 17 Int; 30 Healing; 30 Spell Dmg; 9 MP5; 16 Spell Crit,
+Elemental,Waist,PreRaid,Sash of Sealed Fate,Auction House,,,,81 Armor; 15 Int; 35 Healing; 35 Spell Dmg; 23 Spell Crit,World Drop
 Elemental,Waist,PreRaid,Windhawk Belt,Auction House,,,,"205 Armor; 17 Sta; 19 Int; 20 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 12 Spell Crit
 
-Equip: Increases damage and healing done by magical spells and effects by up to 23;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",
-Elemental,Legs,PreRaid,Spellstrike Pants,Auction House,,,,"156 Armor; 12 Sta; 8 Int; 46 Healing; 46 Spell Dmg; 22 Spell Hit; 26 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 46",
-Elemental,Legs,PreRaid,Pantaloons of Flaming Wrath,Dungeon Drop,,Shattered Halls,Heroic,"136 Armor; 28 Int; 33 Healing; 33 Spell Dmg; 42 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 33",Blood Guard Porung
-Elemental,Legs,PreRaid,Stormsong Kilt,Dungeon Drop,,Underbog,Normal,"681 Armor; 25 Sta; 30 Int; 35 Healing; 35 Spell Dmg; 26 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 35",The Black Stalker
-Elemental,Legs,PreRaid,Kurenai Kilt,Reputation,,,,"256 Armor; 11 Int; 44 Healing; 44 Spell Dmg; 18 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 44",Kurenai - Revered
-Elemental,Legs,PreRaid,Tempest Leggings,Reputation,,,,"256 Armor; 11 Int; 44 Healing; 44 Spell Dmg; 18 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 44",The Mag'har - Revered
-Elemental,Feet,PreRaid,Sigil-Laced Boots,Dungeon Drop,,Arcatraz,Normal,"107 Armor; 24 Sta; 18 Int; 20 Healing; 20 Spell Dmg; 17 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 20",Harbinger Skyriss
-Elemental,Feet,PreRaid,Shattrath Jumpers,Quest (Dung),Into the Heart of the Labyrinth (SL),,,"107 Armor; 25 Sta; 17 Int; 29 Healing; 29 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 29",
-Elemental,Neck,PreRaid,Brooch of Heightened Potential,Dungeon Drop,,Shadow Labyrinth,Normal,"15 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 9 Spell Hit; 14 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 22",Blackheart the Inciter
-Elemental,Neck,PreRaid,Natasha's Ember Necklace,Quest,The Hound-Master (BEM),,,"15 Int; 29 Healing; 29 Spell Dmg; 10 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 29",
-Elemental,Neck,PreRaid,Torc of the Sethekk Prophet,Quest (Dung),Brother Against Brother (Seth),,,"18 Int; 19 Healing; 19 Spell Dmg; 21 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 19",
-Elemental,Ring,PreRaid,Band of Dominion,Auction House,,,,"28 Healing; 28 Spell Dmg; 21 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 28",World Drop
-Elemental,Ring,PreRaid,Cobalt Band of Tyrigosa,Dungeon Drop,,Mana Tombs,Heroic,"19 Sta; 17 Int; 35 Healing; 35 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 35",Nexus-Prince Shaffar
-Elemental,Ring,PreRaid,Sparking Arcanite Ring,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"13 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 10 Spell Hit; 14 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 22",Epoch Hunter
-Elemental,Ring,PreRaid,Ring of Cryptic Dreams,Dungeon Token,,,,"16 Sta; 17 Int; 23 Healing; 23 Spell Dmg; 20 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 23",25 Badges of Justice
-Elemental,Ring,PreRaid,Ashyen's Gift,Reputation,,,,"30 Sta; 23 Healing; 23 Spell Dmg; 21 Spell Hit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 23",Cenarion Expedition - Exalted
-Elemental,Ring,PreRaid,Seer's Signet,Reputation,,,,"24 Sta; 34 Healing; 34 Spell Dmg; 12 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 34",The Scryers - Exalted
-Elemental,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,"44 Healing; 44 Spell Dmg; 16 Spell Hit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 44;
-Equip: Increases your spell hit rating by 16",Nefarian
+Equip: Increases damage and healing done by magical spells and effects by up to 23",
+Elemental,Legs,PreRaid,Spellstrike Pants,Auction House,,,,156 Armor; 12 Sta; 8 Int; 46 Healing; 46 Spell Dmg; 22 Spell Hit; 26 Spell Crit,
+Elemental,Legs,PreRaid,Pantaloons of Flaming Wrath,Dungeon Drop,,Shattered Halls,Heroic,136 Armor; 28 Int; 33 Healing; 33 Spell Dmg; 42 Spell Crit,Blood Guard Porung
+Elemental,Legs,PreRaid,Stormsong Kilt,Dungeon Drop,,Underbog,Normal,681 Armor; 25 Sta; 30 Int; 35 Healing; 35 Spell Dmg; 26 Spell Crit,The Black Stalker
+Elemental,Legs,PreRaid,Kurenai Kilt,Reputation,,,,256 Armor; 11 Int; 44 Healing; 44 Spell Dmg; 18 Spell Crit,Kurenai - Revered
+Elemental,Legs,PreRaid,Tempest Leggings,Reputation,,,,256 Armor; 11 Int; 44 Healing; 44 Spell Dmg; 18 Spell Crit,The Mag'har - Revered
+Elemental,Feet,PreRaid,Sigil-Laced Boots,Dungeon Drop,,Arcatraz,Normal,107 Armor; 24 Sta; 18 Int; 20 Healing; 20 Spell Dmg; 17 Spell Crit,Harbinger Skyriss
+Elemental,Feet,PreRaid,Shattrath Jumpers,Quest (Dung),Into the Heart of the Labyrinth (SL),,,107 Armor; 25 Sta; 17 Int; 29 Healing; 29 Spell Dmg,
+Elemental,Neck,PreRaid,Brooch of Heightened Potential,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 9 Spell Hit; 14 Spell Crit,Blackheart the Inciter
+Elemental,Neck,PreRaid,Natasha's Ember Necklace,Quest,The Hound-Master (BEM),,,15 Int; 29 Healing; 29 Spell Dmg; 10 Spell Crit,
+Elemental,Neck,PreRaid,Torc of the Sethekk Prophet,Quest (Dung),Brother Against Brother (Seth),,,18 Int; 19 Healing; 19 Spell Dmg; 21 Spell Crit,
+Elemental,Ring,PreRaid,Band of Dominion,Auction House,,,,28 Healing; 28 Spell Dmg; 21 Spell Crit,World Drop
+Elemental,Ring,PreRaid,Cobalt Band of Tyrigosa,Dungeon Drop,,Mana Tombs,Heroic,19 Sta; 17 Int; 35 Healing; 35 Spell Dmg,Nexus-Prince Shaffar
+Elemental,Ring,PreRaid,Sparking Arcanite Ring,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 10 Spell Hit; 14 Spell Crit,Epoch Hunter
+Elemental,Ring,PreRaid,Ring of Cryptic Dreams,Dungeon Token,,,,16 Sta; 17 Int; 23 Healing; 23 Spell Dmg; 20 Spell Crit,25 Badges of Justice
+Elemental,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg; 21 Spell Hit,Cenarion Expedition - Exalted
+Elemental,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg; 12 Spell Crit,The Scryers - Exalted
+Elemental,Trinket,PreRaid,Neltharion's Tear,Dungeon Drop,,Blackwing Lair,Normal,44 Healing; 44 Spell Dmg; 16 Spell Hit,Nefarian
 Elemental,Trinket,PreRaid,Quagmirran's Eye,Dungeon Drop,,Slave Pens,Heroic,"37 Healing; 37 Spell Dmg
 
-Equip: Increases damage and healing done by magical spells and effects by up to 37;
 Equip: Your harmful spells have a chance to increase your spell haste rating by 320 for 6 secs. (Proc chance: 10%, 45s cooldown)",Quagmirran
 Elemental,Trinket,PreRaid,Shiffar's Nexus-Horn,Dungeon Drop,,Arcatraz,Normal,"30 Spell Crit
 
 Equip: Chance on spell critical hit to increase your spell damage and healing by 225 for 10 secs. (Proc chance: 20%, 45s cooldown)",Harbinger Skyriss
 Elemental,Trinket,PreRaid,Icon of the Silver Crescent,Dungeon Token,,,,"43 Healing; 43 Spell Dmg
 
-Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec;
-Equip: Increases damage and healing done by magical spells and effects by up to 43",41 Badges of Justice
+Use: Increases damage and healing done by magical spells and effects by up to 155 for 20 sec",41 Badges of Justice
 Elemental,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,Equip: Increases damage done to Undead and Demons by magical spells and effects by up to 85. It also allows the acquisition of Scourgestones on behalf of the Argent Dawn,
 Elemental,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,"32 Spell Hit
 
@@ -158,763 +69,279 @@ Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",Th
 Elemental,Trinket,PreRaid,Xi'ri's Gift,Reputation,,,,"32 Spell Crit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Sha'tar - Revered
-Elemental,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,"41.76 DPS; 19 Int; 168 Healing; 168 Spell Dmg; 21 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 168",
-Elemental,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,"39.67 DPS; 12 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 20 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 121",Warbringer O'mrogg
-Elemental,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,"41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 159",Lower City - Exalted
-Elemental,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,"41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 199",
-Elemental,Off Hand,PreRaid,Draenei Honor Guard Shield,Auction House,,,,"3615 Armor; 16 Int; 19 Healing; 19 Spell Dmg; 21 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 19",World Drop
-Elemental,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,"13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 21",Harbinger Skyriss
-Elemental,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,"12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 26;
-Equip: Increases your spell critical strike rating by 14;
-Equip: Increases your spell hit rating by 8",Sapphiron
-Elemental,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,"49 Healing; 49 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 49",25 Badges of Justice
-Elemental,Off Hand,PreRaid,Mazthoril Honor Shield,Dungeon Token,,,,"4668 Armor; 16 Sta; 17 Int; 23 Healing; 23 Spell Dmg; 21 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 23",33 Badges of Justice
+Elemental,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,41.76 DPS; 19 Int; 168 Healing; 168 Spell Dmg; 21 Spell Crit,
+Elemental,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,39.67 DPS; 12 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 20 Spell Crit,Warbringer O'mrogg
+Elemental,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
+Elemental,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg,
+Elemental,Off Hand,PreRaid,Draenei Honor Guard Shield,Auction House,,,,3615 Armor; 16 Int; 19 Healing; 19 Spell Dmg; 21 Spell Crit,World Drop
+Elemental,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit,Harbinger Skyriss
+Elemental,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
+Elemental,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 Spell Dmg,25 Badges of Justice
+Elemental,Off Hand,PreRaid,Mazthoril Honor Shield,Dungeon Token,,,,4668 Armor; 16 Sta; 17 Int; 23 Healing; 23 Spell Dmg; 21 Spell Crit,33 Badges of Justice
 Elemental,Ranged/Relic,PreRaid,Totem of the Storm,Auction House,,,,Equip: Increases damage done by Chain Lightning and Lightning Bolt by up to 33,World Drop
 Elemental,Ranged/Relic,PreRaid,Totem of the Void,Dungeon Drop,,Mechanar,Normal,Equip: Increases damage done by Chain Lightning and Lightning Bolt by up to 55,The Gatewatchers
 Elemental,Ranged/Relic,PreRaid,Totem of the Pulsing Earth,Dungeon Token,,,,Equip: Reduces the mana cost of Lightning Bolt by 27,15 Badges of Justice
-Enhancement,Head,PreRaid,Wastewalker Helm,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"237 Armor; 30 Sta; 56 AP; 18 Hit; 22 Crit
-
-Equip: Increases attack power by 56",Epoch Hunter
-Enhancement,Head,PreRaid,Mask of the Deceiver,Dungeon Token,,,,"283 Armor; 32 Agi; 36 Sta; 64 AP; 16 Hit
-
-Equip: Increases attack power by 64",50 Badges of Justice
+Enhancement,Head,PreRaid,Wastewalker Helm,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,237 Armor; 30 Sta; 56 AP; 18 Hit; 22 Crit,Epoch Hunter
+Enhancement,Head,PreRaid,Mask of the Deceiver,Dungeon Token,,,,283 Armor; 32 Agi; 36 Sta; 64 AP; 16 Hit,50 Badges of Justice
 Enhancement,Head,PreRaid,Stealther's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"226 Armor; 24 Agi; 18 Sta; 60 AP; 13 Hit
 
-Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley;
-Equip: Increases attack power by 60",
-Enhancement,Head,PreRaid,Helm of the Claw,Quest (Dung),The Warlord's Hideout (SV),,,"237 Armor; 25 Agi; 21 Sta; 66 AP; 14 Hit
-
-Equip: Increases attack power by 66",
-Enhancement,Shoulder,PreRaid,Mantle of Perenolde,Dungeon Drop,,Old Hillsbrad Foothills,Normal,"197 Armor; 24 Sta; 20 AP; 23 Hit; 23 Crit
-
-Equip: Increases attack power by 20",Epoch Hunter
-Enhancement,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,"219 Armor; 25 Agi; 13 Sta; 34 AP; 16 Hit
-
-Equip: Increases attack power by 34",Avatar of the Martyred
-Enhancement,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,"217 Armor; 25 Agi; 50 AP; 24 Hit
-
-Equip: Increases attack power by 50",
-Enhancement,Shoulder,PreRaid,Blackened Leather Spaulders,Reputation,,,,"219 Armor; 20 Agi; 70 AP; 15 Hit
-
-Equip: Increases attack power by 70",Kurenai - Revered
-Enhancement,Shoulder,PreRaid,Talbuk Hide Spaulders,Reputation,,,,"219 Armor; 20 Agi; 70 AP; 15 Hit
-
-Equip: Increases attack power by 70",The Mag'har - Revered
+Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
+Enhancement,Head,PreRaid,Helm of the Claw,Quest (Dung),The Warlord's Hideout (SV),,,237 Armor; 25 Agi; 21 Sta; 66 AP; 14 Hit,
+Enhancement,Shoulder,PreRaid,Mantle of Perenolde,Dungeon Drop,,Old Hillsbrad Foothills,Normal,197 Armor; 24 Sta; 20 AP; 23 Hit; 23 Crit,Epoch Hunter
+Enhancement,Shoulder,PreRaid,Wastewalker Shoulderpads,Dungeon Drop,,Auchenai Crypts,Heroic,219 Armor; 25 Agi; 13 Sta; 34 AP; 16 Hit,Avatar of the Martyred
+Enhancement,Shoulder,PreRaid,Expedition Scout's Epaulets,Quest (Dung),Fel Embers (SH),,,217 Armor; 25 Agi; 50 AP; 24 Hit,
+Enhancement,Shoulder,PreRaid,Blackened Leather Spaulders,Reputation,,,,219 Armor; 20 Agi; 70 AP; 15 Hit,Kurenai - Revered
+Enhancement,Shoulder,PreRaid,Talbuk Hide Spaulders,Reputation,,,,219 Armor; 20 Agi; 70 AP; 15 Hit,The Mag'har - Revered
 Enhancement,Back,PreRaid,Cloak of Darkness,Auction House,,,,101 Armor; 23 Str; 25 Sta,
-Enhancement,Back,PreRaid,Vengeance Wrap,Auction House,,,,"89 Armor; 52 AP; 23 Crit
-
-Equip: Increases attack power by 52",
-Enhancement,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,"78 Armor; 15 Agi; 15 Sta; 36 AP; 17 Hit
-
-Equip: Increases attack power by 36",Avatar of the Martyred
+Enhancement,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP; 23 Crit,
+Enhancement,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP; 17 Hit,Avatar of the Martyred
 Enhancement,Back,PreRaid,Capacitus' Cloak of Calibration,Dungeon Drop,,Mechanar,Normal,78 Armor; 22 Str; 18 Agi; 19 Sta,The Gatewatchers
-Enhancement,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,"76 Armor; 15 Sta; 30 AP; 16 Hit; 18 Crit
-
-Equip: Increases attack power by 30",Blackheart the Inciter
-Enhancement,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,"93 Armor; 23 Agi; 22 Sta; 48 AP
-
-Equip: Increases attack power by 48",25 Badges of Justice
-Enhancement,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,"846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit; 31 Crit
-
-Equip: Increases attack power by 80;
-Equip: Restores 8 mana per 5 sec",
-Enhancement,Chest,PreRaid,Primalstrike Vest,Auction House,,,,"379 Armor; 38 Agi; 39 Sta; 108 AP; 12 Hit
-
-Equip: Increases attack power by 108",
-Enhancement,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,"278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit
-
-Equip: Increases attack power by 90",
-Enhancement,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,"325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit; 17 Crit
-
-Equip: Increases attack power by 38;
-Equip: Restores 5 mana per 5 sec",
-Enhancement,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,"283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit
-
-Equip: Increases attack power by 38",
-Enhancement,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,"159 Armor; 15 Agi; 21 Sta; 64 AP
-
-Equip: Increases attack power by 64",
-Enhancement,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"153 Armor; 24 Agi; 22 Sta; 46 AP
-
-Equip: Increases attack power by 46",Epoch Hunter
-Enhancement,Wrist,PreRaid,Nightstalker's Wristguards,Quest,Down With Daellis (NS),,,"112 Armor; 12 Agi; 42 AP; 9 Hit
-
-Equip: Increases attack power by 42",
+Enhancement,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP; 16 Hit; 18 Crit,Blackheart the Inciter
+Enhancement,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,25 Badges of Justice
+Enhancement,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit; 31 Crit,
+Enhancement,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP; 12 Hit,
+Enhancement,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit,
+Enhancement,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit; 17 Crit,
+Enhancement,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,
+Enhancement,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,
+Enhancement,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
+Enhancement,Wrist,PreRaid,Nightstalker's Wristguards,Quest,Down With Daellis (NS),,,112 Armor; 12 Agi; 42 AP; 9 Hit,
 Enhancement,Wrist,PreRaid,Spymistress's Wristguards,Quest (Dung),The Soul Devices (SL),,,128 Armor; 18 Agi; 15 Sta; 15 Hit,
-Enhancement,Hands,PreRaid,Cobrascale Gloves,Auction House,,,,"208 Armor; 33 Sta; 50 AP; 20 Hit; 25 Crit
-
-Equip: Increases attack power by 50",
-Enhancement,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,"169 Armor; 36 AP; 20 Dodge; 17 Hit; 24 Crit
-
-Equip: Increases attack power by 36",
-Enhancement,Hands,PreRaid,Gloves of the Unbound,Dungeon Drop,,Arcatraz,Normal,"183 Armor; 27 Agi; 20 Sta; 38 AP
-
-Equip: Increases attack power by 38",Wrath-Scryer Soccothrates
-Enhancement,Hands,PreRaid,Handgrips of Assassination,Dungeon Drop,,Black Morass,Normal,"183 Armor; 25 Agi; 24 Sta; 50 AP; 17 Hit
-
-Equip: Increases attack power by 50",Aeonus
-Enhancement,Hands,PreRaid,Predatory Gloves,Dungeon Drop,,Mana Tombs,Heroic,"183 Armor; 16 Sta; 48 AP; 19 Hit; 21 Crit
-
-Equip: Increases attack power by 48",Tavarok
+Enhancement,Hands,PreRaid,Cobrascale Gloves,Auction House,,,,208 Armor; 33 Sta; 50 AP; 20 Hit; 25 Crit,
+Enhancement,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 20 Dodge; 17 Hit; 24 Crit,
+Enhancement,Hands,PreRaid,Gloves of the Unbound,Dungeon Drop,,Arcatraz,Normal,183 Armor; 27 Agi; 20 Sta; 38 AP,Wrath-Scryer Soccothrates
+Enhancement,Hands,PreRaid,Handgrips of Assassination,Dungeon Drop,,Black Morass,Normal,183 Armor; 25 Agi; 24 Sta; 50 AP; 17 Hit,Aeonus
+Enhancement,Hands,PreRaid,Predatory Gloves,Dungeon Drop,,Mana Tombs,Heroic,183 Armor; 16 Sta; 48 AP; 19 Hit; 21 Crit,Tavarok
 Enhancement,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
-Enhancement,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,"457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit; 22 Crit
-
-Equip: Increases attack power by 48;
-Equip: Restores 8 mana per 5 sec",
-Enhancement,Waist,PreRaid,Primalstrike Belt,Auction House,,,,"205 Armor; 20 Agi; 32 Sta; 84 AP
-
-Equip: Increases attack power by 84",
-Enhancement,Waist,PreRaid,Epoch's Whispering Cinch,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"164 Armor; 25 Agi; 24 Sta; 40 AP; 17 Hit
-
-Equip: Increases attack power by 40",Epoch Hunter
-Enhancement,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,"196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit
-
-Equip: Increases attack power by 56",Aeonus
-Enhancement,Waist,PreRaid,Shattrath's Champion Belt,Quest (Dung),How to Break Into the Arcatraz (TK),,,"367 Armor; 22 Int; 50 AP; 15 Hit; 21 Crit
-
-Equip: Increases attack power by 50",
-Enhancement,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,"249 Armor; 52 AP; 20 Dodge; 25 Hit; 25 Crit
-
-Equip: Increases attack power by 52",
-Enhancement,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,"305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit
-
-Equip: Increases attack power by 64",Quagmirran
+Enhancement,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit; 22 Crit,
+Enhancement,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,
+Enhancement,Waist,PreRaid,Epoch's Whispering Cinch,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,164 Armor; 25 Agi; 24 Sta; 40 AP; 17 Hit,Epoch Hunter
+Enhancement,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
+Enhancement,Waist,PreRaid,Shattrath's Champion Belt,Quest (Dung),How to Break Into the Arcatraz (TK),,,367 Armor; 22 Int; 50 AP; 15 Hit; 21 Crit,
+Enhancement,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 20 Dodge; 25 Hit; 25 Crit,
+Enhancement,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Enhancement,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
 Enhancement,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
-Enhancement,Feet,PreRaid,Fel Leather Boots,Auction House,,,,"196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit
-
-Equip: Increases attack power by 36",
+Enhancement,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit,
 Enhancement,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP; 16 Hit
 
-Equip: Increases your effective stealth level by 1;
-Equip: Increases attack power by 48",World Drop
-Enhancement,Feet,PreRaid,Boots of the Unjust,Dungeon Drop,,Auchenai Crypts,Heroic,"201 Armor; 25 Sta; 64 AP; 13 Hit; 19 Crit
-
-Equip: Increases attack power by 64",Exarch Maladaar
-Enhancement,Feet,PreRaid,Shadowstep Striders,Dungeon Drop,,Arcatraz,Heroic,"240 Armor; 31 Agi; 30 Sta; 54 AP
-
-Equip: Increases attack power by 54",Harbinger Skyriss
-Enhancement,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,"172 Armor; 16 Agi; 56 AP; 16 Crit
-
-Equip: Increases attack power by 56",
-Enhancement,Feet,PreRaid,Felboar Hide Shoes,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,"191 Armor; 18 Agi; 15 Sta; 68 AP; 9 Hit
-
-Equip: Increases attack power by 68",
-Enhancement,Neck,PreRaid,Bone Chain Necklace,Dungeon Drop,,Underbog,Normal,"19 Agi; 18 Sta; 36 AP; 13 Hit
-
-Equip: Increases attack power by 36",The Black Stalker
-Enhancement,Neck,PreRaid,Traitor's Noose,Dungeon Drop,,Slave Pens,Heroic,"18 Sta; 38 AP; 12 Hit; 18 Crit
-
-Equip: Increases attack power by 38",Mennu the Betrayer
-Enhancement,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,"20 Agi; 18 Sta; 42 AP; 18 Hit
-
-Equip: Increases attack power by 42",25 Badges of Justice
-Enhancement,Neck,PreRaid,Natasha's Choker,Quest,The Hound-Master (BEM),,,"50 AP; 10 Hit; 15 Crit
-
-Equip: Increases attack power by 50",
+Equip: Increases your effective stealth level by 1",World Drop
+Enhancement,Feet,PreRaid,Boots of the Unjust,Dungeon Drop,,Auchenai Crypts,Heroic,201 Armor; 25 Sta; 64 AP; 13 Hit; 19 Crit,Exarch Maladaar
+Enhancement,Feet,PreRaid,Shadowstep Striders,Dungeon Drop,,Arcatraz,Heroic,240 Armor; 31 Agi; 30 Sta; 54 AP,Harbinger Skyriss
+Enhancement,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,172 Armor; 16 Agi; 56 AP; 16 Crit,
+Enhancement,Feet,PreRaid,Felboar Hide Shoes,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,191 Armor; 18 Agi; 15 Sta; 68 AP; 9 Hit,
+Enhancement,Neck,PreRaid,Bone Chain Necklace,Dungeon Drop,,Underbog,Normal,19 Agi; 18 Sta; 36 AP; 13 Hit,The Black Stalker
+Enhancement,Neck,PreRaid,Traitor's Noose,Dungeon Drop,,Slave Pens,Heroic,18 Sta; 38 AP; 12 Hit; 18 Crit,Mennu the Betrayer
+Enhancement,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,20 Agi; 18 Sta; 42 AP; 18 Hit,25 Badges of Justice
+Enhancement,Neck,PreRaid,Natasha's Choker,Quest,The Hound-Master (BEM),,,50 AP; 10 Hit; 15 Crit,
 Enhancement,Neck,PreRaid,Haramad's Bargain,Reputation,,,,26 Str; 25 Agi,The Consortium - Exalted
-Enhancement,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,"20 Agi; 15 Sta; 30 AP; 13 Hit
-
-Equip: Increases attack power by 30",Talon King Ikiss
-Enhancement,Ring,PreRaid,Ring of Umbral Doom,Dungeon Drop,,Botanica,Normal,"18 Sta; 40 AP; 20 Crit
-
-Equip: Increases attack power by 40",Thorngrin the Tender
-Enhancement,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,Heroic,"40 AP; 19 Hit; 20 Crit
-
-Equip: Increases attack power by 40",Yor
-Enhancement,Ring,PreRaid,Ring of Arathi Warlords,Dungeon Token,,,,"24 Sta; 46 AP; 23 Crit
-
-Equip: Increases attack power by 46",25 Badges of Justice
+Enhancement,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 Sta; 30 AP; 13 Hit,Talon King Ikiss
+Enhancement,Ring,PreRaid,Ring of Umbral Doom,Dungeon Drop,,Botanica,Normal,18 Sta; 40 AP; 20 Crit,Thorngrin the Tender
+Enhancement,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,Heroic,40 AP; 19 Hit; 20 Crit,Yor
+Enhancement,Ring,PreRaid,Ring of Arathi Warlords,Dungeon Token,,,,24 Sta; 46 AP; 23 Crit,25 Badges of Justice
 Enhancement,Ring,PreRaid,Acrobat's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,29 Str; 12 Agi,
-Enhancement,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,"15 Agi; 50 AP; 10 Hit
-
-Equip: Increases attack power by 50",
+Enhancement,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP; 10 Hit,
 Enhancement,Ring,PreRaid,Overseer's Signet,Quest,Shutting Down Manaforge Ara (NS),,,25 Str; 15 Agi; 10 Hit,
-Enhancement,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,"15 Agi; 50 AP; 10 Hit
-
-Equip: Increases attack power by 50",
+Enhancement,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP; 10 Hit,
 Enhancement,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
 Enhancement,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
-Use: Increases haste rating by 260 for 10 sec;
-Equip: Increases attack power by 64",Pathaleon the Calculator
+Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
 Enhancement,Trinket,PreRaid,Hourglass of the Unraveller,Dungeon Drop,,Black Morass,Normal,"32 Crit
 
 Equip: Chance on critical hit to increase your attack power by 300 for 10 secs. (Proc chance: 10%, 50s cooldown)",Temporus
 Enhancement,Trinket,PreRaid,Ogre Mauler's Badge,Dungeon Drop,,Nagrand,Normal,"48 AP
 
-Use: Increases attack power by 185 for 15 sec;
-Equip: Increases attack power by 48",Bleeding Hollow Supply Crates
+Use: Increases attack power by 185 for 15 sec",Bleeding Hollow Supply Crates
 Enhancement,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
 
-Use: Increases attack power by 278 for 20 sec;
-Equip: Increases attack power by 72",41 Badges of Justice
+Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Enhancement,Trinket,PreRaid,Core of Ar'kelos,Quest,Ar'kelos the Guardian (NS),,,"52 AP
 
-Use: Increases your melee and ranged attack power by 200. Effect lasts for 20 sec;
-Equip: Increases attack power by 52",
-Enhancement,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,"150 AP
-
-Equip: Increases attack power by 150 when fighting Undead and Demons. It also allows the acquisition of Scourgestones on behalf of the Argent Dawn",
+Use: Increases your melee and ranged attack power by 200. Effect lasts for 20 sec",
+Enhancement,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
 Enhancement,Trinket,PreRaid,Uniting Charm,Quest,Corki's Gone Missing Again! (Nag),,,"48 AP
 
-Use: Increases attack power by 185 for 15 sec;
-Equip: Increases attack power by 48",
+Use: Increases attack power by 185 for 15 sec",
 Enhancement,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Enhancement,Main Hand,PreRaid,Fist of Reckoning,Auction House,,,,"54.07 DPS; 12 AP; 10 Hit; 16 Crit
-
-Equip: Increases attack power by 12",World Drop
-Enhancement,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,"71.6 DPS; 24 AP; 12 Crit
-
-Equip: Increases attack power by 24",Shirrak the Dead Watcher
-Enhancement,Main Hand,PreRaid,Reflex Blades,Dungeon Drop,,Arcatraz,Normal,"71.67 DPS; 13 Sta; 32 AP; 16 Hit
-
-Equip: Increases attack power by 32",Dalliah the Doomsayer
+Enhancement,Main Hand,PreRaid,Fist of Reckoning,Auction House,,,,54.07 DPS; 12 AP; 10 Hit; 16 Crit,World Drop
+Enhancement,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP; 12 Crit,Shirrak the Dead Watcher
+Enhancement,Main Hand,PreRaid,Reflex Blades,Dungeon Drop,,Arcatraz,Normal,71.67 DPS; 13 Sta; 32 AP; 16 Hit,Dalliah the Doomsayer
 Enhancement,Main Hand,PreRaid,The Bladefist,Dungeon Drop,,Shattered Halls,Heroic,"83.65 DPS; 180 Haste
 
 Proc: Increases your haste rating by 180 for 10 sec",Warchief Kargath Bladefist
 Enhancement,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,71.73 DPS; 16 Str; 13 Sta; 15 Crit,Exarch Maladaar
-Enhancement,Main Hand,PreRaid,Resonating Axe,Quest,Measuring Warp Energies (NS),,,"57.86 DPS; 12 Sta; 22 AP; 11 Crit
-
-Equip: Increases attack power by 22",
-Enhancement,Main Hand,PreRaid,Sporeling Claw,Quest,Fhwoor Smash! (ZM),,,"56.6 DPS; 18 Sta; 24 AP; 12 Hit
-
-Equip: Increases attack power by 24",
-Enhancement,Main Hand,PreRaid,Gladiator's Cleaver,PvP,,,,"91.15 DPS; 21 Sta; 28 AP; 9 Hit; 15 Crit
-
-Equip: Increases attack power by 28",
-Enhancement,Main Hand,PreRaid,Gladiator's Right Ripper,PvP,,,,"91.35 DPS; 21 Sta; 28 AP; 9 Hit; 15 Crit
-
-Equip: Increases attack power by 28",
-Enhancement,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,"59.48 DPS; 7 Sta; 28 AP; 14 Crit
-
-Equip: Increases your critical strike rating by 14;
-Equip: Increases attack power by 28",
-Enhancement,Main Hand,PreRaid,Nexus-Claw,Vendor,,,,"57.86 DPS; 28 AP; 14 Crit
-
-Equip: Increases attack power by 28",Netherstorm
+Enhancement,Main Hand,PreRaid,Resonating Axe,Quest,Measuring Warp Energies (NS),,,57.86 DPS; 12 Sta; 22 AP; 11 Crit,
+Enhancement,Main Hand,PreRaid,Sporeling Claw,Quest,Fhwoor Smash! (ZM),,,56.6 DPS; 18 Sta; 24 AP; 12 Hit,
+Enhancement,Main Hand,PreRaid,Gladiator's Cleaver,PvP,,,,91.15 DPS; 21 Sta; 28 AP; 9 Hit; 15 Crit,
+Enhancement,Main Hand,PreRaid,Gladiator's Right Ripper,PvP,,,,91.35 DPS; 21 Sta; 28 AP; 9 Hit; 15 Crit,
+Enhancement,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,59.48 DPS; 7 Sta; 28 AP; 14 Crit,
+Enhancement,Main Hand,PreRaid,Nexus-Claw,Vendor,,,,57.86 DPS; 28 AP; 14 Crit,Netherstorm
 Enhancement,Ranged/Relic,PreRaid,Totem of the Astral Winds,Dungeon Drop,,Mana Tombs,Heroic,Equip: Increases the attack power bonus on Windfury Weapon attacks by 80,Pandemonius
-Restoration,Head,PreRaid,Hood of Primal Life,Auction House,,,,"271 Armor; 34 Sta; 37 Int; 31 Spi; 68 Healing; 23 Spell Dmg
-
-Equip: Increases healing done by up to 68 and damage done by up to 23 for all magical spells and effects",
-Restoration,Head,PreRaid,Whitemend Hood,Auction House,,,,"145 Armor; 15 Sta; 15 Int; 79 Healing; 27 Spell Dmg; 11 MP5
-
-Equip: Increases healing done by up to 79 and damage done by up to 27 for all magical spells and effects;
-Equip: Restores 11 mana per 5 sec",
-Restoration,Head,PreRaid,Hallowed Crown,Dungeon Drop,,Arcatraz,Normal,"127 Armor; 12 Sta; 24 Int; 26 Spi; 57 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects",Harbinger Skyriss
-Restoration,Head,PreRaid,Headdress of the Tides,Dungeon Drop,,Underbog,Normal,"530 Armor; 30 Sta; 35 Int; 73 Healing; 25 Spell Dmg; 9 MP5
-
-Equip: Increases healing done by up to 73 and damage done by up to 25 for all magical spells and effects;
-Equip: Restores 9 mana per 5 sec",Ghaz'an
-Restoration,Head,PreRaid,Moonglade Cowl,Dungeon Drop,,Botanica,Normal,"237 Armor; 24 Str; 8 Agi; 18 Sta; 25 Int; 13 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Warp Splinter
-Restoration,Head,PreRaid,Raven-Heart Headdress,Dungeon Drop,,Auchenai Crypts,Normal,"208 Armor; 22 Str; 24 Sta; 23 Int; 16 Spi; 35 Healing; 12 Spell Dmg
-
-Equip: Increases healing done by up to 35 and damage done by up to 12 for all magical spells and effects",Shirrak the Dead Watcher
-Restoration,Head,PreRaid,Cowl of Naaru Blessings,Dungeon Token,,,,"151 Armor; 28 Sta; 29 Int; 23 Spi; 66 Healing; 22 Spell Dmg
-
-Equip: Increases healing done by up to 66 and damage done by up to 22 for all magical spells and effects",50 Badges of Justice
-Restoration,Head,PreRaid,Earthshatter Headpiece,Quest,Earthshatter Headpiece (Naxx),,,"513 Armor; 26 Sta; 30 Int; 68 Healing; 23 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 68 and damage done by up to 23 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",
-Restoration,Head,PreRaid,Metallic Headband of Simm'onz,Quest,Forge Camp: Annihilated (Nag),,,"476 Armor; 45 Sta; 68 Healing; 23 Spell Dmg; 12 MP5
-
-Equip: Increases healing done by up to 68 and damage done by up to 23 for all magical spells and effects;
-Equip: Restores 12 mana per 5 sec",
-Restoration,Head,PreRaid,Watcher's Cowl,Reputation,,,,"127 Armor; 21 Sta; 36 Int; 14 Spi; 79 Healing; 27 Spell Dmg
-
-Equip: Increases healing done by up to 79 and damage done by up to 27 for all magical spells and effects",Cenarion Expedition - Revered
-Restoration,Head,PreRaid,Gladiator's Ringmail Helm,PvP,,,,"703 Armor; 54 Sta; 20 Int; 62 Healing; 21 Spell Dmg; 17 Spell Crit
-
-Equip: Increases healing done by up to 62 and damage done by up to 21 for all magical spells and effects",
-Restoration,Shoulder,PreRaid,Primal Mooncloth Shoulders,Auction House,,,,"133 Armor; 16 Int; 15 Spi; 92 Healing; 31 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 92 and damage done by up to 31 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",
-Restoration,Shoulder,PreRaid,Hallowed Pauldrons,Dungeon Drop,,Shadow Labyrinth,Normal,"117 Armor; 10 Sta; 17 Int; 20 Spi; 42 Healing; 14 Spell Dmg
-
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",Grandmaster Vorpil
-Restoration,Shoulder,PreRaid,Mantle of the Sea Wolf,Dungeon Drop,,Mana Tombs,Heroic,"489 Armor; 22 Sta; 25 Int; 51 Healing; 17 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 51 and damage done by up to 17 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",Tavarok
-Restoration,Shoulder,PreRaid,Moonglade Shoulders,Dungeon Drop,,Steamvault,Normal,"219 Armor; 13 Str; 12 Agi; 18 Sta; 19 Int; 18 Spi; 29 Healing; 10 Spell Dmg
-
-Equip: Increases healing done by up to 29 and damage done by up to 10 for all magical spells and effects",Warlord Kalithresh
-Restoration,Shoulder,PreRaid,Pauldrons of Sufferance,Dungeon Drop,,Old Hillsbrad Foothills,Normal,"105 Armor; 18 Sta; 13 Int; 19 Spi; 35 Healing; 12 Spell Dmg
-
-Equip: Increases healing done by up to 35 and damage done by up to 12 for all magical spells and effects",Epoch Hunter
-Restoration,Shoulder,PreRaid,Pauldrons of Wild Magic,Dungeon Drop,,Slave Pens,Heroic,"583 Armor; 21 Sta; 28 Int; 33 Healing; 33 Spell Dmg; 23 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 33",Quagmirran
-Restoration,Shoulder,PreRaid,Ravenwing Pauldrons,Dungeon Drop,,Old Hillsbrad Foothills,Normal,"197 Armor; 19 Str; 19 Sta; 13 Int; 14 Spi; 26 Healing; 9 Spell Dmg
-
-Equip: Increases healing done by up to 26 and damage done by up to 9 for all magical spells and effects",Lieutenant Drake
-Restoration,Shoulder,PreRaid,Vestia's Pauldrons of Inner Grace,Dungeon Drop,,Mechanar,Normal,"117 Armor; 24 Sta; 25 Int; 48 Healing; 16 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 48 and damage done by up to 16 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",The Gatewatchers
-Restoration,Shoulder,PreRaid,Earthshatter Spaulders,Quest,Earthshatter Spaulders (Naxx),,,"464 Armor; 24 Sta; 19 Int; 42 Healing; 14 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",
-Restoration,Shoulder,PreRaid,Gladiator's Ringmail Spaulders,PvP,,,,"649 Armor; 33 Sta; 19 Int; 42 Healing; 14 Spell Dmg; 6 MP5; 18 Spell Crit
-
-Equip: Restores 6 mana per 5 sec;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",
-Restoration,Back,PreRaid,Lifegiving Cloak,Auction House,,,,"85 Armor; 13 Int; 64 Healing; 22 Spell Dmg; 5 MP5
-
-Equip: Increases healing done by up to 64 and damage done by up to 22 for all magical spells and effects;
-Equip: Restores 5 mana per 5 sec",World Drop
-Restoration,Back,PreRaid,White Remedy Cape,Auction House,,,,"76 Armor; 59 Healing; 20 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",
-Restoration,Back,PreRaid,Avian Cloak of Feathers,Dungeon Drop,,Sethekk Halls,Normal,"78 Armor; 18 Int; 12 Spi; 42 Healing; 14 Spell Dmg; 5 MP5
-
-Equip: Restores 5 mana per 5 sec;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",Talon King Ikiss
-Restoration,Back,PreRaid,Cloak of Suturing,Dungeon Drop,,Naxxramas,Normal,"72 Armor; 12 Int; 12 Spi; 48 Healing; 16 Spell Dmg; 5 MP5
-
-Equip: Increases healing done by up to 48 and damage done by up to 16 for all magical spells and effects;
-Equip: Restores 5 mana per 5 sec",Patchwerk
-Restoration,Back,PreRaid,Cloak of the Everliving,Dungeon Drop,,Hellfire Ramparts,Heroic,"78 Armor; 53 Healing; 18 Spell Dmg; 9 MP5
-
-Equip: Restores 9 mana per 5 sec;
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Watchkeeper Gargolmar
-Restoration,Back,PreRaid,Light-Touched Stole of Altruism,Dungeon Drop,,Auchenai Crypts,Heroic,"93 Armor; 22 Sta; 21 Int; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",Exarch Maladaar
-Restoration,Back,PreRaid,Bishop's Cloak,Dungeon Token,,,,"93 Armor; 16 Sta; 17 Int; 46 Healing; 16 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 46 and damage done by up to 16 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",25 Badges of Justice
-Restoration,Chest,PreRaid,Earthpeace Breastplate,Auction House,,,,"652 Armor; 92 Healing; 31 Spell Dmg; 16 MP5
-
-Equip: Restores 16 mana per 5 sec;
-Equip: Increases healing done by up to 92 and damage done by up to 31 for all magical spells and effects",
+Restoration,Head,PreRaid,Hood of Primal Life,Auction House,,,,271 Armor; 34 Sta; 37 Int; 31 Spi; 68 Healing; 23 Spell Dmg,
+Restoration,Head,PreRaid,Whitemend Hood,Auction House,,,,145 Armor; 15 Sta; 15 Int; 79 Healing; 27 Spell Dmg; 11 MP5,
+Restoration,Head,PreRaid,Hallowed Crown,Dungeon Drop,,Arcatraz,Normal,127 Armor; 12 Sta; 24 Int; 26 Spi; 57 Healing; 19 Spell Dmg,Harbinger Skyriss
+Restoration,Head,PreRaid,Headdress of the Tides,Dungeon Drop,,Underbog,Normal,530 Armor; 30 Sta; 35 Int; 73 Healing; 25 Spell Dmg; 9 MP5,Ghaz'an
+Restoration,Head,PreRaid,Moonglade Cowl,Dungeon Drop,,Botanica,Normal,237 Armor; 24 Str; 8 Agi; 18 Sta; 25 Int; 13 Spi; 53 Healing; 18 Spell Dmg,Warp Splinter
+Restoration,Head,PreRaid,Raven-Heart Headdress,Dungeon Drop,,Auchenai Crypts,Normal,208 Armor; 22 Str; 24 Sta; 23 Int; 16 Spi; 35 Healing; 12 Spell Dmg,Shirrak the Dead Watcher
+Restoration,Head,PreRaid,Cowl of Naaru Blessings,Dungeon Token,,,,151 Armor; 28 Sta; 29 Int; 23 Spi; 66 Healing; 22 Spell Dmg,50 Badges of Justice
+Restoration,Head,PreRaid,Earthshatter Headpiece,Quest,Earthshatter Headpiece (Naxx),,,513 Armor; 26 Sta; 30 Int; 68 Healing; 23 Spell Dmg; 8 MP5,
+Restoration,Head,PreRaid,Metallic Headband of Simm'onz,Quest,Forge Camp: Annihilated (Nag),,,476 Armor; 45 Sta; 68 Healing; 23 Spell Dmg; 12 MP5,
+Restoration,Head,PreRaid,Watcher's Cowl,Reputation,,,,127 Armor; 21 Sta; 36 Int; 14 Spi; 79 Healing; 27 Spell Dmg,Cenarion Expedition - Revered
+Restoration,Head,PreRaid,Gladiator's Ringmail Helm,PvP,,,,703 Armor; 54 Sta; 20 Int; 62 Healing; 21 Spell Dmg; 17 Spell Crit,
+Restoration,Shoulder,PreRaid,Primal Mooncloth Shoulders,Auction House,,,,133 Armor; 16 Int; 15 Spi; 92 Healing; 31 Spell Dmg; 7 MP5,
+Restoration,Shoulder,PreRaid,Hallowed Pauldrons,Dungeon Drop,,Shadow Labyrinth,Normal,117 Armor; 10 Sta; 17 Int; 20 Spi; 42 Healing; 14 Spell Dmg,Grandmaster Vorpil
+Restoration,Shoulder,PreRaid,Mantle of the Sea Wolf,Dungeon Drop,,Mana Tombs,Heroic,489 Armor; 22 Sta; 25 Int; 51 Healing; 17 Spell Dmg; 8 MP5,Tavarok
+Restoration,Shoulder,PreRaid,Moonglade Shoulders,Dungeon Drop,,Steamvault,Normal,219 Armor; 13 Str; 12 Agi; 18 Sta; 19 Int; 18 Spi; 29 Healing; 10 Spell Dmg,Warlord Kalithresh
+Restoration,Shoulder,PreRaid,Pauldrons of Sufferance,Dungeon Drop,,Old Hillsbrad Foothills,Normal,105 Armor; 18 Sta; 13 Int; 19 Spi; 35 Healing; 12 Spell Dmg,Epoch Hunter
+Restoration,Shoulder,PreRaid,Pauldrons of Wild Magic,Dungeon Drop,,Slave Pens,Heroic,583 Armor; 21 Sta; 28 Int; 33 Healing; 33 Spell Dmg; 23 Spell Crit,Quagmirran
+Restoration,Shoulder,PreRaid,Ravenwing Pauldrons,Dungeon Drop,,Old Hillsbrad Foothills,Normal,197 Armor; 19 Str; 19 Sta; 13 Int; 14 Spi; 26 Healing; 9 Spell Dmg,Lieutenant Drake
+Restoration,Shoulder,PreRaid,Vestia's Pauldrons of Inner Grace,Dungeon Drop,,Mechanar,Normal,117 Armor; 24 Sta; 25 Int; 48 Healing; 16 Spell Dmg; 8 MP5,The Gatewatchers
+Restoration,Shoulder,PreRaid,Earthshatter Spaulders,Quest,Earthshatter Spaulders (Naxx),,,464 Armor; 24 Sta; 19 Int; 42 Healing; 14 Spell Dmg; 6 MP5,
+Restoration,Shoulder,PreRaid,Gladiator's Ringmail Spaulders,PvP,,,,649 Armor; 33 Sta; 19 Int; 42 Healing; 14 Spell Dmg; 6 MP5; 18 Spell Crit,
+Restoration,Back,PreRaid,Lifegiving Cloak,Auction House,,,,85 Armor; 13 Int; 64 Healing; 22 Spell Dmg; 5 MP5,World Drop
+Restoration,Back,PreRaid,White Remedy Cape,Auction House,,,,76 Armor; 59 Healing; 20 Spell Dmg; 7 MP5,
+Restoration,Back,PreRaid,Avian Cloak of Feathers,Dungeon Drop,,Sethekk Halls,Normal,78 Armor; 18 Int; 12 Spi; 42 Healing; 14 Spell Dmg; 5 MP5,Talon King Ikiss
+Restoration,Back,PreRaid,Cloak of Suturing,Dungeon Drop,,Naxxramas,Normal,72 Armor; 12 Int; 12 Spi; 48 Healing; 16 Spell Dmg; 5 MP5,Patchwerk
+Restoration,Back,PreRaid,Cloak of the Everliving,Dungeon Drop,,Hellfire Ramparts,Heroic,78 Armor; 53 Healing; 18 Spell Dmg; 9 MP5,Watchkeeper Gargolmar
+Restoration,Back,PreRaid,Light-Touched Stole of Altruism,Dungeon Drop,,Auchenai Crypts,Heroic,93 Armor; 22 Sta; 21 Int; 55 Healing; 19 Spell Dmg,Exarch Maladaar
+Restoration,Back,PreRaid,Bishop's Cloak,Dungeon Token,,,,93 Armor; 16 Sta; 17 Int; 46 Healing; 16 Spell Dmg; 8 MP5,25 Badges of Justice
+Restoration,Chest,PreRaid,Earthpeace Breastplate,Auction House,,,,652 Armor; 92 Healing; 31 Spell Dmg; 16 MP5,
 Restoration,Chest,PreRaid,Living Crystal Breastplate,Auction House,,,,"255 Armor; 25 Sta; 23 Int; 17 Spi; 55 Healing; 19 Spell Dmg
 
-Equip: Increases damage and healing done by magical spells and effects by up to 29;
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",
-Restoration,Chest,PreRaid,Primal Mooncloth Robe,Auction House,,,,"202 Armor; 20 Int; 20 Spi; 121 Healing; 41 Spell Dmg; 10 MP5
-
-Equip: Increases healing done by up to 121 and damage done by up to 41 for all magical spells and effects;
-Equip: Restores 10 mana per 5 sec",
+Equip: Increases damage and healing done by magical spells and effects by up to 29",
+Restoration,Chest,PreRaid,Primal Mooncloth Robe,Auction House,,,,202 Armor; 20 Int; 20 Spi; 121 Healing; 41 Spell Dmg; 10 MP5,
 Restoration,Chest,PreRaid,Windhawk Hauberk,Auction House,,,,"379 Armor; 28 Sta; 29 Int; 29 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 19 Spell Crit
 
-Equip: Increases damage and healing done by magical spells and effects by up to 32;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",
-Restoration,Chest,PreRaid,Hallowed Garments,Dungeon Drop,,Shadow Labyrinth,Normal,"156 Armor; 12 Sta; 26 Int; 26 Spi; 57 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects",Murmur
-Restoration,Chest,PreRaid,Harness of the Deep Currents,Dungeon Drop,,Shadow Labyrinth,Normal,"652 Armor; 28 Sta; 30 Int; 68 Healing; 23 Spell Dmg; 10 MP5
-
-Equip: Increases healing done by up to 68 and damage done by up to 23 for all magical spells and effects;
-Equip: Restores 10 mana per 5 sec",Murmur
-Restoration,Chest,PreRaid,Moonglade Robe,Dungeon Drop,,Mechanar,Normal,"292 Armor; 25 Str; 17 Agi; 16 Sta; 17 Int; 14 Spi; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",Pathaleon the Calculator
-Restoration,Chest,PreRaid,Raiments of Divine Authority,Dungeon Drop,,Blood Furnace,Normal,"122 Armor; 16 Sta; 21 Int; 18 Spi; 46 Healing; 16 Spell Dmg
-
-Equip: Increases healing done by up to 46 and damage done by up to 16 for all magical spells and effects",Keli'dan the Breaker
-Restoration,Chest,PreRaid,Raiments of Nature's Breath,Dungeon Drop,,Hellfire Ramparts,Heroic,"292 Armor; 25 Sta; 32 Int; 18 Spi; 75 Healing; 25 Spell Dmg; 7 MP5
-
-Equip: Restores 7 mana per 5 sec;
-Equip: Increases healing done by up to 75 and damage done by up to 25 for all magical spells and effects",Vazruden
-Restoration,Chest,PreRaid,Robe of Effervescent Light,Dungeon Drop,,Blood Furnace,Heroic,"156 Armor; 25 Sta; 33 Int; 18 Spi; 73 Healing; 25 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 73 and damage done by up to 25 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",Keli'dan the Breaker
-Restoration,Chest,PreRaid,Earthshatter Tunic,Quest,Earthshatter Tunic (Naxx),,,"658 Armor; 26 Sta; 32 Int; 59 Healing; 20 Spell Dmg; 12 MP5
-
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects;
-Equip: Restores 12 mana per 5 sec",
-Restoration,Chest,PreRaid,Void Slayer's Tunic,Quest,Dimensius the All-Devouring (NS),,,"619 Armor; 31 Sta; 21 Int; 88 Healing; 30 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 88 and damage done by up to 30 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",
-Restoration,Chest,PreRaid,Gladiator's Ringmail Armor,PvP,,,,"866 Armor; 42 Sta; 23 Int; 59 Healing; 20 Spell Dmg; 7 MP5; 23 Spell Crit
-
-Equip: Restores 7 mana per 5 sec;
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects",
-Restoration,Wrist,PreRaid,Bracers of Havok,Auction House,,,,"67 Armor; 12 Int; 30 Healing; 30 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 30",
+Equip: Increases damage and healing done by magical spells and effects by up to 32",
+Restoration,Chest,PreRaid,Hallowed Garments,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 12 Sta; 26 Int; 26 Spi; 57 Healing; 19 Spell Dmg,Murmur
+Restoration,Chest,PreRaid,Harness of the Deep Currents,Dungeon Drop,,Shadow Labyrinth,Normal,652 Armor; 28 Sta; 30 Int; 68 Healing; 23 Spell Dmg; 10 MP5,Murmur
+Restoration,Chest,PreRaid,Moonglade Robe,Dungeon Drop,,Mechanar,Normal,292 Armor; 25 Str; 17 Agi; 16 Sta; 17 Int; 14 Spi; 55 Healing; 19 Spell Dmg,Pathaleon the Calculator
+Restoration,Chest,PreRaid,Raiments of Divine Authority,Dungeon Drop,,Blood Furnace,Normal,122 Armor; 16 Sta; 21 Int; 18 Spi; 46 Healing; 16 Spell Dmg,Keli'dan the Breaker
+Restoration,Chest,PreRaid,Raiments of Nature's Breath,Dungeon Drop,,Hellfire Ramparts,Heroic,292 Armor; 25 Sta; 32 Int; 18 Spi; 75 Healing; 25 Spell Dmg; 7 MP5,Vazruden
+Restoration,Chest,PreRaid,Robe of Effervescent Light,Dungeon Drop,,Blood Furnace,Heroic,156 Armor; 25 Sta; 33 Int; 18 Spi; 73 Healing; 25 Spell Dmg; 7 MP5,Keli'dan the Breaker
+Restoration,Chest,PreRaid,Earthshatter Tunic,Quest,Earthshatter Tunic (Naxx),,,658 Armor; 26 Sta; 32 Int; 59 Healing; 20 Spell Dmg; 12 MP5,
+Restoration,Chest,PreRaid,Void Slayer's Tunic,Quest,Dimensius the All-Devouring (NS),,,619 Armor; 31 Sta; 21 Int; 88 Healing; 30 Spell Dmg; 8 MP5,
+Restoration,Chest,PreRaid,Gladiator's Ringmail Armor,PvP,,,,866 Armor; 42 Sta; 23 Int; 59 Healing; 20 Spell Dmg; 7 MP5; 23 Spell Crit,
+Restoration,Wrist,PreRaid,Bracers of Havok,Auction House,,,,67 Armor; 12 Int; 30 Healing; 30 Spell Dmg,
 Restoration,Wrist,PreRaid,Windhawk Bracers,Auction House,,,,"159 Armor; 22 Sta; 17 Int; 7 Spi; 31 Healing; 11 Spell Dmg; 8 MP5; 16 Spell Crit
 
-Equip: Increases damage and healing done by magical spells and effects by up to 16;
-Equip: Increases healing done by up to 31 and damage done by up to 11 for all magical spells and effects",
-Restoration,Wrist,PreRaid,Bands of the Benevolent,Dungeon Drop,,Sethekk Halls,Heroic,"81 Armor; 18 Sta; 20 Int; 18 Spi; 46 Healing; 16 Spell Dmg
-
-Equip: Increases healing done by up to 46 and damage done by up to 16 for all magical spells and effects",Talon King Ikiss
-Restoration,Wrist,PreRaid,Bracelets of Royal Redemption,Dungeon Drop,,Ahn'Qiraj,Normal,"61 Armor; 8 Sta; 10 Int; 9 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Emperor Vek'nilash
-Restoration,Wrist,PreRaid,Lucid Dream Bracers,Dungeon Drop,,Mana Tombs,Heroic,"128 Armor; 13 Sta; 15 Int; 17 Spi; 37 Healing; 13 Spell Dmg
-
-Equip: Increases healing done by up to 37 and damage done by up to 13 for all magical spells and effects",Nexus-Prince Shaffar
-Restoration,Wrist,PreRaid,Primal Surge Bracers,Dungeon Drop,,Black Morass,Normal,"285 Armor; 15 Sta; 18 Int; 37 Healing; 13 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 37 and damage done by up to 13 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",Aeonus
-Restoration,Wrist,PreRaid,Earthshatter Wristguards,Quest,Earthshatter Wristguards (Naxx),,,"276 Armor; 17 Sta; 18 Int; 33 Healing; 11 Spell Dmg; 4 MP5
-
-Equip: Increases healing done by up to 33 and damage done by up to 11 for all magical spells and effects;
-Equip: Restores 4 mana per 5 sec",
-Restoration,Wrist,PreRaid,Shattrath Wraps,Quest (Dung),The Soul Devices (SL),,,"68 Armor; 15 Sta; 15 Int; 21 Healing; 21 Spell Dmg
-
-Equip: Increases damage and healing done by magical spells and effects by up to 21",
-Restoration,Wrist,PreRaid,Bindings of the Timewalker,Reputation,,,,"78 Armor; 24 Sta; 12 Int; 64 Healing; 22 Spell Dmg
-
-Equip: Increases healing done by up to 64 and damage done by up to 22 for all magical spells and effects",Keepers of Time - Exalted
-Restoration,Hands,PreRaid,Gloves of the Living Touch,Auction House,,,,"208 Armor; 16 Sta; 18 Int; 22 Spi; 77 Healing; 26 Spell Dmg
-
-Equip: Increases healing done by up to 77 and damage done by up to 26 for all magical spells and effects",
-Restoration,Hands,PreRaid,Bloody Surgeon's Mitts,Dungeon Drop,,Blood Furnace,Normal,"76 Armor; 10 Sta; 20 Int; 12 Spi; 31 Healing; 11 Spell Dmg
-
-Equip: Increases healing done by up to 31 and damage done by up to 11 for all magical spells and effects",Broggok
-Restoration,Hands,PreRaid,Fathomheart Gauntlets,Dungeon Drop,,Steamvault,Normal,"407 Armor; 24 Sta; 25 Int; 55 Healing; 19 Spell Dmg; 7 MP5
-
-Equip: Restores 7 mana per 5 sec;
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",Warlord Kalithresh
-Restoration,Hands,PreRaid,Hallowed Handwraps,Dungeon Drop,,Shattered Halls,Normal,"97 Armor; 19 Sta; 20 Int; 26 Spi; 51 Healing; 17 Spell Dmg
-
-Equip: Increases healing done by up to 51 and damage done by up to 17 for all magical spells and effects",Warchief Kargath Bladefist
-Restoration,Hands,PreRaid,Natural Mender's Wraps,Dungeon Drop,,Auchenai Crypts,Normal,"183 Armor; 22 Sta; 25 Int; 18 Spi; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",Avatar of the Martyred
-Restoration,Hands,PreRaid,Prismatic Mittens of Mending,Dungeon Drop,,Botanica,Normal,"97 Armor; 23 Sta; 26 Int; 55 Healing; 19 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",Commander Sarannis
-Restoration,Hands,PreRaid,Wasphide Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,"164 Armor; 14 Sta; 15 Int; 16 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Princess Huhuran
-Restoration,Hands,PreRaid,Cryo-mitts,Quest (Dung),Someone Else's Hard Work Pays Off (MT),,,"156 Armor; 22 Int; 16 Spi; 57 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects",
-Restoration,Hands,PreRaid,Gloves of Preservation,Quest (Dung),Fel Embers (SH),,,"181 Armor; 25 Int; 25 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",
+Equip: Increases damage and healing done by magical spells and effects by up to 16",
+Restoration,Wrist,PreRaid,Bands of the Benevolent,Dungeon Drop,,Sethekk Halls,Heroic,81 Armor; 18 Sta; 20 Int; 18 Spi; 46 Healing; 16 Spell Dmg,Talon King Ikiss
+Restoration,Wrist,PreRaid,Bracelets of Royal Redemption,Dungeon Drop,,Ahn'Qiraj,Normal,61 Armor; 8 Sta; 10 Int; 9 Spi; 53 Healing; 18 Spell Dmg,Emperor Vek'nilash
+Restoration,Wrist,PreRaid,Lucid Dream Bracers,Dungeon Drop,,Mana Tombs,Heroic,128 Armor; 13 Sta; 15 Int; 17 Spi; 37 Healing; 13 Spell Dmg,Nexus-Prince Shaffar
+Restoration,Wrist,PreRaid,Primal Surge Bracers,Dungeon Drop,,Black Morass,Normal,285 Armor; 15 Sta; 18 Int; 37 Healing; 13 Spell Dmg; 6 MP5,Aeonus
+Restoration,Wrist,PreRaid,Earthshatter Wristguards,Quest,Earthshatter Wristguards (Naxx),,,276 Armor; 17 Sta; 18 Int; 33 Healing; 11 Spell Dmg; 4 MP5,
+Restoration,Wrist,PreRaid,Shattrath Wraps,Quest (Dung),The Soul Devices (SL),,,68 Armor; 15 Sta; 15 Int; 21 Healing; 21 Spell Dmg,
+Restoration,Wrist,PreRaid,Bindings of the Timewalker,Reputation,,,,78 Armor; 24 Sta; 12 Int; 64 Healing; 22 Spell Dmg,Keepers of Time - Exalted
+Restoration,Hands,PreRaid,Gloves of the Living Touch,Auction House,,,,208 Armor; 16 Sta; 18 Int; 22 Spi; 77 Healing; 26 Spell Dmg,
+Restoration,Hands,PreRaid,Bloody Surgeon's Mitts,Dungeon Drop,,Blood Furnace,Normal,76 Armor; 10 Sta; 20 Int; 12 Spi; 31 Healing; 11 Spell Dmg,Broggok
+Restoration,Hands,PreRaid,Fathomheart Gauntlets,Dungeon Drop,,Steamvault,Normal,407 Armor; 24 Sta; 25 Int; 55 Healing; 19 Spell Dmg; 7 MP5,Warlord Kalithresh
+Restoration,Hands,PreRaid,Hallowed Handwraps,Dungeon Drop,,Shattered Halls,Normal,97 Armor; 19 Sta; 20 Int; 26 Spi; 51 Healing; 17 Spell Dmg,Warchief Kargath Bladefist
+Restoration,Hands,PreRaid,Natural Mender's Wraps,Dungeon Drop,,Auchenai Crypts,Normal,183 Armor; 22 Sta; 25 Int; 18 Spi; 55 Healing; 19 Spell Dmg,Avatar of the Martyred
+Restoration,Hands,PreRaid,Prismatic Mittens of Mending,Dungeon Drop,,Botanica,Normal,97 Armor; 23 Sta; 26 Int; 55 Healing; 19 Spell Dmg; 7 MP5,Commander Sarannis
+Restoration,Hands,PreRaid,Wasphide Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,164 Armor; 14 Sta; 15 Int; 16 Spi; 53 Healing; 18 Spell Dmg,Princess Huhuran
+Restoration,Hands,PreRaid,Cryo-mitts,Quest (Dung),Someone Else's Hard Work Pays Off (MT),,,156 Armor; 22 Int; 16 Spi; 57 Healing; 19 Spell Dmg,
+Restoration,Hands,PreRaid,Gloves of Preservation,Quest (Dung),Fel Embers (SH),,,181 Armor; 25 Int; 25 Spi; 53 Healing; 18 Spell Dmg,
 Restoration,Hands,PreRaid,Gladiator's Ringmail Gauntlets,PvP,,,,"541 Armor; 36 Sta; 18 Int; 59 Healing; 20 Spell Dmg; 21 Spell Crit
 
-Equip: Increases the critical effect chance of your Lesser Healing Wave by 2%;
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects",
-Restoration,Waist,PreRaid,Primal Mooncloth Belt,Auction House,,,,"109 Armor; 12 Int; 11 Spi; 81 Healing; 27 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 81 and damage done by up to 27 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",
+Equip: Increases the critical effect chance of your Lesser Healing Wave by 2%",
+Restoration,Waist,PreRaid,Primal Mooncloth Belt,Auction House,,,,109 Armor; 12 Int; 11 Spi; 81 Healing; 27 Spell Dmg; 8 MP5,
 Restoration,Waist,PreRaid,Windhawk Belt,Auction House,,,,"205 Armor; 17 Sta; 19 Int; 20 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 12 Spell Crit
 
-Equip: Increases damage and healing done by magical spells and effects by up to 23;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",
-Restoration,Waist,PreRaid,Cord of Belief,Dungeon Drop,,Slave Pens,Heroic,"88 Armor; 23 Int; 20 Spi; 46 Healing; 16 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 46 and damage done by up to 16 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",Mennu the Betrayer
-Restoration,Waist,PreRaid,Cord of Sanctification,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"105 Armor; 25 Sta; 24 Int; 62 Healing; 21 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 62 and damage done by up to 21 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",Epoch Hunter
-Restoration,Waist,PreRaid,Grasp of the Old God,Dungeon Drop,,Ahn'Qiraj,Normal,"85 Armor; 15 Sta; 19 Int; 59 Healing; 20 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",C'Thun
-Restoration,Waist,PreRaid,Regenerating Belt of Vek'nilash,Dungeon Drop,,Ahn'Qiraj,Normal,"152 Armor; 16 Sta; 18 Int; 13 Spi; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",Emperor Vek'nilash
-Restoration,Waist,PreRaid,Stillwater Girdle,Dungeon Drop,,Mana Tombs,Heroic,"367 Armor; 18 Sta; 26 Int; 53 Healing; 18 Spell Dmg; 8 MP5
-
-Equip: Restores 8 mana per 5 sec;
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Nexus-Prince Shaffar
-Restoration,Waist,PreRaid,The Sleeper's Cord,Dungeon Drop,,Arcatraz,Normal,"164 Armor; 18 Sta; 24 Int; 21 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Wrath-Scryer Soccothrates
-Restoration,Waist,PreRaid,Earthshatter Girdle,Quest,Earthshatter Girdle (Naxx),,,"355 Armor; 18 Sta; 25 Int; 42 Healing; 14 Spell Dmg; 7 MP5
-
-Equip: Restores 7 mana per 5 sec;
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects",
-Restoration,Legs,PreRaid,Kamaei's Cerulean Skirt,Auction House,,,,"149 Armor; 25 Int; 21 Spi; 118 Healing; 37 Spell Dmg
-
-Equip: Increases healing done by up to 118 and damage done by up to 37 for all magical spells and effects",World Drop
-Restoration,Legs,PreRaid,Pants of Living Growth,Auction House,,,,"278 Armor; 29 Int; 35 Spi; 77 Healing; 26 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 77 and damage done by up to 26 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",World Drop
-Restoration,Legs,PreRaid,Whitemend Pants,Auction House,,,,"156 Armor; 21 Sta; 21 Int; 62 Healing; 21 Spell Dmg; 11 MP5
-
-Equip: Increases healing done by up to 62 and damage done by up to 21 for all magical spells and effects;
-Equip: Restores 11 mana per 5 sec",
-Restoration,Legs,PreRaid,Hallowed Trousers,Dungeon Drop,,Sethekk Halls,Normal,"136 Armor; 25 Sta; 33 Int; 18 Spi; 73 Healing; 25 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 73 and damage done by up to 25 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",Talon King Ikiss
-Restoration,Legs,PreRaid,Kilt of the Night Strider,Dungeon Drop,,Blood Furnace,Normal,"203 Armor; 21 Sta; 26 Int; 8 Spi; 33 Healing; 11 Spell Dmg; 6 MP5
-
-Equip: Restores 6 mana per 5 sec;
-Equip: Increases healing done by up to 33 and damage done by up to 11 for all magical spells and effects",Broggok
-Restoration,Legs,PreRaid,Lifegiver Britches,Dungeon Drop,,Hellfire Ramparts,Normal,"103 Armor; 16 Sta; 25 Int; 12 Spi; 44 Healing; 15 Spell Dmg
-
-Equip: Increases healing done by up to 44 and damage done by up to 15 for all magical spells and effects",Vazruden
-Restoration,Legs,PreRaid,Oceansong Kilt,Dungeon Drop,,Hellfire Ramparts,Heroic,"570 Armor; 36 Sta; 34 Int; 84 Healing; 28 Spell Dmg
-
-Equip: Increases healing done by up to 84 and damage done by up to 28 for all magical spells and effects",Vazruden
-Restoration,Legs,PreRaid,Pontifex Kilt,Dungeon Drop,,Steamvault,Heroic,"163 Armor; 25 Sta; 29 Int; 27 Spi; 66 Healing; 22 Spell Dmg
-
-Equip: Increases healing done by up to 66 and damage done by up to 22 for all magical spells and effects",Warlord Kalithresh
-Restoration,Legs,PreRaid,Pontiff's Pantaloons of Prophecy,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"136 Armor; 12 Sta; 27 Int; 24 Spi; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",Captain Skarloc
-Restoration,Legs,PreRaid,Pants of the Naaru,Quest,Special Delivery to Shattrath City (Shattrath City),,,"130 Armor; 27 Sta; 22 Int; 25 Spi; 77 Healing; 26 Spell Dmg
-
-Equip: Increases healing done by up to 77 and damage done by up to 26 for all magical spells and effects",
-Restoration,Legs,PreRaid,Haramad's Leg Wraps,Quest (Dung),Undercutting the Competition (MT),,,"116 Armor; 29 Spi; 24 Healing; 8 Spell Dmg; 11 MP5
-
-Equip: Increases healing done by up to 24 and damage done by up to 8 for all magical spells and effects;
-Equip: Restores 11 mana per 5 sec",
-Restoration,Legs,PreRaid,Gladiator's Ringmail Leggings,PvP,,,,"758 Armor; 54 Sta; 26 Int; 79 Healing; 27 Spell Dmg; 6 MP5; 21 Spell Crit
-
-Equip: Increases healing done by up to 79 and damage done by up to 27 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",
-Restoration,Feet,PreRaid,Boots of the Glade-Keeper,Dungeon Drop,,Mechanar,Normal,"201 Armor; 21 Sta; 24 Int; 20 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",The Gatewatchers
-Restoration,Feet,PreRaid,Boots of the Pious,Dungeon Drop,,Mechanar,Heroic,"128 Armor; 24 Sta; 26 Int; 23 Spi; 62 Healing; 21 Spell Dmg
-
-Equip: Increases healing done by up to 62 and damage done by up to 21 for all magical spells and effects",Pathaleon the Calculator
-Restoration,Feet,PreRaid,Jeweled Boots of Sanctification,Dungeon Drop,,Shattered Halls,Normal,"105 Armor; 22 Sta; 25 Int; 55 Healing; 19 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",Warbringer O'mrogg
-Restoration,Feet,PreRaid,Slippers of Serenity,Dungeon Drop,,Auchenai Crypts,Normal,"94 Armor; 10 Sta; 22 Int; 15 Spi; 35 Healing; 12 Spell Dmg
-
-Equip: Increases healing done by up to 35 and damage done by up to 12 for all magical spells and effects",Exarch Maladaar
-Restoration,Feet,PreRaid,Wavefury Boots,Dungeon Drop,,Slave Pens,Heroic,"448 Armor; 19 Sta; 24 Int; 55 Healing; 19 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",Rokmar the Crackler
-Restoration,Feet,PreRaid,Curate's Boots,Quest (Dung),Fel Embers (SH),,,"106 Armor; 25 Int; 25 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",
-Restoration,Neck,PreRaid,Necklace of Necropsy,Dungeon Drop,,Naxxramas,Normal,"10 Sta; 11 Int; 10 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Heigan the Unclean
-Restoration,Neck,PreRaid,Necklace of Resplendent Hope,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"53 Healing; 18 Spell Dmg; 9 MP5
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects;
-Equip: Restores 9 mana per 5 sec",Epoch Hunter
-Restoration,Neck,PreRaid,Necklace of Eternal Hope,Dungeon Token,,,,"22 Sta; 21 Int; 48 Healing; 16 Spell Dmg; 4 MP5
-
-Equip: Increases healing done by up to 48 and damage done by up to 16 for all magical spells and effects;
-Equip: Restores 4 mana per 5 sec",25 Badges of Justice
-Restoration,Neck,PreRaid,Amulet of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,"11 Sta; 57 Healing; 19 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",
-Restoration,Neck,PreRaid,Karja's Medallion,Quest,Shutting Down Manaforge Ara (NS),,,"15 Int; 10 Spi; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",
-Restoration,Neck,PreRaid,Natasha's Guardian Cord,Quest,The Hound-Master (BEM),,,"10 Int; 55 Healing; 19 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",
-Restoration,Ring,PreRaid,Azure Moonstone Ring,Auction House,,,,"57 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects",
-Restoration,Ring,PreRaid,Brilliant Pearl Band,Auction House,,,,"15 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",
-Restoration,Ring,PreRaid,Band of Unanswered Prayers,Dungeon Drop,,Naxxramas,Normal,"11 Sta; 11 Int; 12 Spi; 51 Healing; 17 Spell Dmg
-
-Equip: Increases healing done by up to 51 and damage done by up to 17 for all magical spells and effects",Anub'Rekhan
-Restoration,Ring,PreRaid,Band of the Crystalline Void,Dungeon Drop,,Mana-Tombs,Heroic,"20 Int; 44 Healing; 15 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 44 and damage done by up to 15 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",Yor
-Restoration,Ring,PreRaid,Cosmic Lifeband,Dungeon Drop,,Mechanar,Normal,"57 Healing; 19 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",Nethermancer Sepethrea
-Restoration,Ring,PreRaid,Pure Elementium Band,Dungeon Drop,,Blackwing Lair,Normal,"9 Sta; 10 Int; 10 Spi; 53 Healing; 18 Spell Dmg
-
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",Nefarian
-Restoration,Ring,PreRaid,Ring of Fabled Hope,Dungeon Drop,,Underbog,Normal,"12 Int; 11 Spi; 59 Healing; 20 Spell Dmg
-
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects",The Black Stalker
-Restoration,Ring,PreRaid,Ring of the Martyr,Dungeon Drop,,Ahn'Qiraj,Normal,"10 Sta; 51 Healing; 17 Spell Dmg; 5 MP5
-
-Equip: Increases healing done by up to 51 and damage done by up to 17 for all magical spells and effects;
-Equip: Restores 5 mana per 5 sec",Princess Huhuran
-Restoration,Ring,PreRaid,Band of Halos,Dungeon Token,,,,"22 Sta; 21 Int; 46 Healing; 16 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 46 and damage done by up to 16 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",25 Badges of Justice
-Restoration,Ring,PreRaid,Celestial Jewel Ring,Quest,Hitting the Motherlode (NS),,,"13 Int; 55 Healing; 19 Spell Dmg; 4 MP5
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 4 mana per 5 sec",
-Restoration,Ring,PreRaid,Spiritualist's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,"12 Spi; 64 Healing; 22 Spell Dmg
-
-Equip: Increases healing done by up to 64 and damage done by up to 22 for all magical spells and effects",
-Restoration,Ring,PreRaid,Keeper's Ring of Piety,Quest (Dung),Hero of the Brood (BM),,,"18 Spi; 42 Healing; 14 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 42 and damage done by up to 14 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",
-Restoration,Ring,PreRaid,Ancestral Band,Reputation,,,,"15 Int; 57 Healing; 19 Spell Dmg; 4 MP5
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 4 mana per 5 sec",Thrallmar - Revered
-Restoration,Ring,PreRaid,Ring of Convalescence,Reputation,,,,"15 Int; 57 Healing; 19 Spell Dmg; 4 MP5
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects;
-Equip: Restores 4 mana per 5 sec",Honor Hold - Revered
+Equip: Increases damage and healing done by magical spells and effects by up to 23",
+Restoration,Waist,PreRaid,Cord of Belief,Dungeon Drop,,Slave Pens,Heroic,88 Armor; 23 Int; 20 Spi; 46 Healing; 16 Spell Dmg; 8 MP5,Mennu the Betrayer
+Restoration,Waist,PreRaid,Cord of Sanctification,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,105 Armor; 25 Sta; 24 Int; 62 Healing; 21 Spell Dmg; 7 MP5,Epoch Hunter
+Restoration,Waist,PreRaid,Grasp of the Old God,Dungeon Drop,,Ahn'Qiraj,Normal,85 Armor; 15 Sta; 19 Int; 59 Healing; 20 Spell Dmg; 7 MP5,C'Thun
+Restoration,Waist,PreRaid,Regenerating Belt of Vek'nilash,Dungeon Drop,,Ahn'Qiraj,Normal,152 Armor; 16 Sta; 18 Int; 13 Spi; 55 Healing; 19 Spell Dmg,Emperor Vek'nilash
+Restoration,Waist,PreRaid,Stillwater Girdle,Dungeon Drop,,Mana Tombs,Heroic,367 Armor; 18 Sta; 26 Int; 53 Healing; 18 Spell Dmg; 8 MP5,Nexus-Prince Shaffar
+Restoration,Waist,PreRaid,The Sleeper's Cord,Dungeon Drop,,Arcatraz,Normal,164 Armor; 18 Sta; 24 Int; 21 Spi; 53 Healing; 18 Spell Dmg,Wrath-Scryer Soccothrates
+Restoration,Waist,PreRaid,Earthshatter Girdle,Quest,Earthshatter Girdle (Naxx),,,355 Armor; 18 Sta; 25 Int; 42 Healing; 14 Spell Dmg; 7 MP5,
+Restoration,Legs,PreRaid,Kamaei's Cerulean Skirt,Auction House,,,,149 Armor; 25 Int; 21 Spi; 118 Healing; 37 Spell Dmg,World Drop
+Restoration,Legs,PreRaid,Pants of Living Growth,Auction House,,,,278 Armor; 29 Int; 35 Spi; 77 Healing; 26 Spell Dmg; 6 MP5,World Drop
+Restoration,Legs,PreRaid,Whitemend Pants,Auction House,,,,156 Armor; 21 Sta; 21 Int; 62 Healing; 21 Spell Dmg; 11 MP5,
+Restoration,Legs,PreRaid,Hallowed Trousers,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 25 Sta; 33 Int; 18 Spi; 73 Healing; 25 Spell Dmg; 7 MP5,Talon King Ikiss
+Restoration,Legs,PreRaid,Kilt of the Night Strider,Dungeon Drop,,Blood Furnace,Normal,203 Armor; 21 Sta; 26 Int; 8 Spi; 33 Healing; 11 Spell Dmg; 6 MP5,Broggok
+Restoration,Legs,PreRaid,Lifegiver Britches,Dungeon Drop,,Hellfire Ramparts,Normal,103 Armor; 16 Sta; 25 Int; 12 Spi; 44 Healing; 15 Spell Dmg,Vazruden
+Restoration,Legs,PreRaid,Oceansong Kilt,Dungeon Drop,,Hellfire Ramparts,Heroic,570 Armor; 36 Sta; 34 Int; 84 Healing; 28 Spell Dmg,Vazruden
+Restoration,Legs,PreRaid,Pontifex Kilt,Dungeon Drop,,Steamvault,Heroic,163 Armor; 25 Sta; 29 Int; 27 Spi; 66 Healing; 22 Spell Dmg,Warlord Kalithresh
+Restoration,Legs,PreRaid,Pontiff's Pantaloons of Prophecy,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,136 Armor; 12 Sta; 27 Int; 24 Spi; 55 Healing; 19 Spell Dmg,Captain Skarloc
+Restoration,Legs,PreRaid,Pants of the Naaru,Quest,Special Delivery to Shattrath City (Shattrath City),,,130 Armor; 27 Sta; 22 Int; 25 Spi; 77 Healing; 26 Spell Dmg,
+Restoration,Legs,PreRaid,Haramad's Leg Wraps,Quest (Dung),Undercutting the Competition (MT),,,116 Armor; 29 Spi; 24 Healing; 8 Spell Dmg; 11 MP5,
+Restoration,Legs,PreRaid,Gladiator's Ringmail Leggings,PvP,,,,758 Armor; 54 Sta; 26 Int; 79 Healing; 27 Spell Dmg; 6 MP5; 21 Spell Crit,
+Restoration,Feet,PreRaid,Boots of the Glade-Keeper,Dungeon Drop,,Mechanar,Normal,201 Armor; 21 Sta; 24 Int; 20 Spi; 53 Healing; 18 Spell Dmg,The Gatewatchers
+Restoration,Feet,PreRaid,Boots of the Pious,Dungeon Drop,,Mechanar,Heroic,128 Armor; 24 Sta; 26 Int; 23 Spi; 62 Healing; 21 Spell Dmg,Pathaleon the Calculator
+Restoration,Feet,PreRaid,Jeweled Boots of Sanctification,Dungeon Drop,,Shattered Halls,Normal,105 Armor; 22 Sta; 25 Int; 55 Healing; 19 Spell Dmg; 6 MP5,Warbringer O'mrogg
+Restoration,Feet,PreRaid,Slippers of Serenity,Dungeon Drop,,Auchenai Crypts,Normal,94 Armor; 10 Sta; 22 Int; 15 Spi; 35 Healing; 12 Spell Dmg,Exarch Maladaar
+Restoration,Feet,PreRaid,Wavefury Boots,Dungeon Drop,,Slave Pens,Heroic,448 Armor; 19 Sta; 24 Int; 55 Healing; 19 Spell Dmg; 8 MP5,Rokmar the Crackler
+Restoration,Feet,PreRaid,Curate's Boots,Quest (Dung),Fel Embers (SH),,,106 Armor; 25 Int; 25 Spi; 53 Healing; 18 Spell Dmg,
+Restoration,Neck,PreRaid,Necklace of Necropsy,Dungeon Drop,,Naxxramas,Normal,10 Sta; 11 Int; 10 Spi; 53 Healing; 18 Spell Dmg,Heigan the Unclean
+Restoration,Neck,PreRaid,Necklace of Resplendent Hope,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,53 Healing; 18 Spell Dmg; 9 MP5,Epoch Hunter
+Restoration,Neck,PreRaid,Necklace of Eternal Hope,Dungeon Token,,,,22 Sta; 21 Int; 48 Healing; 16 Spell Dmg; 4 MP5,25 Badges of Justice
+Restoration,Neck,PreRaid,Amulet of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,11 Sta; 57 Healing; 19 Spell Dmg; 6 MP5,
+Restoration,Neck,PreRaid,Karja's Medallion,Quest,Shutting Down Manaforge Ara (NS),,,15 Int; 10 Spi; 55 Healing; 19 Spell Dmg,
+Restoration,Neck,PreRaid,Natasha's Guardian Cord,Quest,The Hound-Master (BEM),,,10 Int; 55 Healing; 19 Spell Dmg; 6 MP5,
+Restoration,Ring,PreRaid,Azure Moonstone Ring,Auction House,,,,57 Healing; 19 Spell Dmg,
+Restoration,Ring,PreRaid,Brilliant Pearl Band,Auction House,,,,15 Spi; 53 Healing; 18 Spell Dmg,
+Restoration,Ring,PreRaid,Band of Unanswered Prayers,Dungeon Drop,,Naxxramas,Normal,11 Sta; 11 Int; 12 Spi; 51 Healing; 17 Spell Dmg,Anub'Rekhan
+Restoration,Ring,PreRaid,Band of the Crystalline Void,Dungeon Drop,,Mana-Tombs,Heroic,20 Int; 44 Healing; 15 Spell Dmg; 8 MP5,Yor
+Restoration,Ring,PreRaid,Cosmic Lifeband,Dungeon Drop,,Mechanar,Normal,57 Healing; 19 Spell Dmg; 7 MP5,Nethermancer Sepethrea
+Restoration,Ring,PreRaid,Pure Elementium Band,Dungeon Drop,,Blackwing Lair,Normal,9 Sta; 10 Int; 10 Spi; 53 Healing; 18 Spell Dmg,Nefarian
+Restoration,Ring,PreRaid,Ring of Fabled Hope,Dungeon Drop,,Underbog,Normal,12 Int; 11 Spi; 59 Healing; 20 Spell Dmg,The Black Stalker
+Restoration,Ring,PreRaid,Ring of the Martyr,Dungeon Drop,,Ahn'Qiraj,Normal,10 Sta; 51 Healing; 17 Spell Dmg; 5 MP5,Princess Huhuran
+Restoration,Ring,PreRaid,Band of Halos,Dungeon Token,,,,22 Sta; 21 Int; 46 Healing; 16 Spell Dmg; 6 MP5,25 Badges of Justice
+Restoration,Ring,PreRaid,Celestial Jewel Ring,Quest,Hitting the Motherlode (NS),,,13 Int; 55 Healing; 19 Spell Dmg; 4 MP5,
+Restoration,Ring,PreRaid,Spiritualist's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,12 Spi; 64 Healing; 22 Spell Dmg,
+Restoration,Ring,PreRaid,Keeper's Ring of Piety,Quest (Dung),Hero of the Brood (BM),,,18 Spi; 42 Healing; 14 Spell Dmg; 7 MP5,
+Restoration,Ring,PreRaid,Ancestral Band,Reputation,,,,15 Int; 57 Healing; 19 Spell Dmg; 4 MP5,Thrallmar - Revered
+Restoration,Ring,PreRaid,Ring of Convalescence,Reputation,,,,15 Int; 57 Healing; 19 Spell Dmg; 4 MP5,Honor Hold - Revered
 Restoration,Trinket,PreRaid,Auslese's Light Channeler,Dungeon Drop,,Blood Furnace,Normal,"59 Healing; 20 Spell Dmg
 
-Use: Reduces the cost of your next spell cast within 10 sec by up to 215 mana;
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects",Broggok
+Use: Reduces the cost of your next spell cast within 10 sec by up to 215 mana",Broggok
 Restoration,Trinket,PreRaid,Eye of the Dead,Dungeon Drop,,Naxxramas,Normal,"70 Healing; 24 Spell Dmg
 
 Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec;
-Equip: Increases healing done by up to 70 and damage done by up to 24 for all magical spells and effects;
 Use: Increases healing done by the next 5 spells by up to 450 and damage done by up to 150 for 30 sec. (750ms cooldown)",Sapphiron
-Restoration,Trinket,PreRaid,Rejuvenating Gem,Dungeon Drop,,Blackwing Lair,Normal,"66 Healing; 22 Spell Dmg; 9 MP5
-
-Equip: Increases healing done by up to 66 and damage done by up to 22 for all magical spells and effects;
-Equip: Restores 9 mana per 5 sec",Three Drakes
+Restoration,Trinket,PreRaid,Rejuvenating Gem,Dungeon Drop,,Blackwing Lair,Normal,66 Healing; 22 Spell Dmg; 9 MP5,Three Drakes
 Restoration,Trinket,PreRaid,Scarab of the Infinite Cycle,Dungeon Drop,,Black Morass,Normal,"70 Healing; 24 Spell Dmg
 
-Equip: Increases healing done by up to 70 and damage done by up to 24 for all magical spells and effects;
 Equip: Your direct healing and heal over time spells have a chance to increase your spell haste rating by 320 for 6 secs. (Proc chance: 10%, 45s cooldown)",Aeonus
 Restoration,Trinket,PreRaid,Essence of the Martyr,Dungeon Token,,,,"84 Healing; 28 Spell Dmg
 
-Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec;
-Equip: Increases healing done by up to 84 and damage done by up to 28 for all magical spells and effects",41 Badges of Justice
+Use: Increases healing done by spells by up to 297 and damage done by spells by up to 99 for 20 sec",41 Badges of Justice
 Restoration,Trinket,PreRaid,Oshu'gun Relic,Quest,Gava'xi (Nag),,,"53 Healing; 18 Spell Dmg
 
-Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec;
-Equip: Increases healing done by up to 53 and damage done by up to 18 for all magical spells and effects",
+Use: Increases healing done by spells and effects by up to 213 and damage done by spells by up to 71 for 20 sec",
 Restoration,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,"70 Healing; 24 Spell Dmg
 
-Use: Your heals each cost 22 less mana for the next 15 sec;
-Equip: Increases healing done by up to 70 and damage done by up to 24 for all magical spells and effects",Lower City - Revered
-Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,"43.68 DPS; 20 Int; 317 Healing; 106 Spell Dmg; 7 MP5
-
-Equip: Restores 7 mana per 5 sec;
-Equip: Increases healing done by up to 317 and damage done by up to 106 for all magical spells and effects",
-Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,"43.57 DPS; 15 Int; 299 Healing; 100 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 299 and damage done by up to 100 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",World Drop
-Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,"41.11 DPS; 227 Healing; 76 Spell Dmg; 11 MP5
-
-Equip: Increases healing done by up to 227 and damage done by up to 76 for all magical spells and effects;
-Equip: Restores 11 mana per 5 sec",World Drop
-Restoration,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,"41.11 DPS; 13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg
-
-Equip: Increases healing done by up to 227 and damage done by up to 76 for all magical spells and effects",Captain Skarloc
-Restoration,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,"41.11 DPS; 16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 227 and damage done by up to 76 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",Mechano-Lord Capacitus
-Restoration,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,"41.58 DPS; 8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 238 and damage done by up to 80 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",Kel'Thuzad
-Restoration,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,"41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 227 and damage done by up to 76 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",Warchief Kargath Bladefist
-Restoration,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,"41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit
-
-Equip: Increases healing done by up to 317 and damage done by up to 106 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",Murmur
-Restoration,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,"41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5
-
-Equip: Increases healing done by up to 299 and damage done by up to 100 for all magical spells and effects;
-Equip: Restores 8 mana per 5 sec",The Sha'tar - Exalted
-Restoration,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,"41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg
-
-Equip: Increases healing done by up to 375 and damage done by up to 125 for all magical spells and effects",
-Restoration,Off Hand,PreRaid,Crystal Pulse Shield,Auction House,,,,"3711 Armor; 24 Int; 35 Healing; 12 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 35 and damage done by up to 12 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",World Drop
-Restoration,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,"59 Healing; 20 Spell Dmg; 7 MP5
-
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects;
-Equip: Restores 7 mana per 5 sec",Omor the Unscarred
-Restoration,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,"16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 35 and damage done by up to 12 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",Dalliah the Doomsayer
-Restoration,Off Hand,PreRaid,Sapphiron's Right Eye,Dungeon Drop,,Naxxramas,Normal,"9 Sta; 10 Int; 62 Healing; 21 Spell Dmg; 4 MP5
-
-Equip: Increases healing done by up to 62 and damage done by up to 21 for all magical spells and effects;
-Equip: Restores 4 mana per 5 sec",Sapphiron
-Restoration,Off Hand,PreRaid,Shield of Condemnation,Dungeon Drop,,Naxxramas,Normal,"3936 Armor; 10 Sta; 10 Int; 59 Healing; 20 Spell Dmg; 6 MP5
-
-Equip: Restores 6 mana per 5 sec;
-Equip: Increases healing done by up to 59 and damage done by up to 20 for all magical spells and effects",Kel'Thuzad
-Restoration,Off Hand,PreRaid,Stormshield of Renewal,Dungeon Drop,,Underbog,Normal,"3806 Armor; 12 Sta; 16 Int; 57 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 57 and damage done by up to 19 for all magical spells and effects",The Black Stalker
-Restoration,Off Hand,PreRaid,Swamplight Lantern,Dungeon Drop,,Slave Pens,Heroic,"22 Int; 40 Healing; 14 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 40 and damage done by up to 14 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",Quagmirran
-Restoration,Off Hand,PreRaid,Light-Bearer's Faith Shield,Dungeon Token,,,,"4668 Armor; 21 Sta; 22 Int; 55 Healing; 19 Spell Dmg
-
-Equip: Increases healing done by up to 55 and damage done by up to 19 for all magical spells and effects",33 Badges of Justice
-Restoration,Off Hand,PreRaid,Mazthoril Honor Shield,Dungeon Token,,,,"4668 Armor; 16 Sta; 17 Int; 23 Healing; 23 Spell Dmg; 21 Spell Crit
-
-Equip: Increases damage and healing done by magical spells and effects by up to 23",33 Badges of Justice
-Restoration,Off Hand,PreRaid,Tears of Heaven,Dungeon Token,,,,"75 Healing; 25 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 75 and damage done by up to 25 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",25 Badges of Justice
-Restoration,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the Netherwing (SMV),,,"15 Int; 15 Spi; 33 Healing; 11 Spell Dmg; 6 MP5
-
-Equip: Increases healing done by up to 33 and damage done by up to 11 for all magical spells and effects;
-Equip: Restores 6 mana per 5 sec",
-Restoration,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,"16 Int; 12 Spi; 64 Healing; 22 Spell Dmg
-
-Equip: Increases healing done by up to 64 and damage done by up to 22 for all magical spells and effects",Cenarion Expedition - Exalted
-Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,"59.79 DPS; 37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5
-
-Equip: Increases healing done by up to 227 and damage done by up to 76 for all magical spells and effects;
-Equip: Restores 12 mana per 5 sec",Temporus
-Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,"59.79 DPS; 27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg
-
-Equip: Increases healing done by up to 227 and damage done by up to 76 for all magical spells and effects",Mekgineer Steamrigger
-Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,"62.62 DPS; 28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5
-
-Equip: Increases healing done by up to 228 and damage done by up to 76 for all magical spells and effects;
-Equip: Restores 10 mana per 5 sec",The Scryers - Revered
+Use: Your heals each cost 22 less mana for the next 15 sec",Lower City - Revered
+Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
+Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
+Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
+Restoration,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,41.11 DPS; 13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
+Restoration,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,41.11 DPS; 16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
+Restoration,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,41.58 DPS; 8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
+Restoration,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
+Restoration,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
+Restoration,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
+Restoration,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg,
+Restoration,Off Hand,PreRaid,Crystal Pulse Shield,Auction House,,,,3711 Armor; 24 Int; 35 Healing; 12 Spell Dmg; 6 MP5,World Drop
+Restoration,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,59 Healing; 20 Spell Dmg; 7 MP5,Omor the Unscarred
+Restoration,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5,Dalliah the Doomsayer
+Restoration,Off Hand,PreRaid,Sapphiron's Right Eye,Dungeon Drop,,Naxxramas,Normal,9 Sta; 10 Int; 62 Healing; 21 Spell Dmg; 4 MP5,Sapphiron
+Restoration,Off Hand,PreRaid,Shield of Condemnation,Dungeon Drop,,Naxxramas,Normal,3936 Armor; 10 Sta; 10 Int; 59 Healing; 20 Spell Dmg; 6 MP5,Kel'Thuzad
+Restoration,Off Hand,PreRaid,Stormshield of Renewal,Dungeon Drop,,Underbog,Normal,3806 Armor; 12 Sta; 16 Int; 57 Healing; 19 Spell Dmg,The Black Stalker
+Restoration,Off Hand,PreRaid,Swamplight Lantern,Dungeon Drop,,Slave Pens,Heroic,22 Int; 40 Healing; 14 Spell Dmg; 6 MP5,Quagmirran
+Restoration,Off Hand,PreRaid,Light-Bearer's Faith Shield,Dungeon Token,,,,4668 Armor; 21 Sta; 22 Int; 55 Healing; 19 Spell Dmg,33 Badges of Justice
+Restoration,Off Hand,PreRaid,Mazthoril Honor Shield,Dungeon Token,,,,4668 Armor; 16 Sta; 17 Int; 23 Healing; 23 Spell Dmg; 21 Spell Crit,33 Badges of Justice
+Restoration,Off Hand,PreRaid,Tears of Heaven,Dungeon Token,,,,75 Healing; 25 Spell Dmg; 6 MP5,25 Badges of Justice
+Restoration,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the Netherwing (SMV),,,15 Int; 15 Spi; 33 Healing; 11 Spell Dmg; 6 MP5,
+Restoration,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,16 Int; 12 Spi; 64 Healing; 22 Spell Dmg,Cenarion Expedition - Exalted
+Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,59.79 DPS; 37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
+Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,59.79 DPS; 27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
+Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,62.62 DPS; 28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
 Restoration,Ranged/Relic,PreRaid,Totem of Life,Dungeon Drop,,Ahn'Qiraj,Normal,Equip: Increases healing done by Lesser Healing Wave by up to 80,Fankriss the Unyielding
 Restoration,Ranged/Relic,PreRaid,Totem of Spontaneous Regrowth,Dungeon Drop,,Slave Pens,Heroic,Equip: Increases healing done by Healing Wave by up to 88,Mennu the Betrayer
 Restoration,Ranged/Relic,PreRaid,Totem of the Plains,Quest,The Ultimate Bloodsport (Nag),,,Equip: Increases healing done by Lesser Healing Wave by up to 79,

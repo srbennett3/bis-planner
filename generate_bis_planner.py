@@ -115,8 +115,22 @@ SHEET_FIELDS = [
 HELPER_DIFF_COUNT = len(STAT_COLUMNS)
 
 # Ring/Trinket rows: no plain "Equipped" (use Equipped 1 / 2). Other rows: no Equipped 1/2.
-INTEREST_OPTIONS_RING_TRINKET = ["Pass", "Consider", "Need", "Equipped 1", "Equipped 2"]
-INTEREST_OPTIONS_STANDARD = ["Pass", "Consider", "Need", "Equipped"]
+INTEREST_OPTION_CLEAR = "----"
+INTEREST_OPTIONS_RING_TRINKET = [
+    INTEREST_OPTION_CLEAR,
+    "Pass",
+    "Consider",
+    "Need",
+    "Equipped 1",
+    "Equipped 2",
+]
+INTEREST_OPTIONS_STANDARD = [
+    INTEREST_OPTION_CLEAR,
+    "Pass",
+    "Consider",
+    "Need",
+    "Equipped",
+]
 INTEREST_OPTIONS = list(
     dict.fromkeys(INTEREST_OPTIONS_STANDARD + INTEREST_OPTIONS_RING_TRINKET)
 )
@@ -505,6 +519,7 @@ def parse_tooltip_to_dict(html):
         ilvl = int(ilvl_m.group(1))
 
     normalize_spell_stats(stats)
+    special_str = strip_equip_redundant_with_display_stats(stats, special_str)
 
     return stats, special_str, slot, ilvl
 
@@ -535,6 +550,161 @@ def normalize_spell_stats(stats):
     stats.pop("Spell Dmg/Heal", None)
 
 
+def _display_stats_for_equip_filter(stats):
+    """Subset of stats that appear in the planner Stats column (STAT_COLUMNS only)."""
+    if not stats:
+        return {}
+    out = {}
+    for k in STAT_COLUMNS:
+        v = stats.get(k)
+        if v is None or v == "" or isinstance(v, bool):
+            continue
+        try:
+            out[k] = int(v)
+        except (TypeError, ValueError):
+            continue
+    return out
+
+
+def _split_special_segments(special_str):
+    """Split Use:/Equip:/Proc: clauses joined with '; ' without breaking prose semicolons."""
+    s = (special_str or "").strip()
+    if not s:
+        return []
+    parts = re.split(r";\s+(?=Use:|Equip:|Proc:)", s, flags=re.I)
+    return [p.strip() for p in parts if p.strip()]
+
+
+def _equip_body_is_proc_like(body):
+    bl = body.lower()
+    return (
+        "chance on" in bl
+        or "proc chance" in bl
+        or "have a chance" in bl
+        or "chance to " in bl
+        or " cooldown" in bl
+        or "cooldown)" in bl
+    )
+
+
+def _equip_segment_redundant_with_display_stats(display_stats, seg):
+    """True if this Equip: line only repeats numbers already shown in STAT_COLUMNS."""
+    m = re.match(r"^Equip:\s*(.*)$", seg.strip(), re.I | re.DOTALL)
+    if not m:
+        return False
+    body = m.group(1).strip()
+    if not body or _equip_body_is_proc_like(body):
+        return False
+
+    ds = display_stats
+
+    def n_same(key, n):
+        v = ds.get(key)
+        return v is not None and int(n) == int(v)
+
+    # --- Order: more specific patterns before looser ones ---
+
+    m2 = re.search(
+        r"[Ii](?:ncreases?|mproves?)\s+damage\s+and\s+healing\s+done\s+by\s+magical\s+spells\s+and\s+effects\s+by\s+(?:up\s+to\s+)?(\d+)",
+        body,
+    )
+    if m2:
+        n = int(m2.group(1))
+        return n_same("Healing", n) and n_same("Spell Dmg", n)
+
+    m2 = re.search(
+        r"[Ii]ncreases?\s+healing\s+done\s+by\s+(?:up\s+to\s+)?(\d+)(?:.*?damage\s+done\s+by\s+(?:up\s+to\s+)?(\d+))?",
+        body,
+    )
+    if m2:
+        h = int(m2.group(1))
+        if m2.lastindex >= 2 and m2.group(2):
+            d = int(m2.group(2))
+            return n_same("Healing", h) and n_same("Spell Dmg", d)
+        return n_same("Healing", h)
+
+    m2 = re.search(
+        r"[Ii](?:ncreases?|mproves?)\s+damage\s+done\s+by\s+magical\s+spells\s+and\s+effects\s+by\s+(?:up\s+to\s+)?(\d+)",
+        body,
+    )
+    if m2:
+        n = int(m2.group(1))
+        return n_same("Spell Dmg", n)
+
+    m2 = re.search(
+        r"[Ii](?:ncreases?|mproves?)\s+attack\s+power\s+by\s+(\d+)", body
+    )
+    if m2:
+        return n_same("AP", int(m2.group(1)))
+
+    rating_specs = [
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?defense\s+rating\s+by\s*(\d+)",
+            "Defense",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?dodge\s+rating\s+by\s*(\d+)",
+            "Dodge",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?parry\s+rating\s+by\s*(\d+)",
+            "Parry",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?(?:shield\s+)?block\s+rating\s+by\s*(\d+)",
+            "Block Rating",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+the\s+block\s+value\s+of\s+your\s+shield\s+by\s*(\d+)",
+            "Block Value",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?(?:melee\s+and\s+ranged\s+)?hit\s+rating\s+by\s*(\d+)",
+            "Hit",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?(?:melee\s+and\s+ranged\s+)?critical\s+strike\s+rating\s+by\s*(\d+)",
+            "Crit",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?spell\s+hit\s+rating\s+by\s*(\d+)",
+            "Spell Hit",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?spell\s+critical\s+strike\s+rating\s+by\s*(\d+)",
+            "Spell Crit",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?(?:melee\s+)?haste\s+rating\s+by\s*(\d+)",
+            "Haste",
+        ),
+    ]
+    for pat, key in rating_specs:
+        m2 = re.search(pat, body)
+        if m2 and key in STAT_COLUMNS:
+            return n_same(key, int(m2.group(1)))
+
+    m2 = re.search(r"[Rr]estores?\s+(\d+)\s+mana\s+per\s+5\s+sec", body)
+    if m2:
+        return n_same("MP5", int(m2.group(1)))
+
+    return False
+
+
+def strip_equip_redundant_with_display_stats(stats, special_str):
+    """Drop Equip: segments whose numeric effects are already shown in STAT_COLUMNS."""
+    if not special_str or not str(special_str).strip():
+        return (special_str or "").strip()
+    ds = _display_stats_for_equip_filter(stats)
+    kept = []
+    for seg in _split_special_segments(special_str):
+        if re.match(r"^Equip:", seg.strip(), re.I):
+            if _equip_segment_redundant_with_display_stats(ds, seg):
+                continue
+        kept.append(seg)
+    return "; ".join(kept).strip()
+
+
 def _break_use_equip_newlines(text: str) -> str:
     """Ensure space-prefixed Use:/Equip: in prose start on new lines (Stats / display)."""
     if not text or not str(text).strip():
@@ -558,7 +728,8 @@ def stats_dict_to_string(stats, attributes=""):
             parts.append(f"{val} {key}")
     result = "; ".join(parts)
     if attributes:
-        at = _break_use_equip_newlines(attributes.strip())
+        at = strip_equip_redundant_with_display_stats(stats, attributes.strip())
+        at = _break_use_equip_newlines(at)
         if at:
             if result:
                 result += "\n\n" + at
@@ -984,7 +1155,9 @@ def export_xlsx(csv_path, spec_order):
         name = entry.get("name", "")
         slot = entry.get("slot", "")
         stats = entry.get("stats", {})
-        special = entry.get("special", "")
+        special = strip_equip_redundant_with_display_stats(
+            stats, entry.get("special", "") or ""
+        )
 
         ws_db.cell(row=db_row, column=1, value=name)
         ws_db.cell(row=db_row, column=2, value=slot)

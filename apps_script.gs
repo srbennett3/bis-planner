@@ -34,8 +34,10 @@ var CE_ITEMNAME = 2;  // B
 // BIS Planner: Comparison (rich text) = K; hidden M/N = Equip / Equip2; O = CmpRaw; then Δ columns
 var CMP_DISP_COL = 11;
 var CMP_RAW_COL = 15;
-/** Muted color when CmpRaw has no +/- stat segments (e.g. "Current Equipment Not Specified") */
+/** Muted color when CmpRaw has no +/- stat segments (other plain notices). */
 var CMP_NOTICE_COLOR = "#B06000";
+/** Exact CmpRaw line for empty CE — shown in black (not CMP_NOTICE_COLOR). */
+var CMP_RAW_EQUIP_NOT_SPECIFIED = "Current Equipment Not Specified";
 /** Heroic dungeon rows (dark fill + white text in export): lighter Comparison colors for contrast */
 var CMP_DELTA_POS_DARK_ROW = "#A5D6A7";
 var CMP_DELTA_NEG_DARK_ROW = "#FFAB91";
@@ -50,6 +52,11 @@ var EDIT_RECALC_WAIT_MS = 150;
 var OPEN_RECALC_WAIT_MS = 550;
 /** Between two open passes so CmpRaw can finish recalculating before the second read. */
 var OPEN_SECOND_PASS_SLEEP_MS = 220;
+
+/**
+ * First dropdown entry: selecting it clears Interest (unequip). Must be a non-empty string for Sheets.
+ */
+var BIS_INTEREST_CLEAR = "----";
 
 /** Set false after profiling. When true: Executions → View logs, or BIS Planner tools → Show last timing log. */
 var BIS_TIMING_DEBUG = true;
@@ -166,17 +173,36 @@ function onEdit(e) {
   }
 }
 
+/**
+ * Simple onOpen triggers are limited to ~30s. Do not call refreshComparisonAllSpecs_ here — it sleeps
+ * twice per spec and will hang or time out. Use one short wait + one full-sheet refresh; run
+ * BIS Planner tools → Force refresh comparison colors if CmpRaw was still settling.
+ */
 function onOpen() {
   var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
   if (!bp) return;
   applyInterestDropdownsByGearType_(bp);
   rebuildEquippedIndexFromPlanner_(bp);
-  refreshComparisonAllSpecs_(bp);
+  Utilities.sleep(OPEN_RECALC_WAIT_MS);
+  refreshComparisonRichText(bp, null, null, null, null);
 }
 
-/** Ring/Trinket: no plain Equipped. Other slots: no Equipped 1/2. Matches generate_bis_planner.py lists. */
-var INTEREST_LIST_STANDARD = ["Pass", "Consider", "Need", "Equipped"];
-var INTEREST_LIST_RING_TRINKET = ["Pass", "Consider", "Need", "Equipped 1", "Equipped 2"];
+/** Ring/Trinket: no plain Equipped. First item ---- clears cell on select. Matches generate_bis_planner.py. */
+var INTEREST_LIST_STANDARD = [
+  BIS_INTEREST_CLEAR,
+  "Pass",
+  "Consider",
+  "Need",
+  "Equipped",
+];
+var INTEREST_LIST_RING_TRINKET = [
+  BIS_INTEREST_CLEAR,
+  "Pass",
+  "Consider",
+  "Need",
+  "Equipped 1",
+  "Equipped 2",
+];
 
 function interestValidationRuleForGear_(gearType) {
   var g = normalizeItemName(gearType);
@@ -294,6 +320,15 @@ function handleBISPlannerEdit(e, bpSheet) {
     SpreadsheetApp.flush();
     bisTimingStep_(tCtx, "after first flush");
     var newValue = e.range.getValue();
+    if (normalizeItemName(newValue) === BIS_INTEREST_CLEAR || normalizeItemName(newValue) === "None") {
+      e.range.setValue("");
+      newValue = "";
+    }
+    // Legacy sentinels from earlier experiments.
+    if (normalizeItemName(newValue) === "(Clear)" || String(newValue) === " ") {
+      e.range.setValue("");
+      newValue = "";
+    }
     var meta = bpSheet.getRange(row, GG_SPEC, 1, GG_NAME - GG_SPEC + 1).getValues()[0];
     var spec = meta[0];
     var gearType = meta[1];
@@ -367,7 +402,9 @@ function handleBISPlannerEdit(e, bpSheet) {
 
   if (col <= GG_NAME) {
     if (col === GG_GEARTYPE) {
-      bpSheet.getRange(row, GG_INTEREST).setDataValidation(interestValidationRuleForGear_(e.range.getValue()));
+      bpSheet
+        .getRange(row, GG_INTEREST)
+        .setDataValidation(interestValidationRuleForGear_(e.range.getValue()));
     }
     var sg = bpSheet.getRange(row, GG_SPEC, 1, 2).getValues()[0];
     var specForRow = sg[0];
@@ -875,6 +912,12 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
 
   // Sheet.getRange(row, col, numRows, numColumns) — 3rd/4th are counts, not end row/col.
   var cmpNumRows = Math.max(0, lastRow - BIS_FIRST_DATA_ROW + 1);
+  var interestAll = [];
+  if (cmpNumRows > 0) {
+    interestAll = bpSheet
+      .getRange(BIS_FIRST_DATA_ROW, GG_INTEREST, cmpNumRows, 1)
+      .getDisplayValues();
+  }
   var cmpRawLetter = colLetterFromNum_(CMP_RAW_COL);
   var offNInBlock = CMP_RAW_COL - GG_SPEC;
   var indices = [];
@@ -1022,10 +1065,18 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
     }
     if (normalizeItemName(nmN) !== "") {
       var nmNorm = normalizeItemName(nmN);
+      var intN =
+        interestAll.length > i && interestAll[i]
+          ? normalizeItemName(interestAll[i][0])
+          : "";
       if (gearIsRingOrTrinket_(gearRow)) {
         var e1 = normalizeItemName(eqN);
         var e2 = normalizeItemName(eq2N);
-        if (nmNorm === e1 && e2 !== "" && nmNorm === e2) {
+        if (intN === "Equipped 1" && e1 !== "" && nmNorm === e1) {
+          dispStr = "";
+        } else if (intN === "Equipped 2" && e2 !== "" && nmNorm === e2) {
+          dispStr = "";
+        } else if (intN === "Equipped" && e1 !== "" && nmNorm === e1) {
           dispStr = "";
         }
       } else if (nmNorm === normalizeItemName(eqN)) {
@@ -1155,15 +1206,15 @@ function plannerRowIsHeroicDungeonDarkFill_(triple) {
 
 /** @return {boolean} */
 function isDualCmpRawHeaderLine_(trimmed) {
+  // Do not treat "Equipped slot 2" (no colon in sheet formula) as a header — it lives inside the
+  // Slot 2 body; mis-detecting it split the block and styled slot 2 unlike slot 1.
   return (
-    /^Slot 1 Comparison:$/.test(trimmed) ||
-    /^Slot 2 comparison$/.test(trimmed) ||
-    /^Equipped slot [12]$/.test(trimmed)
+    /^Slot 1 Comparison:$/.test(trimmed) || /^Slot 2 comparison$/.test(trimmed)
   );
 }
 
 /**
- * Ring/Trinket CmpRaw: blocks after "Slot 1 Comparison:" / "Slot 2 comparison" (legacy: Equipped slot 1/2).
+ * Ring/Trinket CmpRaw: blocks after "Slot 1 Comparison:" / "Slot 2 comparison".
  * @return {Array<{header:string, bodyLines:Array<string>}>}
  */
 function dualCmpRawBlocksFromText_(text) {
@@ -1415,15 +1466,18 @@ function buildComparisonRichTextValue(display, darkFillRow) {
       );
     }
   }
-  // No +/- stat runs (e.g. "Current Equipment Not Specified") — color the stats line so it is not plain black.
+  // No +/- stat runs — muted notice except "Current Equipment Not Specified" (always black).
   if (runs.length === 0 && line1End > 0) {
     var n1s = po;
     var n1e = Math.min(po + line1End, fullLen);
     if (n1s < n1e) {
+      var plainL1 = String(line1 == null ? "" : line1).replace(/^\s+|\s+$/g, "");
+      var noticeFill =
+        plainL1 === CMP_RAW_EQUIP_NOT_SPECIFIED ? "#000000" : colNotice;
       builder.setTextStyle(
         n1s,
         n1e,
-        SpreadsheetApp.newTextStyle().setForegroundColor(colNotice).build()
+        SpreadsheetApp.newTextStyle().setForegroundColor(noticeFill).build()
       );
     }
   }
