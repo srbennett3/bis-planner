@@ -23,8 +23,8 @@ var GG_NAME     = 4;  // D
 var GG_ACQ      = 6;  // F — Acquisition Type (heroic dungeon row detection; match _get_row_color)
 var GG_DUNGEON  = 8;  // H
 var GG_DIFFICULTY = 9; // I
-var GG_EQUIP    = 13; // M — hidden; must match generate_bis_planner.py SHEET_FIELDS ("Equip")
-var GG_EQUIP2   = 14; // N — hidden ("Equip2")
+var GG_EQUIP    = 14; // N — hidden; must match generate_bis_planner.py SHEET_FIELDS ("Equip")
+var GG_EQUIP2   = 15; // O — hidden ("Equip2")
 // Current Equipment column A uses "Ring 1" / "Ring 2" / "Trinket 1" / "Trinket 2"; planner column C stays Ring/Trinket.
 
 // Current Equipment columns (1-indexed)
@@ -32,13 +32,17 @@ var CE_GEARTYPE = 1;  // A
 var CE_ITEMNAME = 2;  // B
 // Layout must match generate_bis_planner.py (CE_GEM_HEADERS … CE_META_WEIGHT_COL).
 var CE_GEM_FIRST_COL = 3;
-var CE_GEM_LAST_COL = 15;
-var CE_STAT_FIRST_COL = 16;
-var CE_STAT_LAST_COL = 37;
-var CE_GEAR_SCORE_COL = 38;
-var CE_PAWN_SNAPSHOT_FIRST_COL = 39;
-var CE_CUSTOM_STASH_FIRST_COL = 61;
-var CE_META_WEIGHT_COL = 83;
+/** Last column of ideal gem block (C–E); must match generate_bis_planner NUM_CE_GEM_COLS. */
+var CE_GEM_LAST_COL = 5;
+var CE_IDEAL_GEM_COL = 3;
+var CE_IDEAL_META_COL = 4;
+var CE_TOTAL_GEM_STATS_COL = 5;
+var CE_STAT_FIRST_COL = 6;
+var CE_STAT_LAST_COL = 27;
+var CE_GEAR_SCORE_COL = 28;
+var CE_PAWN_SNAPSHOT_FIRST_COL = 29;
+var CE_CUSTOM_STASH_FIRST_COL = 51;
+var CE_META_WEIGHT_COL = 73;
 var CE_WEIGHT_ROW_LABEL = "Weights";
 var CE_WEIGHT_MODE_PAWN = "Pawn Default";
 var CE_WEIGHT_MODE_CUSTOM = "Custom";
@@ -79,15 +83,17 @@ var CE_PAWN_KEYS_FOR_STAT = [
   ["ResilienceRating"],
 ];
 
-var CE_GEM_COUNT_COLS = [4, 6, 8, 10, 12, 14];
-var CE_GEM_PICK_COLS = [3, 5, 7, 9, 11, 13, 15];
-var CE_GEM_PICK_CATS = ["red", "yellow", "blue", "orange", "purple", "green", "meta"];
+/** Non-meta GemDB categories: best weighted gem fills all colored sockets (Pawn-style). */
+var CE_GEM_NON_META_CATS = ["red", "yellow", "blue", "orange", "purple", "green"];
 
 var CE_GEM_LOCKED_BG = "#E0E0E0";
 
-// BIS Planner: Comparison (rich text) = K; hidden M/N = Equip / Equip2; O = CmpRaw; then Δ columns
+// BIS Planner: K = Stat Comparison; L = % Upgrade; P = CmpRaw; Q/R = gear scores (Apps Script); hidden N–R
+var GG_UPGRADE_COL = 12;
 var CMP_DISP_COL = 11;
-var CMP_RAW_COL = 15;
+var CMP_RAW_COL = 16;
+var GG_GEAR_SCORE_COL = 17;
+var GG_GEAR_SCORE_PLUS_GEMS_COL = 18;
 /** Muted color when CmpRaw has no +/- stat segments (other plain notices). */
 var CMP_NOTICE_COLOR = "#B06000";
 /** Exact CmpRaw line for empty CE — shown in black (not CMP_NOTICE_COLOR). */
@@ -97,15 +103,21 @@ var CMP_DELTA_POS_DARK_ROW = "#A5D6A7";
 var CMP_DELTA_NEG_DARK_ROW = "#FFAB91";
 var CMP_ATTR_LINE_DARK_ROW = "#C8E6C9";
 var CMP_NOTICE_DARK_ROW = "#FFE082";
-// Same-row mirror K→N without "=N4" (avoids rare parse issues); offset = CmpRaw − Comparison
+// Same-row mirror K→P without "=P4" (avoids rare parse issues); offset = CmpRaw − Stat Comparison
 var CMP_RAW_R1C1_OFFSET = CMP_RAW_COL - CMP_DISP_COL;
 
-/** After CE / Interest edits: one short wait before reading CmpRaw (N). */
+/** After CE / Interest edits: one short wait before reading CmpRaw (P). */
 var EDIT_RECALC_WAIT_MS = 150;
 /** Before each spec on open / force refresh (formulas still settling). */
 var OPEN_RECALC_WAIT_MS = 550;
 /** Between two open passes so CmpRaw can finish recalculating before the second read. */
 var OPEN_SECOND_PASS_SLEEP_MS = 220;
+
+/**
+ * Prevents nested refreshComparisonRichText (e.g. installable onEdit firing while script writes K/L/Q/R),
+ * which can stack until timeout or appear to hang.
+ */
+var bisRefreshReentryDepth_ = 0;
 
 /**
  * First dropdown entry: selecting it clears Interest (unequip). Must be a non-empty string for Sheets.
@@ -355,23 +367,62 @@ function uniqueSpecFiltersFromPlanner_(bpSheet) {
 }
 
 /**
- * Full planner refresh: one spec at a time. Two light passes per spec (open only) catch rows
- * where CmpRaw was still blank on the first read; edit paths use a single pass.
+ * Menu / repair: two full-sheet passes with a short sleep (CmpRaw may settle between reads).
+ * Do not loop per-spec — that multiplies sleeps and can exceed the 6-minute limit.
  */
-function refreshComparisonAllSpecs_(bp) {
-  var specs = uniqueSpecFiltersFromPlanner_(bp);
-  if (specs.length === 0) {
-    Utilities.sleep(OPEN_RECALC_WAIT_MS);
-    refreshComparisonRichText(bp, null, null, null, null);
-    Utilities.sleep(OPEN_SECOND_PASS_SLEEP_MS);
-    refreshComparisonRichText(bp, null, null, null, null);
-    return;
+function refreshComparisonAllSpecs_(bp, optTimingCtx) {
+  Utilities.sleep(OPEN_RECALC_WAIT_MS);
+  if (optTimingCtx) bisTimingStep_(optTimingCtx, "refreshAll: after first sleep (pass 1)");
+  var ss = bp.getParent();
+  var ceSh = ss.getSheetByName(CURRENT_EQUIP_SHEET);
+  var sharedCaches = ceSh ? plannerRefreshCachesBuild_(ss, ceSh) : null;
+  if (optTimingCtx) {
+    bisTimingStep_(
+      optTimingCtx,
+      sharedCaches
+        ? "refreshAll: shared bulk cache (reused for pass 1 + 2)"
+        : "refreshAll: no CE sheet — no shared cache"
+    );
   }
-  for (var si = 0; si < specs.length; si++) {
-    Utilities.sleep(OPEN_RECALC_WAIT_MS);
-    refreshComparisonRichText(bp, specs[si], null, null, null);
-    Utilities.sleep(OPEN_SECOND_PASS_SLEEP_MS);
-    refreshComparisonRichText(bp, specs[si], null, null, null);
+  var fullSheetBandSnap = {};
+  refreshComparisonRichText(
+    bp,
+    null,
+    null,
+    optTimingCtx,
+    null,
+    sharedCaches,
+    { captureFullSheetBands: fullSheetBandSnap }
+  );
+  if (optTimingCtx) bisTimingStep_(optTimingCtx, "refreshAll: pass 1 done");
+  Utilities.sleep(OPEN_SECOND_PASS_SLEEP_MS);
+  if (optTimingCtx) bisTimingStep_(optTimingCtx, "refreshAll: after second sleep (pass 2)");
+  refreshComparisonRichText(
+    bp,
+    null,
+    null,
+    optTimingCtx,
+    null,
+    sharedCaches,
+    { reuseFullSheetBands: fullSheetBandSnap }
+  );
+  if (optTimingCtx) bisTimingStep_(optTimingCtx, "refreshAll: pass 2 done");
+}
+
+/** True if row 3 has Gear Score / Gear Score Plus Gems (regenerated workbook). */
+function plannerGearScoreColumnsReady_(bpSheet) {
+  try {
+    var hr = BIS_FIRST_DATA_ROW - 1;
+    if (hr < 1) return false;
+    var q = String(bpSheet.getRange(hr, GG_GEAR_SCORE_COL).getValue() || "")
+      .replace(/^\s+|\s+$/g, "")
+      .toLowerCase();
+    var r = String(bpSheet.getRange(hr, GG_GEAR_SCORE_PLUS_GEMS_COL).getValue() || "")
+      .replace(/^\s+|\s+$/g, "")
+      .toLowerCase();
+    return q === "gear score" && r.indexOf("plus gems") !== -1;
+  } catch (e0) {
+    return false;
   }
 }
 
@@ -714,7 +765,6 @@ function ceHandleWeightsEdit_(e, ceSheet, row, col) {
     if (mode === CE_WEIGHT_MODE_PAWN || mode === CE_WEIGHT_MODE_CUSTOM) {
       ceApplyWeightMode_(ceSheet, row, mode);
       ceForEachGearRowInSection_(ceSheet, row, function (gr) {
-        ceRefreshGemRowUi_(ceSheet, gr);
         recalculateGearScoreForRow_(ceSheet, gr);
       });
     }
@@ -754,104 +804,571 @@ function itemdbLookupSockets_(ss, itemName) {
   return z;
 }
 
+/**
+ * ItemDB row for an item: socket counts + stat vector (same order as Current Equipment stat columns).
+ * @return {?{socks:{r:number,y:number,b:number,m:number}, stats:Array<number>}}
+ */
+function itemdbLookupStatsAndSockets_(ss, itemName) {
+  var want = normalizeItemName(itemName);
+  if (!want) return null;
+  var db = ss.getSheetByName(ITEMDB_SHEET);
+  if (!db) return null;
+  var lr = db.getLastRow();
+  if (lr < 2) return null;
+  var nStat = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+  var width = ITEMDB_FIRST_STAT_COL - 1 + nStat;
+  var data = db.getRange(2, 1, lr, width).getValues();
+  for (var i = 0; i < data.length; i++) {
+    if (!itemsNameMatch_(data[i][0], itemName)) continue;
+    var stats = [];
+    for (var s = 0; s < nStat; s++) {
+      stats.push(Number(data[i][ITEMDB_FIRST_STAT_COL - 1 + s]) || 0);
+    }
+    return {
+      socks: {
+        r: Number(data[i][ITEMDB_SOCKR_COL - 1]) || 0,
+        y: Number(data[i][ITEMDB_SOCKY_COL - 1]) || 0,
+        b: Number(data[i][ITEMDB_SOCKB_COL - 1]) || 0,
+        m: Number(data[i][ITEMDB_SOCKM_COL - 1]) || 0,
+      },
+      stats: stats,
+    };
+  }
+  return null;
+}
+
+/** One ItemDB read for refresh loops (avoids re-fetching the sheet per item). */
+function itemdbReadAllStatRows_(ss) {
+  var db = ss.getSheetByName(ITEMDB_SHEET);
+  if (!db) return null;
+  var lr = db.getLastRow();
+  if (lr < 2) return null;
+  var nStat = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+  var width = ITEMDB_FIRST_STAT_COL - 1 + nStat;
+  return db.getRange(2, 1, lr, width).getValues();
+}
+
+function itemdbLookupStatsAndSocketsInData_(data, itemName) {
+  if (!data || !itemName) return null;
+  var nStat = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+  for (var i = 0; i < data.length; i++) {
+    if (!itemsNameMatch_(data[i][0], itemName)) continue;
+    var stats = [];
+    for (var s = 0; s < nStat; s++) {
+      stats.push(Number(data[i][ITEMDB_FIRST_STAT_COL - 1 + s]) || 0);
+    }
+    return {
+      socks: {
+        r: Number(data[i][ITEMDB_SOCKR_COL - 1]) || 0,
+        y: Number(data[i][ITEMDB_SOCKY_COL - 1]) || 0,
+        b: Number(data[i][ITEMDB_SOCKB_COL - 1]) || 0,
+        m: Number(data[i][ITEMDB_SOCKM_COL - 1]) || 0,
+      },
+      stats: stats,
+    };
+  }
+  return null;
+}
+
+/** One GemDB read for refresh loops (computeIdealGemPlan scans categories in memory). */
+function gemdbReadAllRows_(ss) {
+  var sh = ss.getSheetByName(GEMDB_SHEET);
+  if (!sh) return null;
+  var lr = sh.getLastRow();
+  if (lr < 2) return null;
+  return sh.getRange(2, 1, lr, 4).getValues();
+}
+
+/** Weights row for a planner spec name (must match CE section title case). */
+function ceFindWeightsRowForSpec_(ceSheet, spec) {
+  var want = normalizeItemName(spec);
+  if (!want) return null;
+  var lr = ceSheet.getLastRow();
+  var curSpec = null;
+  for (var r = 1; r <= lr; r++) {
+    var a = String(ceSheet.getRange(r, CE_GEARTYPE).getValue()).trim();
+    if (a.indexOf("---") === 0) {
+      var parsed = specDisplayNameFromSectionHeader(a);
+      curSpec = parsed ? normalizeItemName(parsed) : null;
+      continue;
+    }
+    if (a === CE_WEIGHT_ROW_LABEL && curSpec && curSpec === want) {
+      return r;
+    }
+  }
+  return null;
+}
+
+/** True when this planner row is the equipped item (Stat Comparison / % Upgrade stay blank). */
+function plannerRowIsEquippedItemRow_(interestNorm, gearRow, itemNameRaw, eqRaw, eq2Raw) {
+  if (normalizeItemName(itemNameRaw) === "") return false;
+  if (gearIsRingOrTrinket_(gearRow)) {
+    var e1 = normalizeItemName(eqRaw);
+    var e2 = normalizeItemName(eq2Raw);
+    if (interestNorm === "Equipped 1" && e1 !== "" && itemsNameMatch_(itemNameRaw, eqRaw)) return true;
+    if (interestNorm === "Equipped 2" && e2 !== "" && itemsNameMatch_(itemNameRaw, eq2Raw)) return true;
+    if (interestNorm === "Equipped" && e1 !== "" && itemsNameMatch_(itemNameRaw, eqRaw)) return true;
+    return false;
+  }
+  return itemsNameMatch_(itemNameRaw, eqRaw);
+}
+
+/**
+ * Baseline "Gear Score Plus Gems" for % Upgrade: same pipeline as column R, using equipped names from
+ * planner columns N/O (matches Equip / Equip2 formulas). Avoids findCERow + CE Gear Score column, which can
+ * disagree with what N/O show when section matching or cached CE scores drift.
+ * Rings/trinkets: min of scores for the two equipped names (Pawn-style weaker-ring baseline).
+ */
+function plannerBaselineEquippedScore_(ss, ceSheet, spec, plannerGearType, eqN, eq2N, optCaches) {
+  var g = normalizeItemName(plannerGearType);
+  var specN = normalizeItemName(spec);
+  var e1 = normalizeItemName(eqN);
+  var e2 = normalizeItemName(eq2N);
+  var sk = specN + "\0" + g + "\0" + e1 + "\0" + e2;
+  if (optCaches && Object.prototype.hasOwnProperty.call(optCaches.baselineByKey, sk)) {
+    return optCaches.baselineByKey[sk];
+  }
+  var out = 0;
+  if (g === "Ring" || g === "Trinket") {
+    var u1 = e1 ? plannerItemGearScore_(ss, ceSheet, spec, eqN, optCaches) : 0;
+    var u2 = e2 ? plannerItemGearScore_(ss, ceSheet, spec, eq2N, optCaches) : 0;
+    var d = [];
+    if (u1 > 0) d.push(u1);
+    if (u2 > 0) d.push(u2);
+    out = d.length === 0 ? 0 : Math.min.apply(null, d);
+  } else {
+    out = e1 ? plannerItemGearScore_(ss, ceSheet, spec, eqN, optCaches) : 0;
+  }
+  if (optCaches) optCaches.baselineByKey[sk] = out;
+  return out;
+}
+
+/**
+ * Bulk-read CE column A once + ItemDB + GemDB; lazy weight vectors per spec; memo item + baseline scores.
+ * Used only inside refreshComparisonRichTextInner_ to avoid thousands of sheet reads.
+ */
+function plannerRefreshCachesBuild_(ss, ceSheet) {
+  var itemdbData = itemdbReadAllStatRows_(ss);
+  var gemData = gemdbReadAllRows_(ss);
+  var celr = ceSheet.getLastRow();
+  var aCol = celr >= 1 ? ceSheet.getRange(1, CE_GEARTYPE, celr, 1).getValues() : [];
+  var specToRow = {};
+  var curSpec = null;
+  for (var i = 0; i < aCol.length; i++) {
+    var r = i + 1;
+    var a = String(aCol[i][0]).trim();
+    if (a.indexOf("---") === 0) {
+      var parsed = specDisplayNameFromSectionHeader(a);
+      curSpec = parsed ? normalizeItemName(parsed) : null;
+      continue;
+    }
+    if (a === CE_WEIGHT_ROW_LABEL && curSpec) specToRow[curSpec] = r;
+  }
+  var weights = {
+    specToRow: specToRow,
+    wBySpec: {},
+    ceSheet: ceSheet,
+    get: function (spec) {
+      var k = normalizeItemName(spec);
+      if (!k) return null;
+      var row = this.specToRow[k];
+      if (!row) return null;
+      if (this.wBySpec[k]) return this.wBySpec[k];
+      var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+      var wVals = this.ceSheet.getRange(row, CE_STAT_FIRST_COL, 1, n).getValues()[0];
+      var metaSockW = Number(this.ceSheet.getRange(row, CE_META_WEIGHT_COL).getValue()) || 0;
+      var o = { wRow: row, wVals: wVals, metaSockW: metaSockW };
+      this.wBySpec[k] = o;
+      return o;
+    },
+  };
+  return {
+    ss: ss,
+    itemdbData: itemdbData,
+    gemData: gemData,
+    weights: weights,
+    ceGearCol: aCol,
+    ceSheet: ceSheet,
+    baselineByKey: {},
+    itemScoreBaseByKey: {},
+    itemScoreFullByKey: {},
+  };
+}
+
+function plannerItemGearScoreBaseOnlyWithCaches_(caches, spec, itemName) {
+  var nm = normalizeItemName(itemName);
+  if (!nm) return 0;
+  var ck = normalizeItemName(spec) + "\0" + nm;
+  if (Object.prototype.hasOwnProperty.call(caches.itemScoreBaseByKey, ck)) {
+    return caches.itemScoreBaseByKey[ck];
+  }
+  var w = caches.weights.get(spec);
+  if (!w) {
+    caches.itemScoreBaseByKey[ck] = 0;
+    return 0;
+  }
+  var row = itemdbLookupStatsAndSocketsInData_(caches.itemdbData, itemName);
+  if (!row) {
+    caches.itemScoreBaseByKey[ck] = 0;
+    return 0;
+  }
+  var base = 0;
+  for (var i = 0; i < w.wVals.length; i++) {
+    base += (Number(w.wVals[i]) || 0) * (Number(row.stats[i]) || 0);
+  }
+  var out = Math.round(base * 100) / 100;
+  caches.itemScoreBaseByKey[ck] = out;
+  return out;
+}
+
+function plannerItemGearScoreWithCaches_(caches, spec, itemName) {
+  var nm = normalizeItemName(itemName);
+  if (!nm) return 0;
+  var ck = normalizeItemName(spec) + "\0" + nm;
+  if (Object.prototype.hasOwnProperty.call(caches.itemScoreFullByKey, ck)) {
+    return caches.itemScoreFullByKey[ck];
+  }
+  var w = caches.weights.get(spec);
+  if (!w) {
+    caches.itemScoreFullByKey[ck] = 0;
+    return 0;
+  }
+  var row = itemdbLookupStatsAndSocketsInData_(caches.itemdbData, itemName);
+  if (!row) {
+    caches.itemScoreFullByKey[ck] = 0;
+    return 0;
+  }
+  var base = 0;
+  for (var i = 0; i < w.wVals.length; i++) {
+    base += (Number(w.wVals[i]) || 0) * (Number(row.stats[i]) || 0);
+  }
+  var plan = computeIdealGemPlan_(caches.ss, w.wVals, w.metaSockW, row.socks, caches.gemData);
+  var out = Math.round((base + plan.gemScore) * 100) / 100;
+  caches.itemScoreFullByKey[ck] = out;
+  return out;
+}
+
+function scoreGemStatsAgainstWeights_(st, wVals) {
+  var tot = 0;
+  for (var pk in st) {
+    if (!Object.prototype.hasOwnProperty.call(st, pk)) continue;
+    var wgt = ceWeightForPawnStat_(wVals, pk);
+    tot += (Number(st[pk]) || 0) * wgt;
+  }
+  return tot;
+}
+
+function bestGemInCategory_(ss, cat, wVals, optGemData) {
+  var data = optGemData;
+  if (data == null) {
+    var sh = ss.getSheetByName(GEMDB_SHEET);
+    if (!sh) return null;
+    var lr = sh.getLastRow();
+    if (lr < 2) return null;
+    data = sh.getRange(2, 1, lr, 4).getValues();
+  }
+  var bestScore = -1;
+  var bestLabel = "";
+  var bestStats = null;
+  for (var i = 0; i < data.length; i++) {
+    if (String(data[i][1]) !== cat) continue;
+    var rawLab = data[i][2];
+    var lab = ceNormalizeGemLabel_(rawLab);
+    if (!lab || lab === "----") continue;
+    var js = String(data[i][3] || "");
+    var st;
+    try {
+      st = JSON.parse(js);
+    } catch (e1) {
+      continue;
+    }
+    var sc = scoreGemStatsAgainstWeights_(st, wVals);
+    if (sc > bestScore) {
+      bestScore = sc;
+      bestLabel = String(rawLab == null ? "" : rawLab).replace(/\u200b/g, "");
+      bestStats = st;
+    }
+  }
+  if (bestScore < 0) return null;
+  return { label: bestLabel, stats: bestStats, score: bestScore };
+}
+
+/**
+ * Ideal gems: best weighted gem from non-meta categories fills all colored sockets; best meta per meta socket.
+ * @return {{gemScore:number, regLabel:string, regStats:?Object, metaLabel:string, metaStats:?Object, T:number, m:number}}
+ */
+function computeIdealGemPlan_(ss, wVals, metaSockW, socks, optGemData) {
+  var T = (socks.r || 0) + (socks.y || 0) + (socks.b || 0);
+  var m = socks.m || 0;
+  var gemScore = 0;
+  var regLabel = "";
+  var regStats = null;
+  var bestRegScore = -1;
+  if (T > 0) {
+    for (var ci = 0; ci < CE_GEM_NON_META_CATS.length; ci++) {
+      var best = bestGemInCategory_(ss, CE_GEM_NON_META_CATS[ci], wVals, optGemData);
+      if (best && best.score > bestRegScore) {
+        bestRegScore = best.score;
+        regLabel = best.label;
+        regStats = best.stats;
+      }
+    }
+    if (bestRegScore >= 0) gemScore += T * bestRegScore;
+  }
+  var metaLabel = "";
+  var metaStats = null;
+  if (m > 0) {
+    gemScore += m * (Number(metaSockW) || 0);
+    var bm = bestGemInCategory_(ss, "meta", wVals, optGemData);
+    if (bm) {
+      metaLabel = bm.label;
+      metaStats = bm.stats;
+      gemScore += m * bm.score;
+    }
+  }
+  return {
+    gemScore: gemScore,
+    regLabel: regLabel,
+    regStats: regStats,
+    metaLabel: metaLabel,
+    metaStats: metaStats,
+    T: T,
+    m: m,
+  };
+}
+
+var PAWN_KEY_SHORT = {
+  Armor: "Armor",
+  Strength: "Str",
+  Agility: "Agi",
+  Stamina: "Sta",
+  Intellect: "Int",
+  Spirit: "Spi",
+  Healing: "Healing",
+  SpellDamage: "Spell Dmg",
+  Ap: "AP",
+  Mp5: "MP5",
+  DefenseRating: "Defense",
+  DodgeRating: "Dodge",
+  ParryRating: "Parry",
+  BlockRating: "Block Rating",
+  BlockValue: "Block Value",
+  HitRating: "Hit",
+  CritRating: "Crit",
+  SpellHitRating: "Spell Hit",
+  SpellCritRating: "Spell Crit",
+  HasteRating: "Haste",
+  SpellHasteRating: "Haste",
+  ResilienceRating: "Resilience",
+  Versatility: "Versatility",
+};
+
+function aggregateGemStats_(regStats, T, metaStats, m) {
+  var acc = {};
+  function add(obj, mult) {
+    if (!obj || mult <= 0) return;
+    for (var k in obj) {
+      if (!Object.prototype.hasOwnProperty.call(obj, k)) continue;
+      var v = (Number(obj[k]) || 0) * mult;
+      if (v === 0) continue;
+      acc[k] = (acc[k] || 0) + v;
+    }
+  }
+  add(regStats, T);
+  add(metaStats, m);
+  return acc;
+}
+
+function formatAggregatedGemStats_(acc) {
+  var keys = [];
+  for (var k in acc) {
+    if (Object.prototype.hasOwnProperty.call(acc, k)) keys.push(k);
+  }
+  if (keys.length === 0) return "";
+  keys.sort();
+  var parts = [];
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    var v = acc[k];
+    if (Math.abs(v - Math.round(v)) < 1e-6) v = Math.round(v);
+    else v = Math.round(v * 100) / 100;
+    var short = PAWN_KEY_SHORT[k] || k;
+    parts.push((v > 0 ? "+" : "") + v + " " + short);
+  }
+  return parts.join(", ");
+}
+
+/** ItemDB stats × weights only (no sockets / ideal gems). */
+function plannerItemGearScoreBaseOnly_(ss, ceSheet, spec, itemName, optCaches) {
+  if (optCaches) return plannerItemGearScoreBaseOnlyWithCaches_(optCaches, spec, itemName);
+  var nm = normalizeItemName(itemName);
+  if (!nm) return 0;
+  var wRow = ceFindWeightsRowForSpec_(ceSheet, spec);
+  if (!wRow) return 0;
+  var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+  var wVals = ceSheet.getRange(wRow, CE_STAT_FIRST_COL, 1, n).getValues()[0];
+  var row = itemdbLookupStatsAndSockets_(ss, nm);
+  if (!row) return 0;
+  var base = 0;
+  for (var i = 0; i < wVals.length; i++) {
+    base += (Number(wVals[i]) || 0) * (Number(row.stats[i]) || 0);
+  }
+  return Math.round(base * 100) / 100;
+}
+
+function plannerItemGearScore_(ss, ceSheet, spec, itemName, optCaches) {
+  if (optCaches) return plannerItemGearScoreWithCaches_(optCaches, spec, itemName);
+  var nm = normalizeItemName(itemName);
+  if (!nm) return 0;
+  var wRow = ceFindWeightsRowForSpec_(ceSheet, spec);
+  if (!wRow) return 0;
+  var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+  var wVals = ceSheet.getRange(wRow, CE_STAT_FIRST_COL, 1, n).getValues()[0];
+  var metaSockW = Number(ceSheet.getRange(wRow, CE_META_WEIGHT_COL).getValue()) || 0;
+  var row = itemdbLookupStatsAndSockets_(ss, nm);
+  if (!row) return 0;
+  var base = 0;
+  for (var i = 0; i < wVals.length; i++) {
+    base += (Number(wVals[i]) || 0) * (Number(row.stats[i]) || 0);
+  }
+  var plan = computeIdealGemPlan_(ss, wVals, metaSockW, row.socks);
+  return Math.round((base + plan.gemScore) * 100) / 100;
+}
+
+/**
+ * % Upgrade from "Gear Score Plus Gems" vs Current Equipment baseline for that slot.
+ * @param {number} itemScorePlusGems — same value written to column R
+ */
+function upgradePctFromScores_(itemScorePlusGems, equippedBaseline, heroicDark, hideRow) {
+  var out = { text: "", color: "#000000" };
+  if (hideRow) return out;
+  if (equippedBaseline <= 0) return out;
+  var pct = ((itemScorePlusGems - equippedBaseline) / equippedBaseline) * 100;
+  var rounded = Math.round(pct * 10) / 10;
+  var sign = rounded > 0 ? "+" : "";
+  out.text = sign + rounded + "%";
+  var posC = heroicDark ? CMP_DELTA_POS_DARK_ROW : "#0d652d";
+  var negC = heroicDark ? CMP_DELTA_NEG_DARK_ROW : "#c5221f";
+  out.color =
+    rounded > 0 ? posC : rounded < 0 ? negC : heroicDark ? "#EEEEEE" : "#000000";
+  return out;
+}
+
+function flushUpgradePctCells_(bpSheet, upgradeWrites, timingCtx) {
+  if (!upgradeWrites || upgradeWrites.length === 0) {
+    bisTimingStep_(timingCtx, "flushUpgradePctCells_: 0 writes (skip)");
+    return;
+  }
+  bisTimingStep_(timingCtx, "flushUpgradePctCells_: start");
+  upgradeWrites.sort(function (a, b) {
+    return a.r - b.r;
+  });
+  var segments = [];
+  var cur = [upgradeWrites[0]];
+  for (var wi = 1; wi < upgradeWrites.length; wi++) {
+    if (upgradeWrites[wi].r === upgradeWrites[wi - 1].r + 1) cur.push(upgradeWrites[wi]);
+    else {
+      segments.push(cur);
+      cur = [upgradeWrites[wi]];
+    }
+  }
+  segments.push(cur);
+  for (var si = 0; si < segments.length; si++) {
+    var seg = segments[si];
+    var r0 = seg[0].r;
+    var h = seg.length;
+    var texts = [];
+    var colors = [];
+    for (var j = 0; j < h; j++) {
+      texts.push([seg[j].text]);
+      colors.push([seg[j].color]);
+    }
+    var upRange = bpSheet.getRange(r0, GG_UPGRADE_COL, h, 1);
+    upRange.setValues(texts);
+    try {
+      upRange.setFontColors(colors);
+    } catch (eFont) {}
+  }
+  bisTimingStep_(timingCtx, "flushUpgradePctCells_: done");
+}
+
+function flushPlannerGearScoreCells_(bpSheet, gearWrites, timingCtx) {
+  if (!gearWrites || gearWrites.length === 0) {
+    bisTimingStep_(timingCtx, "flushPlannerGearScoreCells_: 0 writes (skip)");
+    return;
+  }
+  bisTimingStep_(timingCtx, "flushPlannerGearScoreCells_: start");
+  gearWrites.sort(function (a, b) {
+    return a.r - b.r;
+  });
+  var segments = [];
+  var cur = [gearWrites[0]];
+  for (var wi = 1; wi < gearWrites.length; wi++) {
+    if (gearWrites[wi].r === gearWrites[wi - 1].r + 1) cur.push(gearWrites[wi]);
+    else {
+      segments.push(cur);
+      cur = [gearWrites[wi]];
+    }
+  }
+  segments.push(cur);
+  for (var si = 0; si < segments.length; si++) {
+    var seg = segments[si];
+    var r0 = seg[0].r;
+    var h = seg.length;
+    var matrix = [];
+    for (var j = 0; j < h; j++) {
+      matrix.push([seg[j].base, seg[j].full]);
+    }
+    try {
+      bpSheet.getRange(r0, GG_GEAR_SCORE_COL, h, 2).setValues(matrix);
+    } catch (eGs) {}
+  }
+  bisTimingStep_(timingCtx, "flushPlannerGearScoreCells_: done");
+}
+
+/** Updates ideal gem display, backgrounds, and Gear Score for one CE row. */
+function ceUpdateIdealGemCellsAndScore_(ceSheet, row) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var wRow = ceFindWeightsRowForSection_(ceSheet, row);
+  if (!wRow) return;
+  var item = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
+  if (!item) {
+    ceSheet.getRange(row, CE_IDEAL_GEM_COL, 1, CE_TOTAL_GEM_STATS_COL - CE_IDEAL_GEM_COL + 1).setValues([["", "", ""]]);
+    ceSheet.getRange(row, CE_IDEAL_GEM_COL, 1, CE_TOTAL_GEM_STATS_COL - CE_IDEAL_GEM_COL + 1).setBackground(CE_GEM_LOCKED_BG);
+    ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue("");
+    return;
+  }
+  var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
+  var wVals = ceSheet.getRange(wRow, CE_STAT_FIRST_COL, 1, n).getValues()[0];
+  var metaSockW = Number(ceSheet.getRange(wRow, CE_META_WEIGHT_COL).getValue()) || 0;
+  var socks = itemdbLookupSockets_(ss, item);
+  var T = socks.r + socks.y + socks.b;
+  var m = socks.m || 0;
+  var plan = computeIdealGemPlan_(ss, wVals, metaSockW, socks);
+  var acc = aggregateGemStats_(plan.regStats, plan.T, plan.metaStats, plan.m);
+  ceSheet.getRange(row, CE_IDEAL_GEM_COL).setValue(T > 0 ? plan.regLabel || "—" : "");
+  ceSheet.getRange(row, CE_IDEAL_META_COL).setValue(m > 0 ? plan.metaLabel || "—" : "");
+  ceSheet.getRange(row, CE_TOTAL_GEM_STATS_COL).setValue(formatAggregatedGemStats_(acc));
+  ceSheet.getRange(row, CE_IDEAL_GEM_COL).setBackground(T > 0 ? null : CE_GEM_LOCKED_BG);
+  ceSheet.getRange(row, CE_IDEAL_META_COL).setBackground(m > 0 ? null : CE_GEM_LOCKED_BG);
+  ceSheet.getRange(row, CE_TOTAL_GEM_STATS_COL).setBackground(T > 0 || m > 0 ? null : CE_GEM_LOCKED_BG);
+  ceSheet.getRange(row, CE_IDEAL_GEM_COL).setFontColor("#000000");
+  ceSheet.getRange(row, CE_IDEAL_META_COL).setFontColor("#000000");
+  ceSheet.getRange(row, CE_TOTAL_GEM_STATS_COL).setFontColor("#000000");
+  var sVals = ceSheet.getRange(row, CE_STAT_FIRST_COL, 1, n).getValues()[0];
+  var score = 0;
+  for (var ii = 0; ii < wVals.length; ii++) {
+    score += (Number(sVals[ii]) || 0) * (Number(wVals[ii]) || 0);
+  }
+  score += plan.gemScore;
+  ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue(Math.round(score * 100) / 100);
+}
+
 /** Strip ZWSP prefix used so Sheets does not parse "+8 Str" as a formula. */
 function ceNormalizeGemLabel_(v) {
   return String(v == null ? "" : v)
     .replace(/\u200b/g, "")
     .replace(/^\s+|\s+$/g, "");
-}
-
-function gemdbLookupStatsJson_(ss, category, label) {
-  var want = ceNormalizeGemLabel_(label);
-  if (!want || want === "----") return null;
-  var sh = ss.getSheetByName(GEMDB_SHEET);
-  if (!sh) return null;
-  var lr = sh.getLastRow();
-  if (lr < 2) return null;
-  var data = sh.getRange(2, 1, lr, 4).getValues();
-  for (var i = 0; i < data.length; i++) {
-    if (String(data[i][1]) !== category) continue;
-    if (ceNormalizeGemLabel_(data[i][2]) !== want) continue;
-    return String(data[i][3] || "");
-  }
-  return null;
-}
-
-/** Sort key: group by alphabetically-first stat phrase, then larger bonus first. */
-function ceGemSortKey_(label) {
-  var t = ceNormalizeGemLabel_(label);
-  var re = /\+?(\d+(?:\.\d+)?)\s+([^/]+)/g;
-  var m;
-  var parts = [];
-  while ((m = re.exec(t)) !== null) {
-    parts.push({ n: Number(m[1]), stat: m[2].trim().toLowerCase() });
-  }
-  if (parts.length === 0) return ["zzz", 0, t.toLowerCase()];
-  var bucket = parts
-    .map(function (p) {
-      return p.stat;
-    })
-    .sort()[0];
-  var maxB = 0;
-  for (var i = 0; i < parts.length; i++) {
-    if (parts[i].n > maxB) maxB = parts[i].n;
-  }
-  return [bucket, -maxB, t.toLowerCase()];
-}
-
-function ceGemSortCompare_(a, b) {
-  var ka = ceGemSortKey_(a);
-  var kb = ceGemSortKey_(b);
-  if (ka[0] !== kb[0]) return ka[0] < kb[0] ? -1 : ka[0] > kb[0] ? 1 : 0;
-  if (ka[1] !== kb[1]) return ka[1] - kb[1];
-  if (ka[2] !== kb[2]) return ka[2] < kb[2] ? -1 : ka[2] > kb[2] ? 1 : 0;
-  return 0;
-}
-
-/**
- * Dropdown values for one gem color (GemDB only — avoids ItemDB getLastRow() spanning item rows
- * and mixing in id column / blanks / wrong categories).
- */
-function ceGemDropdownListForCategory_(ss, cat) {
-  var sh = ss.getSheetByName(GEMDB_SHEET);
-  if (!sh) return ["\u200b----"];
-  var lr = sh.getLastRow();
-  if (lr < 2) return ["\u200b----"];
-  var data = sh.getRange(2, 1, lr, 3).getValues();
-  var raw = [];
-  for (var i = 0; i < data.length; i++) {
-    if (String(data[i][1]) !== cat) continue;
-    var lab = data[i][2];
-    if (lab == null) continue;
-    var s = String(lab);
-    if (ceNormalizeGemLabel_(s) === "") continue;
-    raw.push(s);
-  }
-  raw.sort(ceGemSortCompare_);
-  var seen = {};
-  var out = [];
-  for (var j = 0; j < raw.length; j++) {
-    var k = ceNormalizeGemLabel_(raw[j]);
-    if (seen[k]) continue;
-    seen[k] = true;
-    out.push(raw[j]);
-  }
-  var none = "\u200b----";
-  if (out.length === 0) return [none];
-  var hasNone = false;
-  for (var u = 0; u < out.length; u++) {
-    if (ceNormalizeGemLabel_(out[u]) === "----") hasNone = true;
-  }
-  if (!hasNone) out.unshift(none);
-  return out;
-}
-
-function ceApplyGemPickListValidation_(ceSheet, row, col, listArr) {
-  var rule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(listArr, true)
-    .setAllowInvalid(true)
-    .build();
-  ceSheet.getRange(row, col).setDataValidation(rule);
 }
 
 function ceWeightForPawnStat_(wVals, pawnKey) {
@@ -864,172 +1381,8 @@ function ceWeightForPawnStat_(wVals, pawnKey) {
   return 0;
 }
 
-/** WoW: any gem type can go in a non-meta socket; enable all color/hybrid pickers when T > 0. */
-function ceGemPickEnabled_(socks, cat) {
-  var T = socks.r + socks.y + socks.b;
-  if (cat === "meta") return socks.m > 0;
-  return T > 0;
-}
-
-function ceCountEnabled_(socks, cat) {
-  return ceGemPickEnabled_(socks, cat);
-}
-
-function ceLockGemCell_(ceSheet, row, col, lock) {
-  var cell = ceSheet.getRange(row, col);
-  if (lock) {
-    cell.setBackground(CE_GEM_LOCKED_BG);
-    cell.setDataValidation(null);
-    if (CE_GEM_COUNT_COLS.indexOf(col) >= 0) {
-      cell.setValue(0);
-    } else {
-      cell.setValue("----");
-    }
-  } else {
-    cell.setBackground(null);
-  }
-}
-
-function ceRefreshGemRowUi_(ceSheet, row) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var item = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
-  if (!item) {
-    for (var z = 0; z < CE_GEM_PICK_COLS.length; z++) {
-      ceLockGemCell_(ceSheet, row, CE_GEM_PICK_COLS[z], true);
-      if (z < CE_GEM_COUNT_COLS.length) {
-        ceLockGemCell_(ceSheet, row, CE_GEM_COUNT_COLS[z], true);
-      }
-    }
-    return;
-  }
-  var socks = itemdbLookupSockets_(ss, item);
-  var T = socks.r + socks.y + socks.b;
-  var hasAny = T > 0 || socks.m > 0;
-
-  for (var k = 0; k < CE_GEM_PICK_COLS.length; k++) {
-    var pc = CE_GEM_PICK_COLS[k];
-    var cat = CE_GEM_PICK_CATS[k];
-    var en = hasAny && ceGemPickEnabled_(socks, cat);
-    ceLockGemCell_(ceSheet, row, pc, !en);
-    if (k < CE_GEM_COUNT_COLS.length) {
-      var cc = CE_GEM_COUNT_COLS[k];
-      var cen = hasAny && ceCountEnabled_(socks, cat);
-      ceLockGemCell_(ceSheet, row, cc, !cen);
-    }
-  }
-
-  if (!hasAny) {
-    return;
-  }
-
-  var totalCnt = 0;
-  for (var ii = 0; ii < CE_GEM_COUNT_COLS.length; ii++) {
-    var ccat = CE_GEM_PICK_CATS[ii];
-    if (!ceCountEnabled_(socks, ccat)) continue;
-    totalCnt += Number(ceSheet.getRange(row, CE_GEM_COUNT_COLS[ii]).getValue()) || 0;
-  }
-  if (totalCnt > T) {
-    var over = totalCnt - T;
-    for (var ri = CE_GEM_COUNT_COLS.length - 1; ri >= 0 && over > 0; ri--) {
-      var ccat2 = CE_GEM_PICK_CATS[ri];
-      if (!ceCountEnabled_(socks, ccat2)) continue;
-      var cc2 = CE_GEM_COUNT_COLS[ri];
-      var cv = Number(ceSheet.getRange(row, cc2).getValue()) || 0;
-      var cut = Math.min(cv, over);
-      if (cut > 0) {
-        ceSheet.getRange(row, cc2).setValue(cv - cut);
-        over -= cut;
-      }
-    }
-  }
-
-  ceReapplyGemListValidations_(ceSheet, row, socks);
-  ceRefreshCountValidationsForRow_(ceSheet, row, socks);
-}
-
-function ceReapplyGemListValidations_(ceSheet, row, socks) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  for (var k = 0; k < CE_GEM_PICK_COLS.length; k++) {
-    var pc = CE_GEM_PICK_COLS[k];
-    var cat = CE_GEM_PICK_CATS[k];
-    if (!ceGemPickEnabled_(socks, cat)) continue;
-    var listArr = ceGemDropdownListForCategory_(ss, cat);
-    if (!listArr || listArr.length === 0) continue;
-    ceApplyGemPickListValidation_(ceSheet, row, pc, listArr);
-  }
-}
-
-function ceRefreshCountValidationsForRow_(ceSheet, row, socks) {
-  var T = socks.r + socks.y + socks.b;
-  for (var i = 0; i < CE_GEM_COUNT_COLS.length; i++) {
-    var cc = CE_GEM_COUNT_COLS[i];
-    var cat = CE_GEM_PICK_CATS[i];
-    if (!ceCountEnabled_(socks, cat)) continue;
-    var sumOthers = 0;
-    for (var j = 0; j < CE_GEM_COUNT_COLS.length; j++) {
-      if (j === i) continue;
-      var catj = CE_GEM_PICK_CATS[j];
-      if (!ceCountEnabled_(socks, catj)) continue;
-      sumOthers += Number(ceSheet.getRange(row, CE_GEM_COUNT_COLS[j]).getValue()) || 0;
-    }
-    var maxV = Math.max(0, T - sumOthers);
-    var opts = [];
-    for (var v = 0; v <= maxV; v++) opts.push(String(v));
-    var rule = SpreadsheetApp.newDataValidation()
-      .requireValueInList(opts, true)
-      .setAllowInvalid(false)
-      .build();
-    ceSheet.getRange(row, cc).setDataValidation(rule);
-  }
-}
-
 function recalculateGearScoreForRow_(ceSheet, row) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var wRow = ceFindWeightsRowForSection_(ceSheet, row);
-  if (!wRow) return;
-  var wVals = ceSheet.getRange(wRow, CE_STAT_FIRST_COL, 1, CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1).getValues()[0];
-  var metaSockW = Number(ceSheet.getRange(wRow, CE_META_WEIGHT_COL).getValue()) || 0;
-
-  var item = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
-  var socks = itemdbLookupSockets_(ss, item);
-
-  var sVals = ceSheet.getRange(row, CE_STAT_FIRST_COL, 1, CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1).getValues()[0];
-  var score = 0;
-  for (var i = 0; i < wVals.length; i++) {
-    score += (Number(sVals[i]) || 0) * (Number(wVals[i]) || 0);
-  }
-
-  score += metaSockW * socks.m;
-
-  for (var k = 0; k < CE_GEM_PICK_COLS.length; k++) {
-    var pc = CE_GEM_PICK_COLS[k];
-    var cat = CE_GEM_PICK_CATS[k];
-    var cnt = 1;
-    if (cat !== "meta") {
-      if (k >= CE_GEM_COUNT_COLS.length) continue;
-      cnt = Number(ceSheet.getRange(row, CE_GEM_COUNT_COLS[k]).getValue()) || 0;
-    } else {
-      var gl = ceNormalizeGemLabel_(ceSheet.getRange(row, pc).getValue());
-      if (!gl || gl === "----") cnt = 0;
-    }
-    if (cnt <= 0) continue;
-    var label = ceNormalizeGemLabel_(ceSheet.getRange(row, pc).getValue());
-    var js = gemdbLookupStatsJson_(ss, cat, label);
-    if (!js) continue;
-    var st;
-    try {
-      st = JSON.parse(js);
-    } catch (err) {
-      continue;
-    }
-    for (var pk in st) {
-      if (!Object.prototype.hasOwnProperty.call(st, pk)) continue;
-      var wgt = ceWeightForPawnStat_(wVals, pk);
-      score += cnt * (Number(st[pk]) || 0) * wgt;
-    }
-  }
-
-  ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue(Math.round(score * 100) / 100);
+  ceUpdateIdealGemCellsAndScore_(ceSheet, row);
 }
 
 /** Full refresh (all gear rows). Prefer ceRefreshDerivedOnOpen_ from onOpen. */
@@ -1039,12 +1392,11 @@ function ceRefreshAllDerived_(ceSheet) {
     if (ceIsWeightsRow_(ceSheet, r)) continue;
     var gt = String(ceSheet.getRange(r, CE_GEARTYPE).getValue()).trim();
     if (!gt || gt.indexOf("---") === 0) continue;
-    ceRefreshGemRowUi_(ceSheet, r);
     recalculateGearScoreForRow_(ceSheet, r);
   }
 }
 
-/** Gear rows with no item in B: lock gem block (onOpen skips them in ceRefreshDerivedOnOpen_). */
+/** Gear rows with no item in B: clear ideal gem cells (grey) and gear score. */
 function ceLockGemRowsWithoutItem_(ceSheet) {
   var lr = ceSheet.getLastRow();
   for (var r = CE_FIRST_DATA_ROW; r <= lr; r++) {
@@ -1052,7 +1404,7 @@ function ceLockGemRowsWithoutItem_(ceSheet) {
     var gt = String(ceSheet.getRange(r, CE_GEARTYPE).getValue()).trim();
     if (!gt || gt.indexOf("---") === 0) continue;
     if (normalizeItemName(ceSheet.getRange(r, CE_ITEMNAME).getValue())) continue;
-    ceRefreshGemRowUi_(ceSheet, r);
+    recalculateGearScoreForRow_(ceSheet, r);
   }
 }
 
@@ -1065,13 +1417,12 @@ function ceRefreshDerivedOnOpen_(ceSheet) {
     if (!gt || gt.indexOf("---") === 0) continue;
     var item = normalizeItemName(ceSheet.getRange(r, CE_ITEMNAME).getValue());
     if (!item) continue;
-    ceRefreshGemRowUi_(ceSheet, r);
     recalculateGearScoreForRow_(ceSheet, r);
   }
 }
 
 /**
- * One column group for gem block (C–O). If grouping looks wrong after an xlsx change, delete document
+ * One column group for ideal gem block (C–E). If grouping looks wrong after an xlsx change, delete document
  * property BIS_CE_GEM_GROUPED_V1 once and reopen so this runs again.
  */
 function ceEnsureGemColumnGroup_(ceSheet) {
@@ -1110,15 +1461,6 @@ function handleCurrentEquipEdit(e, ceSheet) {
   }
 
   if (col >= CE_GEM_FIRST_COL && col <= CE_GEM_LAST_COL) {
-    if (!normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue())) {
-      ceRefreshGemRowUi_(ceSheet, row);
-      return;
-    }
-    ceRefreshCountValidationsForRow_(
-      ceSheet,
-      row,
-      itemdbLookupSockets_(SpreadsheetApp.getActiveSpreadsheet(), ceSheet.getRange(row, CE_ITEMNAME).getValue())
-    );
     recalculateGearScoreForRow_(ceSheet, row);
     return;
   }
@@ -1151,7 +1493,7 @@ function handleCurrentEquipEdit(e, ceSheet) {
     bisTimingStep_(tCtx, "after setInterestForItem");
   }
 
-  ceRefreshGemRowUi_(ceSheet, row);
+  recalculateGearScoreForRow_(ceSheet, row);
   recalculateGearScoreForRow_(ceSheet, row);
 
   SpreadsheetApp.flush();
@@ -1203,6 +1545,8 @@ function clearCEItemIfMatch(spec, gearType, itemName) {
 
 /**
  * @param {?Array<Array<*>>} gearColValuesOpt - optional column A values from row 1..lastRow (same as getValues).
+ * Section matching must mirror ceFindWeightsRowForSpec_: substring checks (e.g. "Death Knight" inside
+ * "--- DEATH KNIGHT TANK ---") pick the wrong spec and corrupt % Upgrade baselines.
  */
 function findCERow(ceSheet, spec, gearType, gearColValuesOpt) {
   var data = gearColValuesOpt;
@@ -1211,14 +1555,19 @@ function findCERow(ceSheet, spec, gearType, gearColValuesOpt) {
     if (lastRow < 1) return null;
     data = ceSheet.getRange(1, CE_GEARTYPE, lastRow, 1).getValues();
   }
-  var inSection = false;
+  var specWant = normalizeItemName(spec);
+  var gearWant = normalizeItemName(gearType);
+  if (!gearWant) return null;
+
+  var curSpec = null;
   for (var i = 0; i < data.length; i++) {
     var val = String(data[i][0]);
     if (val.indexOf("---") === 0) {
-      inSection = val.indexOf(spec.toUpperCase()) !== -1;
+      var parsedHdr = specDisplayNameFromSectionHeader(val);
+      curSpec = parsedHdr ? normalizeItemName(parsedHdr) : null;
       continue;
     }
-    if (inSection && normalizeItemName(val) === normalizeItemName(gearType)) {
+    if (curSpec && specWant && curSpec === specWant && normalizeItemName(val) === gearWant) {
       return i + 1;
     }
   }
@@ -1288,7 +1637,7 @@ function clearInterestForItem(bpSheet, spec, ceGearLabel, itemName) {
 }
 
 // ============================================================
-// Comparison column: Rich Text (Google Sheets only; CmpRaw = N, Comparison = K)
+// Stat Comparison column: Rich Text (Google Sheets only; CmpRaw = P, Stat Comparison = K)
 // ============================================================
 
 /** 1-based column index to A1 letter(s) (e.g. 14 → "N"). */
@@ -1314,7 +1663,7 @@ function cellIsCmpRawMirrorFormula_(formula, row) {
 }
 
 /**
- * Writes queued Comparison (K) updates in batches (clear + setRichTextValues / setFormulas) to cut round-trips.
+ * Writes queued Stat Comparison (K) updates in batches (clear + setRichTextValues / setFormulas) to cut round-trips.
  * @param {Array<{r:number, kind:string, rich?:GoogleAppsScript.Spreadsheet.RichTextValue, needClearBefore:boolean}>} writes
  */
 function flushComparisonWrites_(bpSheet, writes, cmpRawColLetter, timingCtx) {
@@ -1417,7 +1766,55 @@ function bisIndicesToRuns_(indices) {
 }
 
 /**
- * Applies green/red Rich Text to Comparison (K) from CmpRaw display (O).
+ * Full-sheet refresh: same logical layout as B:P indexed from Spec (B), without reading E,G,J–M.
+ * partAD: A–D (Interest, Spec, Gear type, Name); partFI: F–I; partNOP: N–P (Equip, Equip2, CmpRaw).
+ */
+function plannerAssembleFullSheetBlockDisplayFromBands_(partAD, partFI, partNOP) {
+  var n = partAD.length;
+  var blockDisplay = new Array(n);
+  for (var ri = 0; ri < n; ri++) {
+    var ad = partAD[ri];
+    var fi = partFI[ri];
+    var nop = partNOP[ri];
+    blockDisplay[ri] = [
+      ad[1],
+      ad[2],
+      ad[3],
+      null,
+      fi[0],
+      fi[1],
+      fi[2],
+      fi[3],
+      null,
+      null,
+      null,
+      null,
+      nop[0],
+      nop[1],
+      nop[2],
+    ];
+  }
+  return blockDisplay;
+}
+
+/** Stable key for force-refresh pass 2: skip CPU when CmpRaw-derived inputs match pass 1. */
+function plannerCmpRawRefreshRowFingerprint_(dispStr, heroicDarkRow, intN, equippedHide) {
+  var errCell = dispStr.length > 0 && dispStr.charAt(0) === "#" ? "1" : "0";
+  return (
+    normalizeComparisonDisplay(dispStr) +
+    "\x1f" +
+    (heroicDarkRow ? "1" : "0") +
+    "\x1f" +
+    String(intN || "") +
+    "\x1f" +
+    (equippedHide ? "1" : "0") +
+    "\x1f" +
+    errCell
+  );
+}
+
+/**
+ * Applies green/red Rich Text to Stat Comparison (K) from CmpRaw (P); fills % Upgrade (L).
  * Mirror fallback uses batched =N{row} (same link as R1C1 =RC[offset]).
  * @param {?string} specFilter - If set, only rows whose Spec (B) matches.
  * @param {?string} gearTypeFilter - With specFilter, only rows whose Gear type (C) matches (same slot
@@ -1425,8 +1822,55 @@ function bisIndicesToRuns_(indices) {
  * @param {?{start:number, last:number, rows:Array<string>}} timingCtx - optional; pass null from onOpen / menu.
  * @param {?Array<Array<*>>} plannerABCReuse - optional B:C (2 cols) or A:C (3 cols) getValues snapshot, rows aligned
  *   to BIS_FIRST_DATA_ROW; when spec+gear scoped, skips a second B+C read (equip path passes B:C only).
+ * @param {?Object} optSharedPlannerCaches - from plannerRefreshCachesBuild_; when set (e.g. force refresh), skip rebuilding
+ *   ItemDB/GemDB/CE caches so pass 2 reuses pass 1 memoization.
+ * @param {?{captureFullSheetBands:?Object, reuseFullSheetBands:?Object}} optFullSheetIo_ - force-refresh pass 2 only:
+ *   pass 1 uses captureFullSheetBands (plain object filled with partAD/partFI/partNOP); pass 2 uses reuseFullSheetBands
+ *   to re-read CmpRaw (P) and K formulas only.
  */
-function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCtx, plannerABCReuse) {
+function refreshComparisonRichText(
+  bpSheet,
+  specFilter,
+  gearTypeFilter,
+  timingCtx,
+  plannerABCReuse,
+  optSharedPlannerCaches,
+  optFullSheetIo_
+) {
+  var lastRow = bpSheet.getLastRow();
+  if (lastRow < BIS_FIRST_DATA_ROW) return;
+
+  if (bisRefreshReentryDepth_ > 0) {
+    bisTimingStep_(timingCtx, "refreshComparisonRichText: skipped (re-entry)");
+    return;
+  }
+  bisRefreshReentryDepth_++;
+  try {
+    refreshComparisonRichTextInner_(
+      bpSheet,
+      specFilter,
+      gearTypeFilter,
+      timingCtx,
+      plannerABCReuse,
+      lastRow,
+      optSharedPlannerCaches,
+      optFullSheetIo_
+    );
+  } finally {
+    bisRefreshReentryDepth_--;
+  }
+}
+
+function refreshComparisonRichTextInner_(
+  bpSheet,
+  specFilter,
+  gearTypeFilter,
+  timingCtx,
+  plannerABCReuse,
+  lastRow,
+  optSharedPlannerCaches,
+  optFullSheetIo_
+) {
   var specFilterNorm =
     specFilter != null && String(specFilter).replace(/^\s+|\s+$/g, "") !== ""
       ? normalizeItemName(specFilter)
@@ -1436,36 +1880,87 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
       ? normalizeItemName(gearTypeFilter)
       : null;
 
-  var lastRow = bpSheet.getLastRow();
-  if (lastRow < BIS_FIRST_DATA_ROW) return;
-
   bisTimingStep_(timingCtx, "refreshComparisonRichText: enter");
 
   // Sheet.getRange(row, col, numRows, numColumns) — 3rd/4th are counts, not end row/col.
   var cmpNumRows = Math.max(0, lastRow - BIS_FIRST_DATA_ROW + 1);
   var interestAll = [];
-  if (cmpNumRows > 0) {
-    interestAll = bpSheet
-      .getRange(BIS_FIRST_DATA_ROW, GG_INTEREST, cmpNumRows, 1)
-      .getDisplayValues();
-  }
   var cmpRawLetter = colLetterFromNum_(CMP_RAW_COL);
   var offNInBlock = CMP_RAW_COL - GG_SPEC;
   var indices = [];
   var blockDisplay = null;
   var kFormulas = null;
   var rowNK = null;
-  /** F:I per planner data row — Acquisition, Quest, Dungeon, Difficulty (only when block B:O not loaded). */
+  /** F:I per planner data row — Acquisition, Quest, Dungeon, Difficulty (only when block B:P not loaded). */
   var metaAcqDungeonDiff = null;
 
   if (!specFilterNorm && !gearFilterNorm) {
-    blockDisplay = bpSheet
-      .getRange(BIS_FIRST_DATA_ROW, GG_SPEC, cmpNumRows, offNInBlock + 1)
-      .getDisplayValues();
-    kFormulas = bpSheet.getRange(BIS_FIRST_DATA_ROW, CMP_DISP_COL, cmpNumRows, 1).getFormulas();
-    bisTimingStep_(timingCtx, "refresh: after reads (B:O display + K formulas)");
-    for (var ai = 0; ai < cmpNumRows; ai++) indices.push(ai);
+    var rData = BIS_FIRST_DATA_ROW;
+    var wAD = GG_NAME - GG_INTEREST + 1;
+    var wFI = GG_DIFFICULTY - GG_ACQ + 1;
+    var wNOP = CMP_RAW_COL - GG_EQUIP + 1;
+    var bandsReusedForP = false;
+    if (cmpNumRows > 0) {
+      var partAD;
+      var partFI;
+      var partNOP;
+      var snap =
+        optFullSheetIo_ && optFullSheetIo_.reuseFullSheetBands
+          ? optFullSheetIo_.reuseFullSheetBands
+          : null;
+      if (
+        snap &&
+        snap.partAD &&
+        snap.partAD.length === cmpNumRows &&
+        snap.partFI &&
+        snap.partFI.length === cmpNumRows &&
+        snap.partNOP &&
+        snap.partNOP.length === cmpNumRows
+      ) {
+        partAD = snap.partAD;
+        partFI = snap.partFI;
+        var prevNOP = snap.partNOP;
+        var partPonly = bpSheet.getRange(rData, CMP_RAW_COL, cmpNumRows, 1).getValues();
+        partNOP = new Array(cmpNumRows);
+        for (var pi = 0; pi < cmpNumRows; pi++) {
+          partNOP[pi] = [prevNOP[pi][0], prevNOP[pi][1], partPonly[pi][0]];
+        }
+        bandsReusedForP = true;
+      } else {
+        partAD = bpSheet.getRange(rData, GG_INTEREST, cmpNumRows, wAD).getValues();
+        partFI = bpSheet.getRange(rData, GG_ACQ, cmpNumRows, wFI).getValues();
+        partNOP = bpSheet.getRange(rData, GG_EQUIP, cmpNumRows, wNOP).getValues();
+      }
+      blockDisplay = plannerAssembleFullSheetBlockDisplayFromBands_(partAD, partFI, partNOP);
+      interestAll = new Array(cmpNumRows);
+      for (var ai = 0; ai < cmpNumRows; ai++) {
+        interestAll[ai] = [partAD[ai][0]];
+      }
+      kFormulas = bpSheet.getRange(rData, CMP_DISP_COL, cmpNumRows, 1).getFormulas();
+      if (
+        optFullSheetIo_ &&
+        optFullSheetIo_.captureFullSheetBands &&
+        !bandsReusedForP
+      ) {
+        var cap = optFullSheetIo_.captureFullSheetBands;
+        cap.partAD = partAD;
+        cap.partFI = partFI;
+        cap.partNOP = partNOP;
+      }
+    }
+    bisTimingStep_(
+      timingCtx,
+      bandsReusedForP
+        ? "refresh: after reads (CmpRaw P + K only; bands from pass 1)"
+        : "refresh: after reads (A-D,F-I,N-P values + K formulas)"
+    );
+    for (var aj = 0; aj < cmpNumRows; aj++) indices.push(aj);
   } else if (specFilterNorm && gearFilterNorm) {
+    if (cmpNumRows > 0) {
+      interestAll = bpSheet
+        .getRange(BIS_FIRST_DATA_ROW, GG_INTEREST, cmpNumRows, 1)
+        .getDisplayValues();
+    }
     var usePlannerReuse =
       plannerABCReuse != null &&
       plannerABCReuse.length === cmpNumRows &&
@@ -1506,6 +2001,7 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
       var equipG = bpSheet.getRange(r0g, GG_EQUIP, hg, 1).getDisplayValues();
       var equip2G = bpSheet.getRange(r0g, GG_EQUIP2, hg, 1).getDisplayValues();
       var gearG = bpSheet.getRange(r0g, GG_GEARTYPE, hg, 1).getDisplayValues();
+      var specG = bpSheet.getRange(r0g, GG_SPEC, hg, 1).getDisplayValues();
       for (var jg = 0; jg < hg; jg++) {
         rowNK[sg + jg] = {
           d: dG[jg][0],
@@ -1514,11 +2010,17 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
           e: equipG[jg][0],
           e2: equip2G[jg][0],
           g: gearG[jg][0],
+          sp: specG[jg][0],
         };
       }
     }
     bisTimingStep_(timingCtx, "refresh: after scoped N+K reads (" + runsG.length + " run(s))");
   } else {
+    if (cmpNumRows > 0) {
+      interestAll = bpSheet
+        .getRange(BIS_FIRST_DATA_ROW, GG_INTEREST, cmpNumRows, 1)
+        .getDisplayValues();
+    }
     var bOnly = bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_SPEC, cmpNumRows, 1).getValues();
     bisTimingStep_(timingCtx, "refresh: after read B (spec-scoped)");
     for (var ci = 0; ci < bOnly.length; ci++) {
@@ -1533,24 +2035,26 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
     rowNK = {};
     var runsS = bisIndicesToRuns_(indices);
     for (var si2 = 0; si2 < runsS.length; si2++) {
-      var ss = runsS[si2][0];
+      var ix0 = runsS[si2][0];
       var ps = runsS[si2][1];
-      var hs = ps - ss + 1;
-      var r0s = BIS_FIRST_DATA_ROW + ss;
+      var hs = ps - ix0 + 1;
+      var r0s = BIS_FIRST_DATA_ROW + ix0;
       var dS = bpSheet.getRange(r0s, CMP_RAW_COL, hs, 1).getDisplayValues();
       var kS = bpSheet.getRange(r0s, CMP_DISP_COL, hs, 1).getFormulas();
       var nameS = bpSheet.getRange(r0s, GG_NAME, hs, 1).getDisplayValues();
       var equipS = bpSheet.getRange(r0s, GG_EQUIP, hs, 1).getDisplayValues();
       var equip2S = bpSheet.getRange(r0s, GG_EQUIP2, hs, 1).getDisplayValues();
       var gearS = bpSheet.getRange(r0s, GG_GEARTYPE, hs, 1).getDisplayValues();
+      var specS = bpSheet.getRange(r0s, GG_SPEC, hs, 1).getDisplayValues();
       for (var js = 0; js < hs; js++) {
-        rowNK[ss + js] = {
+        rowNK[ix0 + js] = {
           d: dS[js][0],
           k: kS[js][0],
           n: nameS[js][0],
           e: equipS[js][0],
           e2: equip2S[js][0],
           g: gearS[js][0],
+          sp: specS[js][0],
         };
       }
     }
@@ -1565,7 +2069,29 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
     bisTimingStep_(timingCtx, "refresh: after read F:I (heroic row detection)");
   }
 
+  var gearColsOk = plannerGearScoreColumnsReady_(bpSheet);
+  if (!gearColsOk) {
+    bisTimingStep_(
+      timingCtx,
+      "refresh: Q/R not Gear Score headers — skip writing Q/R (regenerate workbook from generate_bis_planner.py)"
+    );
+  }
+
   var writes = [];
+  var upgradeWrites = [];
+  var gearScoreWrites = [];
+  var ss = bpSheet.getParent();
+  var ceSheet = ss.getSheetByName(CURRENT_EQUIP_SHEET);
+  var plannerCaches = null;
+  if (ceSheet) {
+    if (optSharedPlannerCaches) {
+      plannerCaches = optSharedPlannerCaches;
+      bisTimingStep_(timingCtx, "refresh: bulk cache (reused)");
+    } else {
+      plannerCaches = plannerRefreshCachesBuild_(ss, ceSheet);
+      bisTimingStep_(timingCtx, "refresh: bulk cache (ItemDB + GemDB + CE column A)");
+    }
+  }
 
   for (var ki = 0; ki < indices.length; ki++) {
     var i = indices[ki];
@@ -1583,23 +2109,25 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
     var gearRow;
     var eqN;
     var eq2N;
+    var specRow;
     if (blockDisplay != null) {
+      specRow = blockDisplay[i][0];
       nmN = blockDisplay[i][nameIx];
       gearRow = blockDisplay[i][gearIx];
       eqN = blockDisplay[i][equipIx];
       eq2N = blockDisplay[i][equip2Ix];
     } else {
+      specRow = rowNK[i].sp;
       nmN = rowNK[i].n;
       gearRow = rowNK[i].g;
       eqN = rowNK[i].e;
       eq2N = rowNK[i].e2;
     }
+    var intN =
+      interestAll.length > i && interestAll[i]
+        ? normalizeItemName(interestAll[i][0])
+        : "";
     if (normalizeItemName(nmN) !== "") {
-      var nmNorm = normalizeItemName(nmN);
-      var intN =
-        interestAll.length > i && interestAll[i]
-          ? normalizeItemName(interestAll[i][0])
-          : "";
       if (gearIsRingOrTrinket_(gearRow)) {
         var e1 = normalizeItemName(eqN);
         var e2 = normalizeItemName(eq2N);
@@ -1627,25 +2155,61 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
             metaAcqDungeonDiff[i][3]
           ]
     );
+
+    var equippedHide = plannerRowIsEquippedItemRow_(intN, gearRow, nmN, eqN, eq2N);
+    var capBandSnap = optFullSheetIo_ && optFullSheetIo_.captureFullSheetBands;
+    var reuseBandSnap = optFullSheetIo_ && optFullSheetIo_.reuseFullSheetBands;
+    var fpKey = null;
+    if (capBandSnap || (reuseBandSnap && reuseBandSnap.cmpSkipFp)) {
+      fpKey = plannerCmpRawRefreshRowFingerprint_(dispStr, heroicDarkRow, intN, equippedHide);
+      if (
+        reuseBandSnap &&
+        reuseBandSnap.cmpSkipFp &&
+        Object.prototype.hasOwnProperty.call(reuseBandSnap.cmpSkipFp, r) &&
+        reuseBandSnap.cmpSkipFp[r] === fpKey
+      ) {
+        continue;
+      }
+    }
+
+    var itemBaseNum = "";
+    var itemFullNum = "";
+    if (ceSheet && normalizeItemName(specRow) && normalizeItemName(nmN)) {
+      itemBaseNum = plannerItemGearScoreBaseOnly_(ss, ceSheet, specRow, nmN, plannerCaches);
+      itemFullNum = plannerItemGearScore_(ss, ceSheet, specRow, nmN, plannerCaches);
+    }
+    gearScoreWrites.push({ r: r, base: itemBaseNum, full: itemFullNum });
+    var baselineEq = ceSheet
+      ? plannerBaselineEquippedScore_(ss, ceSheet, specRow, gearRow, eqN, eq2N, plannerCaches)
+      : 0;
+
     // Do not skip when N display is empty: leaving K unchanged preserves stale rich text (e.g. after
     // equipping). Empty CmpRaw → build returns null → mirror =RC[] so K shows blank until N fills, then
     // the sheet updates the mirror live; onOpen / second pass still reapplies colored rich text.
     // CmpRaw display errors (#VALUE!, #N/A, etc.) — mirror CmpRaw, no rich text
     if (dispStr.length > 0 && dispStr.charAt(0) === "#") {
+      if (capBandSnap && fpKey != null) {
+        if (!capBandSnap.cmpSkipFp) capBandSnap.cmpSkipFp = {};
+        capBandSnap.cmpSkipFp[r] = fpKey;
+      }
       if (!cellIsCmpRawMirrorFormula_(kF, r)) {
         writes.push({ r: r, kind: "mirror", needClearBefore: true });
       }
+      upgradeWrites.push({
+        r: r,
+        text: "",
+        color: "#000000",
+      });
       continue;
     }
     try {
       var rich = buildComparisonRichTextValue(dispStr, heroicDarkRow);
       if (rich) {
-        var hadFormula = kF && String(kF).replace(/^\s+|\s+$/g, "") !== "";
         writes.push({
           r: r,
           kind: "rich",
           rich: rich,
-          needClearBefore: bogus || hadFormula,
+          needClearBefore: true,
         });
       } else {
         if (!cellIsCmpRawMirrorFormula_(kF, r)) {
@@ -1657,10 +2221,28 @@ function refreshComparisonRichText(bpSheet, specFilter, gearTypeFilter, timingCt
         writes.push({ r: r, kind: "mirror", needClearBefore: true });
       }
     }
+    var hidePct =
+      equippedHide ||
+      normalizeItemName(nmN) === "" ||
+      !normalizeItemName(specRow) ||
+      !ceSheet;
+    var uh = upgradePctFromScores_(
+      Number(itemFullNum) || 0,
+      baselineEq,
+      heroicDarkRow,
+      hidePct
+    );
+    upgradeWrites.push({ r: r, text: uh.text, color: uh.color });
+    if (capBandSnap && fpKey != null) {
+      if (!capBandSnap.cmpSkipFp) capBandSnap.cmpSkipFp = {};
+      capBandSnap.cmpSkipFp[r] = fpKey;
+    }
   }
 
   bisTimingStep_(timingCtx, "refresh: after CPU (filter + buildComparison queue)");
   flushComparisonWrites_(bpSheet, writes, cmpRawLetter, timingCtx);
+  flushPlannerGearScoreCells_(bpSheet, gearColsOk ? gearScoreWrites : [], timingCtx);
+  flushUpgradePctCells_(bpSheet, upgradeWrites, timingCtx);
   bisTimingStep_(timingCtx, "refreshComparisonRichText: return");
 }
 
@@ -2033,7 +2615,7 @@ function buildComparisonRichTextValue(display, darkFillRow) {
 function addBISPlannerToolsMenu() {
   SpreadsheetApp.getUi()
     .createMenu("BIS Planner tools")
-    .addItem("Force refresh comparison colors", "forceRefreshComparisonColors")
+    .addItem("Force refresh Stat Comparison & % Upgrade", "forceRefreshComparisonColors")
     .addItem("Rebuild equipped index (repair)", "rebuildEquippedIndexMenu_")
     .addItem("Show last timing log", "showLastBISTimingLog_")
     .addToUi();
@@ -2058,7 +2640,7 @@ function showLastBISTimingLog_() {
   if (!raw) {
     try {
       SpreadsheetApp.getUi().alert(
-        "No timing saved yet. Set BIS_TIMING_DEBUG = true in the script, then edit Interest or CE."
+        "No timing saved yet. Set BIS_TIMING_DEBUG = true, then run Force refresh or edit Interest / Current Equipment."
       );
     } catch (e0) {}
     return;
@@ -2076,7 +2658,7 @@ function showLastBISTimingLog_() {
   }
 }
 
-/** Same logic as onOpen; refreshes spec-by-spec so it can finish within the execution limit. */
+/** Same idea as onOpen: sleeps + two full-sheet comparison passes (avoids per-spec timeout). */
 function forceRefreshComparisonColors() {
   var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
   if (!bp) {
@@ -2085,9 +2667,13 @@ function forceRefreshComparisonColors() {
     } catch (e0) {}
     return;
   }
+  var tCtx = bisTimingCreate_();
+  if (tCtx) bisTimingStep_(tCtx, "force: menu start");
   rebuildEquippedIndexFromPlanner_(bp);
-  refreshComparisonAllSpecs_(bp);
+  if (tCtx) bisTimingStep_(tCtx, "force: after rebuildEquippedIndexFromPlanner_");
+  refreshComparisonAllSpecs_(bp, tCtx);
+  if (tCtx) bisTimingFinish_(tCtx, "Force refresh Stat Comparison");
   try {
-    SpreadsheetApp.getUi().alert("Comparison column refresh finished.");
+    SpreadsheetApp.getUi().alert("Stat Comparison and % Upgrade refresh finished.");
   } catch (e1) {}
 }

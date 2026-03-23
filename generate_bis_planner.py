@@ -8,7 +8,7 @@ Two-step workflow:
   2. python3 generate_bis_planner.py paladin             # generate CSV + Excel (no API calls)
 
 Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights: AddonReference/Pawn/ClassicHawsJon.lua → pawn_scales_tbc.json.
-TBC gem lists: Pawn/GemsBurningCrusade.lua. Excel adds Current Equipment gem columns, Weights row (Pawn snapshot + custom stash), Gear Score, GemDB + ItemDB socket columns.
+TBC gem lists: Pawn/GemsBurningCrusade.lua. Excel adds Current Equipment ideal-gem columns (Apps Script), Weights row (Pawn snapshot + custom stash), Gear Score, GemDB + ItemDB socket columns; BIS Planner Stat Comparison + % Upgrade.
 
 Supported classes: druid, hunter, mage, paladin, priest, rogue, shaman, warlock, warrior
 
@@ -114,21 +114,11 @@ ITEMDB_SOCK_COL_FIRST = 3  # 1-based: SockR
 NUM_ITEMDB_SOCKET_COLS = 4
 ITEMDB_FIRST_STAT_COL = ITEMDB_SOCK_COL_FIRST + NUM_ITEMDB_SOCKET_COLS  # 7
 
-# Current Equipment: A=Gear, B=Item, gem block, stats, Gear Score; then hidden weight stash (weights row).
+# Current Equipment: A=Gear, B=Item, ideal gem summary (Apps Script), stats, Gear Score; then hidden stash.
 CE_GEM_HEADERS = [
-    "Red Gem",
-    "Red Count",
-    "Yellow Gem",
-    "Yellow Count",
-    "Blue Gem",
-    "Blue Count",
-    "Orange Gem",
-    "Orange Count",
-    "Purple Gem",
-    "Purple Count",
-    "Green Gem",
-    "Green Count",
-    "Meta Gem",
+    "Ideal Gem",
+    "Ideal Meta",
+    "Total Gem Stats",
 ]
 NUM_CE_GEM_COLS = len(CE_GEM_HEADERS)
 CE_WEIGHT_ROW_LABEL = "Weights"
@@ -180,8 +170,10 @@ CSV_FIELDS = [
 SHEET_FIELDS = [
     "Interest", "Spec", "Gear Type", "Name", "Phase", "Acquisition Type",
     "Quest", "Dungeon", "Difficulty", "Stats",
-    "Comparison", "Notes",
+    "Stat Comparison", "% Upgrade", "Notes",
     "Equip", "Equip2", "CmpRaw",
+    "Gear Score",
+    "Gear Score Plus Gems",
 ]
 
 # Hidden after CmpRaw: two blocks of per-stat Δ (Equip, then Equip2) for Ring/Trinket dual comparison.
@@ -375,6 +367,37 @@ def parse_all_guide_items():
 # 2b. CLASS / SPEC DISCOVERY
 # ============================================================
 
+def _title_case_words_apps_script_style(s: str) -> str:
+    """Match apps_script.gs titleCaseWords — used when parsing CE lines like --- BEAR ---."""
+    parts = str(s).split()
+    out = []
+    for w in parts:
+        if not w:
+            continue
+        out.append(w[0].upper() + w[1:].lower())
+    return " ".join(out)
+
+
+def _validate_spec_order_for_ce_and_planner(spec_order: list) -> None:
+    """
+    CE section titles are f'--- {spec_name.upper()} ---'. Apps Script maps that back to column B
+    via specDisplayNameFromSectionHeader → titleCaseWords(inner). That must equal the Loon/CSV spec
+    string exactly, or Equip / N / O / Apps Script section matching breaks.
+    """
+    if len(spec_order) != len(set(spec_order)):
+        log("ERROR: duplicate spec names in discovered spec_order")
+        sys.exit(1)
+    for spec in spec_order:
+        canon = _title_case_words_apps_script_style(spec.upper())
+        if canon != spec:
+            log(
+                "ERROR: Loon RegisterSpec second label %r must equal Apps Script "
+                "titleCaseWords(upper(label)) → %r. Fix the lua string or rename to match."
+                % (spec, canon)
+            )
+            sys.exit(1)
+
+
 def _extract_spec_name(filepath):
     """Extract spec display name from the first RegisterSpec call in a guide file."""
     with open(filepath, "r") as f:
@@ -415,6 +438,7 @@ def discover_class_guides(class_name):
         sys.exit(1)
 
     spec_order = [g[0] for g in guides]
+    _validate_spec_order_for_ce_and_planner(spec_order)
     log(f"Discovered {class_title}: {', '.join(spec_order)} ({len(guides)} specs)")
     return spec_order, guides
 
@@ -1638,6 +1662,20 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         log("No rows to export.")
         return
 
+    csv_specs = {(row.get("Spec") or "").strip() for row in all_rows if (row.get("Spec") or "").strip()}
+    unknown = csv_specs - set(spec_order)
+    if unknown:
+        log(
+            "WARNING: CSV Spec column has values not in spec_order (Equip formulas use spec_order): "
+            + ", ".join(sorted(unknown))
+        )
+    missing_in_csv = set(spec_order) - csv_specs
+    if missing_in_csv:
+        log(
+            "WARNING: These spec_order entries have no CSV rows (CE sections still exist): "
+            + ", ".join(sorted(missing_in_csv))
+        )
+
     header_fill = PatternFill("solid", fgColor="37474F")
     header_font = Font(bold=True, size=11, color="FFFFFF")
     section_fill = PatternFill("solid", fgColor="546E7A")
@@ -1773,7 +1811,8 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         "(rings/trinkets use two slots: Ring 1/2, Trinket 1/2), it will update here. "
         "If your item is not on the list, you can manually enter stats (integers only). "
         "Pawn stat weights for each spec are on the Weights row below Ranged/Relic (not a separate tab). "
-        "Gem columns: use Google Sheets + Apps Script for socket-aware dropdowns and gear score."
+        "Ideal Gem / Meta / Total Gem Stats are filled by Apps Script from GemDB and your weights "
+        "(best weighted gem per socket type, like Pawn)."
     )
     # Rows 1–2: title A1:B2; C1:C2 "Instructions:"; D row1 / D row2 = one paragraph each (no vertical merge of body)
     CE_HEADER_ROW = 3
@@ -1826,21 +1865,6 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         CE_HEADER_ROW + 1,
     )
 
-    gem_header_to_cat = {
-        "Red Gem": "red",
-        "Yellow Gem": "yellow",
-        "Blue Gem": "blue",
-        "Orange Gem": "orange",
-        "Purple Gem": "purple",
-        "Green Gem": "green",
-        "Meta Gem": "meta",
-    }
-    count_dv = DataValidation(
-        type="list",
-        formula1='"0,1,2,3,4,5,6,7,8,9,10"',
-        allow_blank=True,
-    )
-    ws_ce.add_data_validation(count_dv)
     weight_mode_dv = DataValidation(
         type="list",
         formula1='"%s,%s"' % (CE_WEIGHT_MODE_PAWN, CE_WEIGHT_MODE_CUSTOM),
@@ -1868,23 +1892,9 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         for gear_type in CE_GEAR_ORDER:
             ws_ce.cell(row=ce_row, column=1, value=gear_type)
 
-            for hi, gh in enumerate(CE_GEM_HEADERS):
+            for hi in range(len(CE_GEM_HEADERS)):
                 ci = CE_GEM_FIRST_COL + hi
-                if gh.endswith(" Count"):
-                    ws_ce.cell(row=ce_row, column=ci, value=0)
-                    count_dv.add(ws_ce.cell(row=ce_row, column=ci))
-                    continue
-                cat = gem_header_to_cat.get(gh)
-                ginfo = gem_list_cols.get(cat) if cat else None
-                if ginfo and ginfo[1] > 0:
-                    gl, nlab, _gid = ginfo
-                    dv_g = DataValidation(
-                        type="list",
-                        formula1="ItemDB!$%s$2:$%s$%d" % (gl, gl, nlab + 1),
-                        allow_blank=True,
-                    )
-                    ws_ce.add_data_validation(dv_g)
-                    dv_g.add(ws_ce.cell(row=ce_row, column=ci))
+                ws_ce.cell(row=ce_row, column=ci, value="")
 
             for si, stat_key in enumerate(STAT_COLUMNS):
                 db_col = ITEMDB_FIRST_STAT_COL + si
@@ -1966,14 +1976,17 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     )
 
     # -- Single BIS Planner sheet --
-    # A–J Interest…Stats (visible); K Comparison, L Notes (visible — no hidden cols before Notes).
-    # M Equip, N Equip2, O CmpRaw (hidden); then two Δ blocks (slot1, slot2); CmpRaw references Δ only.
+    # A–J … M Notes; hidden N–R Equip, Equip2, CmpRaw, Gear Score, Gear Score Plus Gems; then Δ blocks.
     ws = wb.create_sheet(title="BIS Planner")
     ws.sheet_properties.tabColor = "1565C0"
 
     equip_col_letter = _col_letter(SHEET_FIELDS.index("Equip") + 1)
     equip2_col_letter = _col_letter(SHEET_FIELDS.index("Equip2") + 1)
     cmp_raw_col_letter = _col_letter(SHEET_FIELDS.index("CmpRaw") + 1)
+    gear_score_col_letter = _col_letter(SHEET_FIELDS.index("Gear Score") + 1)
+    gear_score_gems_col_letter = _col_letter(
+        SHEET_FIELDS.index("Gear Score Plus Gems") + 1
+    )
     first_helper_col = len(SHEET_FIELDS) + 1
     helper_diff_letters_slot1 = [
         _col_letter(first_helper_col + i) for i in range(HELPER_DIFF_COUNT)
@@ -1988,8 +2001,8 @@ def export_xlsx(csv_path, spec_order, class_title=None):
 
     col_widths = {
         "A": 18, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
-        "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 14,
-        "M": 2, "N": 2,
+        "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 12, "M": 14,
+        "N": 2, "O": 2,
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
@@ -1997,6 +2010,10 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     ws.column_dimensions[equip_col_letter].hidden = True
     ws.column_dimensions[equip2_col_letter].hidden = True
     ws.column_dimensions[cmp_raw_col_letter].hidden = True
+    ws.column_dimensions[gear_score_col_letter].hidden = True
+    ws.column_dimensions[gear_score_gems_col_letter].hidden = True
+    ws.column_dimensions[gear_score_col_letter].width = 2
+    ws.column_dimensions[gear_score_gems_col_letter].width = 2
     for hl in helper_diff_letters_slot1 + helper_diff_letters_slot2:
         ws.column_dimensions[hl].hidden = True
         ws.column_dimensions[hl].width = 2
@@ -2102,12 +2119,16 @@ def export_xlsx(csv_path, spec_order, class_title=None):
                     db_num_cols,
                 )
                 cell = ws.cell(row=excel_row, column=ci, value=formula)
-            elif field == "Comparison":
+            elif field == "Stat Comparison":
                 cell = ws.cell(
                     row=excel_row,
                     column=ci,
                     value=f"={cmp_raw_col_letter}{excel_row}",
                 )
+            elif field == "% Upgrade":
+                cell = ws.cell(row=excel_row, column=ci, value="")
+            elif field in ("Gear Score", "Gear Score Plus Gems"):
+                cell = ws.cell(row=excel_row, column=ci, value="")
             elif field == "Interest":
                 cell = ws.cell(row=excel_row, column=ci, value="")
                 gear_type = data_row.get("Gear Type", "")
