@@ -69,10 +69,10 @@ Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",Th
 Elemental,Trinket,PreRaid,Xi'ri's Gift,Reputation,,,,"32 Spell Crit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Sha'tar - Revered
-Elemental,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,41.76 DPS; 19 Int; 168 Healing; 168 Spell Dmg; 21 Spell Crit,
-Elemental,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,39.67 DPS; 12 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 20 Spell Crit,Warbringer O'mrogg
-Elemental,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
-Elemental,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
+Elemental,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,19 Int; 168 Healing; 168 Spell Dmg; 21 Spell Crit,
+Elemental,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,12 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 20 Spell Crit,Warbringer O'mrogg
+Elemental,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
+Elemental,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
 Elemental,Off Hand,PreRaid,Draenei Honor Guard Shield,Auction House,,,,3615 Armor; 16 Int; 19 Healing; 19 Spell Dmg; 21 Spell Crit,World Drop
 Elemental,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit,Harbinger Skyriss
 Elemental,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
@@ -163,22 +163,22 @@ Enhancement,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (N
 Enhancement,Trinket,PreRaid,Uniting Charm,Quest,Corki's Gone Missing Again! (Nag),,,"48 AP
 
 Use: Increases attack power by 185 for 15 sec",
-Enhancement,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
+Enhancement,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Enhancement,Main Hand,PreRaid,Fist of Reckoning,Auction House,,,,54.07 DPS; 12 AP; 10 Hit; 16 Crit,World Drop
-Enhancement,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP; 12 Crit,Shirrak the Dead Watcher
-Enhancement,Main Hand,PreRaid,Reflex Blades,Dungeon Drop,,Arcatraz,Normal,71.67 DPS; 13 Sta; 32 AP; 16 Hit,Dalliah the Doomsayer
-Enhancement,Main Hand,PreRaid,The Bladefist,Dungeon Drop,,Shattered Halls,Heroic,"83.65 DPS; 180 Haste
+Enhancement,Main Hand,PreRaid,Fist of Reckoning,Auction House,,,,12 AP; 10 Hit; 16 Crit,World Drop
+Enhancement,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,24 AP; 12 Crit,Shirrak the Dead Watcher
+Enhancement,Main Hand,PreRaid,Reflex Blades,Dungeon Drop,,Arcatraz,Normal,13 Sta; 32 AP; 16 Hit,Dalliah the Doomsayer
+Enhancement,Main Hand,PreRaid,The Bladefist,Dungeon Drop,,Shattered Halls,Heroic,"180 Haste
 
 Proc: Increases your haste rating by 180 for 10 sec",Warchief Kargath Bladefist
-Enhancement,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,71.73 DPS; 16 Str; 13 Sta; 15 Crit,Exarch Maladaar
-Enhancement,Main Hand,PreRaid,Resonating Axe,Quest,Measuring Warp Energies (NS),,,57.86 DPS; 12 Sta; 22 AP; 11 Crit,
-Enhancement,Main Hand,PreRaid,Sporeling Claw,Quest,Fhwoor Smash! (ZM),,,56.6 DPS; 18 Sta; 24 AP; 12 Hit,
-Enhancement,Main Hand,PreRaid,Gladiator's Cleaver,PvP,,,,91.15 DPS; 21 Sta; 28 AP; 9 Hit; 15 Crit; 10 Resilience,
-Enhancement,Main Hand,PreRaid,Gladiator's Right Ripper,PvP,,,,91.35 DPS; 21 Sta; 28 AP; 9 Hit; 15 Crit; 10 Resilience,
-Enhancement,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,59.48 DPS; 7 Sta; 28 AP; 14 Crit,
-Enhancement,Main Hand,PreRaid,Nexus-Claw,Vendor,,,,57.86 DPS; 28 AP; 14 Crit,Netherstorm
+Enhancement,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,16 Str; 13 Sta; 15 Crit,Exarch Maladaar
+Enhancement,Main Hand,PreRaid,Resonating Axe,Quest,Measuring Warp Energies (NS),,,12 Sta; 22 AP; 11 Crit,
+Enhancement,Main Hand,PreRaid,Sporeling Claw,Quest,Fhwoor Smash! (ZM),,,18 Sta; 24 AP; 12 Hit,
+Enhancement,Main Hand,PreRaid,Gladiator's Cleaver,PvP,,,,21 Sta; 28 AP; 9 Hit; 15 Crit; 10 Resilience,
+Enhancement,Main Hand,PreRaid,Gladiator's Right Ripper,PvP,,,,21 Sta; 28 AP; 9 Hit; 15 Crit; 10 Resilience,
+Enhancement,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,7 Sta; 28 AP; 14 Crit,
+Enhancement,Main Hand,PreRaid,Nexus-Claw,Vendor,,,,28 AP; 14 Crit,Netherstorm
 Enhancement,Ranged/Relic,PreRaid,Totem of the Astral Winds,Dungeon Drop,,Mana Tombs,Heroic,Equip: Increases the attack power bonus on Windfury Weapon attacks by 80,Pandemonius
 Restoration,Head,PreRaid,Hood of Primal Life,Auction House,,,,271 Armor; 34 Sta; 37 Int; 31 Spi; 68 Healing; 23 Spell Dmg,
 Restoration,Head,PreRaid,Whitemend Hood,Auction House,,,,145 Armor; 15 Sta; 15 Int; 79 Healing; 27 Spell Dmg; 11 MP5,
@@ -317,16 +317,16 @@ Use: Increases healing done by spells and effects by up to 213 and damage done b
 Restoration,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,"70 Healing; 24 Spell Dmg
 
 Use: Your heals each cost 22 less mana for the next 15 sec",Lower City - Revered
-Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
-Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
-Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
-Restoration,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,41.11 DPS; 13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
-Restoration,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,41.11 DPS; 16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
-Restoration,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,41.58 DPS; 8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
-Restoration,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
-Restoration,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
-Restoration,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
-Restoration,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
+Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
+Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
+Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,227 Healing; 76 Spell Dmg; 11 MP5,World Drop
+Restoration,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
+Restoration,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
+Restoration,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
+Restoration,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
+Restoration,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
+Restoration,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
+Restoration,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
 Restoration,Off Hand,PreRaid,Crystal Pulse Shield,Auction House,,,,3711 Armor; 24 Int; 35 Healing; 12 Spell Dmg; 6 MP5,World Drop
 Restoration,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,59 Healing; 20 Spell Dmg; 7 MP5,Omor the Unscarred
 Restoration,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5,Dalliah the Doomsayer
@@ -339,9 +339,9 @@ Restoration,Off Hand,PreRaid,Mazthoril Honor Shield,Dungeon Token,,,,4668 Armor;
 Restoration,Off Hand,PreRaid,Tears of Heaven,Dungeon Token,,,,75 Healing; 25 Spell Dmg; 6 MP5,25 Badges of Justice
 Restoration,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the Netherwing (SMV),,,15 Int; 15 Spi; 33 Healing; 11 Spell Dmg; 6 MP5,
 Restoration,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,16 Int; 12 Spi; 64 Healing; 22 Spell Dmg,Cenarion Expedition - Exalted
-Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,59.79 DPS; 37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
-Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,59.79 DPS; 27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
-Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,62.62 DPS; 28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
+Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
+Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
+Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
 Restoration,Ranged/Relic,PreRaid,Totem of Life,Dungeon Drop,,Ahn'Qiraj,Normal,Equip: Increases healing done by Lesser Healing Wave by up to 80,Fankriss the Unyielding
 Restoration,Ranged/Relic,PreRaid,Totem of Spontaneous Regrowth,Dungeon Drop,,Slave Pens,Heroic,Equip: Increases healing done by Healing Wave by up to 88,Mennu the Betrayer
 Restoration,Ranged/Relic,PreRaid,Totem of the Plains,Quest,The Ultimate Bloodsport (Nag),,,Equip: Increases healing done by Lesser Healing Wave by up to 79,

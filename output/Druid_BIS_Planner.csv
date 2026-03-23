@@ -141,13 +141,13 @@ Use: Increases spell damage by up to 84 and healing by up to 156 for 15 sec",
 Balance,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,"32 Spell Hit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Scryers - Revered
-Balance,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,41.76 DPS; 19 Int; 168 Healing; 168 Spell Dmg; 21 Spell Crit,
-Balance,Main Hand,PreRaid,Bleeding Hollow Warhammer,Dungeon Drop,,Slave Pens,Heroic,41.25 DPS; 12 Sta; 17 Int; 121 Healing; 121 Spell Dmg; 16 Spell Crit,Quagmirran
-Balance,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,39.67 DPS; 12 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 20 Spell Crit,Warbringer O'mrogg
-Balance,Main Hand,PreRaid,Sky Breaker,Dungeon Drop,,Auchenai Crypts,Heroic,41.11 DPS; 13 Sta; 20 Int; 132 Healing; 132 Spell Dmg,Avatar of the Martyred
-Balance,Main Hand,PreRaid,Starlight Dagger,Dungeon Drop,,Slave Pens,Heroic,41.67 DPS; 15 Sta; 15 Int; 121 Healing; 121 Spell Dmg; 16 Spell Hit,Mennu the Betrayer
-Balance,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
-Balance,Main Hand,PreRaid,High Warlord's Spellblade,PvP,,,,41.56 DPS; 18 Sta; 13 Int; 121 Healing; 121 Spell Dmg; 13 Spell Hit; 13 Resilience,
+Balance,Main Hand,PreRaid,Eternium Runed Blade,Auction House,,,,19 Int; 168 Healing; 168 Spell Dmg; 21 Spell Crit,
+Balance,Main Hand,PreRaid,Bleeding Hollow Warhammer,Dungeon Drop,,Slave Pens,Heroic,12 Sta; 17 Int; 121 Healing; 121 Spell Dmg; 16 Spell Crit,Quagmirran
+Balance,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,12 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 20 Spell Crit,Warbringer O'mrogg
+Balance,Main Hand,PreRaid,Sky Breaker,Dungeon Drop,,Auchenai Crypts,Heroic,13 Sta; 20 Int; 132 Healing; 132 Spell Dmg,Avatar of the Martyred
+Balance,Main Hand,PreRaid,Starlight Dagger,Dungeon Drop,,Slave Pens,Heroic,15 Sta; 15 Int; 121 Healing; 121 Spell Dmg; 16 Spell Hit,Mennu the Betrayer
+Balance,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
+Balance,Main Hand,PreRaid,High Warlord's Spellblade,PvP,,,,18 Sta; 13 Int; 121 Healing; 121 Spell Dmg; 13 Spell Hit; 13 Resilience,
 Balance,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit,Harbinger Skyriss
 Balance,Off Hand,PreRaid,Manual of the Nethermancer,Dungeon Drop,,Mechanar,Normal,12 Sta; 15 Int; 21 Healing; 21 Spell Dmg; 19 Spell Crit,Nethermancer Sepethrea
 Balance,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
@@ -157,14 +157,14 @@ Balance,Off Hand,PreRaid,Talisman of Kalecgos,Dungeon Token,,,,"14 Int
 
 Equip: Increases damage done by Arcane spells and effects by up to 50",25 Badges of Justice
 Balance,Off Hand,PreRaid,The Saga of Terokk,Quest (Dung),Terokk's Legacy (Seth),,,23 Int; 28 Healing; 28 Spell Dmg,
-Balance,Two Hand,PreRaid,The Bringer of Death,Auction House,,,,62.92 DPS; 32 Sta; 31 Int; 121 Healing; 121 Spell Dmg; 42 Spell Crit,World Drop
-Balance,Two Hand,PreRaid,Bloodfire Greatstaff,Dungeon Drop,,Black Morass,Normal,62.92 DPS; 42 Sta; 42 Int; 121 Healing; 121 Spell Dmg; 28 Spell Crit,Aeonus
-Balance,Two Hand,PreRaid,Grand Scepter of the Nexus-Kings,Dungeon Drop,,Mana Tombs,Heroic,62.92 DPS; 45 Sta; 43 Int; 121 Healing; 121 Spell Dmg; 19 Spell Hit,Nexus-Prince Shaffar
-Balance,Two Hand,PreRaid,Terokk's Shadowstaff,Dungeon Drop,,Sethekk Halls,Heroic,66.72 DPS; 40 Sta; 42 Int; 168 Healing; 168 Spell Dmg; 37 Spell Crit,Talon King Ikiss
-Balance,Two Hand,PreRaid,Warpstaff of Arcanum,Dungeon Drop,,Botanica,Normal,62.92 DPS; 37 Sta; 38 Int; 121 Healing; 121 Spell Dmg; 16 Spell Hit; 26 Spell Crit,Warp Splinter
-Balance,Two Hand,PreRaid,Auchenai Staff,Reputation,,,,62.62 DPS; 46 Int; 121 Healing; 121 Spell Dmg; 19 Spell Hit; 26 Spell Crit,The Aldor - Revered
-Balance,Two Hand,PreRaid,Gladiator's War Staff,PvP,,,,68.5 DPS; 48 Sta; 35 Int; 199 Healing; 199 Spell Dmg; 21 Spell Hit; 36 Spell Crit; 25 Resilience,
-Balance,Two Hand,PreRaid,High Warlord's War Staff,PvP,,,,63.0 DPS; 40 Sta; 30 Int; 121 Healing; 121 Spell Dmg; 20 Spell Hit; 30 Spell Crit; 20 Resilience,
+Balance,Two Hand,PreRaid,The Bringer of Death,Auction House,,,,32 Sta; 31 Int; 121 Healing; 121 Spell Dmg; 42 Spell Crit,World Drop
+Balance,Two Hand,PreRaid,Bloodfire Greatstaff,Dungeon Drop,,Black Morass,Normal,42 Sta; 42 Int; 121 Healing; 121 Spell Dmg; 28 Spell Crit,Aeonus
+Balance,Two Hand,PreRaid,Grand Scepter of the Nexus-Kings,Dungeon Drop,,Mana Tombs,Heroic,45 Sta; 43 Int; 121 Healing; 121 Spell Dmg; 19 Spell Hit,Nexus-Prince Shaffar
+Balance,Two Hand,PreRaid,Terokk's Shadowstaff,Dungeon Drop,,Sethekk Halls,Heroic,40 Sta; 42 Int; 168 Healing; 168 Spell Dmg; 37 Spell Crit,Talon King Ikiss
+Balance,Two Hand,PreRaid,Warpstaff of Arcanum,Dungeon Drop,,Botanica,Normal,37 Sta; 38 Int; 121 Healing; 121 Spell Dmg; 16 Spell Hit; 26 Spell Crit,Warp Splinter
+Balance,Two Hand,PreRaid,Auchenai Staff,Reputation,,,,46 Int; 121 Healing; 121 Spell Dmg; 19 Spell Hit; 26 Spell Crit,The Aldor - Revered
+Balance,Two Hand,PreRaid,Gladiator's War Staff,PvP,,,,48 Sta; 35 Int; 199 Healing; 199 Spell Dmg; 21 Spell Hit; 36 Spell Crit; 25 Resilience,
+Balance,Two Hand,PreRaid,High Warlord's War Staff,PvP,,,,40 Sta; 30 Int; 121 Healing; 121 Spell Dmg; 20 Spell Hit; 30 Spell Crit; 20 Resilience,
 Balance,Ranged/Relic,PreRaid,Idol of the Moon,Auction House,,,,Equip: Increases the damage of your Moonfire spell by up to 33,World Drop
 Balance,Ranged/Relic,PreRaid,Ivory Idol of the Moongoddess,Dungeon Drop,,Shattered Halls,Normal,Equip: Increases the damage of your Starfire spell by up to 55,Grand Warlock Nethekurse
 Balance,Ranged/Relic,PreRaid,Idol of the Raven Goddess,Quest,Vanquish the Raven God (ZM),,,"Equip: Increases the healing granted by the Tree of Life form aura by 44, adds 20 critical strike rating to the Leader of the Pack aura, and adds 20 spell critical strike rating to the Moonkin form aura",
@@ -257,17 +257,17 @@ Bear,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
 
 Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Bear,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
-Bear,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,"320 Armor; 65.83 DPS; 35 Str; 31 Sta; 712 AP
+Bear,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,"320 Armor; 35 Str; 31 Sta; 712 AP
 
 Equip: Reduces the base Mana cost of your shapeshifting spells by 200",World Drop
-Bear,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,62.92 DPS; 34 Str; 32 Agi; 33 Sta; 539 AP; 22 Hit,Avatar of the Martyred
-Bear,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,62.92 DPS; 46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
-Bear,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 71.17 DPS; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
-Bear,Two Hand,PreRaid,Greatstaff of the Leviathan,Dungeon Drop,,Underbog,Normal,360 Armor; 62.92 DPS; 39 Str; 36 Sta; 539 AP,Ghaz'an
-Bear,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,61.46 DPS; 27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit,
-Bear,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 65.94 DPS; 39 Sta; 712 AP; 27 Defense,Cenarion Expedition - Exalted
-Bear,Two Hand,PreRaid,Grand Marshal's Maul,PvP,,,,62.92 DPS; 28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
-Bear,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,62.92 DPS; 28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
+Bear,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,34 Str; 32 Agi; 33 Sta; 539 AP; 22 Hit,Avatar of the Martyred
+Bear,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
+Bear,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
+Bear,Two Hand,PreRaid,Greatstaff of the Leviathan,Dungeon Drop,,Underbog,Normal,360 Armor; 39 Str; 36 Sta; 539 AP,Ghaz'an
+Bear,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit,
+Bear,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 39 Sta; 712 AP; 27 Defense,Cenarion Expedition - Exalted
+Bear,Two Hand,PreRaid,Grand Marshal's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
+Bear,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
 Bear,Ranged/Relic,PreRaid,Idol of Brutality,Dungeon Drop,,Stratholme,Normal,Equip: Increases the damage dealt by your Maul ability by 50 and Swipe ability by 10,Magistrate Barthilas
 Bear,Ranged/Relic,PreRaid,Idol of Ursoc,Dungeon Drop,,Underbog,Normal,Equip: Increases initial and per application periodic damage done by Lacerate by 8,Hungarfen
 Bear,Ranged/Relic,PreRaid,Idol of the Wild,Quest,Colossal Menace (HFP),,,Equip: Increases the damage dealt by Mangle (Cat) by 24 and the damage dealt by Mangle (Bear) by 52,
@@ -349,16 +349,16 @@ Cat,Trinket,PreRaid,Core of Ar'kelos,Quest,Ar'kelos the Guardian (NS),,,"52 AP
 
 Use: Increases your melee and ranged attack power by 200. Effect lasts for 20 sec",
 Cat,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
-Cat,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,"320 Armor; 65.83 DPS; 35 Str; 31 Sta; 712 AP
+Cat,Two Hand,PreRaid,Staff of Natural Fury,Auction House,,,,"320 Armor; 35 Str; 31 Sta; 712 AP
 
 Equip: Reduces the base Mana cost of your shapeshifting spells by 200",World Drop
-Cat,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,62.92 DPS; 34 Str; 32 Agi; 33 Sta; 539 AP; 22 Hit,Avatar of the Martyred
-Cat,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,62.92 DPS; 46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
-Cat,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 71.17 DPS; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
-Cat,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,61.46 DPS; 27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit,
-Cat,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 65.94 DPS; 39 Sta; 712 AP; 27 Defense,Cenarion Expedition - Exalted
-Cat,Two Hand,PreRaid,Grand Marshal's Maul,PvP,,,,62.92 DPS; 28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
-Cat,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,62.92 DPS; 28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
+Cat,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,34 Str; 32 Agi; 33 Sta; 539 AP; 22 Hit,Avatar of the Martyred
+Cat,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
+Cat,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
+Cat,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit,
+Cat,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 39 Sta; 712 AP; 27 Defense,Cenarion Expedition - Exalted
+Cat,Two Hand,PreRaid,Grand Marshal's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
+Cat,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
 Cat,Ranged/Relic,PreRaid,Idol of Feral Shadows,Dungeon Drop,,Arcatraz,Normal,Equip: Increases periodic damage done by Rip by 7 per combo point,Zereketh the Unbound
 Cat,Ranged/Relic,PreRaid,Everbloom Idol,Dungeon Token,,,,Equip: Increases the damage dealt by Shred by 88,15 Badges of Justice
 Cat,Ranged/Relic,PreRaid,Idol of the Wild,Quest,Colossal Menace (HFP),,,Equip: Increases the damage dealt by Mangle (Cat) by 24 and the damage dealt by Mangle (Bear) by 52,
@@ -487,16 +487,16 @@ Use: Increases healing done by spells and effects by up to 213 and damage done b
 Restoration,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,"70 Healing; 24 Spell Dmg
 
 Use: Your heals each cost 22 less mana for the next 15 sec",Lower City - Revered
-Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
-Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
-Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
-Restoration,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,41.11 DPS; 13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
-Restoration,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,41.11 DPS; 16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
-Restoration,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,41.58 DPS; 8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
-Restoration,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
-Restoration,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
-Restoration,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
-Restoration,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
+Restoration,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
+Restoration,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
+Restoration,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,227 Healing; 76 Spell Dmg; 11 MP5,World Drop
+Restoration,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
+Restoration,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
+Restoration,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
+Restoration,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
+Restoration,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
+Restoration,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
+Restoration,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
 Restoration,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,59 Healing; 20 Spell Dmg; 7 MP5,Omor the Unscarred
 Restoration,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5,Dalliah the Doomsayer
 Restoration,Off Hand,PreRaid,Lordaeron Medical Guide,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,12 Sta; 10 Int; 16 Spi; 46 Healing; 16 Spell Dmg,Lieutenant Drake
@@ -506,11 +506,11 @@ Restoration,Off Hand,PreRaid,Swamplight Lantern,Dungeon Drop,,Slave Pens,Heroic,
 Restoration,Off Hand,PreRaid,Tears of Heaven,Dungeon Token,,,,75 Healing; 25 Spell Dmg; 6 MP5,25 Badges of Justice
 Restoration,Off Hand,PreRaid,Netherwing Spiritualist's Charm,Quest,Ally of the Netherwing (SMV),,,15 Int; 15 Spi; 33 Healing; 11 Spell Dmg; 6 MP5,
 Restoration,Off Hand,PreRaid,Windcaller's Orb,Reputation,,,,16 Int; 12 Spi; 64 Healing; 22 Spell Dmg,Cenarion Expedition - Exalted
-Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,59.79 DPS; 37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
-Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,59.79 DPS; 27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
-Restoration,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 28 Sta; 28 Int; 27 Spi; 300 Healing; 100 Spell Dmg; 592 AP; 11 MP5
+Restoration,Two Hand,PreRaid,Epoch-Mender,Dungeon Drop,,Black Morass,Normal,37 Sta; 35 Int; 227 Healing; 76 Spell Dmg; 12 MP5,Temporus
+Restoration,Two Hand,PreRaid,Serpentcrest Life-Staff,Dungeon Drop,,Steamvault,Normal,27 Sta; 27 Int; 46 Spi; 227 Healing; 76 Spell Dmg,Mekgineer Steamrigger
+Restoration,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"28 Sta; 28 Int; 27 Spi; 300 Healing; 100 Spell Dmg; 592 AP; 11 MP5
 
 Use: Creates a portal, teleporting group members that use it to Karazhan",
-Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,62.62 DPS; 28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
+Restoration,Two Hand,PreRaid,Seer's Cane,Reputation,,,,28 Sta; 46 Int; 228 Healing; 76 Spell Dmg; 10 MP5,The Scryers - Revered
 Restoration,Ranged/Relic,PreRaid,Idol of the Emerald Queen,Dungeon Drop,,Shadow Labyrinth,Normal,Equip: Increases the periodic healing of your Lifebloom by up to 88,Ambassador Hellmaw
 Restoration,Ranged/Relic,PreRaid,Harold's Rejuvenating Broach,Quest,The Ultimate Bloodsport (Nag),,,Equip: Increases healing done by Rejuvenation by up to 86,

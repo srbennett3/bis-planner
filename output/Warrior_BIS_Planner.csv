@@ -72,30 +72,28 @@ Use: Increases attack power by 260 for 20 sec",Sapphiron
 Arms,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
 
 Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
-Arms,Main Hand,PreRaid,Blinkstrike,Auction House,,,,"81.15 DPS
-
-Proc: Grants an extra attack on your next swing",World Drop
-Arms,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
+Arms,Main Hand,PreRaid,Blinkstrike,Auction House,,,,Proc: Grants an extra attack on your next swing,World Drop
+Arms,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Arms,Main Hand,PreRaid,Fel Edged Battleaxe,Auction House,,,,83.41 DPS; 3 Sta; 14 Hit; 21 Crit,
-Arms,Main Hand,PreRaid,Bloodskull Destroyer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,71.73 DPS; 12 Sta; 22 AP; 21 Crit,Lieutenant Drake
-Arms,Main Hand,PreRaid,Edge of the Cosmos,Dungeon Drop,,Mechanar,Normal,71.73 DPS; 13 Sta; 30 AP; 16 Crit,Pathaleon the Calculator
-Arms,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,71.67 DPS; 17 Str; 15 Sta,Broggok
-Arms,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,71.79 DPS; 15 Agi; 26 AP,Aeonus
-Arms,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,71.73 DPS; 16 Str; 13 Sta; 15 Crit,Exarch Maladaar
-Arms,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,81.15 DPS; 38 AP; 19 Hit,The Aldor - Exalted
-Arms,Main Hand,PreRaid,Grand Marshal's Slicer,PvP,,,,71.73 DPS; 18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
-Arms,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,71.73 DPS; 18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
-Arms,Two Hand,PreRaid,Lionheart Champion,Auction House,,,,"118.61 DPS; 49 Str; 44 Agi
+Arms,Main Hand,PreRaid,Fel Edged Battleaxe,Auction House,,,,3 Sta; 14 Hit; 21 Crit,
+Arms,Main Hand,PreRaid,Bloodskull Destroyer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,12 Sta; 22 AP; 21 Crit,Lieutenant Drake
+Arms,Main Hand,PreRaid,Edge of the Cosmos,Dungeon Drop,,Mechanar,Normal,13 Sta; 30 AP; 16 Crit,Pathaleon the Calculator
+Arms,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,17 Str; 15 Sta,Broggok
+Arms,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Arms,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,16 Str; 13 Sta; 15 Crit,Exarch Maladaar
+Arms,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,38 AP; 19 Hit,The Aldor - Exalted
+Arms,Main Hand,PreRaid,Grand Marshal's Slicer,PvP,,,,18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
+Arms,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
+Arms,Two Hand,PreRaid,Lionheart Champion,Auction House,,,,"49 Str; 44 Agi
 
 Proc: Increases Strength by 100 for 10 sec;
 Equip: Increases your chance to resist Fear effects by 5%",
-Arms,Two Hand,PreRaid,Endbringer,Dungeon Drop,,Underbog,Normal,93.24 DPS; 29 Str; 28 Sta; 45 Crit,The Black Stalker
-Arms,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Arms,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,56.82 DPS; 10 Agi; 32 AP; 6 Crit,
-Arms,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
-Arms,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
+Arms,Two Hand,PreRaid,Endbringer,Dungeon Drop,,Underbog,Normal,29 Str; 28 Sta; 45 Crit,The Black Stalker
+Arms,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,31 Sta; 102 AP; 30 Crit,Aeonus
+Arms,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,10 Agi; 32 AP; 6 Crit,
+Arms,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
+Arms,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
 Fury,Head,PreRaid,Helm of Assassination,Dungeon Drop,,Arcatraz,Normal,237 Armor; 25 Sta; 66 AP; 25 Crit,Harbinger Skyriss
 Fury,Head,PreRaid,Mask of the Deceiver,Dungeon Token,,,,283 Armor; 32 Agi; 36 Sta; 64 AP; 16 Hit,50 Badges of Justice
 Fury,Head,PreRaid,Overlord's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"898 Armor; 29 Str; 22 Sta; 13 Hit; 24 Crit
@@ -169,30 +167,28 @@ Use: Increases attack power by 260 for 20 sec",Sapphiron
 Fury,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
 
 Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
-Fury,Main Hand,PreRaid,Blinkstrike,Auction House,,,,"81.15 DPS
-
-Proc: Grants an extra attack on your next swing",World Drop
-Fury,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
+Fury,Main Hand,PreRaid,Blinkstrike,Auction House,,,,Proc: Grants an extra attack on your next swing,World Drop
+Fury,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Fury,Main Hand,PreRaid,Fel Edged Battleaxe,Auction House,,,,83.41 DPS; 3 Sta; 14 Hit; 21 Crit,
-Fury,Main Hand,PreRaid,Bloodskull Destroyer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,71.73 DPS; 12 Sta; 22 AP; 21 Crit,Lieutenant Drake
-Fury,Main Hand,PreRaid,Edge of the Cosmos,Dungeon Drop,,Mechanar,Normal,71.73 DPS; 13 Sta; 30 AP; 16 Crit,Pathaleon the Calculator
-Fury,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,71.67 DPS; 17 Str; 15 Sta,Broggok
-Fury,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,71.79 DPS; 15 Agi; 26 AP,Aeonus
-Fury,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,71.73 DPS; 16 Str; 13 Sta; 15 Crit,Exarch Maladaar
-Fury,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,81.15 DPS; 38 AP; 19 Hit,The Aldor - Exalted
-Fury,Main Hand,PreRaid,Grand Marshal's Slicer,PvP,,,,71.73 DPS; 18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
-Fury,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,71.73 DPS; 18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
-Fury,Two Hand,PreRaid,Lionheart Champion,Auction House,,,,"118.61 DPS; 49 Str; 44 Agi
+Fury,Main Hand,PreRaid,Fel Edged Battleaxe,Auction House,,,,3 Sta; 14 Hit; 21 Crit,
+Fury,Main Hand,PreRaid,Bloodskull Destroyer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,12 Sta; 22 AP; 21 Crit,Lieutenant Drake
+Fury,Main Hand,PreRaid,Edge of the Cosmos,Dungeon Drop,,Mechanar,Normal,13 Sta; 30 AP; 16 Crit,Pathaleon the Calculator
+Fury,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,17 Str; 15 Sta,Broggok
+Fury,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Fury,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,16 Str; 13 Sta; 15 Crit,Exarch Maladaar
+Fury,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,38 AP; 19 Hit,The Aldor - Exalted
+Fury,Main Hand,PreRaid,Grand Marshal's Slicer,PvP,,,,18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
+Fury,Main Hand,PreRaid,High Warlord's Cleaver,PvP,,,,18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
+Fury,Two Hand,PreRaid,Lionheart Champion,Auction House,,,,"49 Str; 44 Agi
 
 Proc: Increases Strength by 100 for 10 sec;
 Equip: Increases your chance to resist Fear effects by 5%",
-Fury,Two Hand,PreRaid,Endbringer,Dungeon Drop,,Underbog,Normal,93.24 DPS; 29 Str; 28 Sta; 45 Crit,The Black Stalker
-Fury,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Fury,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,56.82 DPS; 10 Agi; 32 AP; 6 Crit,
-Fury,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
-Fury,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
+Fury,Two Hand,PreRaid,Endbringer,Dungeon Drop,,Underbog,Normal,29 Str; 28 Sta; 45 Crit,The Black Stalker
+Fury,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,31 Sta; 102 AP; 30 Crit,Aeonus
+Fury,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,10 Agi; 32 AP; 6 Crit,
+Fury,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
+Fury,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
 Protection,Head,PreRaid,Felsteel Helm,Auction House,,,,1284 Armor; 25 Str; 27 Sta; 33 Defense,
 Protection,Head,PreRaid,Hope Bearer Helm,Dungeon Drop,,Auchenai Crypts,Normal,827 Armor; 30 Str; 23 Agi; 19 Sta; 13 Hit,Shirrak the Dead Watcher
 Protection,Head,PreRaid,Warhelm of the Bold,Dungeon Drop,,Botanica,Normal,946 Armor; 24 Str; 22 Agi; 23 Sta; 20 Defense,Warp Splinter
@@ -289,19 +285,19 @@ Use: Increases maximum health by 900 for 15 sec",
 Protection,Trinket,PreRaid,Timelapse Shard,Reputation,,,,"27 Sta; 24 Resilience
 
 Use: Reduces your threat to enemy targets within 30 yards, making them less likely to attack you",Keepers of Time - Exalted
-Protection,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
+Protection,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Protection,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,71.79 DPS; 15 Agi; 26 AP,Aeonus
-Protection,Main Hand,PreRaid,Terokk's Nightmace,Dungeon Drop,,Sethekk Halls,Normal,71.75 DPS; 25 Sta,Talon King Ikiss
-Protection,Main Hand,PreRaid,The Bladefist,Dungeon Drop,,Shattered Halls,Heroic,"83.65 DPS; 180 Haste
+Protection,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Protection,Main Hand,PreRaid,Terokk's Nightmace,Dungeon Drop,,Sethekk Halls,Normal,25 Sta,Talon King Ikiss
+Protection,Main Hand,PreRaid,The Bladefist,Dungeon Drop,,Shattered Halls,Heroic,"180 Haste
 
 Proc: Increases your haste rating by 180 for 10 sec",Warchief Kargath Bladefist
-Protection,Main Hand,PreRaid,The Hungering Cold,Dungeon Drop,,Naxxramas,Normal,140 Armor; 73.0 DPS; 14 Sta,Kel'Thuzad
-Protection,Main Hand,PreRaid,The Sun Eater,Dungeon Drop,,Mechanar,Heroic,83.44 DPS; 22 Sta; 13 Defense; 19 Dodge,Pathaleon the Calculator
-Protection,Main Hand,PreRaid,Grom'tor's Charge,Quest,The Cipher of Damnation (SMV),,,67.19 DPS; 7 Agi; 30 Sta; 11 Defense,
-Protection,Main Hand,PreRaid,Honor's Call,Reputation,,,,81.11 DPS; 13 Sta; 16 Defense; 8 Hit,Honor Hold - Exalted
-Protection,Main Hand,PreRaid,Warbringer,Reputation,,,,81.11 DPS; 12 Sta; 16 Defense; 7 Hit,Thrallmar - Exalted
+Protection,Main Hand,PreRaid,The Hungering Cold,Dungeon Drop,,Naxxramas,Normal,140 Armor; 14 Sta,Kel'Thuzad
+Protection,Main Hand,PreRaid,The Sun Eater,Dungeon Drop,,Mechanar,Heroic,22 Sta; 13 Defense; 19 Dodge,Pathaleon the Calculator
+Protection,Main Hand,PreRaid,Grom'tor's Charge,Quest,The Cipher of Damnation (SMV),,,7 Agi; 30 Sta; 11 Defense,
+Protection,Main Hand,PreRaid,Honor's Call,Reputation,,,,13 Sta; 16 Defense; 8 Hit,Honor Hold - Exalted
+Protection,Main Hand,PreRaid,Warbringer,Reputation,,,,12 Sta; 16 Defense; 7 Hit,Thrallmar - Exalted
 Protection,Off Hand,PreRaid,Aegis of the Sunbird,Dungeon Drop,,Botanica,Normal,3806 Armor; 27 Sta; 19 Defense; 29 Block Value,High Botanist Freywinn
 Protection,Off Hand,PreRaid,Platinum Shield of the Valorous,Dungeon Drop,,Shadow Labyrinth,Normal,3711 Armor; 33 Sta; 24 Defense,Ambassador Hellmaw
 Protection,Off Hand,PreRaid,The Face of Death,Dungeon Drop,,Naxxramas,Normal,3994 Armor; 21 Sta; 12 Block Rating; 21 Block Value,Sapphiron
@@ -311,9 +307,9 @@ Protection,Off Hand,PreRaid,Netherwing Protector's Shield,Quest,Ally of the Neth
 Protection,Off Hand,PreRaid,Crest of the Sha'tar,Reputation,,,,4465 Armor; 19 Sta; 13 Defense; 24 Block Value,The Sha'tar - Exalted
 Protection,Off Hand,PreRaid,Grand Marshal's Barricade,PvP,,,,3806 Armor; 36 Sta; 23 Resilience,
 Protection,Off Hand,PreRaid,High Warlord's Barricade,PvP,,,,3806 Armor; 36 Sta; 23 Resilience,
-Protection,Ranged/Relic,PreRaid,Spinesever,Auction House,,,,72.95 DPS; 11 Agi; 12 Sta; 20 AP; 10 Hit,World Drop
-Protection,Ranged/Relic,PreRaid,Crossbow of Imminent Doom,Dungeon Drop,,Ruins of Ahn'Qiraj,Normal,50.81 DPS; 5 Str; 7 Agi; 5 Sta; 10 Hit,Ossirian the Unscarred
-Protection,Ranged/Relic,PreRaid,Nethershrike,Dungeon Drop,,Mechanar,Normal,64.38 DPS; 15 Sta; 16 Crit,Nethermancer Sepethrea
-Protection,Ranged/Relic,PreRaid,Starbolt Longbow,Dungeon Drop,,Mana Tombs,Heroic,66.43 DPS; 19 Sta; 15 Crit,Pandemonius
-Protection,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,51.76 DPS; 7 Agi; 10 Sta; 14 AP; 7 Hit,
-Protection,Ranged/Relic,PreRaid,Consortium Blaster,Reputation,,,,66.25 DPS; 15 Sta; 28 AP; 7 Crit,The Consortium - Revered
+Protection,Ranged/Relic,PreRaid,Spinesever,Auction House,,,,11 Agi; 12 Sta; 20 AP; 10 Hit,World Drop
+Protection,Ranged/Relic,PreRaid,Crossbow of Imminent Doom,Dungeon Drop,,Ruins of Ahn'Qiraj,Normal,5 Str; 7 Agi; 5 Sta; 10 Hit,Ossirian the Unscarred
+Protection,Ranged/Relic,PreRaid,Nethershrike,Dungeon Drop,,Mechanar,Normal,15 Sta; 16 Crit,Nethermancer Sepethrea
+Protection,Ranged/Relic,PreRaid,Starbolt Longbow,Dungeon Drop,,Mana Tombs,Heroic,19 Sta; 15 Crit,Pandemonius
+Protection,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,7 Agi; 10 Sta; 14 AP; 7 Hit,
+Protection,Ranged/Relic,PreRaid,Consortium Blaster,Reputation,,,,15 Sta; 28 AP; 7 Crit,The Consortium - Revered

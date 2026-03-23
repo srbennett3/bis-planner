@@ -77,27 +77,25 @@ Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Beast Mastery,Trinket,PreRaid,Bladefist's Breadth,Quest,Overlord (HFP),,,"200 AP; 26 Crit
 
 Use: Increases attack power by 200 for 15 sec",
-Beast Mastery,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP; 12 Crit,Shirrak the Dead Watcher
-Beast Mastery,Main Hand,PreRaid,Silithid Claw,Dungeon Drop,,Ahn'Qiraj,Normal,57.5 DPS; 30 AP; 14 Crit,Battleguard Sartura
-Beast Mastery,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,71.58 DPS; 21 Agi; 12 Sta; 22 AP,Nethermancer Sepethrea
-Beast Mastery,Main Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,71.56 DPS; 13 Sta; 22 AP; 21 Crit,High Botanist Freywinn
-Beast Mastery,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,59.81 DPS; 10 Agi; 9 Sta; 32 AP,
-Beast Mastery,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,71.67 DPS; 8 Sta; 22 AP; 10 Hit; 14 Crit,Sapphiron
-Beast Mastery,Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,81.25 DPS; 19 Agi; 38 AP,The Consortium - Exalted
-Beast Mastery,Off Hand,PreRaid,Void-Talon,Vendor,,,,57.5 DPS; 14 Agi; 28 AP,Netherstorm
-Beast Mastery,Two Hand,PreRaid,Mooncleaver,Auction House,,,,118.65 DPS; 106 AP; 52 Crit,
-Beast Mastery,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Beast Mastery,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,93.29 DPS; 35 Agi; 30 Sta; 62 AP; 24 Hit,Murmur
-Beast Mastery,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,85.0 DPS; 30 Agi; 22 Sta; 60 AP; 16 Hit,Loatheb
-Beast Mastery,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,93.33 DPS; 54 Agi; 33 Sta,
-Beast Mastery,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,66.43 DPS; 10 Int; 22 AP; 10 Crit,World Drop
-Beast Mastery,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,"73.7 DPS
-
-Equip: Your ranged attacks have a chance to increase your attack power by 250 for 10 sec",Opera Event (Wolf)
-Beast Mastery,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,67.5 DPS; 24 AP; 14 Crit,Kel'Thuzad
-Beast Mastery,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,75.5 DPS; 14 Agi; 28 AP,Warlord Kalithresh
-Beast Mastery,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
-Beast Mastery,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
+Beast Mastery,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,24 AP; 12 Crit,Shirrak the Dead Watcher
+Beast Mastery,Main Hand,PreRaid,Silithid Claw,Dungeon Drop,,Ahn'Qiraj,Normal,30 AP; 14 Crit,Battleguard Sartura
+Beast Mastery,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,21 Agi; 12 Sta; 22 AP,Nethermancer Sepethrea
+Beast Mastery,Main Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,13 Sta; 22 AP; 21 Crit,High Botanist Freywinn
+Beast Mastery,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,10 Agi; 9 Sta; 32 AP,
+Beast Mastery,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,8 Sta; 22 AP; 10 Hit; 14 Crit,Sapphiron
+Beast Mastery,Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,19 Agi; 38 AP,The Consortium - Exalted
+Beast Mastery,Off Hand,PreRaid,Void-Talon,Vendor,,,,14 Agi; 28 AP,Netherstorm
+Beast Mastery,Two Hand,PreRaid,Mooncleaver,Auction House,,,,106 AP; 52 Crit,
+Beast Mastery,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,31 Sta; 102 AP; 30 Crit,Aeonus
+Beast Mastery,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,35 Agi; 30 Sta; 62 AP; 24 Hit,Murmur
+Beast Mastery,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,30 Agi; 22 Sta; 60 AP; 16 Hit,Loatheb
+Beast Mastery,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,54 Agi; 33 Sta,
+Beast Mastery,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,10 Int; 22 AP; 10 Crit,World Drop
+Beast Mastery,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,Equip: Your ranged attacks have a chance to increase your attack power by 250 for 10 sec,Opera Event (Wolf)
+Beast Mastery,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,24 AP; 14 Crit,Kel'Thuzad
+Beast Mastery,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,14 Agi; 28 AP,Warlord Kalithresh
+Beast Mastery,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
+Beast Mastery,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
 Marksmanship,Head,PreRaid,Mask of Veiled Death,Auction House,,,,220 Armor; 80 AP; 19 Hit; 30 Crit,World Drop
 Marksmanship,Head,PreRaid,Beast Lord Helm,Dungeon Drop,,Mechanar,Normal,530 Armor; 25 Agi; 21 Sta; 22 Int; 50 AP,Pathaleon the Calculator
 Marksmanship,Head,PreRaid,Mok'Nathal Beast-Mask,Dungeon Drop,,Auchenai Crypts,Normal,463 Armor; 23 Agi; 22 Sta; 15 Int; 44 AP,Exarch Maladaar
@@ -176,27 +174,25 @@ Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Marksmanship,Trinket,PreRaid,Bladefist's Breadth,Quest,Overlord (HFP),,,"200 AP; 26 Crit
 
 Use: Increases attack power by 200 for 15 sec",
-Marksmanship,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP; 12 Crit,Shirrak the Dead Watcher
-Marksmanship,Main Hand,PreRaid,Silithid Claw,Dungeon Drop,,Ahn'Qiraj,Normal,57.5 DPS; 30 AP; 14 Crit,Battleguard Sartura
-Marksmanship,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,71.58 DPS; 21 Agi; 12 Sta; 22 AP,Nethermancer Sepethrea
-Marksmanship,Main Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,71.56 DPS; 13 Sta; 22 AP; 21 Crit,High Botanist Freywinn
-Marksmanship,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,59.81 DPS; 10 Agi; 9 Sta; 32 AP,
-Marksmanship,Main Hand,PreRaid,Void-Talon,Vendor,,,,57.5 DPS; 14 Agi; 28 AP,Netherstorm
-Marksmanship,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,71.67 DPS; 8 Sta; 22 AP; 10 Hit; 14 Crit,Sapphiron
-Marksmanship,Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,81.25 DPS; 19 Agi; 38 AP,The Consortium - Exalted
-Marksmanship,Two Hand,PreRaid,Mooncleaver,Auction House,,,,118.65 DPS; 106 AP; 52 Crit,
-Marksmanship,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Marksmanship,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,93.29 DPS; 35 Agi; 30 Sta; 62 AP; 24 Hit,Murmur
-Marksmanship,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,85.0 DPS; 30 Agi; 22 Sta; 60 AP; 16 Hit,Loatheb
-Marksmanship,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,93.33 DPS; 54 Agi; 33 Sta,
-Marksmanship,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,66.43 DPS; 10 Int; 22 AP; 10 Crit,World Drop
-Marksmanship,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,"73.7 DPS
-
-Equip: Your ranged attacks have a chance to increase your attack power by 250 for 10 sec",Opera Event (Wolf)
-Marksmanship,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,67.5 DPS; 24 AP; 14 Crit,Kel'Thuzad
-Marksmanship,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,75.5 DPS; 14 Agi; 28 AP,Warlord Kalithresh
-Marksmanship,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
-Marksmanship,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
+Marksmanship,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,24 AP; 12 Crit,Shirrak the Dead Watcher
+Marksmanship,Main Hand,PreRaid,Silithid Claw,Dungeon Drop,,Ahn'Qiraj,Normal,30 AP; 14 Crit,Battleguard Sartura
+Marksmanship,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,21 Agi; 12 Sta; 22 AP,Nethermancer Sepethrea
+Marksmanship,Main Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,13 Sta; 22 AP; 21 Crit,High Botanist Freywinn
+Marksmanship,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,10 Agi; 9 Sta; 32 AP,
+Marksmanship,Main Hand,PreRaid,Void-Talon,Vendor,,,,14 Agi; 28 AP,Netherstorm
+Marksmanship,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,8 Sta; 22 AP; 10 Hit; 14 Crit,Sapphiron
+Marksmanship,Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,19 Agi; 38 AP,The Consortium - Exalted
+Marksmanship,Two Hand,PreRaid,Mooncleaver,Auction House,,,,106 AP; 52 Crit,
+Marksmanship,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,31 Sta; 102 AP; 30 Crit,Aeonus
+Marksmanship,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,35 Agi; 30 Sta; 62 AP; 24 Hit,Murmur
+Marksmanship,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,30 Agi; 22 Sta; 60 AP; 16 Hit,Loatheb
+Marksmanship,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,54 Agi; 33 Sta,
+Marksmanship,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,10 Int; 22 AP; 10 Crit,World Drop
+Marksmanship,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,Equip: Your ranged attacks have a chance to increase your attack power by 250 for 10 sec,Opera Event (Wolf)
+Marksmanship,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,24 AP; 14 Crit,Kel'Thuzad
+Marksmanship,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,14 Agi; 28 AP,Warlord Kalithresh
+Marksmanship,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
+Marksmanship,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
 Survival,Head,PreRaid,Mask of Veiled Death,Auction House,,,,220 Armor; 80 AP; 19 Hit; 30 Crit,World Drop
 Survival,Head,PreRaid,Beast Lord Helm,Dungeon Drop,,Mechanar,Normal,530 Armor; 25 Agi; 21 Sta; 22 Int; 50 AP,Pathaleon the Calculator
 Survival,Head,PreRaid,Mok'Nathal Beast-Mask,Dungeon Drop,,Auchenai Crypts,Normal,463 Armor; 23 Agi; 22 Sta; 15 Int; 44 AP,Exarch Maladaar
@@ -278,24 +274,22 @@ Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Survival,Trinket,PreRaid,Bladefist's Breadth,Quest,Overlord (HFP),,,"200 AP; 26 Crit
 
 Use: Increases attack power by 200 for 15 sec",
-Survival,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,71.6 DPS; 24 AP; 12 Crit,Shirrak the Dead Watcher
-Survival,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,71.58 DPS; 21 Agi; 12 Sta; 22 AP,Nethermancer Sepethrea
-Survival,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,59.81 DPS; 10 Agi; 9 Sta; 32 AP,
-Survival,Main Hand,PreRaid,Void-Talon,Vendor,,,,57.5 DPS; 14 Agi; 28 AP,Netherstorm
-Survival,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,71.67 DPS; 8 Sta; 22 AP; 10 Hit; 14 Crit,Sapphiron
-Survival,Off Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,71.56 DPS; 13 Sta; 22 AP; 21 Crit,High Botanist Freywinn
-Survival,Off Hand,PreRaid,Talon of Anzu,Dungeon Drop,,Sethekk Halls,Heroic,71.67 DPS; 10 Agi; 3 Sta; 36 AP,Anzu
-Survival,Two Hand,PreRaid,Mooncleaver,Auction House,,,,118.65 DPS; 106 AP; 52 Crit,
-Survival,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Survival,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,93.29 DPS; 35 Agi; 30 Sta; 62 AP; 24 Hit,Murmur
-Survival,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,85.0 DPS; 30 Agi; 22 Sta; 60 AP; 16 Hit,Loatheb
-Survival,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,93.33 DPS; 54 Agi; 33 Sta,
-Survival,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,66.43 DPS; 10 Int; 22 AP; 10 Crit,World Drop
-Survival,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,"73.7 DPS
-
-Equip: Your ranged attacks have a chance to increase your attack power by 250 for 10 sec",Opera Event (Wolf)
-Survival,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,67.5 DPS; 24 AP; 14 Crit,Kel'Thuzad
-Survival,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,75.5 DPS; 14 Agi; 28 AP,Warlord Kalithresh
-Survival,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
-Survival,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
-Survival,Main Hand~Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,81.25 DPS; 19 Agi; 38 AP,The Consortium - Exalted
+Survival,Main Hand,PreRaid,Claw of the Watcher,Dungeon Drop,,Auchenai Crypts,Heroic,24 AP; 12 Crit,Shirrak the Dead Watcher
+Survival,Main Hand,PreRaid,Stellaris,Dungeon Drop,,Mechanar,Normal,21 Agi; 12 Sta; 22 AP,Nethermancer Sepethrea
+Survival,Main Hand,PreRaid,Ripfang Paw,Quest,Declawing Doomclaw (NS),,,10 Agi; 9 Sta; 32 AP,
+Survival,Main Hand,PreRaid,Void-Talon,Vendor,,,,14 Agi; 28 AP,Netherstorm
+Survival,Off Hand,PreRaid,Claw of the Frost Wyrm,Dungeon Drop,,Naxxramas,Normal,8 Sta; 22 AP; 10 Hit; 14 Crit,Sapphiron
+Survival,Off Hand,PreRaid,Stormreaver Warblades,Dungeon Drop,,Botanica,Normal,13 Sta; 22 AP; 21 Crit,High Botanist Freywinn
+Survival,Off Hand,PreRaid,Talon of Anzu,Dungeon Drop,,Sethekk Halls,Heroic,10 Agi; 3 Sta; 36 AP,Anzu
+Survival,Two Hand,PreRaid,Mooncleaver,Auction House,,,,106 AP; 52 Crit,
+Survival,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,31 Sta; 102 AP; 30 Crit,Aeonus
+Survival,Two Hand,PreRaid,Sonic Spear,Dungeon Drop,,Shadow Labyrinth,Normal,35 Agi; 30 Sta; 62 AP; 24 Hit,Murmur
+Survival,Two Hand,PreRaid,The Eye of Nerub,Dungeon Drop,,Naxxramas,Normal,30 Agi; 22 Sta; 60 AP; 16 Hit,Loatheb
+Survival,Two Hand,PreRaid,Terokk's Quill,Quest (Dung),Terokk's Legacy (Seth),,,54 Agi; 33 Sta,
+Survival,Ranged/Relic,PreRaid,Valanos' Longbow,Auction House,,,,10 Int; 22 AP; 10 Crit,World Drop
+Survival,Ranged/Relic,PreRaid,Don Santos' Famous Hunting Rifle,Dungeon Drop,,Karazhan,Normal,Equip: Your ranged attacks have a chance to increase your attack power by 250 for 10 sec,Opera Event (Wolf)
+Survival,Ranged/Relic,PreRaid,Nerubian Slavemaker,Dungeon Drop,,Naxxramas,Normal,24 AP; 14 Crit,Kel'Thuzad
+Survival,Ranged/Relic,PreRaid,Wrathtide Longbow,Dungeon Drop,,Steamvault,Heroic,14 Agi; 28 AP,Warlord Kalithresh
+Survival,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
+Survival,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
+Survival,Main Hand~Off Hand,PreRaid,Guile of Khoraazi,Reputation,,,,19 Agi; 38 AP,The Consortium - Exalted

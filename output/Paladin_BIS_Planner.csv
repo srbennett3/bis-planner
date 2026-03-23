@@ -136,16 +136,16 @@ Use: Increases healing done by spells and effects by up to 213 and damage done b
 Holy,Trinket,PreRaid,Lower City Prayerbook,Reputation,,,,"70 Healing; 24 Spell Dmg
 
 Use: Your heals each cost 22 less mana for the next 15 sec",Lower City - Revered
-Holy,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,43.68 DPS; 20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
-Holy,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,43.57 DPS; 15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
-Holy,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,41.11 DPS; 227 Healing; 76 Spell Dmg; 11 MP5,World Drop
-Holy,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,41.11 DPS; 13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
-Holy,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,41.11 DPS; 16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
-Holy,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,41.58 DPS; 8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
-Holy,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
-Holy,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
-Holy,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
-Holy,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
+Holy,Main Hand,PreRaid,Hand of Eternity,Auction House,,,,20 Int; 317 Healing; 106 Spell Dmg; 7 MP5,
+Holy,Main Hand,PreRaid,The Ancient Scepter of Sue-Min,Auction House,,,,15 Int; 299 Healing; 100 Spell Dmg; 8 MP5,World Drop
+Holy,Main Hand,PreRaid,The Essence Focuser,Auction House,,,,227 Healing; 76 Spell Dmg; 11 MP5,World Drop
+Holy,Main Hand,PreRaid,Dathrohan's Ceremonial Hammer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 18 Spi; 227 Healing; 76 Spell Dmg,Captain Skarloc
+Holy,Main Hand,PreRaid,Hammer of the Penitent,Dungeon Drop,,Mechanar,Normal,16 Int; 13 Spi; 227 Healing; 76 Spell Dmg; 6 MP5,Mechano-Lord Capacitus
+Holy,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Normal,8 Sta; 11 Int; 238 Healing; 80 Spell Dmg; 8 MP5,Kel'Thuzad
+Holy,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
+Holy,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
+Holy,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
+Holy,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
 Holy,Off Hand,PreRaid,Crystal Pulse Shield,Auction House,,,,3711 Armor; 24 Int; 35 Healing; 12 Spell Dmg; 6 MP5,World Drop
 Holy,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,59 Healing; 20 Spell Dmg; 7 MP5,Omor the Unscarred
 Holy,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5,Dalliah the Doomsayer
@@ -314,13 +314,13 @@ Protection,Trinket,PreRaid,Zandalarian Hero Charm,Quest,The Heart of Hakkar (ZG)
 Protection,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,"32 Spell Hit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Scryers - Revered
-Protection,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,41.11 DPS; 15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
-Protection,Main Hand,PreRaid,Mana Wrath,Dungeon Drop,,Mechanar,Normal,41.11 DPS; 24 Sta; 18 Int; 126 Healing; 126 Spell Dmg,Pathaleon the Calculator
-Protection,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,41.11 DPS; 13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
-Protection,Main Hand,PreRaid,Continuum Blade,Reputation,,,,41.11 DPS; 30 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 8 Spell Hit,Keepers of Time - Revered
-Protection,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
-Protection,Main Hand,PreRaid,Stormcaller,Reputation,,,,41.11 DPS; 12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
-Protection,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
+Protection,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
+Protection,Main Hand,PreRaid,Mana Wrath,Dungeon Drop,,Mechanar,Normal,24 Sta; 18 Int; 126 Healing; 126 Spell Dmg,Pathaleon the Calculator
+Protection,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
+Protection,Main Hand,PreRaid,Continuum Blade,Reputation,,,,30 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 8 Spell Hit,Keepers of Time - Revered
+Protection,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
+Protection,Main Hand,PreRaid,Stormcaller,Reputation,,,,12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
+Protection,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
 Protection,Off Hand,PreRaid,Aegis of the Sunbird,Dungeon Drop,,Botanica,Normal,3806 Armor; 27 Sta; 19 Defense; 29 Block Value,High Botanist Freywinn
 Protection,Off Hand,PreRaid,Blood Knight Defender,Dungeon Drop,,Hellfire Ramparts,Heroic,3806 Armor; 26 Sta; 18 Block Rating,Watchkeeper Gargolmar
 Protection,Off Hand,PreRaid,Platinum Shield of the Valorous,Dungeon Drop,,Shadow Labyrinth,Normal,3711 Armor; 33 Sta; 24 Defense,Ambassador Hellmaw
@@ -409,24 +409,24 @@ Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Retribution,Trinket,PreRaid,Core of Ar'kelos,Quest,Ar'kelos the Guardian (NS),,,"52 AP
 
 Use: Increases your melee and ranged attack power by 200. Effect lasts for 20 sec",
-Retribution,Two Hand,PreRaid,Deep Thunder,Auction House,,,,"118.55 DPS; 37 Str; 37 Agi; 55 Sta
+Retribution,Two Hand,PreRaid,Deep Thunder,Auction House,,,,"37 Str; 37 Agi; 55 Sta
 
 Proc: Stuns target for 4 sec",
-Retribution,Two Hand,PreRaid,Khorium Champion,Auction House,,,,"108.48 DPS; 50 Str; 37 Hit
+Retribution,Two Hand,PreRaid,Khorium Champion,Auction House,,,,"50 Str; 37 Hit
 
 Proc: Heal self for 270 to 450 and increases Strength by 120 for 30 sec",
-Retribution,Two Hand,PreRaid,Lionheart Champion,Auction House,,,,"118.61 DPS; 49 Str; 44 Agi
+Retribution,Two Hand,PreRaid,Lionheart Champion,Auction House,,,,"49 Str; 44 Agi
 
 Proc: Increases Strength by 100 for 10 sec;
 Equip: Increases your chance to resist Fear effects by 5%",
-Retribution,Two Hand,PreRaid,Singing Crystal Axe,Auction House,,,,"105.57 DPS; 400 Haste
+Retribution,Two Hand,PreRaid,Singing Crystal Axe,Auction House,,,,"400 Haste
 
 Proc: Increases your haste rating by 400 for 10 sec",World Drop
-Retribution,Two Hand,PreRaid,The Hammer of Destiny,Auction House,,,,"105.69 DPS; 32 Str; 30 Sta; 29 Int
+Retribution,Two Hand,PreRaid,The Hammer of Destiny,Auction House,,,,"32 Str; 30 Sta; 29 Int
 
 Proc: Restores 170 to 230 mana",World Drop
-Retribution,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Retribution,Two Hand,PreRaid,Gladiator's Greatsword,PvP,,,,118.61 DPS; 32 Str; 48 Sta; 20 Hit; 35 Crit; 28 Resilience,
+Retribution,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,31 Sta; 102 AP; 30 Crit,Aeonus
+Retribution,Two Hand,PreRaid,Gladiator's Greatsword,PvP,,,,32 Str; 48 Sta; 20 Hit; 35 Crit; 28 Resilience,
 Retribution,Ranged/Relic,PreRaid,Libram of Fervor,Auction House,,,,Equip: Increases the melee attack power bonus of your Seal of the Crusader by 48 and the Holy damage increase of your Judgement of the Crusader by 33,World Drop
 Retribution,Ranged/Relic,PreRaid,Libram of Avengement,Dungeon Drop,,Blood Furnace,Heroic,"Equip: Causes your Judgement of Command, Judgement of Righteousness, Judgment of",The Maker
 Retribution,Ranged/Relic,PreRaid,Libram of Hope,Dungeon Drop,,Dire Maul,Normal,Equip: Reduces the base mana cost of your Seal spells by 20,Isalien

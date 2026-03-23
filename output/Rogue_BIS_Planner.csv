@@ -58,19 +58,15 @@ Dps,Trinket,PreRaid,Bloodlust Brooch,Dungeon Token,,,,"72 AP
 
 Use: Increases attack power by 278 for 20 sec",41 Badges of Justice
 Dps,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Naxx),,,150 AP,
-Dps,Main Hand,PreRaid,Blinkstrike,Auction House,,,,"81.15 DPS
-
-Proc: Grants an extra attack on your next swing",World Drop
-Dps,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"91.11 DPS; 9 Sta; 212 Haste
+Dps,Main Hand,PreRaid,Blinkstrike,Auction House,,,,Proc: Grants an extra attack on your next swing,World Drop
+Dps,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Dps,Main Hand,PreRaid,The Night Blade,Auction House,,,,"81.39 DPS
-
-Proc: Your attacks ignore 435 of your enemies' armor for 10 sec",World Drop
-Dps,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,81.15 DPS; 38 AP; 19 Hit,The Aldor - Exalted
-Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,71.79 DPS; 15 Agi; 26 AP,Aeonus
-Dps,Off Hand,PreRaid,Searing Sunblade,Dungeon Token,,,,85.38 DPS; 24 Agi; 22 Sta,50 Badges of Justice
-Dps,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,56.82 DPS; 10 Agi; 32 AP; 6 Crit,
-Dps,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,51.76 DPS; 7 Agi; 10 Sta; 14 AP; 7 Hit,
-Dps,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,73.75 DPS; 12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
-Dps,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,73.7 DPS; 12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted
+Dps,Main Hand,PreRaid,The Night Blade,Auction House,,,,Proc: Your attacks ignore 435 of your enemies' armor for 10 sec,World Drop
+Dps,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,38 AP; 19 Hit,The Aldor - Exalted
+Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Dps,Off Hand,PreRaid,Searing Sunblade,Dungeon Token,,,,24 Agi; 22 Sta,50 Badges of Justice
+Dps,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,10 Agi; 32 AP; 6 Crit,
+Dps,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,7 Agi; 10 Sta; 14 AP; 7 Hit,
+Dps,Ranged/Relic,PreRaid,Marksman's Bow,Reputation,,,,12 Agi; 22 AP; 11 Hit,Thrallmar - Exalted
+Dps,Ranged/Relic,PreRaid,Veteran's Musket,Reputation,,,,12 Agi; 22 AP; 11 Hit,Honor Hold - Exalted

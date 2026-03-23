@@ -85,15 +85,15 @@ Affliction,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Na
 Affliction,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,"32 Spell Hit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Scryers - Revered
-Affliction,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,"41.11 DPS; 159 Healing; 159 Spell Dmg
+Affliction,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,"159 Healing; 159 Spell Dmg
 
 Equip: Your harmful spells have a chance to increase your spell haste rating by 280 for 6 secs. (Proc chance: 15%, 50s cooldown)",World Drop
-Affliction,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,41.11 DPS; 15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
-Affliction,Main Hand,PreRaid,Illidari-Bane Mageblade,Quest,Quenching the Blade (SMV),,,"41.56 DPS; 12 Sta; 11 Int; 20 Spell Crit
+Affliction,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
+Affliction,Main Hand,PreRaid,Illidari-Bane Mageblade,Quest,Quenching the Blade (SMV),,,"12 Sta; 11 Int; 20 Spell Crit
 
 Equip: Increases damage done to Demons by magical spells and effects by up to 185",
-Affliction,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,41.11 DPS; 13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
-Affliction,Main Hand,PreRaid,Stormcaller,Reputation,,,,41.11 DPS; 12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
+Affliction,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
+Affliction,Main Hand,PreRaid,Stormcaller,Reputation,,,,12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
 Affliction,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit,Harbinger Skyriss
 Affliction,Off Hand,PreRaid,Royal Scepter of Vek'lor,Dungeon Drop,,Ahn'Qiraj,Normal,10 Sta; 9 Int; 20 Healing; 20 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Emperor Vek'lor
 Affliction,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
@@ -101,14 +101,14 @@ Affliction,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 S
 Affliction,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,"18 Sta
 
 Equip: Increases damage done by Shadow spells and effects by up to 51",25 Badges of Justice
-Affliction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
+Affliction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
 
 Use: Creates a portal, teleporting group members that use it to Karazhan;
 Equip: Increases damage and healing done by magical spells and effects of all party members within 30 yards by up to 33",
-Affliction,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,139.0 DPS; 16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
-Affliction,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Healing; 13 Spell Dmg; 8 Spell Hit,Dalliah the Doomsayer
-Affliction,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Healing; 20 Spell Dmg; 11 Spell Crit,The Black Stalker
-Affliction,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,113.67 DPS; 7 Sta; 7 Int; 12 Healing; 12 Spell Dmg; 8 Spell Hit,Patchwerk
+Affliction,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
+Affliction,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,9 Sta; 10 Int; 13 Healing; 13 Spell Dmg; 8 Spell Hit,Dalliah the Doomsayer
+Affliction,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,10 Sta; 20 Healing; 20 Spell Dmg; 11 Spell Crit,The Black Stalker
+Affliction,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,7 Sta; 7 Int; 12 Healing; 12 Spell Dmg; 8 Spell Hit,Patchwerk
 Demonology,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg; 16 Spell Hit; 24 Spell Crit,
 Demonology,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
 Demonology,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg; 19 Spell Crit,Pathaleon the Calculator
@@ -195,15 +195,15 @@ Demonology,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (Na
 Demonology,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,"32 Spell Hit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Scryers - Revered
-Demonology,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,"41.11 DPS; 159 Healing; 159 Spell Dmg
+Demonology,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,"159 Healing; 159 Spell Dmg
 
 Equip: Your harmful spells have a chance to increase your spell haste rating by 280 for 6 secs. (Proc chance: 15%, 50s cooldown)",World Drop
-Demonology,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,41.11 DPS; 15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
-Demonology,Main Hand,PreRaid,Illidari-Bane Mageblade,Quest,Quenching the Blade (SMV),,,"41.56 DPS; 12 Sta; 11 Int; 20 Spell Crit
+Demonology,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
+Demonology,Main Hand,PreRaid,Illidari-Bane Mageblade,Quest,Quenching the Blade (SMV),,,"12 Sta; 11 Int; 20 Spell Crit
 
 Equip: Increases damage done to Demons by magical spells and effects by up to 185",
-Demonology,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,41.11 DPS; 13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
-Demonology,Main Hand,PreRaid,Stormcaller,Reputation,,,,41.11 DPS; 12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
+Demonology,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
+Demonology,Main Hand,PreRaid,Stormcaller,Reputation,,,,12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
 Demonology,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit,Harbinger Skyriss
 Demonology,Off Hand,PreRaid,Royal Scepter of Vek'lor,Dungeon Drop,,Ahn'Qiraj,Normal,10 Sta; 9 Int; 20 Healing; 20 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Emperor Vek'lor
 Demonology,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
@@ -211,14 +211,14 @@ Demonology,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 S
 Demonology,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,"18 Sta
 
 Equip: Increases damage done by Shadow spells and effects by up to 51",25 Badges of Justice
-Demonology,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
+Demonology,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
 
 Use: Creates a portal, teleporting group members that use it to Karazhan;
 Equip: Increases damage and healing done by magical spells and effects of all party members within 30 yards by up to 33",
-Demonology,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,139.0 DPS; 16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
-Demonology,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Healing; 13 Spell Dmg; 8 Spell Hit,Dalliah the Doomsayer
-Demonology,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Healing; 20 Spell Dmg; 11 Spell Crit,The Black Stalker
-Demonology,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,113.67 DPS; 7 Sta; 7 Int; 12 Healing; 12 Spell Dmg; 8 Spell Hit,Patchwerk
+Demonology,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
+Demonology,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,9 Sta; 10 Int; 13 Healing; 13 Spell Dmg; 8 Spell Hit,Dalliah the Doomsayer
+Demonology,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,10 Sta; 20 Healing; 20 Spell Dmg; 11 Spell Crit,The Black Stalker
+Demonology,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,7 Sta; 7 Int; 12 Healing; 12 Spell Dmg; 8 Spell Hit,Patchwerk
 Destruction,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg; 16 Spell Hit; 24 Spell Crit,
 Destruction,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
 Destruction,Head,PreRaid,Incanter's Cowl,Dungeon Drop,,Mechanar,Normal,127 Armor; 15 Sta; 27 Int; 17 Spi; 29 Healing; 29 Spell Dmg; 19 Spell Crit,Pathaleon the Calculator
@@ -318,15 +318,15 @@ Destruction,Trinket,PreRaid,Mark of the Champion,Quest,The Fall of Kel'Thuzad (N
 Destruction,Trinket,PreRaid,Scryer's Bloodgem,Reputation,,,,"32 Spell Hit
 
 Use: Increases spell damage by up to 150 and healing by up to 280 for 15 sec",The Scryers - Revered
-Destruction,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,"41.11 DPS; 159 Healing; 159 Spell Dmg
+Destruction,Main Hand,PreRaid,Blade of Wizardry,Auction House,,,,"159 Healing; 159 Spell Dmg
 
 Equip: Your harmful spells have a chance to increase your spell haste rating by 280 for 6 secs. (Proc chance: 15%, 50s cooldown)",World Drop
-Destruction,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,41.11 DPS; 15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
-Destruction,Main Hand,PreRaid,Illidari-Bane Mageblade,Quest,Quenching the Blade (SMV),,,"41.56 DPS; 12 Sta; 11 Int; 20 Spell Crit
+Destruction,Main Hand,PreRaid,Greatsword of Horrid Dreams,Dungeon Drop,,Shadow Labyrinth,Normal,15 Sta; 14 Int; 130 Healing; 130 Spell Dmg; 14 Spell Hit,Murmur
+Destruction,Main Hand,PreRaid,Illidari-Bane Mageblade,Quest,Quenching the Blade (SMV),,,"12 Sta; 11 Int; 20 Spell Crit
 
 Equip: Increases damage done to Demons by magical spells and effects by up to 185",
-Destruction,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,41.11 DPS; 13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
-Destruction,Main Hand,PreRaid,Stormcaller,Reputation,,,,41.11 DPS; 12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
+Destruction,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,13 Sta; 11 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Honor Hold - Exalted
+Destruction,Main Hand,PreRaid,Stormcaller,Reputation,,,,12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
 Destruction,Off Hand,PreRaid,Lamp of Peaceful Radiance,Dungeon Drop,,Arcatraz,Normal,13 Sta; 14 Int; 21 Healing; 21 Spell Dmg; 12 Spell Hit; 13 Spell Crit,Harbinger Skyriss
 Destruction,Off Hand,PreRaid,Royal Scepter of Vek'lor,Dungeon Drop,,Ahn'Qiraj,Normal,10 Sta; 9 Int; 20 Healing; 20 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Emperor Vek'lor
 Destruction,Off Hand,PreRaid,Sapphiron's Left Eye,Dungeon Drop,,Naxxramas,Normal,12 Sta; 8 Int; 26 Healing; 26 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Sapphiron
@@ -337,13 +337,13 @@ Destruction,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 
 Destruction,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,"18 Sta
 
 Equip: Increases damage done by Shadow spells and effects by up to 51",25 Badges of Justice
-Destruction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"64.31 DPS; 30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
+Destruction,Two Hand,PreRaid,"Atiesh, Greatstaff of the Guardian",Quest,"Atiesh, Greatstaff of the Guardian ()",,,"30 Sta; 29 Int; 150 Healing; 150 Spell Dmg; 28 Spell Crit
 
 Use: Creates a portal, teleporting group members that use it to Karazhan;
 Equip: Increases damage and healing done by magical spells and effects of all party members within 30 yards by up to 33",
-Destruction,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,139.0 DPS; 16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
-Destruction,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,129.44 DPS; 9 Sta; 10 Int; 13 Healing; 13 Spell Dmg; 8 Spell Hit,Dalliah the Doomsayer
-Destruction,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,157.33 DPS; 10 Sta; 20 Healing; 20 Spell Dmg; 11 Spell Crit,The Black Stalker
-Destruction,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,113.67 DPS; 7 Sta; 7 Int; 12 Healing; 12 Spell Dmg; 8 Spell Hit,Patchwerk
+Destruction,Ranged/Relic,PreRaid,Doomfinger,Dungeon Drop,,Naxxramas,Normal,16 Healing; 16 Spell Dmg; 14 Spell Crit,Kel'Thuzad
+Destruction,Ranged/Relic,PreRaid,Nether Core's Control Rod,Dungeon Drop,,Arcatraz,Normal,9 Sta; 10 Int; 13 Healing; 13 Spell Dmg; 8 Spell Hit,Dalliah the Doomsayer
+Destruction,Ranged/Relic,PreRaid,The Black Stalk,Dungeon Drop,,Underbog,Normal,10 Sta; 20 Healing; 20 Spell Dmg; 11 Spell Crit,The Black Stalker
+Destruction,Ranged/Relic,PreRaid,Wand of Fates,Dungeon Drop,,Naxxramas,Normal,7 Sta; 7 Int; 12 Healing; 12 Spell Dmg; 8 Spell Hit,Patchwerk
 Destruction,Ranged/Relic,PreRaid,Master Firestone,Other,,,,"Equip: Enchants the main hand weapon with fire, granting each attack a chance to deal 116 to 174 additional fire damage;
 Equip: Increases damage done by Fire spells and effects by up to 30",Soul Shard

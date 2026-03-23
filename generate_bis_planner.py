@@ -7,7 +7,7 @@ Two-step workflow:
   1. python3 generate_bis_planner.py --build-db         # fetch item stats from Wowhead (re-fetches stale cache)
   2. python3 generate_bis_planner.py paladin             # generate CSV + Excel (no API calls)
 
-Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights: AddonReference/Pawn/ClassicHawsJon.lua → pawn_scales_tbc.json.
+Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights: AddonReference/Pawn/ClassicHawsJon.lua → data/pawn_scales_tbc.json.
 TBC gem lists: Pawn/GemsBurningCrusade.lua. Excel adds Current Equipment ideal-gem columns (Apps Script), Weights row (Pawn snapshot + custom stash), Gear Score, GemDB + ItemDB socket columns; BIS Planner Stat Comparison + % Upgrade.
 
 Supported classes: druid, hunter, mage, paladin, priest, rogue, shaman, warlock, warrior
@@ -34,10 +34,10 @@ ADDON_REFERENCE_DIR = os.path.join(SCRIPT_DIR, "AddonReference")
 LOON_GUIDES_DIR = os.path.join(ADDON_REFERENCE_DIR, "Loon")
 PAWN_ADDON_DIR = os.path.join(ADDON_REFERENCE_DIR, "Pawn")
 PAWN_CLASSIC_HAWS_PATH = os.path.join(PAWN_ADDON_DIR, "ClassicHawsJon.lua")
-PAWN_SCALES_JSON_PATH = os.path.join(SCRIPT_DIR, "pawn_scales_tbc.json")
-DB_DIR = os.path.join(SCRIPT_DIR, "DB")
+DATA_DIR = os.path.join(SCRIPT_DIR, "data")
+PAWN_SCALES_JSON_PATH = os.path.join(DATA_DIR, "pawn_scales_tbc.json")
 OUTPUT_DIR = os.path.join(SCRIPT_DIR, "output")
-ITEM_DB_PATH = os.path.join(SCRIPT_DIR, "item_database.json")
+ITEM_DB_PATH = os.path.join(DATA_DIR, "item_database.json")
 GEAR_ORDER = [
     "Head", "Shoulder", "Back", "Chest", "Wrist", "Hands",
     "Waist", "Legs", "Feet", "Neck", "Ring", "Trinket",
@@ -101,7 +101,7 @@ FETCH_DELAY = 0.15
 FETCH_WORKERS = 4
 
 STAT_COLUMNS = [
-    "Armor", "DPS", "Str", "Agi", "Sta", "Int", "Spi",
+    "Armor", "Str", "Agi", "Sta", "Int", "Spi",
     "Healing", "Spell Dmg", "AP", "MP5",
     "Defense", "Dodge", "Parry", "Block Rating", "Block Value",
     "Hit", "Crit", "Spell Hit", "Spell Crit", "Haste",
@@ -137,7 +137,6 @@ CE_META_WEIGHT_COL = CE_CUSTOM_STASH_FIRST_COL + len(STAT_COLUMNS)
 # Pawn scale keys contributing to each planner STAT_COLUMNS weight (sum if multiple).
 STAT_COL_PAWN_WEIGHT_KEYS = [
     ("Armor",),
-    (),  # DPS — not modeled in Pawn scale the same way as weapon DPS
     ("Strength",),
     ("Agility",),
     ("Stamina",),
@@ -235,7 +234,7 @@ def log(msg):
 # ============================================================
 
 def parse_item_sources():
-    filepath = os.path.join(DB_DIR, "ItemSources.lua")
+    filepath = os.path.join(DATA_DIR, "ItemSources.lua")
     sources = {}
     with open(filepath, "r") as f:
         for line in f:
@@ -987,6 +986,7 @@ def build_item_database(test_mode=False, test_class=None, force_refresh=False):
     for entry in db.values():
         normalize_spell_stats(entry.get("stats") or {})
 
+    os.makedirs(DATA_DIR, exist_ok=True)
     with open(ITEM_DB_PATH, "w") as f:
         json.dump(db, f, separators=(",", ":"))
 
@@ -1206,7 +1206,7 @@ CLASS_TITLE_TO_PAWN_CLASS_ID = {
     "Druid": 11,
 }
 
-# Loon `RegisterSpec(..., LBIS.L["SpecLabel"], ...)` vs Pawn `spec_name` in pawn_scales_tbc.json.
+# Loon `RegisterSpec(..., LBIS.L["SpecLabel"], ...)` vs Pawn `spec_name` in data/pawn_scales_tbc.json.
 # Known mismatches (anything else must match Pawn exactly):
 #   Druid Cat/Bear -> Feral (Damage) / Feral (Tank)
 #   Rogue: one Loon guide "Dps" vs Pawn Assassination / Combat / Subtlety -> map to Combat (TBC default)
@@ -1578,7 +1578,7 @@ def parse_pawn_gems_burning_crusade(lua_path=None):
 
 
 def refresh_pawn_scales_json():
-    """Rebuild pawn_scales_tbc.json from AddonReference/Pawn/ClassicHawsJon.lua (TBC multipliers)."""
+    """Rebuild data/pawn_scales_tbc.json from AddonReference/Pawn/ClassicHawsJon.lua (TBC multipliers)."""
     if not os.path.isfile(PAWN_CLASSIC_HAWS_PATH):
         log(
             "  Pawn scales skipped: missing %s (copy from the Pawn addon if needed)."
@@ -1603,6 +1603,7 @@ def refresh_pawn_scales_json():
             ),
             "scales": scales,
         }
+        os.makedirs(DATA_DIR, exist_ok=True)
         with open(PAWN_SCALES_JSON_PATH, "w", encoding="utf-8") as out:
             json.dump(payload, out, indent=2)
         log("  Pawn scales -> %s (%d scales)" % (PAWN_SCALES_JSON_PATH, len(scales)))
@@ -2335,7 +2336,7 @@ def _col_letter(n):
 
 def run_stat_audit_report():
     """
-    Data audit: item_database.json stat keys (frequency) vs STAT_COLUMNS and Pawn scale keys.
+    Data audit: data/item_database.json stat keys (frequency) vs STAT_COLUMNS and Pawn scale keys.
     Run: python3 generate_bis_planner.py --audit-stats
     """
     stat_cols_set = set(STAT_COLUMNS)
@@ -2385,7 +2386,7 @@ def run_stat_audit_report():
 
 
 def run_loon_pawn_spec_check():
-    """Print Loon RegisterSpec labels vs pawn_scales_tbc.json spec_name (per class)."""
+    """Print Loon RegisterSpec labels vs data/pawn_scales_tbc.json spec_name (per class)."""
     if not os.path.isdir(LOON_GUIDES_DIR):
         log("ERROR: Loon dir missing: %s" % LOON_GUIDES_DIR)
         return
@@ -2480,7 +2481,7 @@ def main():
     parser.add_argument("--all", action="store_true",
                         help="Generate CSV and Excel for every class that has guide files")
     parser.add_argument("--build-db", action="store_true",
-                        help="Fetch item stats from Wowhead and build item_database.json")
+                        help="Fetch item stats from Wowhead and build data/item_database.json")
     parser.add_argument("--refresh-db", action="store_true",
                         help="With --build-db: refetch every catalog item (ignore cache hits)")
     parser.add_argument("--test", action="store_true",
@@ -2492,7 +2493,7 @@ def main():
     parser.add_argument(
         "--audit-stats",
         action="store_true",
-        help="Print item_database stat-key frequencies vs STAT_COLUMNS / Pawn keys; then exit",
+        help="Print data/item_database.json stat-key frequencies vs STAT_COLUMNS / Pawn keys; then exit",
     )
     parser.add_argument(
         "--check-loon-pawn-specs",
