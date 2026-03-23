@@ -56,7 +56,7 @@ Holy,Wrist,PreRaid,Virtue Bearer's Vambraces,Dungeon Drop,,Blood Furnace,Heroic,
 Holy,Wrist,PreRaid,Redemption Wristguards,Quest,Redemption Wristguards (Naxx),,,492 Armor; 22 Sta; 15 Int; 31 Healing; 11 Spell Dmg; 4 MP5,
 Holy,Wrist,PreRaid,Shattrath Wraps,Quest (Dung),The Soul Devices (SL),,,68 Armor; 15 Sta; 15 Int; 21 Healing; 21 Spell Dmg,
 Holy,Wrist,PreRaid,Bindings of the Timewalker,Reputation,,,,78 Armor; 24 Sta; 12 Int; 64 Healing; 22 Spell Dmg,Keepers of Time - Exalted
-Holy,Wrist,PreRaid,General's Lamellar Bracers,PvP,,,,624 Armor; 22 Sta; 12 Int; 20 Healing; 20 Spell Dmg; 14 Spell Crit,
+Holy,Wrist,PreRaid,General's Lamellar Bracers,PvP,,,,624 Armor; 22 Sta; 12 Int; 20 Healing; 20 Spell Dmg; 14 Spell Crit; 13 Resilience,
 Holy,Hands,PreRaid,Gloves of the Living Touch,Auction House,,,,208 Armor; 16 Sta; 18 Int; 22 Spi; 77 Healing; 26 Spell Dmg,
 Holy,Hands,PreRaid,Bloody Surgeon's Mitts,Dungeon Drop,,Blood Furnace,Normal,76 Armor; 10 Sta; 20 Int; 12 Spi; 31 Healing; 11 Spell Dmg,Broggok
 Holy,Hands,PreRaid,Fathomheart Gauntlets,Dungeon Drop,,Steamvault,Normal,407 Armor; 24 Sta; 25 Int; 55 Healing; 19 Spell Dmg; 7 MP5,Warlord Kalithresh
@@ -79,7 +79,7 @@ Holy,Waist,PreRaid,Wave-Song Girdle,Dungeon Drop,,Auchenai Crypts,Heroic,438 Arm
 Holy,Waist,PreRaid,Akama's Sash,Quest,Akama's Promise (SMV),,,195 Armor; 10 Sta; 7 Int; 18 Spi; 40 Healing; 40 Spell Dmg,
 Holy,Waist,PreRaid,Redemption Girdle,Quest,Redemption Girdle (Naxx),,,632 Armor; 19 Sta; 29 Int; 40 Healing; 14 Spell Dmg; 5 MP5,
 Holy,Waist,PreRaid,A'dal's Gift,Quest (Dung),How to Break Into the Arcatraz (TK),,,88 Armor; 25 Int; 34 Healing; 34 Spell Dmg; 21 Spell Crit,
-Holy,Waist,PreRaid,General's Lamellar Belt,PvP,,,,870 Armor; 34 Sta; 23 Int; 28 Healing; 28 Spell Dmg; 23 Spell Crit,
+Holy,Waist,PreRaid,General's Lamellar Belt,PvP,,,,870 Armor; 34 Sta; 23 Int; 28 Healing; 28 Spell Dmg; 23 Spell Crit; 24 Resilience,
 Holy,Legs,PreRaid,Kamaei's Cerulean Skirt,Auction House,,,,149 Armor; 25 Int; 21 Spi; 118 Healing; 37 Spell Dmg,World Drop
 Holy,Legs,PreRaid,Whitemend Pants,Auction House,,,,156 Armor; 21 Sta; 21 Int; 62 Healing; 21 Spell Dmg; 11 MP5,
 Holy,Legs,PreRaid,Cassock of the Loyal,Dungeon Drop,,Underbog,Normal,1019 Armor; 30 Sta; 34 Int; 68 Healing; 23 Spell Dmg; 25 Spell Crit,Hungarfen
@@ -145,7 +145,7 @@ Holy,Main Hand,PreRaid,Hammer of the Twisting Nether,Dungeon Drop,,Naxxramas,Nor
 Holy,Main Hand,PreRaid,Lightsworn Hammer,Dungeon Drop,,Shattered Halls,Normal,41.11 DPS; 12 Sta; 11 Int; 227 Healing; 76 Spell Dmg; 8 MP5,Warchief Kargath Bladefist
 Holy,Main Hand,PreRaid,Shockwave Truncheon,Dungeon Drop,,Shadow Labyrinth,Heroic,41.58 DPS; 24 Sta; 317 Healing; 106 Spell Dmg; 6 MP5; 16 Spell Crit,Murmur
 Holy,Main Hand,PreRaid,Gavel of Pure Light,Reputation,,,,41.32 DPS; 12 Sta; 12 Int; 299 Healing; 100 Spell Dmg; 8 MP5,The Sha'tar - Exalted
-Holy,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg,
+Holy,Main Hand,PreRaid,Gladiator's Salvation,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 375 Healing; 125 Spell Dmg; 18 Resilience,
 Holy,Off Hand,PreRaid,Crystal Pulse Shield,Auction House,,,,3711 Armor; 24 Int; 35 Healing; 12 Spell Dmg; 6 MP5,World Drop
 Holy,Off Hand,PreRaid,Faol's Signet of Cleansing,Dungeon Drop,,Hellfire Ramparts,Heroic,59 Healing; 20 Spell Dmg; 7 MP5,Omor the Unscarred
 Holy,Off Hand,PreRaid,Lamp of Peaceful Repose,Dungeon Drop,,Arcatraz,Normal,16 Sta; 18 Int; 35 Healing; 12 Spell Dmg; 6 MP5,Dalliah the Doomsayer
@@ -162,19 +162,19 @@ Holy,Ranged/Relic,PreRaid,Libram of Light,Dungeon Drop,,Naxxramas,Normal,Equip: 
 Holy,Ranged/Relic,PreRaid,Libram of the Lightbringer,Dungeon Drop,,Botanica,Normal,Equip: Increases healing done by Holy Light by up to 87,Commander Sarannis
 Holy,Ranged/Relic,PreRaid,Blessed Book of Nagrand,Quest,The Ultimate Bloodsport (Nag),,,Equip: Increases healing done by Flash of Light by up to 79,
 Protection,Head,PreRaid,Felsteel Helm,Auction House,,,,1284 Armor; 25 Str; 27 Sta; 33 Defense,
-Protection,Head,PreRaid,Helm of the Stalwart Defender,Auction House,,,,1366 Armor; 4 Str; 47 Sta; 23 Defense,
+Protection,Head,PreRaid,Helm of the Stalwart Defender,Auction House,,,,1366 Armor; 4 Str; 47 Sta; 23 Defense; 23 Resilience,
 Protection,Head,PreRaid,Oathkeeper's Helm,Auction House,,,,1080 Armor; 40 Sta; 22 Int; 26 Healing; 26 Spell Dmg; 9 MP5; 15 Defense,
 Protection,Head,PreRaid,Greathelm of the Unbreakable,Dungeon Drop,,Shattered Halls,Normal,922 Armor; 36 Str; 48 Sta; 30 Defense,Grand Warlock Nethekurse
 Protection,Head,PreRaid,Helm of the Righteous,Dungeon Drop,,Mechanar,Normal,946 Armor; 30 Sta; 20 Int; 23 Healing; 23 Spell Dmg; 6 MP5; 21 Defense,Pathaleon the Calculator
 Protection,Head,PreRaid,Faceguard of Determination,Dungeon Token,,,,1129 Armor; 36 Sta; 32 Defense; 24 Dodge; 24 Block Rating,50 Badges of Justice
 Protection,Head,PreRaid,Myrmidon's Headdress,Quest (Dung),The Warlord's Hideout (SV),,,946 Armor; 17 Str; 37 Sta; 33 Defense,
-Protection,Head,PreRaid,Gladiator's Lamellar Helm,PvP,,,,1257 Armor; 57 Sta; 21 Int; 33 Healing; 33 Spell Dmg; 22 Spell Crit,
+Protection,Head,PreRaid,Gladiator's Lamellar Helm,PvP,,,,1257 Armor; 57 Sta; 21 Int; 33 Healing; 33 Spell Dmg; 22 Spell Crit; 32 Resilience,
 Protection,Shoulder,PreRaid,Fanblade Pauldrons,Dungeon Drop,,Auchenai Crypts,Heroic,873 Armor; 16 Str; 22 Sta; 20 Defense; 15 Parry,Shirrak the Dead Watcher
 Protection,Shoulder,PreRaid,Shoulderguards of the Bold,Dungeon Drop,,Shadow Labyrinth,Normal,873 Armor; 25 Str; 25 Sta; 17 Defense,Murmur
 Protection,Shoulder,PreRaid,Spaulders of the Righteous,Dungeon Drop,,Botanica,Normal,873 Armor; 22 Sta; 22 Int; 15 Healing; 15 Spell Dmg; 20 Defense,Laj
 Protection,Shoulder,PreRaid,Nexus-Guard's Pauldrons,Quest,Success! (NS),,,767 Armor; 17 Agi; 27 Sta; 17 Block Rating; 26 Block Value,
 Protection,Shoulder,PreRaid,Warchief's Mantle,Quest (Dung),Return to Andormu (CoT),,,786 Armor; 23 Str; 27 Sta; 18 Parry,
-Protection,Shoulder,PreRaid,Gladiator's Lamellar Shoulders,PvP,,,,1160 Armor; 34 Sta; 18 Int; 19 Healing; 19 Spell Dmg; 24 Spell Crit,
+Protection,Shoulder,PreRaid,Gladiator's Lamellar Shoulders,PvP,,,,1160 Armor; 34 Sta; 18 Int; 19 Healing; 19 Spell Dmg; 24 Spell Crit; 21 Resilience,
 Protection,Back,PreRaid,Cloak of Eternity,Auction House,,,,76 Armor; 36 Sta; 23 Defense,
 Protection,Back,PreRaid,Bogstrok Scale Cloak,Dungeon Drop,,Slave Pens,Normal,271 Armor; 22 Sta; 16 Defense,Rokmar the Crackler
 Protection,Back,PreRaid,Burnoose of Shifting Ages,Dungeon Drop,,Black Morass,Normal,216 Armor; 15 Sta; 26 Defense; 29 Block Value,Chrono Lord Deja
@@ -187,22 +187,22 @@ Protection,Chest,PreRaid,Breastplate of the Righteous,Dungeon Drop,,Steamvault,N
 Protection,Chest,PreRaid,Jade-Skull Breastplate,Dungeon Drop,,Mechanar,Normal,1164 Armor; 30 Str; 50 Sta; 25 Defense; 23 Block Rating,Nethermancer Sepethrea
 Protection,Chest,PreRaid,Breastplate of the Warbringer,Quest,Forge Camp: Annihilated (Nag),,,1048 Armor; 45 Sta; 31 Defense; 30 Hit,
 Protection,Chest,PreRaid,Vindicator's Hauberk,Reputation,,,,1164 Armor; 39 Sta; 46 Defense; 19 Dodge,The Aldor - Revered
-Protection,Chest,PreRaid,Gladiator's Lamellar Chestpiece,PvP,,,,1547 Armor; 51 Sta; 25 Int; 20 Healing; 20 Spell Dmg; 30 Spell Crit,
+Protection,Chest,PreRaid,Gladiator's Lamellar Chestpiece,PvP,,,,1547 Armor; 51 Sta; 25 Int; 20 Healing; 20 Spell Dmg; 30 Spell Crit; 27 Resilience,
 Protection,Wrist,PreRaid,Bracers of the Green Fortress,Auction House,,,,581 Armor; 39 Sta; 17 Defense; 10 Dodge,
 Protection,Wrist,PreRaid,Amber Bands of the Aggressor,Dungeon Drop,,Steamvault,Heroic,608 Armor; 22 Str; 18 Agi; 25 Sta; 15 Defense,Warlord Kalithresh
 Protection,Wrist,PreRaid,Bracers of Dignity,Dungeon Drop,,Arcatraz,Heroic,608 Armor; 30 Sta; 12 Int; 19 Healing; 19 Spell Dmg; 21 Defense,Harbinger Skyriss
 Protection,Wrist,PreRaid,Vambraces of Daring,Dungeon Drop,,Hellfire Ramparts,Heroic,509 Armor; 18 Str; 26 Sta; 11 Defense; 23 Block Value,Vazruden
 Protection,Wrist,PreRaid,Sha'tari Wrought Armguards,Quest,The Soul Devices (Auch),,,509 Armor; 20 Str; 18 Sta; 12 Defense,
 Protection,Wrist,PreRaid,Thadell's Bracers,Quest,When the Cows Come Home (NS),,,448 Armor; 21 Sta; 12 Int; 16 Healing; 16 Spell Dmg; 9 Defense,
-Protection,Wrist,PreRaid,General's Lamellar Bracers,PvP,,,,624 Armor; 22 Sta; 12 Int; 20 Healing; 20 Spell Dmg; 14 Spell Crit,
+Protection,Wrist,PreRaid,General's Lamellar Bracers,PvP,,,,624 Armor; 22 Sta; 12 Int; 20 Healing; 20 Spell Dmg; 14 Spell Crit; 13 Resilience,
 Protection,Hands,PreRaid,Felsteel Gloves,Auction House,,,,943 Armor; 25 Str; 27 Sta; 25 Defense,
-Protection,Hands,PreRaid,Gauntlets of the Iron Tower,Auction House,,,,831 Armor; 3 Str; 30 Sta; 20 Defense,
+Protection,Hands,PreRaid,Gauntlets of the Iron Tower,Auction House,,,,831 Armor; 3 Str; 30 Sta; 20 Defense; 26 Resilience,
 Protection,Hands,PreRaid,Gauntlets of Dissension,Dungeon Drop,,Botanica,Heroic,868 Armor; 24 Str; 23 Agi; 36 Sta; 24 Defense,Warp Splinter
 Protection,Hands,PreRaid,Gauntlets of the Righteous,Dungeon Drop,,Shattered Halls,Normal,728 Armor; 22 Sta; 20 Int; 21 Healing; 21 Spell Dmg; 7 MP5; 19 Defense,Warchief Kargath Bladefist
 Protection,Hands,PreRaid,Thatia's Self-Correcting Gauntlets,Dungeon Drop,,Arcatraz,Normal,728 Armor; 16 Str; 35 Sta; 18 Defense; 39 Block Value,Dalliah the Doomsayer
 Protection,Hands,PreRaid,Dauntless Handguards,Quest (Dung),Fel Embers (SH),,,722 Armor; 36 Sta; 25 Block Rating; 38 Block Value,
 Protection,Hands,PreRaid,Gauntlets of the Chosen,Reputation,,,,728 Armor; 15 Agi; 30 Sta; 35 Defense,The Scryers - Revered
-Protection,Hands,PreRaid,Gladiator's Lamellar Gauntlets,PvP,,,,"967 Armor; 34 Sta; 24 Int; 28 Healing; 28 Spell Dmg; 24 Spell Crit
+Protection,Hands,PreRaid,Gladiator's Lamellar Gauntlets,PvP,,,,"967 Armor; 34 Sta; 24 Int; 28 Healing; 28 Spell Dmg; 24 Spell Crit; 14 Resilience
 
 Equip: Increases the critical effect chance of your Flash of Light by 2%",
 Protection,Hands,PreRaid,Topaz-Studded Battlegrips,World Drop,,,,944 Armor; 49 Sta; 31 Defense,Doom Lord Kazzak
@@ -212,7 +212,7 @@ Protection,Waist,PreRaid,Lion's Heart Girdle,Dungeon Drop,,Hellfire Ramparts,Her
 Protection,Waist,PreRaid,Lightwarden's Girdle,Quest,Deathblow to the Legion (NS),,,622 Armor; 30 Sta; 14 Int; 28 Healing; 28 Spell Dmg; 23 Defense,
 Protection,Waist,PreRaid,Starcaller's Plated Belt,Quest,Arconus the Insatiable (NS),,,590 Armor; 30 Sta; 16 Int; 23 Healing; 23 Spell Dmg; 12 Defense,
 Protection,Waist,PreRaid,Sha'tari Vindicator's Waistguard,Quest (Dung),How to Break Into the Arcatraz (TK),,,655 Armor; 33 Sta; 20 Defense; 24 Block Rating; 29 Block Value,
-Protection,Waist,PreRaid,General's Lamellar Belt,PvP,,,,870 Armor; 34 Sta; 23 Int; 28 Healing; 28 Spell Dmg; 23 Spell Crit,
+Protection,Waist,PreRaid,General's Lamellar Belt,PvP,,,,870 Armor; 34 Sta; 23 Int; 28 Healing; 28 Spell Dmg; 23 Spell Crit; 24 Resilience,
 Protection,Legs,PreRaid,Felsteel Leggings,Auction House,,,,1257 Armor; 25 Str; 39 Sta; 33 Defense,
 Protection,Legs,PreRaid,Greaves of the Shatterer,Dungeon Drop,,Shattered Halls,Normal,1019 Armor; 25 Str; 37 Sta; 25 Defense,Warchief Kargath Bladefist
 Protection,Legs,PreRaid,Legplates of the Righteous,Dungeon Drop,,Black Morass,Normal,1019 Armor; 27 Sta; 24 Int; 28 Healing; 28 Spell Dmg; 10 MP5; 26 Defense,Aeonus
@@ -226,7 +226,7 @@ Protection,Feet,PreRaid,Ascendant's Boots,Quest,A Job Unfinished... (SMV),,,722 
 Protection,Feet,PreRaid,Bloodguard's Greaves,Quest,Information Gathering (NS),,,685 Armor; 11 Str; 42 Sta; 16 Defense,
 Protection,Feet,PreRaid,Starcaller's Plated Stompers,Quest,Escape from the Staging Grounds (NS),,,722 Armor; 21 Sta; 14 Int; 16 Healing; 16 Spell Dmg; 13 Defense,
 Protection,Feet,PreRaid,Flesh Beast's Metal Greaves,Quest (Dung),Someone Else's Hard Work Pays Off (MT),,,680 Armor; 25 Sta; 18 Defense; 28 Dodge,
-Protection,Feet,PreRaid,General's Lamellar Greaves,PvP,,,,1063 Armor; 34 Sta; 23 Int; 28 Healing; 28 Spell Dmg; 23 Spell Crit,
+Protection,Feet,PreRaid,General's Lamellar Greaves,PvP,,,,1063 Armor; 34 Sta; 23 Int; 28 Healing; 28 Spell Dmg; 23 Spell Crit; 24 Resilience,
 Protection,Neck,PreRaid,Chain of the Twilight Owl,Auction House,,,,"19 Int; 21 Healing; 21 Spell Dmg; 18 Defense
 
 Use: Increases the spell critical hit chance of nearby party members by 2% for 30 min",
@@ -240,7 +240,7 @@ Protection,Neck,PreRaid,Maimfist's Choker,Quest (Dung),The Will of the Warchief 
 Protection,Neck,PreRaid,Mark of the Ravenguard,Quest (Dung),Brother Against Brother (Seth),,,40 Sta; 17 Defense,
 Protection,Neck,PreRaid,Medallion of the Valiant Guardian,Quest (Dung),Turning the Tide (SH),,,17 Str; 27 Sta; 18 Defense,
 Protection,Neck,PreRaid,Strength of the Untamed,Reputation,,,,27 Sta; 19 Defense; 18 Dodge,Cenarion Expedition - Revered
-Protection,Neck,PreRaid,Pendant of Dominance,PvP,,,,31 Sta; 12 Int; 26 Healing; 26 Spell Dmg,
+Protection,Neck,PreRaid,Pendant of Dominance,PvP,,,,31 Sta; 12 Int; 26 Healing; 26 Spell Dmg; 16 Resilience,
 Protection,Ring,PreRaid,Band of Impenetrable Defenses,Auction House,,,,36 Sta; 26 Defense,World Drop
 Protection,Ring,PreRaid,Delicate Eternium Ring,Auction House,,,,25 Agi; 15 Sta; 16 Dodge,
 Protection,Ring,PreRaid,Crystal Band of Valor,Dungeon Drop,,Mana Tombs,Heroic,27 Sta; 22 Defense; 16 Hit,Tavarok
@@ -250,7 +250,7 @@ Protection,Ring,PreRaid,Iron Band of the Unbreakable,Dungeon Drop,,Old Hillsbrad
 Protection,Ring,PreRaid,Lieutenant's Signet of Lordaeron,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,143 Armor; 30 Sta; 21 Dodge,Lieutenant Drake
 Protection,Ring,PreRaid,Yor's Revenge,Dungeon Drop,,Mana-Tombs,Heroic,190 Armor; 30 Sta; 20 Defense,Yor
 Protection,Ring,PreRaid,Ring of Unyielding Force,Dungeon Token,,,,294 Armor; 31 Sta; 22 Defense,25 Badges of Justice
-Protection,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit,50 Spirit Shards
+Protection,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit; 11 Resilience,50 Spirit Shards
 Protection,Ring,PreRaid,Protector's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,22 Sta; 25 Defense; 15 Block Value,
 Protection,Ring,PreRaid,Andormu's Tear,Quest (Dung),Hero of the Brood (BM),,,10 Defense; 26 Dodge; 15 Block Rating,
 Protection,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg; 21 Spell Hit,Cenarion Expedition - Exalted
@@ -320,14 +320,14 @@ Protection,Main Hand,PreRaid,Blade of the Archmage,Reputation,,,,41.11 DPS; 13 S
 Protection,Main Hand,PreRaid,Continuum Blade,Reputation,,,,41.11 DPS; 30 Sta; 11 Int; 121 Healing; 121 Spell Dmg; 8 Spell Hit,Keepers of Time - Revered
 Protection,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
 Protection,Main Hand,PreRaid,Stormcaller,Reputation,,,,41.11 DPS; 12 Sta; 12 Int; 159 Healing; 159 Spell Dmg; 21 Spell Crit,Thrallmar - Exalted
-Protection,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg,
+Protection,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
 Protection,Off Hand,PreRaid,Aegis of the Sunbird,Dungeon Drop,,Botanica,Normal,3806 Armor; 27 Sta; 19 Defense; 29 Block Value,High Botanist Freywinn
 Protection,Off Hand,PreRaid,Blood Knight Defender,Dungeon Drop,,Hellfire Ramparts,Heroic,3806 Armor; 26 Sta; 18 Block Rating,Watchkeeper Gargolmar
 Protection,Off Hand,PreRaid,Platinum Shield of the Valorous,Dungeon Drop,,Shadow Labyrinth,Normal,3711 Armor; 33 Sta; 24 Defense,Ambassador Hellmaw
 Protection,Off Hand,PreRaid,The Fel Barrier,Dungeon Drop,,Mana Tombs,Heroic,4668 Armor; 30 Sta,Nexus-Prince Shaffar
 Protection,Off Hand,PreRaid,Azure-Shield of Coldarra,Dungeon Token,,,,4668 Armor; 31 Sta; 22 Defense; 33 Block Value,33 Badges of Justice
 Protection,Off Hand,PreRaid,Crest of the Sha'tar,Reputation,,,,4465 Armor; 19 Sta; 13 Defense; 24 Block Value,The Sha'tar - Exalted
-Protection,Off Hand,PreRaid,Gladiator's Shield Wall,PvP,,,,5197 Armor; 45 Sta,
+Protection,Off Hand,PreRaid,Gladiator's Shield Wall,PvP,,,,5197 Armor; 45 Sta; 29 Resilience,
 Protection,Ranged/Relic,PreRaid,Libram of the Eternal Rest,Dungeon Drop,,Sethekk Halls,Normal,Equip: Increases the damage of your Consecration spell by up to 47,Darkweaver Syth
 Protection,Ranged/Relic,PreRaid,Libram of Repentance,Dungeon Token,,,,42 Block Rating,15 Badges of Justice
 Retribution,Head,PreRaid,Helm of Assassination,Dungeon Drop,,Arcatraz,Normal,237 Armor; 25 Sta; 66 AP; 25 Crit,Harbinger Skyriss
@@ -358,8 +358,8 @@ Retribution,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2
 Retribution,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,
 Retribution,Wrist,PreRaid,Bands of Syth,Dungeon Drop,,Sethekk Halls,Normal,497 Armor; 21 Str; 19 Agi; 18 Sta,Darkweaver Syth
 Retribution,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
-Retribution,Wrist,PreRaid,General's Scaled Bracers,PvP,,,,624 Armor; 26 Str; 22 Sta; 11 Int; 7 Crit,
-Retribution,Wrist,PreRaid,Marshal's Scaled Bracers,PvP,,,,624 Armor; 26 Str; 22 Sta; 11 Int; 7 Crit,
+Retribution,Wrist,PreRaid,General's Scaled Bracers,PvP,,,,624 Armor; 26 Str; 22 Sta; 11 Int; 7 Crit; 8 Resilience,
+Retribution,Wrist,PreRaid,Marshal's Scaled Bracers,PvP,,,,624 Armor; 26 Str; 22 Sta; 11 Int; 7 Crit; 8 Resilience,
 Retribution,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 20 Dodge; 17 Hit; 24 Crit,
 Retribution,Hands,PreRaid,Ragesteel Gloves,Auction House,,,,728 Armor; 35 Str; 20 Hit; 27 Crit,
 Retribution,Hands,PreRaid,Windstrike Gloves,Auction House,,,,465 Armor; 36 Str; 18 Agi; 25 Sta; 17 Hit,
@@ -378,8 +378,8 @@ Retribution,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20
 Retribution,Feet,PreRaid,Boots of the Unjust,Dungeon Drop,,Auchenai Crypts,Heroic,201 Armor; 25 Sta; 64 AP; 13 Hit; 19 Crit,Exarch Maladaar
 Retribution,Feet,PreRaid,Obsidian Clodstompers,Dungeon Drop,,Botanica,Normal,800 Armor; 34 Str; 30 Sta,High Botanist Freywinn
 Retribution,Feet,PreRaid,Sha'tari Wrought Greaves,Quest (Dung),Into the Heart of the Labyrinth (SL),,,800 Armor; 24 Str; 21 Agi; 22 Sta,
-Retribution,Feet,PreRaid,General's Scaled Greaves,PvP,,,,1063 Armor; 36 Str; 33 Sta; 23 Int; 16 Crit,
-Retribution,Feet,PreRaid,Marshal's Scaled Greaves,PvP,,,,1063 Armor; 36 Str; 33 Sta; 23 Int; 16 Crit,
+Retribution,Feet,PreRaid,General's Scaled Greaves,PvP,,,,1063 Armor; 36 Str; 33 Sta; 23 Int; 16 Crit; 16 Resilience,
+Retribution,Feet,PreRaid,Marshal's Scaled Greaves,PvP,,,,1063 Armor; 36 Str; 33 Sta; 23 Int; 16 Crit; 16 Resilience,
 Retribution,Neck,PreRaid,Necklace of Trophies,Auction House,,,,22 Str; 15 Agi; 14 Hit,World Drop
 Retribution,Neck,PreRaid,Adamantine Chain of the Unbroken,Dungeon Drop,,Slave Pens,Heroic,19 Sta; 34 AP; 30 Crit,Quagmirran
 Retribution,Neck,PreRaid,Choker of Vile Intent,Dungeon Token,,,,20 Agi; 18 Sta; 42 AP; 18 Hit,25 Badges of Justice
@@ -426,7 +426,7 @@ Retribution,Two Hand,PreRaid,The Hammer of Destiny,Auction House,,,,"105.69 DPS;
 
 Proc: Restores 170 to 230 mana",World Drop
 Retribution,Two Hand,PreRaid,Quantum Blade,Dungeon Drop,,Black Morass,Heroic,108.57 DPS; 31 Sta; 102 AP; 30 Crit,Aeonus
-Retribution,Two Hand,PreRaid,Gladiator's Greatsword,PvP,,,,118.61 DPS; 32 Str; 48 Sta; 20 Hit; 35 Crit,
+Retribution,Two Hand,PreRaid,Gladiator's Greatsword,PvP,,,,118.61 DPS; 32 Str; 48 Sta; 20 Hit; 35 Crit; 28 Resilience,
 Retribution,Ranged/Relic,PreRaid,Libram of Fervor,Auction House,,,,Equip: Increases the melee attack power bonus of your Seal of the Crusader by 48 and the Holy damage increase of your Judgement of the Crusader by 33,World Drop
 Retribution,Ranged/Relic,PreRaid,Libram of Avengement,Dungeon Drop,,Blood Furnace,Heroic,"Equip: Causes your Judgement of Command, Judgement of Righteousness, Judgment of",The Maker
 Retribution,Ranged/Relic,PreRaid,Libram of Hope,Dungeon Drop,,Dire Maul,Normal,Equip: Reduces the base mana cost of your Seal spells by 20,Isalien

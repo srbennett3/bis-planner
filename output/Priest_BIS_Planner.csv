@@ -216,7 +216,7 @@ Shadow,Neck,PreRaid,Brooch of Heightened Potential,Dungeon Drop,,Shadow Labyrint
 Shadow,Neck,PreRaid,Choker of the Fire Lord,Dungeon Drop,,Molten Core,Normal,7 Sta; 7 Int; 34 Healing; 34 Spell Dmg,Ragnaros
 Shadow,Neck,PreRaid,Natasha's Arcane Filament,Quest,The Hound-Master (BEM),,,22 Sta; 10 Int; 29 Healing; 29 Spell Dmg,
 Shadow,Neck,PreRaid,Natasha's Ember Necklace,Quest,The Hound-Master (BEM),,,15 Int; 29 Healing; 29 Spell Dmg; 10 Spell Crit,
-Shadow,Neck,PreRaid,Pendant of Dominance,PvP,,,,31 Sta; 12 Int; 26 Healing; 26 Spell Dmg,
+Shadow,Neck,PreRaid,Pendant of Dominance,PvP,,,,31 Sta; 12 Int; 26 Healing; 26 Spell Dmg; 16 Resilience,
 Shadow,Ring,PreRaid,Band of Dominion,Auction House,,,,28 Healing; 28 Spell Dmg; 21 Spell Crit,World Drop
 Shadow,Ring,PreRaid,Band of Dark Dominion,Dungeon Drop,,Blackwing Lair,Normal,"12 Sta; 6 Int
 
@@ -224,7 +224,7 @@ Equip: Increases damage done by Shadow spells and effects by up to 33",Trash Dro
 Shadow,Ring,PreRaid,Band of the Inevitable,Dungeon Drop,,Naxxramas,Normal,36 Healing; 36 Spell Dmg; 8 Spell Hit,Noth the Plaguebringer
 Shadow,Ring,PreRaid,Cobalt Band of Tyrigosa,Dungeon Drop,,Mana Tombs,Heroic,19 Sta; 17 Int; 35 Healing; 35 Spell Dmg,Nexus-Prince Shaffar
 Shadow,Ring,PreRaid,Ring of Spell Power,Dungeon Drop,,Molten Core,Normal,33 Healing; 33 Spell Dmg,Trash Drop
-Shadow,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit,50 Spirit Shards
+Shadow,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit; 11 Resilience,50 Spirit Shards
 Shadow,Ring,PreRaid,Evoker's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Int; 29 Healing; 29 Spell Dmg; 10 Spell Crit,
 Shadow,Ring,PreRaid,Manastorm Band,Quest,Shutting Down Manaforge Ara (NS),,,15 Int; 29 Healing; 29 Spell Dmg; 10 Spell Crit,
 Shadow,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,
@@ -271,8 +271,8 @@ Shadow,Main Hand,PreRaid,Runesong Dagger,Dungeon Drop,,Shattered Halls,Normal,39
 Shadow,Main Hand,PreRaid,Sky Breaker,Dungeon Drop,,Auchenai Crypts,Heroic,41.11 DPS; 13 Sta; 20 Int; 132 Healing; 132 Spell Dmg,Avatar of the Martyred
 Shadow,Main Hand,PreRaid,Starlight Dagger,Dungeon Drop,,Slave Pens,Heroic,41.67 DPS; 15 Sta; 15 Int; 121 Healing; 121 Spell Dmg; 16 Spell Hit,Mennu the Betrayer
 Shadow,Main Hand,PreRaid,Gavel of Unearthed Secrets,Reputation,,,,41.48 DPS; 24 Sta; 16 Int; 159 Healing; 159 Spell Dmg; 15 Spell Crit,Lower City - Exalted
-Shadow,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg,
-Shadow,Main Hand,PreRaid,Gladiator's Spellblade,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg,
+Shadow,Main Hand,PreRaid,Gladiator's Gavel,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
+Shadow,Main Hand,PreRaid,Gladiator's Spellblade,PvP,,,,41.25 DPS; 28 Sta; 18 Int; 199 Healing; 199 Spell Dmg; 18 Resilience,
 Shadow,Off Hand,PreRaid,Khadgar's Knapsack,Dungeon Token,,,,49 Healing; 49 Spell Dmg,25 Badges of Justice
 Shadow,Off Hand,PreRaid,Orb of the Soul-Eater,Dungeon Token,,,,"18 Sta
 

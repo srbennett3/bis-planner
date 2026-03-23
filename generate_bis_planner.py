@@ -7,8 +7,8 @@ Two-step workflow:
   1. python3 generate_bis_planner.py --build-db         # fetch item stats from Wowhead (re-fetches stale cache)
   2. python3 generate_bis_planner.py paladin             # generate CSV + Excel (no API calls)
 
-Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights source: AddonReference/Pawn/ClassicHawsJon.lua only.
-Excel includes a "Pawn weights (TBC)" sheet when pawn_scales_tbc.json is present (refreshed from ClassicHawsJon.lua on each export).
+Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights: AddonReference/Pawn/ClassicHawsJon.lua → pawn_scales_tbc.json.
+TBC gem lists: Pawn/GemsBurningCrusade.lua. Excel adds Current Equipment gem columns, Weights row (Pawn snapshot + custom stash), Gear Score, GemDB + ItemDB socket columns.
 
 Supported classes: druid, hunter, mage, paladin, priest, rogue, shaman, warlock, warrior
 
@@ -18,6 +18,7 @@ Requires: openpyxl  (pip install openpyxl)
 import argparse
 import concurrent.futures
 import csv
+from collections import Counter
 import json
 import os
 import re
@@ -104,7 +105,72 @@ STAT_COLUMNS = [
     "Healing", "Spell Dmg", "AP", "MP5",
     "Defense", "Dodge", "Parry", "Block Rating", "Block Value",
     "Hit", "Crit", "Spell Hit", "Spell Crit", "Haste",
+    "Resilience",  # high usage in TBC PvP gear; maps to Pawn ResilienceRating
 ]
+
+# ItemDB: Name, Slot, then socket counts, then STAT_COLUMNS, Attributes.
+# Must stay in sync with apps_script.gs (comment CE ↔ ITEMDB).
+ITEMDB_SOCK_COL_FIRST = 3  # 1-based: SockR
+NUM_ITEMDB_SOCKET_COLS = 4
+ITEMDB_FIRST_STAT_COL = ITEMDB_SOCK_COL_FIRST + NUM_ITEMDB_SOCKET_COLS  # 7
+
+# Current Equipment: A=Gear, B=Item, gem block, stats, Gear Score; then hidden weight stash (weights row).
+CE_GEM_HEADERS = [
+    "Red Gem",
+    "Red Count",
+    "Yellow Gem",
+    "Yellow Count",
+    "Blue Gem",
+    "Blue Count",
+    "Orange Gem",
+    "Orange Count",
+    "Purple Gem",
+    "Purple Count",
+    "Green Gem",
+    "Green Count",
+    "Meta Gem",
+]
+NUM_CE_GEM_COLS = len(CE_GEM_HEADERS)
+CE_WEIGHT_ROW_LABEL = "Weights"
+CE_WEIGHT_MODE_PAWN = "Pawn Default"
+CE_WEIGHT_MODE_CUSTOM = "Custom"
+# 1-based column indices (must match generate_bis_planner.py export_xlsx & apps_script.gs).
+CE_GEM_FIRST_COL = 3
+CE_GEM_LAST_COL = CE_GEM_FIRST_COL + NUM_CE_GEM_COLS - 1
+CE_STAT_FIRST_COL = CE_GEM_LAST_COL + 1
+CE_STAT_LAST_COL = CE_STAT_FIRST_COL + len(STAT_COLUMNS) - 1
+CE_GEAR_SCORE_COL = CE_STAT_LAST_COL + 1
+CE_PAWN_SNAPSHOT_FIRST_COL = CE_GEAR_SCORE_COL + 1
+CE_CUSTOM_STASH_FIRST_COL = CE_PAWN_SNAPSHOT_FIRST_COL + len(STAT_COLUMNS)
+CE_META_WEIGHT_COL = CE_CUSTOM_STASH_FIRST_COL + len(STAT_COLUMNS)
+
+# Pawn scale keys contributing to each planner STAT_COLUMNS weight (sum if multiple).
+STAT_COL_PAWN_WEIGHT_KEYS = [
+    ("Armor",),
+    (),  # DPS — not modeled in Pawn scale the same way as weapon DPS
+    ("Strength",),
+    ("Agility",),
+    ("Stamina",),
+    ("Intellect",),
+    ("Spirit",),
+    ("Healing",),
+    ("SpellDamage",),
+    ("Ap",),
+    ("Mp5",),
+    ("DefenseRating",),
+    ("DodgeRating",),
+    ("ParryRating",),
+    ("BlockRating",),
+    ("BlockValue",),
+    ("HitRating",),
+    ("CritRating",),
+    ("SpellHitRating",),
+    ("SpellCritRating",),
+    ("HasteRating", "SpellHasteRating"),
+    ("ResilienceRating",),
+]
+
+PAWN_GEMS_BC_LUA = os.path.join(SCRIPT_DIR, "Pawn", "GemsBurningCrusade.lua")
 
 CSV_FIELDS = [
     "Spec", "Gear Type", "Phase", "Name", "Acquisition Type",
@@ -1116,6 +1182,17 @@ CLASS_TITLE_TO_PAWN_CLASS_ID = {
     "Druid": 11,
 }
 
+# Loon `RegisterSpec(..., LBIS.L["SpecLabel"], ...)` vs Pawn `spec_name` in pawn_scales_tbc.json.
+# Known mismatches (anything else must match Pawn exactly):
+#   Druid Cat/Bear -> Feral (Damage) / Feral (Tank)
+#   Rogue: one Loon guide "Dps" vs Pawn Assassination / Combat / Subtlety -> map to Combat (TBC default)
+#   Priest: Pawn has Discipline; Loon only Holy + Shadow (no Discipline guide / CE section)
+PLANNER_SPEC_TO_PAWN_SPEC_NAME = {
+    ("Druid", "Cat"): "Feral (Damage)",
+    ("Druid", "Bear"): "Feral (Tank)",
+    ("Rogue", "Dps"): "Combat",
+}
+
 _PAWN_VARS_TBC = {
     "HitRatingPer": 1.0,
     "SpellHitRatingPer": 1.0,
@@ -1231,6 +1308,251 @@ def _pawn_extract_scales_from_lua(lua_text):
     return scales
 
 
+def planner_weight_from_pawn_keys(weights, keys):
+    """Sum Pawn scale weights for one planner stat column."""
+    if not keys:
+        return 0.0
+    t = 0.0
+    for k in keys:
+        v = weights.get(k)
+        if v is not None:
+            t += float(v)
+    return t
+
+
+def pawn_weights_vector_for_stat_columns(weights_dict):
+    """List of len(STAT_COLUMNS) floats for Current Equipment weight row."""
+    return [
+        planner_weight_from_pawn_keys(weights_dict, keys)
+        for keys in STAT_COL_PAWN_WEIGHT_KEYS
+    ]
+
+
+def get_pawn_weights_for_spec(class_title, spec_name):
+    """Return (weights_dict or None, vector aligned to STAT_COLUMNS)."""
+    cid = CLASS_TITLE_TO_PAWN_CLASS_ID.get((class_title or "").strip().title())
+    if cid is None or not os.path.isfile(PAWN_SCALES_JSON_PATH):
+        return None, None
+    try:
+        with open(PAWN_SCALES_JSON_PATH, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+    except (OSError, json.JSONDecodeError):
+        return None, None
+    cls_title = (class_title or "").strip().title()
+    want = (spec_name or "").strip()
+    want_pawn = PLANNER_SPEC_TO_PAWN_SPEC_NAME.get((cls_title, want), want)
+    for sc in payload.get("scales", []):
+        if sc.get("class_id") != cid:
+            continue
+        if (sc.get("spec_name") or "").strip() != want_pawn:
+            continue
+        wd = sc.get("weights") or {}
+        return wd, pawn_weights_vector_for_stat_columns(wd)
+    return None, None
+
+
+def _lua_skip_ws(s, i):
+    while i < len(s) and s[i] in " \t\n\r":
+        i += 1
+    return i
+
+
+def _lua_brace_span(s, open_idx):
+    """Return (inner_without_braces, index_after_closing) or (None, open_idx)."""
+    if open_idx >= len(s) or s[open_idx] != "{":
+        return None, open_idx
+    depth = 0
+    for j in range(open_idx, len(s)):
+        if s[j] == "{":
+            depth += 1
+        elif s[j] == "}":
+            depth -= 1
+            if depth == 0:
+                return s[open_idx + 1 : j], j + 1
+    return None, open_idx
+
+
+def _lua_parse_stats_table(inner):
+    out = {}
+    if not inner:
+        return out
+    parts = re.split(r",\s*", inner.strip())
+    for p in parts:
+        p = p.strip()
+        if not p:
+            continue
+        m = re.match(r"^(\w+)\s*=\s*([\d.]+)\s*$", p)
+        if m:
+            v = m.group(2)
+            out[m.group(1)] = float(v) if "." in v else int(float(v))
+    return out
+
+
+def _gem_categorize(has_r, has_y, has_b, is_meta_table):
+    if is_meta_table:
+        return "meta"
+    if has_r and has_y and not has_b:
+        return "orange"
+    if has_r and has_b and not has_y:
+        return "purple"
+    if has_y and has_b and not has_r:
+        return "green"
+    if has_r and not has_y and not has_b:
+        return "red"
+    if has_y and not has_r and not has_b:
+        return "yellow"
+    if has_b and not has_r and not has_y:
+        return "blue"
+    return None
+
+
+def _pawn_stat_display_label(pawn_key, val):
+    """Short label for gem dropdown (+8 Str style)."""
+    short = {
+        "Strength": "Str",
+        "Agility": "Agi",
+        "Stamina": "Sta",
+        "Intellect": "Int",
+        "Spirit": "Spi",
+        "SpellDamage": "Spell Dmg",
+        "Healing": "Healing",
+        "Ap": "AP",
+        "Rap": "RAP",
+        "Armor": "Armor",
+        "Mp5": "MP5",
+        "HitRating": "Hit",
+        "CritRating": "Crit",
+        "SpellHitRating": "Spell Hit",
+        "SpellCritRating": "Spell Crit",
+        "HasteRating": "Haste",
+        "SpellHasteRating": "Spell Haste",
+        "DefenseRating": "Def",
+        "DodgeRating": "Dodge",
+        "ParryRating": "Parry",
+        "BlockRating": "Block",
+        "BlockValue": "BV",
+        "SpellPenetration": "Spell Pen",
+        "ExpertiseRating": "Exp",
+        "ResilienceRating": "Res",
+    }.get(pawn_key, pawn_key)
+    iv = int(val) if float(val) == int(float(val)) else val
+    return "+%s %s" % (iv, short)
+
+
+def format_gem_stats_label(stats_dict):
+    """Sorted deterministic label for dedupe / dropdown."""
+    if not stats_dict:
+        return ""
+    items = sorted(stats_dict.items(), key=lambda z: z[0].lower())
+    return "/".join(_pawn_stat_display_label(k, v) for k, v in items)
+
+
+# Google Sheets treats leading "+" like a formula; prefix ZWSP so the cell is plain text.
+GEM_LABEL_SHEETS_PREFIX = "\u200b"
+
+
+def _gem_sort_key_label(label: str) -> tuple:
+    """Sort: group by alphabetically-first stat token, then descending max bonus, then label."""
+    s = (label or "").replace(GEM_LABEL_SHEETS_PREFIX, "").strip()
+    parts = re.findall(r"\+?(\d+(?:\.\d+)?)\s+([^/]+)", s)
+    if not parts:
+        return ("zzz", 0, s.lower())
+    stat_names = [p[1].strip().lower() for p in parts]
+    bucket = min(stat_names)
+    max_bonus = max(int(float(p[0])) for p in parts)
+    return (bucket, -max_bonus, s.lower())
+
+
+def _finalize_gem_label_for_sheet(label: str) -> str:
+    if not label:
+        return label
+    if label.startswith(GEM_LABEL_SHEETS_PREFIX):
+        return label
+    return GEM_LABEL_SHEETS_PREFIX + label
+
+
+def parse_pawn_gems_burning_crusade(lua_path=None):
+    """
+    Parse Pawn/GemsBurningCrusade.lua into categories:
+    red, yellow, blue, orange, purple, green, meta.
+    Each entry: { "id", "category", "stats", "label" }.
+    """
+    path = lua_path or PAWN_GEMS_BC_LUA
+    if not os.path.isfile(path):
+        return {c: [] for c in ("red", "yellow", "blue", "orange", "purple", "green", "meta")}
+    with open(path, "r", encoding="utf-8", errors="replace") as f:
+        text = f.read()
+
+    table_names = [
+        ("PawnGemData60Common", False),
+        ("PawnGemData70Uncommon", False),
+        ("PawnGemData70Rare", False),
+        ("PawnGemData70Epic", False),
+        ("PawnMetaGemData70Rare", True),
+    ]
+    by_cat = {c: [] for c in ("red", "yellow", "blue", "orange", "purple", "green", "meta")}
+    seen = set()
+
+    for tbl, is_meta in table_names:
+        m = re.search(
+            r"local\s+" + re.escape(tbl) + r"\s*=\s*\{", text
+        )
+        if not m:
+            continue
+        open_idx = m.end() - 1
+        inner, _ = _lua_brace_span(text, open_idx)
+        if inner is None:
+            continue
+        pos = 0
+        while pos < len(inner):
+            j = inner.find("{ ID =", pos)
+            if j < 0:
+                break
+            blk_inner, after = _lua_brace_span(inner, j)
+            if blk_inner is None:
+                pos = j + 1
+                continue
+            pos = after
+            id_m = re.search(r"ID\s*=\s*(\d+)", blk_inner)
+            if not id_m:
+                continue
+            gid = int(id_m.group(1))
+            has_r = bool(re.search(r"\bR\s*=\s*true\b", blk_inner))
+            has_y = bool(re.search(r"\bY\s*=\s*true\b", blk_inner))
+            has_b = bool(re.search(r"\bB\s*=\s*true\b", blk_inner))
+            sm = re.search(r"Stats\s*=\s*\{", blk_inner)
+            stats = {}
+            if sm:
+                st_open = sm.end() - 1
+                st_inner, _ = _lua_brace_span(blk_inner, st_open)
+                if st_inner is not None:
+                    stats = _lua_parse_stats_table(st_inner)
+            if not stats:
+                continue
+            cat = _gem_categorize(has_r, has_y, has_b, is_meta)
+            if not cat:
+                continue
+            label = format_gem_stats_label(stats)
+            if not label:
+                continue
+            dedupe_key = (cat, label)
+            if dedupe_key in seen:
+                continue
+            seen.add(dedupe_key)
+            by_cat[cat].append(
+                {
+                    "id": gid,
+                    "category": cat,
+                    "stats": stats,
+                    "label": _finalize_gem_label_for_sheet(label),
+                }
+            )
+
+    for c in by_cat:
+        by_cat[c].sort(key=lambda x: _gem_sort_key_label(x["label"]))
+    return by_cat
+
+
 def refresh_pawn_scales_json():
     """Rebuild pawn_scales_tbc.json from AddonReference/Pawn/ClassicHawsJon.lua (TBC multipliers)."""
     if not os.path.isfile(PAWN_CLASSIC_HAWS_PATH):
@@ -1264,92 +1586,6 @@ def refresh_pawn_scales_json():
     except OSError as e:
         log("  Pawn scales error: %s" % e)
         return False
-
-
-def _append_pawn_weights_sheet(
-    wb,
-    class_title,
-    header_font,
-    header_fill,
-    section_font,
-    section_fill,
-    thin_border,
-    wrap_align,
-):
-    from openpyxl.styles import Font
-
-    cid = CLASS_TITLE_TO_PAWN_CLASS_ID.get((class_title or "").strip().title())
-    if cid is None:
-        return
-    if not os.path.isfile(PAWN_SCALES_JSON_PATH):
-        return
-    try:
-        with open(PAWN_SCALES_JSON_PATH, "r", encoding="utf-8") as f:
-            payload = json.load(f)
-    except (OSError, json.JSONDecodeError):
-        log("  Pawn weights sheet skipped (could not read pawn_scales_tbc.json).")
-        return
-
-    scales = [s for s in payload.get("scales", []) if s.get("class_id") == cid]
-    if not scales:
-        return
-
-    ws = wb.create_sheet(title="Pawn weights (TBC)")
-    ws.sheet_properties.tabColor = "6A1B9A"
-    row = 1
-    ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=3)
-    t1 = ws.cell(
-        row=row,
-        column=1,
-        value=(
-            "Pawn stat weights (TBC Classic — HawsJon; "
-            "source: AddonReference/Pawn/ClassicHawsJon.lua)"
-        ),
-    )
-    t1.font = Font(bold=True, size=12)
-    row += 1
-    ws.cell(
-        row=row,
-        column=1,
-        value=(
-            "Regenerated on each Excel export; see pawn_scales_tbc.json in the project root."
-        ),
-    )
-    row += 2
-
-    for sc in sorted(scales, key=lambda x: (x.get("spec_id", 0), x.get("spec_name", ""))):
-        label = " — ".join(
-            [
-                sc.get("class_name", ""),
-                "spec %s" % sc.get("spec_id", ""),
-                sc.get("spec_name", ""),
-            ]
-        )
-        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=2)
-        sec = ws.cell(row=row, column=1, value=label)
-        sec.font = section_font
-        sec.fill = section_fill
-        sec.border = thin_border
-        row += 1
-        for ci, h in enumerate(("Pawn stat", "Weight"), 1):
-            cell = ws.cell(row=row, column=ci, value=h)
-            cell.font = header_font
-            cell.fill = header_fill
-            cell.border = thin_border
-        row += 1
-        for stat, wt in sorted(sc["weights"].items(), key=lambda z: z[0].lower()):
-            c1 = ws.cell(row=row, column=1, value=stat)
-            c2 = ws.cell(row=row, column=2, value=wt)
-            c1.border = thin_border
-            c2.border = thin_border
-            c1.alignment = wrap_align
-            c2.alignment = wrap_align
-            row += 1
-        row += 1
-
-    ws.column_dimensions["A"].width = 30
-    ws.column_dimensions["B"].width = 14
-    log("  Pawn weights (TBC) sheet: %d spec scale(s)" % len(scales))
 
 
 def _get_row_color(row):
@@ -1424,10 +1660,17 @@ def export_xlsx(csv_path, spec_order, class_title=None):
 
     # -- ItemDB sheet (hidden) --
     ws_db = wb.create_sheet(title="ItemDB")
-    db_headers = ["Name", "Slot"] + STAT_COLUMNS + ["Attributes"]
+    db_headers = (
+        ["Name", "Slot", "SockR", "SockY", "SockB", "SockM"]
+        + STAT_COLUMNS
+        + ["Attributes"]
+    )
     db_num_cols = len(db_headers)
     for ci, h in enumerate(db_headers, 1):
         ws_db.cell(row=1, column=ci, value=h)
+
+    gem_by_cat = parse_pawn_gems_burning_crusade()
+    gem_categories = ["red", "yellow", "blue", "orange", "purple", "green", "meta"]
 
     items_by_slot = {}
     db_row = 2
@@ -1438,14 +1681,23 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         special = strip_equip_redundant_with_display_stats(
             stats, entry.get("special", "") or ""
         )
+        socks = entry.get("sockets") or {}
 
         ws_db.cell(row=db_row, column=1, value=name)
         ws_db.cell(row=db_row, column=2, value=slot)
+        ws_db.cell(row=db_row, column=3, value=int(socks.get("red") or 0))
+        ws_db.cell(row=db_row, column=4, value=int(socks.get("yellow") or 0))
+        ws_db.cell(row=db_row, column=5, value=int(socks.get("blue") or 0))
+        ws_db.cell(row=db_row, column=6, value=int(socks.get("meta") or 0))
         for si, stat_key in enumerate(STAT_COLUMNS):
             val = stats.get(stat_key)
             if val:
-                ws_db.cell(row=db_row, column=3 + si, value=val)
-        ws_db.cell(row=db_row, column=3 + len(STAT_COLUMNS), value=special)
+                ws_db.cell(row=db_row, column=ITEMDB_FIRST_STAT_COL + si, value=val)
+        ws_db.cell(
+            row=db_row,
+            column=ITEMDB_FIRST_STAT_COL + len(STAT_COLUMNS),
+            value=special,
+        )
 
         items_by_slot.setdefault(slot, []).append(name)
         db_row += 1
@@ -1461,7 +1713,41 @@ def export_xlsx(csv_path, spec_order, class_title=None):
             ws_db.cell(row=2 + ri, column=col, value=item_name)
         slot_list_cols[gear_type] = (get_column_letter(col), len(slot_items))
 
+    gem_list_cols = {}
+    next_col = slot_col_start + len(GEAR_ORDER)
+    for cat in gem_categories:
+        col = next_col
+        ws_db.cell(row=1, column=col, value="Gem_%s_label" % cat)
+        ws_db.cell(row=1, column=col + 1, value="Gem_%s_id" % cat)
+        lst = list(gem_by_cat.get(cat, []))
+        # Sentinel only in label column (no numeric id — avoids "0" leaking into dropdowns).
+        rows_out = [{"label": _finalize_gem_label_for_sheet("----"), "id": ""}] + lst
+        for ri, ent in enumerate(rows_out):
+            ws_db.cell(row=2 + ri, column=col, value=ent["label"])
+            ws_db.cell(row=2 + ri, column=col + 1, value=ent["id"] if ent["id"] != "" else None)
+        ltr = get_column_letter(col)
+        ltr_id = get_column_letter(col + 1)
+        gem_list_cols[cat] = (ltr, len(rows_out), ltr_id)
+        next_col += 2
+
     ws_db.sheet_state = "hidden"
+
+    # Hidden Id → stats JSON for Apps Script gear score (avoids parsing dropdown labels).
+    ws_gems = wb.create_sheet(title="GemDB")
+    ws_gems.append(["Id", "Category", "Label", "StatsJson"])
+    g_row = 2
+    for cat in gem_categories:
+        for ent in gem_by_cat.get(cat, []):
+            ws_gems.cell(row=g_row, column=1, value=ent["id"])
+            ws_gems.cell(row=g_row, column=2, value=cat)
+            ws_gems.cell(row=g_row, column=3, value=ent["label"])
+            ws_gems.cell(
+                row=g_row,
+                column=4,
+                value=json.dumps(ent["stats"], separators=(",", ":")),
+            )
+            g_row += 1
+    ws_gems.sheet_state = "hidden"
     total_db_items = db_row - 2
     log(f"  ItemDB: {total_db_items} items")
 
@@ -1473,9 +1759,10 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     ws_ce = wb.create_sheet(title="Current Equipment")
     ws_ce.sheet_properties.tabColor = "455A64"
 
-    ce_headers = ["Gear Type", "Item Name"] + STAT_COLUMNS
+    ce_headers = ["Gear Type", "Item Name"] + CE_GEM_HEADERS + STAT_COLUMNS + ["Gear Score"]
     ce_ncol = len(ce_headers)
-    ce_last_col = get_column_letter(ce_ncol)
+    ce_visible_last = get_column_letter(CE_GEAR_SCORE_COL)
+    ce_hidden_last = get_column_letter(CE_META_WEIGHT_COL)
 
     ce_intro_para1 = (
         "Add your current equipment to see comparisons by typing in item name. "
@@ -1484,7 +1771,9 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     ce_intro_para2 = (
         'If an item in the BIS Planner sheet is set to "Equipped", "Equipped 1", or "Equipped 2" '
         "(rings/trinkets use two slots: Ring 1/2, Trinket 1/2), it will update here. "
-        "If your item is not on the list, you can manually enter stats (integers only)."
+        "If your item is not on the list, you can manually enter stats (integers only). "
+        "Pawn stat weights for each spec are on the Weights row below Ranged/Relic (not a separate tab). "
+        "Gem columns: use Google Sheets + Apps Script for socket-aware dropdowns and gear score."
     )
     # Rows 1–2: title A1:B2; C1:C2 "Instructions:"; D row1 / D row2 = one paragraph each (no vertical merge of body)
     CE_HEADER_ROW = 3
@@ -1502,12 +1791,12 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     lab_ce.font = intro_label_font
     lab_ce.alignment = intro_label_align
 
-    ws_ce.merge_cells(f"{ce_text_start_letter}1:{ce_last_col}1")
+    ws_ce.merge_cells(f"{ce_text_start_letter}1:{ce_visible_last}1")
     p1 = ws_ce.cell(row=1, column=ce_text_start_col, value=ce_intro_para1)
     p1.font = intro_body_font
     p1.alignment = wrap_align
 
-    ws_ce.merge_cells(f"{ce_text_start_letter}2:{ce_last_col}2")
+    ws_ce.merge_cells(f"{ce_text_start_letter}2:{ce_visible_last}2")
     p2 = ws_ce.cell(row=2, column=ce_text_start_col, value=ce_intro_para2)
     p2.font = intro_body_font
     p2.alignment = wrap_align
@@ -1520,10 +1809,44 @@ def export_xlsx(csv_path, spec_order, class_title=None):
 
     ws_ce.column_dimensions["A"].width = 14
     ws_ce.column_dimensions["B"].width = 34
-    ws_ce.column_dimensions["C"].width = 16
-    for ci in range(4, 3 + len(STAT_COLUMNS)):
+    for ci in range(CE_GEM_FIRST_COL, CE_GEM_LAST_COL + 1):
+        letter = get_column_letter(ci)
+        ws_ce.column_dimensions[letter].width = 16
+    for ci in range(CE_STAT_FIRST_COL, CE_STAT_LAST_COL + 1):
         ws_ce.column_dimensions[get_column_letter(ci)].width = 9
-    ws_ce.freeze_panes = f"C{CE_HEADER_ROW + 1}"
+    ws_ce.column_dimensions[get_column_letter(CE_GEAR_SCORE_COL)].width = 11
+    for ci in range(CE_PAWN_SNAPSHOT_FIRST_COL, CE_META_WEIGHT_COL + 1):
+        letter = get_column_letter(ci)
+        ws_ce.column_dimensions[letter].hidden = True
+        ws_ce.column_dimensions[letter].width = 2
+
+    # Freeze only Gear Type + Item Name (A:B). Gem block scrolls horizontally with stats (avoids Sheets viewport errors).
+    ws_ce.freeze_panes = "%s%d" % (
+        get_column_letter(CE_GEM_FIRST_COL),
+        CE_HEADER_ROW + 1,
+    )
+
+    gem_header_to_cat = {
+        "Red Gem": "red",
+        "Yellow Gem": "yellow",
+        "Blue Gem": "blue",
+        "Orange Gem": "orange",
+        "Purple Gem": "purple",
+        "Green Gem": "green",
+        "Meta Gem": "meta",
+    }
+    count_dv = DataValidation(
+        type="list",
+        formula1='"0,1,2,3,4,5,6,7,8,9,10"',
+        allow_blank=True,
+    )
+    ws_ce.add_data_validation(count_dv)
+    weight_mode_dv = DataValidation(
+        type="list",
+        formula1='"%s,%s"' % (CE_WEIGHT_MODE_PAWN, CE_WEIGHT_MODE_CUSTOM),
+        allow_blank=False,
+    )
+    ws_ce.add_data_validation(weight_mode_dv)
 
     ce_spec_rows = {}
     ce_row = CE_HEADER_ROW + 1
@@ -1531,22 +1854,51 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         cell = ws_ce.cell(row=ce_row, column=1, value=f"--- {spec_name.upper()} ---")
         cell.font = section_font
         cell.fill = section_fill
-        for ci in range(2, len(ce_headers) + 1):
+        for ci in range(2, CE_GEAR_SCORE_COL + 1):
             c = ws_ce.cell(row=ce_row, column=ci)
             c.fill = section_fill
         ce_row += 1
 
         spec_start = ce_row
+        _wd, wvec = get_pawn_weights_for_spec(class_title, spec_name)
+        if wvec is None:
+            wvec = [0.0] * len(STAT_COLUMNS)
+        meta_w = float((_wd or {}).get("MetaSocketEffect") or 0)
+
         for gear_type in CE_GEAR_ORDER:
             ws_ce.cell(row=ce_row, column=1, value=gear_type)
 
+            for hi, gh in enumerate(CE_GEM_HEADERS):
+                ci = CE_GEM_FIRST_COL + hi
+                if gh.endswith(" Count"):
+                    ws_ce.cell(row=ce_row, column=ci, value=0)
+                    count_dv.add(ws_ce.cell(row=ce_row, column=ci))
+                    continue
+                cat = gem_header_to_cat.get(gh)
+                ginfo = gem_list_cols.get(cat) if cat else None
+                if ginfo and ginfo[1] > 0:
+                    gl, nlab, _gid = ginfo
+                    dv_g = DataValidation(
+                        type="list",
+                        formula1="ItemDB!$%s$2:$%s$%d" % (gl, gl, nlab + 1),
+                        allow_blank=True,
+                    )
+                    ws_ce.add_data_validation(dv_g)
+                    dv_g.add(ws_ce.cell(row=ce_row, column=ci))
+
             for si, stat_key in enumerate(STAT_COLUMNS):
-                db_col = 3 + si
+                db_col = ITEMDB_FIRST_STAT_COL + si
                 formula = (
                     f'=IFERROR(VLOOKUP(B{ce_row},{itemdb_range_bounded},'
                     f'{db_col},FALSE),"")'
                 )
-                ws_ce.cell(row=ce_row, column=3 + si, value=formula)
+                ws_ce.cell(
+                    row=ce_row,
+                    column=CE_STAT_FIRST_COL + si,
+                    value=formula,
+                )
+
+            ws_ce.cell(row=ce_row, column=CE_GEAR_SCORE_COL, value="")
 
             itemdb_slot = CE_ROW_TO_ITEMDB_SLOT.get(gear_type, gear_type)
             col_info = slot_list_cols.get(itemdb_slot)
@@ -1563,10 +1915,43 @@ def export_xlsx(csv_path, spec_order, class_title=None):
                     ws_ce.add_data_validation(dv)
                     dv.add(ws_ce.cell(row=ce_row, column=2))
 
-            for ci in range(1, len(ce_headers) + 1):
+            for ci in range(1, CE_GEAR_SCORE_COL + 1):
                 ws_ce.cell(row=ce_row, column=ci).border = thin_border
 
             ce_row += 1
+
+        # Weights row (per spec): B = mode; stats = weights; hidden snapshot + stash + meta weight.
+        ws_ce.cell(row=ce_row, column=1, value=CE_WEIGHT_ROW_LABEL)
+        ws_ce.cell(row=ce_row, column=2, value=CE_WEIGHT_MODE_PAWN)
+        weight_mode_dv.add(ws_ce.cell(row=ce_row, column=2))
+        for ci in range(CE_GEM_FIRST_COL, CE_GEM_LAST_COL + 1):
+            ws_ce.cell(row=ce_row, column=ci, value="")
+
+        for si, wt in enumerate(wvec):
+            ws_ce.cell(
+                row=ce_row,
+                column=CE_STAT_FIRST_COL + si,
+                value=wt,
+            )
+        ws_ce.cell(row=ce_row, column=CE_GEAR_SCORE_COL, value="")
+
+        for si, wt in enumerate(wvec):
+            ws_ce.cell(
+                row=ce_row,
+                column=CE_PAWN_SNAPSHOT_FIRST_COL + si,
+                value=wt,
+            )
+            ws_ce.cell(
+                row=ce_row,
+                column=CE_CUSTOM_STASH_FIRST_COL + si,
+                value=wt,
+            )
+        ws_ce.cell(row=ce_row, column=CE_META_WEIGHT_COL, value=meta_w)
+
+        for ci in range(1, CE_META_WEIGHT_COL + 1):
+            ws_ce.cell(row=ce_row, column=ci).border = thin_border
+
+        ce_row += 1
 
         ce_spec_rows[spec_name] = (spec_start, ce_row - 1)
         ce_row += 1
@@ -1575,7 +1960,10 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     credit_cell = ws_ce.cell(row=ce_row + 1, column=1, value="Created by Steven Bennett 2026")
     credit_cell.font = credit_font
 
-    log(f"  Current Equipment: {len(spec_order)} specs x {len(CE_GEAR_ORDER)} slots")
+    log(
+        "  Current Equipment: %d specs x (%d gear rows + Weights per spec)"
+        % (len(spec_order), len(CE_GEAR_ORDER))
+    )
 
     # -- Single BIS Planner sheet --
     # A–J Interest…Stats (visible); K Comparison, L Notes (visible — no hidden cols before Notes).
@@ -1769,19 +2157,13 @@ def export_xlsx(csv_path, spec_order, class_title=None):
 
     log(f"  BIS Planner: {len(all_rows)} items")
 
-    _append_pawn_weights_sheet(
-        wb,
-        class_title,
-        header_font,
-        header_fill,
-        section_font,
-        section_fill,
-        thin_border,
-        wrap_align,
-    )
-
-    # Tab order: Current Equipment, BIS Planner, Pawn weights (TBC), ItemDB (hidden)
-    target_order = ["Current Equipment", "BIS Planner", "Pawn weights (TBC)", "ItemDB"]
+    # Tab order: Current Equipment, BIS Planner, ItemDB + GemDB (hidden). Pawn scales live on CE Weights rows only.
+    target_order = [
+        "Current Equipment",
+        "BIS Planner",
+        "ItemDB",
+        "GemDB",
+    ]
     for idx, name in enumerate(target_order):
         if name in wb.sheetnames:
             current_idx = wb.sheetnames.index(name)
@@ -1829,7 +2211,7 @@ def _build_equip2_name_formula(row, ce_spec_rows, spec_order):
 
 def _build_stat_diff_helper_formula(row, equip_col_letter, itemdb_range, stat_index):
     """One hidden cell: formatted diff fragment or blank (keeps CmpRaw short — CmpRaw TEXTJOINs the row range)."""
-    db_col_num = 3 + stat_index
+    db_col_num = ITEMDB_FIRST_STAT_COL + stat_index
     stat_key = STAT_COLUMNS[stat_index]
     item_stat = f'IFERROR(VLOOKUP(D{row},{itemdb_range},{db_col_num},0),0)'
     equip_stat = (
@@ -1930,6 +2312,121 @@ def _col_letter(n):
 # ============================================================
 
 
+def run_stat_audit_report():
+    """
+    Data audit: item_database.json stat keys (frequency) vs STAT_COLUMNS and Pawn scale keys.
+    Run: python3 generate_bis_planner.py --audit-stats
+    """
+    stat_cols_set = set(STAT_COLUMNS)
+    pawn_mapped = set()
+    for tup in STAT_COL_PAWN_WEIGHT_KEYS:
+        pawn_mapped.update(tup)
+
+    if not os.path.isfile(ITEM_DB_PATH):
+        log("ERROR: %s not found." % ITEM_DB_PATH)
+        return
+    with open(ITEM_DB_PATH, "r", encoding="utf-8") as f:
+        item_db = json.load(f)
+    key_freq = Counter()
+    for entry in item_db.values():
+        for k in (entry.get("stats") or {}):
+            key_freq[k] += 1
+
+    log("--- ItemDB stats: top keys by item count ---")
+    for k, n in key_freq.most_common(50):
+        in_col = "CE column" if k in stat_cols_set else "not in STAT_COLUMNS"
+        log("  %6d  %-28s  %s" % (n, k, in_col))
+
+    orphan_stats = sorted(k for k in key_freq if k not in stat_cols_set and not k.startswith("_"))
+    if orphan_stats:
+        log("--- ItemDB stat keys not mapped to STAT_COLUMNS (excluding _internal) ---")
+        for k in orphan_stats:
+            log("  %6d  %s" % (key_freq[k], k))
+
+    pawn_keys_max = {}
+    if os.path.isfile(PAWN_SCALES_JSON_PATH):
+        with open(PAWN_SCALES_JSON_PATH, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+        for sc in payload.get("scales", []):
+            w = sc.get("weights") or {}
+            for pk, val in w.items():
+                v = abs(float(val or 0))
+                if v > pawn_keys_max.get(pk, 0):
+                    pawn_keys_max[pk] = v
+    unmapped_pawn = sorted(
+        pk for pk, mx in pawn_keys_max.items() if mx > 0 and pk not in pawn_mapped
+    )
+    if unmapped_pawn:
+        log("--- Pawn keys with non-zero weight somewhere, not aggregated into CE stat columns ---")
+        for pk in unmapped_pawn:
+            log("  max|w|≈%.4g  %s" % (pawn_keys_max[pk], pk))
+    log("--- Audit done (STAT_COLUMNS has %d entries) ---" % len(STAT_COLUMNS))
+
+
+def run_loon_pawn_spec_check():
+    """Print Loon RegisterSpec labels vs pawn_scales_tbc.json spec_name (per class)."""
+    if not os.path.isdir(LOON_GUIDES_DIR):
+        log("ERROR: Loon dir missing: %s" % LOON_GUIDES_DIR)
+        return
+    if not os.path.isfile(PAWN_SCALES_JSON_PATH):
+        log("ERROR: %s not found." % PAWN_SCALES_JSON_PATH)
+        return
+    with open(PAWN_SCALES_JSON_PATH, "r", encoding="utf-8") as f:
+        payload = json.load(f)
+    pawn_by_class = {}
+    for sc in payload.get("scales", []):
+        cn = (sc.get("class_name") or "").strip()
+        sn = (sc.get("spec_name") or "").strip()
+        pawn_by_class.setdefault(cn, set()).add(sn)
+
+    loon_by_class = {}
+    loon_resolved_by_class = {}
+    loon_files = []
+    for fname in sorted(os.listdir(LOON_GUIDES_DIR)):
+        if not fname.endswith(".lua"):
+            continue
+        path = os.path.join(LOON_GUIDES_DIR, fname)
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            for line in f:
+                m = re.match(
+                    r'.*LBIS:RegisterSpec\(LBIS\.L\["([^"]*)"\],\s*LBIS\.L\["([^"]*)"\]',
+                    line,
+                )
+                if m:
+                    c, s = m.group(1), m.group(2)
+                    loon_by_class.setdefault(c, set()).add(s)
+                    cls_title = c.strip().title()
+                    s_clean = (s or "").strip()
+                    resolved = PLANNER_SPEC_TO_PAWN_SPEC_NAME.get((cls_title, s_clean), s_clean)
+                    loon_resolved_by_class.setdefault(c, set()).add(resolved)
+                    loon_files.append((fname, c, s))
+                    break
+
+    log("--- Loon -> Pawn: mismatches after PLANNER_SPEC_TO_PAWN_SPEC_NAME ---")
+    bad = 0
+    for fname, c, s in sorted(loon_files, key=lambda x: (x[1], x[2], x[0])):
+        cls_title = c.strip().title()
+        s_clean = (s or "").strip()
+        want_pawn = PLANNER_SPEC_TO_PAWN_SPEC_NAME.get((cls_title, s_clean), s_clean)
+        pset = pawn_by_class.get(c, set())
+        if want_pawn not in pset:
+            bad += 1
+            log(
+                "  %s  class=%r loon=%r -> %r  Pawn has: %s"
+                % (fname, c, s_clean, want_pawn, sorted(pset))
+            )
+    if bad == 0:
+        log("  (none — all Loon specs resolve to a Pawn scale)")
+
+    log("--- Pawn scales with no Loon guide (same class; Loon labels resolved via alias map) ---")
+    for cn in sorted(pawn_by_class.keys()):
+        only_pawn = pawn_by_class[cn] - loon_resolved_by_class.get(cn, set())
+        if only_pawn:
+            log("  %s: %s" % (cn, ", ".join(sorted(only_pawn))))
+
+    log("--- Done ---")
+
+
 def list_guide_classes():
     """Lowercase class names that have at least one guide file in AddonReference/Loon/."""
     classes = set()
@@ -1971,7 +2468,25 @@ def main():
                         help="Max phase to include (cumulative). 0=PreRaid (default), 1=Phase 1, etc.")
     parser.add_argument("--output", type=str, default=None, help="Output CSV path override")
     parser.add_argument("--no-excel", action="store_true", help="Skip .xlsx generation")
+    parser.add_argument(
+        "--audit-stats",
+        action="store_true",
+        help="Print item_database stat-key frequencies vs STAT_COLUMNS / Pawn keys; then exit",
+    )
+    parser.add_argument(
+        "--check-loon-pawn-specs",
+        action="store_true",
+        help="Compare Loon RegisterSpec names to Pawn JSON spec_name per class; then exit",
+    )
     args = parser.parse_args()
+
+    if args.audit_stats:
+        run_stat_audit_report()
+        return
+
+    if args.check_loon_pawn_specs:
+        run_loon_pawn_spec_check()
+        return
 
     if args.build_db:
         build_item_database(

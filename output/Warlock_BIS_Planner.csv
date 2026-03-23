@@ -66,7 +66,7 @@ Affliction,Neck,PreRaid,Hydra-fang Necklace,Dungeon Drop,,Underbog,Normal,17 Sta
 Affliction,Ring,PreRaid,Band of the Inevitable,Dungeon Drop,,Naxxramas,Normal,36 Healing; 36 Spell Dmg; 8 Spell Hit,Noth the Plaguebringer
 Affliction,Ring,PreRaid,Seal of the Damned,Dungeon Drop,,Naxxramas,Normal,17 Sta; 21 Healing; 21 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Four Horseman
 Affliction,Ring,PreRaid,Sparking Arcanite Ring,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 10 Spell Hit; 14 Spell Crit,Epoch Hunter
-Affliction,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit,50 Spirit Shards
+Affliction,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit; 11 Resilience,50 Spirit Shards
 Affliction,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,
 Affliction,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg; 21 Spell Hit,Cenarion Expedition - Exalted
 Affliction,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg; 12 Spell Crit,The Scryers - Exalted
@@ -176,7 +176,7 @@ Demonology,Neck,PreRaid,Hydra-fang Necklace,Dungeon Drop,,Underbog,Normal,17 Sta
 Demonology,Ring,PreRaid,Band of the Inevitable,Dungeon Drop,,Naxxramas,Normal,36 Healing; 36 Spell Dmg; 8 Spell Hit,Noth the Plaguebringer
 Demonology,Ring,PreRaid,Seal of the Damned,Dungeon Drop,,Naxxramas,Normal,17 Sta; 21 Healing; 21 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Four Horseman
 Demonology,Ring,PreRaid,Sparking Arcanite Ring,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 10 Spell Hit; 14 Spell Crit,Epoch Hunter
-Demonology,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit,50 Spirit Shards
+Demonology,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit; 11 Resilience,50 Spirit Shards
 Demonology,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,
 Demonology,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg; 21 Spell Hit,Cenarion Expedition - Exalted
 Demonology,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg; 12 Spell Crit,The Scryers - Exalted
@@ -300,7 +300,7 @@ Destruction,Ring,PreRaid,Ring of the Eternal Flame,Dungeon Drop,,Naxxramas,Norma
 Equip: Increases damage done by Fire spells and effects by up to 34",Trash Drop
 Destruction,Ring,PreRaid,Seal of the Damned,Dungeon Drop,,Naxxramas,Normal,17 Sta; 21 Healing; 21 Spell Dmg; 8 Spell Hit; 14 Spell Crit,Four Horseman
 Destruction,Ring,PreRaid,Sparking Arcanite Ring,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,13 Sta; 14 Int; 22 Healing; 22 Spell Dmg; 10 Spell Hit; 14 Spell Crit,Epoch Hunter
-Destruction,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit,50 Spirit Shards
+Destruction,Ring,PreRaid,Seal of the Exorcist,Dungeon Token,,,,24 Sta; 28 Healing; 28 Spell Dmg; 12 Spell Hit; 11 Resilience,50 Spirit Shards
 Destruction,Ring,PreRaid,Ring of the Fallen God,Quest,The Savior of Kalimdor (AQ),,,5 Sta; 6 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,
 Destruction,Ring,PreRaid,Ashyen's Gift,Reputation,,,,30 Sta; 23 Healing; 23 Spell Dmg; 21 Spell Hit,Cenarion Expedition - Exalted
 Destruction,Ring,PreRaid,Seer's Signet,Reputation,,,,24 Sta; 34 Healing; 34 Spell Dmg; 12 Spell Crit,The Scryers - Exalted
