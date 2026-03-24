@@ -194,62 +194,11 @@ var BIS_INTEREST_CLEAR = "----";
 /** JSON map: equippedSlotKey_(spec, gear) → row number (1-based). Rebuilt on onOpen; reconciles clearOtherEquipped. */
 var BIS_EQUIPPED_INDEX_PROP = "BIS_EQUIPPED_INDEX_JSON_V1";
 
-/**
- * When true: equip flows (BIS Interest→Equipped or CE column B) record segment timings to sheet
- * BIS_PipelineTiming (Step, Segment ms, Cumulative ms). Set false to disable.
- * Nested CE onEdit during planner equip reuses the same session (no second reset/flush).
- * Labels: bp_* (equip path), ce_* / ce_score_* / ce_manualScore_* (CE stats & ideal gem score),
- * cmp_* / cmp_cache_* / cmp_cmpRaw_* (comparison refresh, cache build, CmpRaw string build).
- */
-var BIS_PIPELINE_TIMING = true;
-var bisTimingSs_ = null;
-var bisTimingMarks_ = null;
-var bisTimingSession_ = false;
+/** Lazy CE map: specNorm → Weights row (1-based). Invalidated when weights row is edited. */
+var bisCeWeightsRowMap_ = { key: "", specToWeights: null, colA: null };
 
-function bisTimingReset_(ss) {
-  if (!BIS_PIPELINE_TIMING || bisTimingSession_) return;
-  bisTimingSs_ = ss || SpreadsheetApp.getActiveSpreadsheet();
-  var t0 = new Date().getTime();
-  bisTimingMarks_ = [{ t: t0, label: "pipeline_start" }];
-  bisTimingSession_ = true;
-}
-
-function bisTimingMark_(label) {
-  if (!bisTimingSession_ || bisTimingMarks_ == null) return;
-  bisTimingMarks_.push({ t: new Date().getTime(), label: label });
-}
-
-function bisTimingFlush_() {
-  if (!bisTimingSession_ || bisTimingMarks_ == null || bisTimingMarks_.length < 2) {
-    bisTimingSession_ = false;
-    bisTimingMarks_ = null;
-    bisTimingSs_ = null;
-    return;
-  }
-  var ss = bisTimingSs_;
-  var marks = bisTimingMarks_;
-  bisTimingSession_ = false;
-  bisTimingMarks_ = null;
-  bisTimingSs_ = null;
-  var t0 = marks[0].t;
-  var matrix = [["Run (UTC)", new Date().toISOString(), ""]];
-  matrix.push(["Step", "Segment ms", "Cumulative ms"]);
-  var cum = 0;
-  var prev = t0;
-  for (var i = 1; i < marks.length; i++) {
-    var seg = marks[i].t - prev;
-    cum += seg;
-    matrix.push([marks[i].label, seg, cum]);
-    prev = marks[i].t;
-  }
-  matrix.push(["TOTAL", marks[marks.length - 1].t - t0, ""]);
-  try {
-    if (!ss) ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sh = ss.getSheetByName("BIS_PipelineTiming");
-    if (!sh) sh = ss.insertSheet("BIS_PipelineTiming");
-    sh.getRange(1, 1, matrix.length, 3).setValues(matrix);
-  } catch (eT) {}
-}
+/** Same-execution memo: ItemDB column A only (membership checks). */
+var bisItemdbNamesExecCache_ = { key: "", names: null };
 
 function normalizeItemName(v) {
   if (v == null || v === "") return "";
@@ -354,7 +303,7 @@ function onOpen() {
   applyInterestDropdownsByGearType_(bp);
   rebuildEquippedIndexFromPlanner_(bp);
   Utilities.sleep(OPEN_RECALC_WAIT_MS);
-  refreshComparisonRichText(bp, null, null, null, null, null);
+  refreshComparisonRichText(bp, null, null, null, null, null, null, null);
 }
 
 /** Ring/Trinket: no plain Equipped. First item ---- clears cell on select. Matches generate_bis_planner.py. */
@@ -450,11 +399,11 @@ function refreshComparisonAllSpecs_(bp) {
   var fullSheetBandSnap = {};
   refreshComparisonRichText(bp, null, null, null, sharedCaches, {
     captureFullSheetBands: fullSheetBandSnap,
-  });
+  }, null, null);
   Utilities.sleep(OPEN_SECOND_PASS_SLEEP_MS);
   refreshComparisonRichText(bp, null, null, null, sharedCaches, {
     reuseFullSheetBands: fullSheetBandSnap,
-  });
+  }, null, null);
 }
 
 // ============================================================
@@ -492,15 +441,12 @@ function handleBISPlannerEdit(e, bpSheet) {
       e.range.setValue("Equipped");
       nv = "Equipped";
     }
-    var bpEquipTiming = false;
     var ceGearColSync = null;
-    try {
+    var lastRowEq;
     if (interestIsEquippedState_(nv)) {
-      bisTimingReset_(bpSheet.getParent());
-      bpEquipTiming = bisTimingSession_;
       e.range.setFontWeight("bold");
       var ceLabel = ceSlotLabelForPlannerInterest_(gearType, nv);
-      var lastRowEq = bpSheet.getLastRow();
+      lastRowEq = bpSheet.getLastRow();
       var nEq = lastRowEq - BIS_FIRST_DATA_ROW + 1;
       var eqMap = getEquippedIndexMap_();
       var eqKey = equippedSlotKey_(spec, gearType, nv);
@@ -523,14 +469,18 @@ function handleBISPlannerEdit(e, bpSheet) {
         eqMap[eqKey] = row;
         saveEquippedIndexMap_(eqMap);
       } else {
-        plannerBCReuse = bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_SPEC, nEq, 2).getValues();
-        clearOtherEquippedUsingIndex_(bpSheet, row, spec, gearType, nv);
+        var abcFull = bpSheet.getRange(BIS_FIRST_DATA_ROW, 1, nEq, GG_GEARTYPE).getValues();
+        plannerBCReuse = [];
+        for (var pbi = 0; pbi < abcFull.length; pbi++) {
+          plannerBCReuse.push([
+            abcFull[pbi][GG_SPEC - 1],
+            abcFull[pbi][GG_GEARTYPE - 1],
+          ]);
+        }
+        clearOtherEquippedUsingIndex_(bpSheet, row, spec, gearType, nv, abcFull);
       }
-      bisTimingMark_("bp_equippedIndex_done");
       var ssForCe = bpSheet.getParent();
-      if (bpEquipTiming) bisTimingMark_("bp_after_getParent");
       var ceSheetSync = ssForCe.getSheetByName(CURRENT_EQUIP_SHEET);
-      if (bpEquipTiming) bisTimingMark_("bp_after_getCeSheet");
       ceGearColSync = null;
       if (ceSheetSync) {
         var ceLrSync = ceEffectiveLastRow_(ceSheetSync);
@@ -538,7 +488,6 @@ function handleBISPlannerEdit(e, bpSheet) {
           ceGearColSync = ceSheetSync.getRange(1, CE_GEARTYPE, ceLrSync, 1).getValues();
         }
       }
-      if (bpEquipTiming) bisTimingMark_("bp_after_ceGearCol_read");
       var ceRowEq = null;
       var oldCeB = "";
       if (ceSheetSync) {
@@ -547,16 +496,10 @@ function handleBISPlannerEdit(e, bpSheet) {
           oldCeB = normalizeItemName(ceSheetSync.getRange(ceRowEq, CE_ITEMNAME).getValue());
         }
       }
-      if (bpEquipTiming) bisTimingMark_("bp_after_findCERow_equip");
-      bisTimingMark_("bp_before_setCEItem");
       setCEItem(spec, ceLabel, itemName, ceSheetSync, ceGearColSync);
-      bisTimingMark_("bp_after_setCEItem");
-      if (bpEquipTiming) bisTimingMark_("bp_before_ceRefreshStats");
       if (ceSheetSync && ceRowEq && normalizeItemName(itemName)) {
         ceRefreshStatsAndGearScoreForRow_(ceSheetSync, ceRowEq, oldCeB, itemName, ssForCe);
       }
-      if (bpEquipTiming) bisTimingMark_("bp_after_ceRefreshStats");
-      bisTimingMark_("bp_ceStats_done");
     } else {
       e.range.setFontWeight("normal");
       if (interestIsEquippedState_(e.oldValue)) {
@@ -574,17 +517,18 @@ function handleBISPlannerEdit(e, bpSheet) {
         clearEquippedIndexIfRow_(row, spec, gearType, e.oldValue);
       }
     }
-      if (bpEquipTiming) bisTimingMark_("bp_before_flush");
-      SpreadsheetApp.flush();
-      if (bpEquipTiming) bisTimingMark_("bp_after_flush");
-      Utilities.sleep(EDIT_RECALC_WAIT_MS);
-      if (bpEquipTiming) bisTimingMark_("bp_after_editRecalcSleep");
-      if (bpEquipTiming) bisTimingMark_("bp_before_comparisonRefresh");
-      refreshComparisonRichText(bpSheet, spec, gearType, plannerBCReuse, null, null, ceGearColSync);
-      if (bpEquipTiming) bisTimingMark_("bp_after_comparisonRefresh");
-    } finally {
-      if (bpEquipTiming) bisTimingFlush_();
-    }
+    SpreadsheetApp.flush();
+    Utilities.sleep(EDIT_RECALC_WAIT_MS);
+    refreshComparisonRichText(
+      bpSheet,
+      spec,
+      gearType,
+      plannerBCReuse,
+      null,
+      null,
+      ceGearColSync,
+      lastRowEq
+    );
     return;
   }
 
@@ -598,7 +542,7 @@ function handleBISPlannerEdit(e, bpSheet) {
     var specForRow = sg[0];
     var gearForRow = sg[1];
     SpreadsheetApp.flush();
-    refreshComparisonRichText(bpSheet, specForRow, gearForRow, null, null, null);
+    refreshComparisonRichText(bpSheet, specForRow, gearForRow, null, null, null, null, null);
   }
 }
 
@@ -696,15 +640,26 @@ function rebuildEquippedIndexFromPlanner_(bpSheet) {
  * Clears other Equipped for same spec+slot using DocumentProperties index; falls back to full scan
  * when index is cold or stale row. Updates index to currentRow.
  */
-function clearOtherEquippedUsingIndex_(bpSheet, currentRow, spec, gearType, interestValue) {
+/**
+ * @param {?Array<Array<*>>} plannerABCForFallback - A:GG_GEARTYPE snapshot (same shape as clearOtherEquipped); avoids full read on index miss.
+ */
+function clearOtherEquippedUsingIndex_(
+  bpSheet,
+  currentRow,
+  spec,
+  gearType,
+  interestValue,
+  plannerABCForFallback
+) {
   var key = equippedSlotKey_(spec, gearType, interestValue);
   var map = getEquippedIndexMap_();
   var prev = map[key];
   var specN = normalizeItemName(spec);
   var gearN = normalizeItemName(gearType);
+  var fb = plannerABCForFallback != null && plannerABCForFallback.length > 0 ? plannerABCForFallback : null;
 
   if (prev == null || prev === "") {
-    clearOtherEquipped(bpSheet, currentRow, spec, gearType, interestValue, null);
+    clearOtherEquipped(bpSheet, currentRow, spec, gearType, interestValue, fb);
   } else if (prev !== currentRow) {
     var v = bpSheet.getRange(prev, 1, 1, GG_GEARTYPE).getValues()[0];
     if (
@@ -718,7 +673,7 @@ function clearOtherEquippedUsingIndex_(bpSheet, currentRow, spec, gearType, inte
       rl.setValue("");
       rl.setFontWeight("normal");
     } else {
-      clearOtherEquipped(bpSheet, currentRow, spec, gearType, interestValue, null);
+      clearOtherEquipped(bpSheet, currentRow, spec, gearType, interestValue, fb);
     }
   }
   map[key] = currentRow;
@@ -787,23 +742,107 @@ function ceEffectiveLastRow_(ceSheet) {
   return Math.min(lr, CE_FIRST_DATA_ROW + CE_CONTENT_ROW_CAP - 1);
 }
 
+/**
+ * Reuse column A matrix for rows 1..celr (1-based effective height).
+ * Returns exactly celr rows (truncates if vals is longer).
+ * Returns null if vals is null or shorter than celr (must read from sheet).
+ */
+function ceGearColSnapshotRowsAtCelr_(vals, celr) {
+  if (vals == null) return null;
+  if (celr < 1) {
+    return vals.length === 0 ? [] : null;
+  }
+  if (vals.length < celr) return null;
+  if (vals.length === celr) return vals;
+  return vals.slice(0, celr);
+}
+
+/**
+ * Same as ceGearColSnapshotRowsAtCelr_ but reads ceEffectiveLastRow_(ceSheet) once.
+ * Do not call from plannerRefreshCachesBuild_: that function must use a single frozen celr for both
+ * cacheKey and snapshot check — two consecutive getLastRow calls can disagree and force a duplicate read.
+ */
+function ceGearColSnapshotRows_(vals, ceSheet) {
+  return ceGearColSnapshotRowsAtCelr_(vals, ceEffectiveLastRow_(ceSheet));
+}
+
+/** True when ceGearColSnapshotRows_ can supply column A without a sheet read. */
+function ceGearColValsUsable_(vals, ceSheet) {
+  return ceGearColSnapshotRows_(vals, ceSheet) != null;
+}
+
 function ceIsWeightsRow_(ceSheet, row) {
   var a = normalizeItemName(ceSheet.getRange(row, CE_GEARTYPE).getValue());
   return a === CE_WEIGHT_ROW_LABEL;
 }
 
-/** Scan column A downward from anyRow; first "Weights" before next section wins. One bounded bulk read. */
-function ceFindWeightsRowForSection_(ceSheet, anyRow) {
-  var sheetLast = ceSheet.getLastRow();
-  if (anyRow > sheetLast || anyRow < 1) return null;
-  var end = Math.min(sheetLast, anyRow + CE_WEIGHTS_SCAN_BELOW_SLOT);
-  var colA = ceSheet.getRange(anyRow, CE_GEARTYPE, end, 1).getValues();
-  for (var i = 0; i < colA.length; i++) {
-    var a = String(colA[i][0]).trim();
-    if (a.indexOf("---") === 0) return null;
-    if (a === CE_WEIGHT_ROW_LABEL) return anyRow + i;
+function ceWeightsMapKey_(ss, ceSheet) {
+  return ss.getId() + ":" + ceSheet.getSheetId() + ":" + ceEffectiveLastRow_(ceSheet);
+}
+
+function ceInvalidateWeightsRowMap_() {
+  bisCeWeightsRowMap_.key = "";
+  bisCeWeightsRowMap_.specToWeights = null;
+  bisCeWeightsRowMap_.colA = null;
+}
+
+/** Nearest section header above row1 (1-based): normalized spec name. */
+function specForCERowFromColA_(colA, row1) {
+  var i = row1 - 1;
+  while (i >= CE_FIRST_DATA_ROW - 1 && i < colA.length) {
+    var val = String(colA[i][0]).trim();
+    if (val.indexOf("---") === 0) {
+      var parsed = specDisplayNameFromSectionHeader(colA[i][0]);
+      return parsed ? normalizeItemName(parsed) : null;
+    }
+    i--;
   }
   return null;
+}
+
+function ceEnsureWeightsSpecMap_(ss, ceSheet, colA) {
+  var celr = ceEffectiveLastRow_(ceSheet);
+  var key = ceWeightsMapKey_(ss, ceSheet);
+  var m = {};
+  var curSpec = null;
+  for (var ri = CE_FIRST_DATA_ROW - 1; ri < colA.length && ri < celr; ri++) {
+    var cell = String(colA[ri][0]).trim();
+    if (cell.indexOf("---") === 0) {
+      var ph = specDisplayNameFromSectionHeader(colA[ri][0]);
+      curSpec = ph ? normalizeItemName(ph) : null;
+      continue;
+    }
+    if (cell === CE_WEIGHT_ROW_LABEL && curSpec) {
+      m[curSpec] = ri + 1;
+    }
+  }
+  bisCeWeightsRowMap_.key = key;
+  bisCeWeightsRowMap_.specToWeights = m;
+  bisCeWeightsRowMap_.colA = colA;
+}
+
+/** Weights row for the CE section containing anyRow (one column A scan per ss+sheet+celr per execution). */
+function ceFindWeightsRowForSection_(ceSheet, anyRow) {
+  var ss = ceSheet.getParent();
+  var celr = ceEffectiveLastRow_(ceSheet);
+  if (anyRow > celr || anyRow < 1) return null;
+  var colA;
+  var key = ceWeightsMapKey_(ss, ceSheet);
+  if (
+    bisCeWeightsRowMap_.key === key &&
+    bisCeWeightsRowMap_.specToWeights != null &&
+    bisCeWeightsRowMap_.colA &&
+    bisCeWeightsRowMap_.colA.length === celr
+  ) {
+    colA = bisCeWeightsRowMap_.colA;
+  } else {
+    colA = ceSheet.getRange(1, CE_GEARTYPE, celr, 1).getValues();
+    ceEnsureWeightsSpecMap_(ss, ceSheet, colA);
+  }
+  var specHere = specForCERowFromColA_(colA, anyRow);
+  if (!specHere) return null;
+  var w = bisCeWeightsRowMap_.specToWeights[specHere];
+  return w != null ? w : null;
 }
 
 function ceForEachGearRowInSection_(ceSheet, weightsRow, fn) {
@@ -839,6 +878,7 @@ function ceCopyVisibleWeightsToStash_(ceSheet, wRow) {
 }
 
 function ceHandleWeightsEdit_(e, ceSheet, row, col) {
+  ceInvalidateWeightsRowMap_();
   if (col === CE_ITEMNAME) {
     var mode = normalizeItemName(e.range.getValue());
     if (mode === CE_WEIGHT_MODE_PAWN || mode === CE_WEIGHT_MODE_CUSTOM) {
@@ -880,8 +920,11 @@ function bisClearSheetDataCachesMenu_() {
   bisItemdbExecCache_.data = null;
   bisGemdbExecCache_.key = "";
   bisGemdbExecCache_.data = null;
+  bisItemdbNamesExecCache_.key = "";
+  bisItemdbNamesExecCache_.names = null;
   bisCeGearColExecCache_.key = "";
   bisCeGearColExecCache_.vals = null;
+  ceInvalidateWeightsRowMap_();
   try {
     SpreadsheetApp.getUi().alert(
       "Cleared ItemDB/GemDB caches (Document Cache keys + this execution). Large ItemDB may skip JSON cache; sheet reads always reflect edits. Smaller GemDB is usually cached until last row changes or TTL."
@@ -952,6 +995,22 @@ function itemdbReadAllStatRows_(ss) {
     } catch (ePut) {}
   }
   return data;
+}
+
+/** ItemDB name column only (A2:A{lr}); same-execution memo for membership checks. */
+function itemdbReadNameColumn_(ss) {
+  var db = ss.getSheetByName(ITEMDB_SHEET);
+  if (!db) return null;
+  var lr = db.getLastRow();
+  if (lr < 2) return null;
+  var execKey = ss.getId() + ":idbnames:" + lr;
+  if (bisItemdbNamesExecCache_.key === execKey && bisItemdbNamesExecCache_.names) {
+    return bisItemdbNamesExecCache_.names;
+  }
+  var names = db.getRange(2, 1, lr, 1).getValues();
+  bisItemdbNamesExecCache_.key = execKey;
+  bisItemdbNamesExecCache_.names = names;
+  return names;
 }
 
 /**
@@ -1126,28 +1185,36 @@ function plannerBaselineEquippedScore_(ss, ceSheet, spec, plannerGearType, eqN, 
  * Bulk-read CE column A once + ItemDB + GemDB; lazy weight vectors per spec; memo baselines + item scores.
  * Used only inside refreshComparisonRichTextInner_ to avoid thousands of sheet reads.
  * @param {?Array<Array<*>>} optCeGearColVals - if length matches ceEffectiveLastRow_(ceSheet), reuse (no sheet read).
+ * @param {?Array<Array<*>>} optItemdbData - when non-null, reuse instead of itemdbReadAllStatRows_.
+ * @param {?{rows:Array<Array<*>>, byCategory:Object, lr:number}} optGemData - when non-null, reuse instead of gemdbReadAllRows_.
  */
-function plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals) {
-  if (bisTimingSession_) bisTimingMark_("cmp_cache_start");
-  var itemdbData = itemdbReadAllStatRows_(ss);
-  if (bisTimingSession_) bisTimingMark_("cmp_cache_after_itemdb");
-  var gemData = gemdbReadAllRows_(ss);
-  if (bisTimingSession_) bisTimingMark_("cmp_cache_after_gemdb");
+function plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals, optItemdbData, optGemData) {
+  var itemdbData =
+    optItemdbData != null ? optItemdbData : itemdbReadAllStatRows_(ss);
+  var gemData = optGemData != null ? optGemData : gemdbReadAllRows_(ss);
   var celr = ceEffectiveLastRow_(ceSheet);
   var cacheKey = ss.getId() + ":" + ceSheet.getSheetId() + ":" + celr;
   var aCol;
-  if (optCeGearColVals != null && optCeGearColVals.length === celr) {
-    aCol = optCeGearColVals;
+  var colAFromSnap = ceGearColSnapshotRowsAtCelr_(optCeGearColVals, celr);
+  var colAFromExec = null;
+  if (
+    colAFromSnap == null &&
+    bisCeGearColExecCache_.key === cacheKey &&
+    bisCeGearColExecCache_.vals != null
+  ) {
+    colAFromExec = ceGearColSnapshotRowsAtCelr_(bisCeGearColExecCache_.vals, celr);
+  }
+  if (colAFromSnap != null) {
+    aCol = colAFromSnap;
     bisCeGearColExecCache_.key = cacheKey;
     bisCeGearColExecCache_.vals = aCol;
-  } else if (bisCeGearColExecCache_.key === cacheKey && bisCeGearColExecCache_.vals != null) {
-    aCol = bisCeGearColExecCache_.vals;
+  } else if (colAFromExec != null) {
+    aCol = colAFromExec;
   } else {
     aCol = celr >= 1 ? ceSheet.getRange(1, CE_GEARTYPE, celr, 1).getValues() : [];
     bisCeGearColExecCache_.key = cacheKey;
     bisCeGearColExecCache_.vals = aCol;
   }
-  if (bisTimingSession_) bisTimingMark_("cmp_cache_after_ceColA");
   var specToRow = {};
   var curSpec = null;
   for (var i = 0; i < aCol.length; i++) {
@@ -1160,7 +1227,6 @@ function plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals) {
     }
     if (a === CE_WEIGHT_ROW_LABEL && curSpec) specToRow[curSpec] = r;
   }
-  if (bisTimingSession_) bisTimingMark_("cmp_cache_after_specToRow");
   var weights = {
     specToRow: specToRow,
     wBySpec: {},
@@ -1499,7 +1565,17 @@ function flushPlannerGearScoreCells_(bpSheet, gearWrites) {
 }
 
 function ceItemNameInItemDb_(ss, itemName) {
-  return itemdbLookupStatsAndSockets_(ss, itemName) != null;
+  var want = normalizeItemName(itemName);
+  if (!want) return false;
+  var names = itemdbReadNameColumn_(ss);
+  if (!names) return false;
+  for (var ni = 0; ni < names.length; ni++) {
+    if (!itemsNameMatch_(names[ni][0], itemName)) continue;
+    var full = itemdbLookupStatsAndSockets_(ss, itemName);
+    if (full == null) return false;
+    return true;
+  }
+  return false;
 }
 
 function ceClearStatCellsToBlank_(ceSheet, row) {
@@ -1708,12 +1784,10 @@ function ceSetupManualGemSocketDropdowns_(ceSheet, row) {
  * Scrubs display zeros in stat columns on each run (onOpen + any edit that hits this path).
  */
 function ceRecalculateManualIdealGemsAndScore_(ceSheet, row, ss, wRow) {
-  if (bisTimingSession_) bisTimingMark_("ce_manualScore_enter");
   var itemChk = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
   if (itemChk && !ceItemNameInItemDb_(ss, itemChk)) {
     ceScrubStatRowDisplayZerosToBlank_(ceSheet, row);
   }
-  if (bisTimingSession_) bisTimingMark_("ce_manualScore_after_scrubCheck");
   var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
   var wVals = ceSheet.getRange(wRow, CE_STAT_FIRST_COL, 1, n).getValues()[0];
   if (ceManualRowIsTrinket_(ceSheet, row)) {
@@ -1724,12 +1798,10 @@ function ceRecalculateManualIdealGemsAndScore_(ceSheet, row, ss, wRow) {
       scoreT += (Number(sValsT[ti]) || 0) * (Number(wVals[ti]) || 0);
     }
     ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue(Math.round(scoreT * 100) / 100);
-    if (bisTimingSession_) bisTimingMark_("ce_manualScore_done_trinket");
     return;
   }
   var metaSockW = Number(ceSheet.getRange(wRow, CE_META_WEIGHT_COL).getValue()) || 0;
   var gemData = gemdbReadAllRows_(ss);
-  if (bisTimingSession_) bisTimingMark_("ce_manualScore_after_gemdb");
   var regLabel = String(ceSheet.getRange(row, CE_IDEAL_GEM_COL).getDisplayValue() || "");
   var metaLabel = String(ceSheet.getRange(row, CE_IDEAL_META_COL).getDisplayValue() || "");
   var T = ceParseLeadingIntFromSocketLabel_(regLabel);
@@ -1737,7 +1809,6 @@ function ceRecalculateManualIdealGemsAndScore_(ceSheet, row, ss, wRow) {
   if (m > 1) m = 1;
   var socks = { r: T, y: 0, b: 0, m: m };
   var plan = computeIdealGemPlan_(ss, wVals, metaSockW, socks, gemData);
-  if (bisTimingSession_) bisTimingMark_("ce_manualScore_after_idealPlan");
   var acc = aggregateGemStats_(plan.regStats, plan.T, plan.metaStats, plan.m);
   ceSheet.getRange(row, CE_TOTAL_GEM_STATS_COL).setValue(formatAggregatedGemStats_(acc));
   ceSheet.getRange(row, CE_TOTAL_GEM_STATS_COL).setBackground(T > 0 || m > 0 ? null : CE_GEM_LOCKED_BG);
@@ -1753,18 +1824,14 @@ function ceRecalculateManualIdealGemsAndScore_(ceSheet, row, ss, wRow) {
   }
   score += plan.gemScore;
   ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue(Math.round(score * 100) / 100);
-  if (bisTimingSession_) bisTimingMark_("ce_manualScore_done");
 }
 
 /** Updates ideal gem display, backgrounds, and Gear Score for one CE row. */
 function ceUpdateIdealGemCellsAndScore_(ceSheet, row) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  if (bisTimingSession_) bisTimingMark_("ce_score_enter");
   var wRow = ceFindWeightsRowForSection_(ceSheet, row);
-  if (bisTimingSession_) bisTimingMark_("ce_score_after_findWeights");
   if (!wRow) return;
   var item = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
-  if (bisTimingSession_) bisTimingMark_("ce_score_after_readItemCell");
   if (!item) {
     ceRemoveStatRowProtection_(ceSheet, row);
     ceClearGemCellValidations_(ceSheet, row);
@@ -1772,7 +1839,6 @@ function ceUpdateIdealGemCellsAndScore_(ceSheet, row) {
     ceSheet.getRange(row, CE_IDEAL_GEM_COL, 1, CE_TOTAL_GEM_STATS_COL - CE_IDEAL_GEM_COL + 1).setValues([["", "", ""]]);
     ceSheet.getRange(row, CE_IDEAL_GEM_COL, 1, CE_TOTAL_GEM_STATS_COL - CE_IDEAL_GEM_COL + 1).setBackground(CE_GEM_LOCKED_BG);
     ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue("");
-    if (bisTimingSession_) bisTimingMark_("ce_score_done_emptyItem");
     return;
   }
   var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
@@ -1780,18 +1846,14 @@ function ceUpdateIdealGemCellsAndScore_(ceSheet, row) {
   var wBand = ceSheet.getRange(wRow, CE_STAT_FIRST_COL, 1, wBandW).getValues()[0];
   var wVals = wBand.slice(0, n);
   var metaSockW = Number(wBand[wBandW - 1]) || 0;
-  if (bisTimingSession_) bisTimingMark_("ce_score_after_weightsBand");
   var gemData = gemdbReadAllRows_(ss);
-  if (bisTimingSession_) bisTimingMark_("ce_score_after_gemdbRead");
   var itemRowDb = itemdbLookupStatsAndSockets_(ss, item);
-  if (bisTimingSession_) bisTimingMark_("ce_score_after_itemdbLookupRow");
   if (itemRowDb) {
     ceClearGemCellValidations_(ceSheet, row);
     var socks = itemRowDb.socks;
     var Tdb = socks.r + socks.y + socks.b;
     var mdb = socks.m || 0;
     var planDb = computeIdealGemPlan_(ss, wVals, metaSockW, socks, gemData);
-    if (bisTimingSession_) bisTimingMark_("ce_score_after_idealGemPlan");
     var accDb = aggregateGemStats_(planDb.regStats, planDb.T, planDb.metaStats, planDb.m);
     var gemRow = [
       Tdb > 0 ? planDb.regLabel || "—" : "",
@@ -1815,13 +1877,10 @@ function ceUpdateIdealGemCellsAndScore_(ceSheet, row) {
     }
     scoreDb += planDb.gemScore;
     ceSheet.getRange(row, CE_GEAR_SCORE_COL).setValue(Math.round(scoreDb * 100) / 100);
-    if (bisTimingSession_) bisTimingMark_("ce_score_done_itemdbPath");
     return;
   }
-  if (bisTimingSession_) bisTimingMark_("ce_score_manualBranch");
   ceSetupManualGemSocketDropdowns_(ceSheet, row);
   ceRecalculateManualIdealGemsAndScore_(ceSheet, row, ss, wRow);
-  if (bisTimingSession_) bisTimingMark_("ce_score_done_afterManual");
 }
 
 function recalculateGearScoreForRow_(ceSheet, row) {
@@ -1993,13 +2052,10 @@ function refreshCEComparisonForRow_(ceSheet, bpSheet, row) {
   var ceSlotLabel = normalizeItemName(ceSheet.getRange(row, CE_GEARTYPE).getValue());
   if (!ceSlotLabel || ceSlotLabel.indexOf("---") === 0 || ceSlotLabel === CE_WEIGHT_ROW_LABEL) return;
   var plannerGear = plannerGearAndInterestFromCE_(ceSlotLabel).plannerGear;
-  if (bisTimingSession_) bisTimingMark_("ce_cmpRefresh_beforeFlush");
   SpreadsheetApp.flush();
   Utilities.sleep(EDIT_RECALC_WAIT_MS);
-  if (bisTimingSession_) bisTimingMark_("ce_cmpRefresh_afterSleep");
   // Must pass gear type: spec-only refresh walks every row for that spec (can be 10k+ → minutes on onEdit).
-  refreshComparisonRichText(bpSheet, spec, plannerGear, null, null, null);
-  if (bisTimingSession_) bisTimingMark_("ce_cmpRefresh_done");
+  refreshComparisonRichText(bpSheet, spec, plannerGear, null, null, null, null, null);
 }
 
 function handleCurrentEquipEdit(e, ceSheet) {
@@ -2051,36 +2107,26 @@ function handleCurrentEquipEdit(e, ceSheet) {
   var newItemName = normalizeItemName(e.range.getValue());
   var oldItemName = normalizeItemName(e.oldValue);
 
-  var ceOwnTiming = BIS_PIPELINE_TIMING && !bisTimingSession_;
-  if (ceOwnTiming) bisTimingReset_(ss);
-  else if (bisTimingSession_) bisTimingMark_("ce_nested_item_column_B");
-
-  try {
-    if (!newItemName) {
-      ceRemoveStatRowProtection_(ceSheet, row);
-      ceClearGemCellValidations_(ceSheet, row);
-      ceRestoreStatLookupFormulasForRow_(ceSheet, row, ss);
-      recalculateGearScoreForRow_(ceSheet, row);
-      SpreadsheetApp.flush();
-    } else {
-      ceRefreshStatsAndGearScoreForRow_(ceSheet, row, oldItemName, newItemName, ss);
-    }
-    if (ceOwnTiming) bisTimingMark_("ce_after_statsAndScore");
-
-    if (bpSheet) {
-      if (oldItemName) {
-        clearInterestForItem(bpSheet, spec, gearType, oldItemName);
-      }
-      if (newItemName) {
-        setInterestForItem(bpSheet, spec, gearType, newItemName);
-      }
-    }
-    if (ceOwnTiming) bisTimingMark_("ce_after_plannerInterestSync");
-
-    refreshCEComparisonForRow_(ceSheet, bpSheet, row);
-  } finally {
-    if (ceOwnTiming) bisTimingFlush_();
+  if (!newItemName) {
+    ceRemoveStatRowProtection_(ceSheet, row);
+    ceClearGemCellValidations_(ceSheet, row);
+    ceRestoreStatLookupFormulasForRow_(ceSheet, row, ss);
+    recalculateGearScoreForRow_(ceSheet, row);
+    SpreadsheetApp.flush();
+  } else {
+    ceRefreshStatsAndGearScoreForRow_(ceSheet, row, oldItemName, newItemName, ss);
   }
+
+  if (bpSheet) {
+    if (oldItemName) {
+      clearInterestForItem(bpSheet, spec, gearType, oldItemName);
+    }
+    if (newItemName) {
+      setInterestForItem(bpSheet, spec, gearType, newItemName);
+    }
+  }
+
+  refreshCEComparisonForRow_(ceSheet, bpSheet, row);
 }
 
 function findSpecForCERow(ceSheet, targetRow) {
@@ -2106,37 +2152,24 @@ function findSpecForCERow(ceSheet, targetRow) {
 function ceRefreshStatsAndGearScoreForRow_(ceSheet, row, oldItemName, newItemName, ss) {
   var newN = normalizeItemName(newItemName);
   if (!newN) return;
-  if (bisTimingSession_) bisTimingMark_("ce_refresh_enter");
   var oldN = normalizeItemName(oldItemName);
   var protCache = ceSheet.getProtections(SpreadsheetApp.ProtectionType.RANGE);
-  if (bisTimingSession_) bisTimingMark_("ce_after_getProtections");
   var newInDb = ceItemNameInItemDb_(ss, newN);
-  if (bisTimingSession_) bisTimingMark_("ce_after_itemDbMembership");
   if (newInDb) {
-    if (bisTimingSession_) bisTimingMark_("ce_before_applyItemDbStats");
     ceApplyItemDbStatsToRow_(ceSheet, row, ss, newN);
-    if (bisTimingSession_) bisTimingMark_("ce_after_applyItemDbStats");
-    if (bisTimingSession_) bisTimingMark_("ce_before_protectStatRow");
     if (!ceStatRowHasOurProtection_(ceSheet, row, protCache)) {
       ceProtectStatRow_(ceSheet, row, protCache);
       protCache = ceSheet.getProtections(SpreadsheetApp.ProtectionType.RANGE);
     }
-    if (bisTimingSession_) bisTimingMark_("ce_after_protectStatRow");
     ceClearGemCellValidations_(ceSheet, row);
-    if (bisTimingSession_) bisTimingMark_("ce_after_clearGemValidations");
   } else {
-    if (bisTimingSession_) bisTimingMark_("ce_before_removeProtectionManual");
     ceRemoveStatRowProtection_(ceSheet, row, protCache);
     if (oldN && ceItemNameInItemDb_(ss, oldN)) {
       ceClearStatCellsToBlank_(ceSheet, row);
     }
     ceSetupManualGemSocketDropdowns_(ceSheet, row);
-    if (bisTimingSession_) bisTimingMark_("ce_after_manualSetup");
   }
-  if (bisTimingSession_) bisTimingMark_("ce_before_recalculateGearScore");
   recalculateGearScoreForRow_(ceSheet, row);
-  if (bisTimingSession_) bisTimingMark_("ce_after_recalculateGearScore");
-  if (bisTimingSession_) bisTimingMark_("ce_rowStatsApplied");
 }
 
 /**
@@ -2197,6 +2230,45 @@ function findCERow(ceSheet, spec, gearType, gearColValuesOpt) {
     }
   }
   return null;
+}
+
+/** In-memory CE column A snapshot; same matching rules as findCERow. */
+function findCERowInSnapshot_(colA, spec, gearType) {
+  if (!colA || colA.length === 0) return null;
+  var specWant = normalizeItemName(spec);
+  var gearWant = normalizeItemName(gearType);
+  if (!gearWant) return null;
+  var curSpec = null;
+  for (var i = 0; i < colA.length; i++) {
+    var val = String(colA[i][0]);
+    if (val.indexOf("---") === 0) {
+      var parsedHdr = specDisplayNameFromSectionHeader(val);
+      curSpec = parsedHdr ? normalizeItemName(parsedHdr) : null;
+      continue;
+    }
+    if (curSpec && specWant && curSpec === specWant && normalizeItemName(val) === gearWant) {
+      return i + 1;
+    }
+  }
+  return null;
+}
+
+/** One A+B bulk read for equip resolution (full-sheet comparison). */
+function plannerBuildCeEquipSnapshot_(ceSheet, ceGearColVals) {
+  if (!ceSheet) {
+    return { colA: [], colB: [], celr: 0 };
+  }
+  var celr = ceEffectiveLastRow_(ceSheet);
+  if (celr < 1) {
+    return { colA: [], colB: [], celr: 0 };
+  }
+  var colAFromSnap = ceGearColSnapshotRowsAtCelr_(ceGearColVals, celr);
+  var colA =
+    colAFromSnap != null
+      ? colAFromSnap
+      : ceSheet.getRange(1, CE_GEARTYPE, celr, 1).getValues();
+  var colB = ceSheet.getRange(1, CE_ITEMNAME, celr, 1).getValues();
+  return { colA: colA, colB: colB, celr: celr };
 }
 
 /** @param {string} ceGearLabel - Current Equipment column A (e.g. Ring 1, Head). */
@@ -2421,12 +2493,16 @@ function plannerWriteCmpRawForComparisonRefresh_(
   indices,
   blockDisplay,
   rowNK,
-  offNInBlock
+  offNInBlock,
+  optItemdbData
 ) {
   var ss = bpSheet.getParent();
-  if (bisTimingSession_) bisTimingMark_("cmp_cmpRaw_before_itemdb");
-  var data = itemdbReadAllStatRows_(ss);
-  if (bisTimingSession_) bisTimingMark_("cmp_cmpRaw_after_itemdb");
+  var data;
+  if (optItemdbData != null) {
+    data = optItemdbData;
+  } else {
+    data = itemdbReadAllStatRows_(ss);
+  }
   if (!data || data.length === 0) return;
   var nStat = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
   if (BIS_STAT_LABELS.length !== nStat) return;
@@ -2457,7 +2533,6 @@ function plannerWriteCmpRawForComparisonRefresh_(
       rowNK[i].d = s;
     }
   }
-  if (bisTimingSession_) bisTimingMark_("cmp_cmpRaw_after_stringLoop");
 }
 
 // ============================================================
@@ -2590,36 +2665,48 @@ function bisIndicesToRuns_(indices) {
 
 /**
  * Equipped item name(s) from Current Equipment for this planner row (matches former N/O formulas).
+ * @param {?{colA:Array<Array<*>>, colB:Array<Array<*>>, celr:number}} optEquipSnap - from plannerBuildCeEquipSnapshot_; avoids per-row CE reads.
  */
-function plannerResolveEquippedNamesForPlannerRow_(ceSheet, specRaw, gearTypeRaw, ceGearColVals) {
+function plannerResolveEquippedNamesForPlannerRow_(ceSheet, specRaw, gearTypeRaw, ceGearColVals, optEquipSnap) {
   if (!ceSheet) return { e1: "", e2: "" };
   var sp = normalizeItemName(specRaw);
   var g = normalizeItemName(gearTypeRaw);
   if (!sp || !g) return { e1: "", e2: "" };
+  var snap = optEquipSnap;
+  var colA = snap ? snap.colA : ceGearColVals;
+  var colB = snap ? snap.colB : null;
+  function nameAtRow(r) {
+    if (colB && r >= 1 && r <= colB.length) {
+      return normalizeItemName(colB[r - 1][0]);
+    }
+    return normalizeItemName(ceSheet.getRange(r, CE_ITEMNAME).getValue());
+  }
   if (g === "Ring" || g === "Trinket") {
     var s1 = g === "Ring" ? "Ring 1" : "Trinket 1";
     var s2 = g === "Ring" ? "Ring 2" : "Trinket 2";
-    var r1 = findCERow(ceSheet, sp, s1, ceGearColVals);
-    var r2 = findCERow(ceSheet, sp, s2, ceGearColVals);
-    var e1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
-    var e2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+    var r1 = snap ? findCERowInSnapshot_(colA, sp, s1) : findCERow(ceSheet, sp, s1, ceGearColVals);
+    var r2 = snap ? findCERowInSnapshot_(colA, sp, s2) : findCERow(ceSheet, sp, s2, ceGearColVals);
+    var e1 = r1 ? nameAtRow(r1) : "";
+    var e2 = r2 ? nameAtRow(r2) : "";
     return { e1: e1, e2: e2 };
   }
-  var r0 = findCERow(ceSheet, sp, g, ceGearColVals);
-  var e0 = r0 ? normalizeItemName(ceSheet.getRange(r0, CE_ITEMNAME).getValue()) : "";
+  var r0 = snap ? findCERowInSnapshot_(colA, sp, g) : findCERow(ceSheet, sp, g, ceGearColVals);
+  var e0 = r0 ? nameAtRow(r0) : "";
   return { e1: e0, e2: "" };
 }
 
 /**
  * Full-sheet refresh: logical B–P block from A–D + F–I bands + CE-resolved equip (no N–O on sheet).
+ * Equip path uses spec+gear scoped refreshComparisonRichText (not full-sheet); onOpen/menu use this for all rows.
  */
 function plannerAssembleFullSheetBlockFromBandsAndCE_(partAD, partFI, ceSheet, ceGearColVals) {
   var n = partAD.length;
+  var snap = plannerBuildCeEquipSnapshot_(ceSheet, ceGearColVals);
   var blockDisplay = new Array(n);
   for (var ri = 0; ri < n; ri++) {
     var ad = partAD[ri];
     var fi = partFI[ri];
-    var eqPair = plannerResolveEquippedNamesForPlannerRow_(ceSheet, ad[1], ad[2], ceGearColVals);
+    var eqPair = plannerResolveEquippedNamesForPlannerRow_(ceSheet, ad[1], ad[2], ceGearColVals, snap);
     blockDisplay[ri] = [
       ad[1],
       ad[2],
@@ -2670,6 +2757,7 @@ function plannerCmpRawRefreshRowFingerprint_(dispStr, heroicDarkRow, intN, equip
  * @param {?{captureFullSheetBands:?Object, reuseFullSheetBands:?Object}} optFullSheetIo_ - force-refresh pass 2 only:
  *   pass 1 fills captureFullSheetBands with partAD/partFI; pass 2 reuses them and refreshes CE-derived equip + K formulas.
  * @param {?Array<Array<*>>} optCeGearColVals - CE column A getValues (rows 1..effective last row); skips duplicate read in cache build.
+ * @param {?number} optPlannerLastRow - when >= BIS_FIRST_DATA_ROW, skip getLastRow (equip path passes fresh lastRow).
  */
 function refreshComparisonRichText(
   bpSheet,
@@ -2678,17 +2766,21 @@ function refreshComparisonRichText(
   plannerABCReuse,
   optSharedPlannerCaches,
   optFullSheetIo_,
-  optCeGearColVals
+  optCeGearColVals,
+  optPlannerLastRow
 ) {
-  var lastRow = bpSheet.getLastRow();
+  var lastRow;
+  if (optPlannerLastRow != null && Number(optPlannerLastRow) >= BIS_FIRST_DATA_ROW) {
+    lastRow = Number(optPlannerLastRow);
+  } else {
+    lastRow = bpSheet.getLastRow();
+  }
   if (lastRow < BIS_FIRST_DATA_ROW) return;
 
   if (bisRefreshReentryDepth_ > 0) {
-    if (bisTimingSession_) bisTimingMark_("cmp_skipped_nestedReentry");
     return;
   }
   bisRefreshReentryDepth_++;
-  if (bisTimingSession_) bisTimingMark_("cmp_outer_enter");
   try {
     refreshComparisonRichTextInner_(
       bpSheet,
@@ -2715,7 +2807,6 @@ function refreshComparisonRichTextInner_(
   optFullSheetIo_,
   optCeGearColVals
 ) {
-  if (bisTimingSession_) bisTimingMark_("cmp_inner_enter");
   var specFilterNorm =
     specFilter != null && String(specFilter).replace(/^\s+|\s+$/g, "") !== ""
       ? normalizeItemName(specFilter)
@@ -2730,12 +2821,24 @@ function refreshComparisonRichTextInner_(
   var ceGearColInner = null;
   if (ceSheetInner) {
     var celrInner = ceEffectiveLastRow_(ceSheetInner);
-    if (optCeGearColVals != null && optCeGearColVals.length === celrInner) {
-      ceGearColInner = optCeGearColVals;
+    var innerSnap = ceGearColSnapshotRowsAtCelr_(optCeGearColVals, celrInner);
+    if (innerSnap != null) {
+      ceGearColInner = innerSnap;
     } else if (celrInner >= 1) {
       ceGearColInner = ceSheetInner.getRange(1, CE_GEARTYPE, celrInner, 1).getValues();
     }
+    // After a cold flush, getLastRow() can tick up on the next read; avoid a too-short matrix for rowNK/snap.
+    var celrPost = ceEffectiveLastRow_(ceSheetInner);
+    if (
+      celrPost >= 1 &&
+      (ceGearColInner == null || ceGearColInner.length < celrPost)
+    ) {
+      ceGearColInner = ceSheetInner.getRange(1, CE_GEARTYPE, celrPost, 1).getValues();
+    }
   }
+  var ceEquipSnap = ceSheetInner
+    ? plannerBuildCeEquipSnapshot_(ceSheetInner, ceGearColInner)
+    : null;
 
   // Sheet.getRange(row, col, numRows, numColumns) — 3rd/4th are counts, not end row/col.
   var cmpNumRows = Math.max(0, lastRow - BIS_FIRST_DATA_ROW + 1);
@@ -2815,7 +2918,6 @@ function refreshComparisonRichTextInner_(
       indices.push(bi);
     }
     if (indices.length === 0) {
-      if (bisTimingSession_) bisTimingMark_("cmp_abort_emptyIndices_specGear");
       return;
     }
     interestAll = new Array(cmpNumRows);
@@ -2845,7 +2947,8 @@ function refreshComparisonRichTextInner_(
           ceSheetInner,
           specG[jg][0],
           gearG[jg][0],
-          ceGearColInner
+          ceGearColInner,
+          ceEquipSnap
         );
         rowNK[sg + jg] = {
           d: "",
@@ -2865,7 +2968,6 @@ function refreshComparisonRichTextInner_(
       indices.push(ci);
     }
     if (indices.length === 0) {
-      if (bisTimingSession_) bisTimingMark_("cmp_abort_emptyIndices_specOnly");
       return;
     }
     interestAll = new Array(cmpNumRows);
@@ -2895,7 +2997,8 @@ function refreshComparisonRichTextInner_(
           ceSheetInner,
           specS[js][0],
           gearS[js][0],
-          ceGearColInner
+          ceGearColInner,
+          ceEquipSnap
         );
         rowNK[ix0 + js] = {
           d: "",
@@ -2910,17 +3013,23 @@ function refreshComparisonRichTextInner_(
     }
   }
 
-  if (bisTimingSession_) bisTimingMark_("cmp_after_indicesAndBlockPrep");
+  var threadItemdb = null;
+  var threadGem = null;
   if (indices.length > 0) {
-    if (bisTimingSession_) bisTimingMark_("cmp_beforeCmpRawWrite");
-    plannerWriteCmpRawForComparisonRefresh_(bpSheet, indices, blockDisplay, rowNK, offNInBlock);
-    if (bisTimingSession_) bisTimingMark_("cmp_afterCmpRawWrite");
+    threadItemdb = itemdbReadAllStatRows_(ssInner);
+    plannerWriteCmpRawForComparisonRefresh_(
+      bpSheet,
+      indices,
+      blockDisplay,
+      rowNK,
+      offNInBlock,
+      threadItemdb
+    );
+    threadGem = gemdbReadAllRows_(ssInner);
   }
 
-  if (bisTimingSession_) bisTimingMark_("cmp_indicesReady");
 
   if (blockDisplay == null && indices.length > 0) {
-    if (bisTimingSession_) bisTimingMark_("cmp_before_metaFiBands");
     var metaW = GG_DIFFICULTY - GG_ACQ + 1;
     var runsFi = bisIndicesToRuns_(indices);
     metaAcqDungeonDiff = {};
@@ -2934,7 +3043,6 @@ function refreshComparisonRichTextInner_(
         metaAcqDungeonDiff[sf + jf] = fiRows[jf];
       }
     }
-    if (bisTimingSession_) bisTimingMark_("cmp_after_metaFiBands");
   }
 
   var writes = [];
@@ -2946,12 +3054,19 @@ function refreshComparisonRichTextInner_(
     if (optSharedPlannerCaches) {
       plannerCaches = optSharedPlannerCaches;
     } else {
-      plannerCaches = plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals);
+      // Use ceGearColInner (resolved above), not optCeGearColVals: after CE writes in the same run,
+      // effective last row can grow so the caller snapshot is too short — inner re-reads col A, but
+      // passing the stale opt here forced a second full read in plannerRefreshCachesBuild_.
+      plannerCaches = plannerRefreshCachesBuild_(
+        ss,
+        ceSheet,
+        ceGearColInner,
+        threadItemdb,
+        threadGem
+      );
     }
-    if (bisTimingSession_) bisTimingMark_("cmp_cachesReady");
   }
 
-  if (bisTimingSession_) bisTimingMark_("cmp_beforeMainLoop");
   for (var ki = 0; ki < indices.length; ki++) {
     var i = indices[ki];
     var r = i + BIS_FIRST_DATA_ROW;
@@ -3095,16 +3210,10 @@ function refreshComparisonRichTextInner_(
     }
   }
 
-  if (bisTimingSession_) bisTimingMark_("cmp_afterMainLoop");
 
-  if (bisTimingSession_) bisTimingMark_("cmp_before_flushK");
   flushComparisonWrites_(bpSheet, writes, cmpRawLetter);
-  if (bisTimingSession_) bisTimingMark_("cmp_after_flushK");
   flushPlannerGearScoreCells_(bpSheet, []);
-  if (bisTimingSession_) bisTimingMark_("cmp_before_flushUpgrade");
   flushUpgradePctCells_(bpSheet, upgradeWrites);
-  if (bisTimingSession_) bisTimingMark_("cmp_after_flushUpgrade");
-  if (bisTimingSession_) bisTimingMark_("cmp_afterBatchWrites");
 }
 
 /**

@@ -110,6 +110,10 @@ Tracks what you're currently wearing, with separate sections for each spec (e.g.
 - **Python 3.6+**
 - **openpyxl** (`pip install openpyxl`)
 
+### Apps Script caches
+
+**BIS Planner tools → Clear ItemDB/GemDB sheet cache** also clears the in-memory ItemDB name-column memo and the Current Equipment weights-row map.
+
 ### Folder Structure
 
 ```
