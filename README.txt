@@ -33,13 +33,15 @@ The spreadsheet is now fully interactive. When you share it (File > Share, or Fi
 
 ### Spreadsheet Tabs
 
-Each generated `.xlsx` contains three sheets:
+Each generated `.xlsx` includes these tabs (in order):
 
 | Tab | Description |
 |---|---|
-| **Current Equipment** | Enter/track your currently equipped items per spec. Always the first tab. |
+| **General Info** | Static overview of how the workbook and Apps Script behave (first tab). |
+| **Current Equipment** | Enter/track your currently equipped items per spec. |
 | **BIS Planner** | All BIS and pre-BIS items for every spec on a single sheet, with stat comparison. |
-| **ItemDB** (hidden) | 3,600+ TBC item stat database used by lookups and dropdowns. |
+| **ItemDB** (hidden) | TBC item stat database used by lookups and dropdowns. |
+| **GemDB** (hidden) | Gem stats JSON for ideal gem scoring in Apps Script. |
 
 ### BIS Planner Sheet
 
@@ -112,7 +114,7 @@ Tracks what you're currently wearing, with separate sections for each spec (e.g.
 
 ### Apps Script caches
 
-**BIS Planner tools → Clear ItemDB/GemDB sheet cache** also clears the in-memory ItemDB name-column memo and the Current Equipment weights-row map.
+Document Cache keys are per spreadsheet; execution-scoped memos (ItemDB name column, Current Equipment weights-row map) reset on the next Apps Script run.
 
 ### Folder Structure
 

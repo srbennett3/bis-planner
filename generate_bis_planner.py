@@ -1607,6 +1607,222 @@ def refresh_pawn_scales_json():
         return False
 
 
+def _populate_general_info_sheet(
+    ws_gi,
+    get_column_letter,
+    section_fill,
+    section_font,
+    intro_title_font,
+    intro_body_font,
+    subsection_font,
+    wrap_align,
+):
+    """
+    First-tab documentation for Google Sheets (Apps Script). Single scrollable column group A:F.
+    """
+    from openpyxl.styles import Alignment
+
+    last_col = 6
+    last_letter = get_column_letter(last_col)
+    top_align = Alignment(wrap_text=True, vertical="top", horizontal="left")
+    section_align = Alignment(wrap_text=True, vertical="center", horizontal="left")
+
+    for ci in range(1, last_col + 1):
+        ws_gi.column_dimensions[get_column_letter(ci)].width = 14
+
+    def span(r1):
+        return "A%d:%s%d" % (r1, last_letter, r1)
+
+    r = 1
+
+    def row_section(title):
+        nonlocal r
+        ws_gi.merge_cells(span(r))
+        c = ws_gi.cell(row=r, column=1, value=title)
+        c.font = section_font
+        c.fill = section_fill
+        c.alignment = section_align
+        r += 1
+
+    def row_subheading(text):
+        nonlocal r
+        ws_gi.merge_cells(span(r))
+        c = ws_gi.cell(row=r, column=1, value=text)
+        c.font = subsection_font
+        c.alignment = top_align
+        r += 1
+
+    def row_body(text):
+        nonlocal r
+        ws_gi.merge_cells(span(r))
+        c = ws_gi.cell(row=r, column=1, value=text)
+        c.font = intro_body_font
+        c.alignment = top_align
+        r += 1
+
+    def row_blank():
+        nonlocal r
+        r += 1
+
+    ws_gi.merge_cells(span(r))
+    t = ws_gi.cell(row=r, column=1, value="BIS Planner")
+    t.font = intro_title_font
+    t.alignment = Alignment(wrap_text=False, vertical="center", horizontal="left")
+    r += 1
+    row_blank()
+
+    row_body(
+        "NOTE: This relies heavily on an Apps Script for calculations and will not work outside of Google Sheets."
+    )
+    row_body(
+        "NOTE: There are a lot of background calculations going on. It may take around 5–7 seconds "
+        "for the comparison percentages to update."
+    )
+    row_blank()
+
+    row_section("Current Equipment Tab")
+
+    row_subheading("General")
+    row_body(
+        "This tab stores all items currently equipped for each spec."
+    )
+    row_body(
+        'To equip an item, select a cell in the "Item Name" column and begin typing. A dropdown list '
+        "will appear with items of the same type."
+    )
+    row_body(
+        "Select an item and the stats will autofill and are not editable."
+    )
+    row_body(
+        "If gear is equipped here that is in the BIS Planner tab, it will automatically show as equipped "
+        "in that tab and comparison values will automatically update for items of the same spec and gear type."
+    )
+    row_blank()
+
+    row_subheading("Sockets")
+    row_body(
+        'Items with gem sockets will automatically assume the "best" (highest contribution to gear score) '
+        "gems are applied for the spec."
+    )
+    row_body(
+        "This makes an ideal gear score that is useful when comparing to other items with or without sockets."
+    )
+    row_body(
+        "The assumed gem stats can be found in columns C, D, and E (collapsible). These cells will remain "
+        "grey until an item with at least one socket is equipped."
+    )
+    row_blank()
+
+    row_subheading("Custom Items")
+    row_body(
+        "Items in the BIS Planner database are limited to Loon's pool. If an item equipped is not on the "
+        "list, type a custom name and the stats will be editable for that row."
+    )
+    row_body(
+        "Custom items will have the option to define how many normal and meta sockets they have, and gear "
+        "score will assume best gems are applied."
+    )
+    row_blank()
+
+    row_subheading("Weights")
+    row_body(
+        "Included for each spec is the default stat weights from Pawn, found in the last row of each spec."
+    )
+    row_body(
+        'The weights are editable. If a change is made, the title "Pawn Defaults" will change to Custom. '
+        "The default title can be reselected to reload the default weights."
+    )
+    row_body(
+        "Gear Score is used to compare items, and the % Upgrade (shown in the BIS Planner tab) should match "
+        "Pawn. It equals the sum of all stats multiplied by their weights plus socket stats."
+    )
+    row_blank()
+    row_blank()
+
+    row_section("BIS Planner Tab")
+
+    row_subheading("General")
+    row_body(
+        "This tab is a filterable list of all Loon pre-BIS/BIS items for this class."
+    )
+    row_body(
+        "The only portions of this sheet intended to be edited are column A (Interest) and column M "
+        "(notes, if desired)."
+    )
+    row_body(
+        "By default, the notes are mainly used to define which dungeon boss drops a given item, or which "
+        "faction or honor level is required."
+    )
+    row_body(
+        "For each spec, only one piece of gear may be equipped at a time per slot, except two at a time "
+        "for rings and trinkets."
+    )
+    row_blank()
+
+    row_subheading("Interest")
+    row_body(
+        "The Interest column can be used to equip items or classify them by interest level (useful for filtering)."
+    )
+    row_body(
+        'If "Equipped" is selected, the corresponding row in the Current Equipment tab will automatically '
+        "update, along with all comparisons for the same spec and gear type."
+    )
+    row_body(
+        'If "----" is selected, the cell will shortly become blank.'
+    )
+    row_blank()
+
+    row_subheading("Filtering")
+    row_body(
+        "Any column may be filtered and/or sorted using native Google Sheets tools. Multiple filters can be "
+        "applied, but only one sort order at a time."
+    )
+    row_body(
+        'To filter or sort, click the upside-down triangle to the right of a column title; a dropdown menu '
+        "will appear."
+    )
+    row_body(
+        "Filter by condition allows text-based filters (contains, does not contain, etc.)."
+    )
+    row_body(
+        "Filter by values lists all distinct entries in the column; uncheck values to hide them."
+    )
+    row_body(
+        '"Clear" unchecks/hides all values in the column (so you can then check only what you want to show). '
+        '"Select all" checks/shows all values (effectively removing the filter).'
+    )
+    row_body(
+        "Example: Filter Spec to only desired specs; filter Acquisition Type to dungeon drops or quests; "
+        "filter Difficulty to Heroic or Normal (leave blank checked to include non-dungeon items); or filter "
+        "Dungeons to specific dungeons."
+    )
+    row_body(
+        "Troubleshoot: If no values are shown, click the Filter button twice to reset the filters (located on "
+        "the right side of the Google Sheets toolbar)."
+    )
+    row_blank()
+
+    row_subheading("Comparison columns (Stats, Stat Comparison, and % Upgrade)")
+    row_body(
+        "The Stats column shows the stats and special attributes of the item for that row."
+    )
+    row_body(
+        "The Stat Comparison column shows the stat differential between the row item and the currently "
+        "equipped item. Positive means the row item's stat is larger."
+    )
+    row_body(
+        "For rings and trinkets, differentials and special attributes are shown for both equipped slots."
+    )
+    row_body(
+        "% Upgrade compares gear scores using: 100 × (item gear score − equipped gear score) ÷ equipped gear score. "
+        "For rings and trinkets, both slots are shown on separate lines in the % Upgrade column."
+    )
+    row_body(
+        "If an equipped item with no gear score (i.e. trinket) is compared with an item that has a gear score, "
+        "the default % Upgrade is 100%."
+    )
+
+
 def _get_row_color(row):
     acq = row["Acquisition Type"]
     dungeon = row.get("Dungeon", "")
@@ -1682,14 +1898,26 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         bottom=Side(style="thin", color="BDBDBD"),
     )
     wrap_align = Alignment(wrap_text=True, vertical="top")
-    intro_title_align = Alignment(wrap_text=False, vertical="center", horizontal="left")
     intro_title_font = Font(bold=True, size=14, color="212121")
     intro_body_font = Font(size=10, color="424242")
-    intro_label_font = Font(bold=True, size=10, color="424242")
-    intro_label_align = Alignment(wrap_text=False, vertical="center", horizontal="left")
+    subsection_font = Font(bold=True, size=11, color="37474F")
 
     wb = Workbook()
     wb.remove(wb.active)
+
+    # -- General Info (first tab; documentation only) --
+    ws_gi = wb.create_sheet(title="General Info", index=0)
+    ws_gi.sheet_properties.tabColor = "004D40"
+    _populate_general_info_sheet(
+        ws_gi,
+        get_column_letter,
+        section_fill,
+        section_font,
+        intro_title_font,
+        intro_body_font,
+        subsection_font,
+        wrap_align,
+    )
 
     # -- ItemDB sheet (hidden) --
     ws_db = wb.create_sheet(title="ItemDB")
@@ -1788,52 +2016,14 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     itemdb_last_row = max(2, db_row - 1)
     itemdb_range_bounded = f"ItemDB!A$2:{db_end_col_letter}${itemdb_last_row}"
 
-    # -- Current Equipment sheet (first tab) --
+    # -- Current Equipment sheet --
     ws_ce = wb.create_sheet(title="Current Equipment")
     ws_ce.sheet_properties.tabColor = "455A64"
 
     ce_headers = ["Gear Type", "Item Name"] + CE_GEM_HEADERS + STAT_COLUMNS + ["Gear Score"]
-    ce_ncol = len(ce_headers)
-    ce_visible_last = get_column_letter(CE_GEAR_SCORE_COL)
-    ce_hidden_last = get_column_letter(CE_META_WEIGHT_COL)
 
-    ce_intro_para1 = (
-        "Add your current equipment to see comparisons by typing in item name. "
-        "Note: Stats and comparisons will take a few seconds to update."
-    )
-    ce_intro_para2 = (
-        'If an item in the BIS Planner sheet is set to "Equipped", "Equipped 1", or "Equipped 2" '
-        "(rings/trinkets use two slots: Ring 1/2, Trinket 1/2), it will update here. "
-        "If your item is not on the list, you can manually enter stats (integers only). "
-        "Pawn stat weights for each spec are on the Weights row below Ranged/Relic (not a separate tab). "
-        "Ideal Gem / Meta / Total Gem Stats are filled by Apps Script from GemDB and your weights "
-        "(best weighted gem per socket type, like Pawn)."
-    )
-    # Rows 1–2: title A1:B2; C1:C2 "Instructions:"; D row1 / D row2 = one paragraph each (no vertical merge of body)
-    CE_HEADER_ROW = 3
-    ce_label_col = 3
-    ce_text_start_col = 4
-    ce_text_start_letter = get_column_letter(ce_text_start_col)
-
-    ws_ce.merge_cells("A1:B2")
-    ws_ce.cell(row=1, column=1, value="Current Equipment")
-    ws_ce.cell(row=1, column=1).font = intro_title_font
-    ws_ce.cell(row=1, column=1).alignment = intro_title_align
-
-    ws_ce.merge_cells(f"{get_column_letter(ce_label_col)}1:{get_column_letter(ce_label_col)}2")
-    lab_ce = ws_ce.cell(row=1, column=ce_label_col, value="Instructions:")
-    lab_ce.font = intro_label_font
-    lab_ce.alignment = intro_label_align
-
-    ws_ce.merge_cells(f"{ce_text_start_letter}1:{ce_visible_last}1")
-    p1 = ws_ce.cell(row=1, column=ce_text_start_col, value=ce_intro_para1)
-    p1.font = intro_body_font
-    p1.alignment = wrap_align
-
-    ws_ce.merge_cells(f"{ce_text_start_letter}2:{ce_visible_last}2")
-    p2 = ws_ce.cell(row=2, column=ce_text_start_col, value=ce_intro_para2)
-    p2.font = intro_body_font
-    p2.alignment = wrap_align
+    # Row 1 = column headers (matches apps_script.gs CE_FIRST_DATA_ROW = 2 for first content row)
+    CE_HEADER_ROW = 1
 
     for ci, h in enumerate(ce_headers, 1):
         cell = ws_ce.cell(row=CE_HEADER_ROW, column=ci, value=h)
@@ -1978,48 +2168,29 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     bp_total_cols = len(SHEET_FIELDS)
     bp_visible_last_col = get_column_letter(SHEET_FIELDS.index("Notes") + 1)
 
+    # A/B: ~header width + small margin for the Sheets filter (Excel char units).
+    # Column L: ~"% Upgrade" text width plus space for the filter icon.
     col_widths = {
-        "A": 18, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
-        "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 12, "M": 14,
+        "A": 13,
+        "B": 10,
+        "C": 13,
+        "D": 28,
+        "E": 10,
+        "F": 20,
+        "G": 16,
+        "H": 13,
+        "I": 12,
+        "J": 34,
+        "K": 34,
+        "L": 13.5,
+        "M": 14,
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
     ws.column_dimensions["E"].width = 16
 
-    bp_intro_row1 = (
-        "Click the down arrow on a given column to filter or sort values. "
-        'If no values are displayed, click the "Remove Filter/Filter" button on the Sheets '
-        "toolbar twice to reset the filters."
-    )
-    bp_intro_row2 = (
-        "Select field in interest column and filter most wanted items. "
-        "For rings/trinkets use Equipped 1 or Equipped 2 (two slots on Current Equipment). "
-        "Note: Interest updates may take a few seconds."
-    )
-    # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:M1 and F2:M2 instruction lines (through Notes)
-    BP_HEADER_ROW = 3
-    bp_text_start_col = 6
-    bp_text_start_letter = get_column_letter(bp_text_start_col)
-
-    ws.merge_cells("A1:B2")
-    ws.cell(row=1, column=1, value="BIS Planner")
-    ws.cell(row=1, column=1).font = intro_title_font
-    ws.cell(row=1, column=1).alignment = intro_title_align
-
-    ws.merge_cells("E1:E2")
-    lab_bp = ws.cell(row=1, column=5, value="Instructions:")
-    lab_bp.font = intro_label_font
-    lab_bp.alignment = intro_label_align
-
-    ws.merge_cells(f"{bp_text_start_letter}1:{bp_visible_last_col}1")
-    b1 = ws.cell(row=1, column=bp_text_start_col, value=bp_intro_row1)
-    b1.font = intro_body_font
-    b1.alignment = wrap_align
-
-    ws.merge_cells(f"{bp_text_start_letter}2:{bp_visible_last_col}2")
-    b2 = ws.cell(row=2, column=bp_text_start_col, value=bp_intro_row2)
-    b2.font = intro_body_font
-    b2.alignment = wrap_align
+    # Row 1 = column headers (matches apps_script.gs BIS_FIRST_DATA_ROW = 2 for first item row)
+    BP_HEADER_ROW = 1
 
     for ci, field in enumerate(SHEET_FIELDS, 1):
         cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=field)
@@ -2076,8 +2247,9 @@ def export_xlsx(csv_path, spec_order, class_title=None):
 
     log(f"  BIS Planner: {len(all_rows)} items")
 
-    # Tab order: Current Equipment, BIS Planner, ItemDB + GemDB (hidden). Pawn scales live on CE Weights rows only.
+    # Tab order: General Info, Current Equipment, BIS Planner, ItemDB + GemDB (hidden).
     target_order = [
+        "General Info",
         "Current Equipment",
         "BIS Planner",
         "ItemDB",

@@ -3,7 +3,6 @@
 //
 // Copy this entire file to: Extensions > Apps Script
 // Then save (Ctrl+S). The script runs automatically on cell edits.
-// Custom menu "BIS Planner tools" is added in onOpen (getUi() is not available when you Run a function from the script editor).
 //
 // Created by Steven Bennett 2026
 // ============================================================
@@ -11,9 +10,9 @@
 var BIS_PLANNER_SHEET = "BIS Planner";
 var CURRENT_EQUIP_SHEET = "Current Equipment";
 
-// First data row on each sheet (must match generate_bis_planner.py export_xlsx intro rows)
-var BIS_FIRST_DATA_ROW = 4;
-var CE_FIRST_DATA_ROW = 4;
+// First data row on each sheet (must match generate_bis_planner.py: header row 1, data from row 2)
+var BIS_FIRST_DATA_ROW = 2;
+var CE_FIRST_DATA_ROW = 2;
 
 /**
  * getLastRow() reflects any column on the sheet. A single stray value far below Current Equipment
@@ -285,11 +284,9 @@ function onEdit(e) {
 
 /**
  * Simple onOpen triggers are limited to ~30s. Do not call refreshComparisonAllSpecs_ here — it sleeps
- * twice per spec and will hang or time out. Use one short wait + one full-sheet refresh; run
- * BIS Planner tools → Force refresh comparison colors if CmpRaw was still settling.
+ * twice per spec and will hang or time out. Use one short wait + one full-sheet refresh.
  */
 function onOpen() {
-  addBISPlannerToolsMenu();
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var ce = ss.getSheetByName(CURRENT_EQUIP_SHEET);
   if (ce) {
@@ -906,32 +903,6 @@ function bisGetDocumentCache_() {
   }
 }
 
-/**
- * Clears ItemDB/GemDB caches (run after editing those sheets). Menu: BIS Planner tools → Clear ItemDB/GemDB sheet cache.
- */
-function bisClearSheetDataCachesMenu_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sc = bisGetDocumentCache_();
-  if (sc) {
-    sc.remove(BIS_ITEMDB_DOC_CACHE_PREFIX + ss.getId());
-    sc.remove(BIS_GEMDB_DOC_CACHE_PREFIX + ss.getId());
-  }
-  bisItemdbExecCache_.key = "";
-  bisItemdbExecCache_.data = null;
-  bisGemdbExecCache_.key = "";
-  bisGemdbExecCache_.data = null;
-  bisItemdbNamesExecCache_.key = "";
-  bisItemdbNamesExecCache_.names = null;
-  bisCeGearColExecCache_.key = "";
-  bisCeGearColExecCache_.vals = null;
-  ceInvalidateWeightsRowMap_();
-  try {
-    SpreadsheetApp.getUi().alert(
-      "Cleared ItemDB/GemDB caches (Document Cache keys + this execution). Large ItemDB may skip JSON cache; sheet reads always reflect edits. Smaller GemDB is usually cached until last row changes or TTL."
-    );
-  } catch (e1) {}
-}
-
 function itemdbLookupSockets_(ss, itemName) {
   var z = { r: 0, y: 0, b: 0, m: 0 };
   if (!itemName) return z;
@@ -1132,6 +1103,81 @@ function ceFindWeightsRowForSpec_(ceSheet, spec) {
   return null;
 }
 
+/**
+ * Ring 1 / Ring 2 gear scores from Current Equipment (same source as % Upgrade baseline).
+ * @return {{s1:number, s2:number}}
+ */
+function plannerRingEquippedSlotScores_(ceSheet, spec, optCaches) {
+  var specN = normalizeItemName(spec);
+  var sk = specN + "\0Ring\0slots";
+  if (
+    optCaches &&
+    optCaches.ringSlotScores &&
+    Object.prototype.hasOwnProperty.call(optCaches.ringSlotScores, sk)
+  ) {
+    return optCaches.ringSlotScores[sk];
+  }
+  var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
+  var r1 = findCERow(ceSheet, spec, "Ring 1", aCol);
+  var r2 = findCERow(ceSheet, spec, "Ring 2", aCol);
+  var s1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+  var s2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+  var nm1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
+  var nm2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+  var out = { s1: s1, s2: s2, hasItem1: nm1 !== "", hasItem2: nm2 !== "" };
+  if (optCaches) {
+    if (!optCaches.ringSlotScores) optCaches.ringSlotScores = {};
+    optCaches.ringSlotScores[sk] = out;
+  }
+  return out;
+}
+
+/**
+ * Trinket 1 / Trinket 2 gear scores from Current Equipment (same source as % Upgrade baseline).
+ * @return {{s1:number, s2:number}}
+ */
+function plannerTrinketEquippedSlotScores_(ceSheet, spec, optCaches) {
+  var specN = normalizeItemName(spec);
+  var sk = specN + "\0Trinket\0slots";
+  if (
+    optCaches &&
+    optCaches.trinketSlotScores &&
+    Object.prototype.hasOwnProperty.call(optCaches.trinketSlotScores, sk)
+  ) {
+    return optCaches.trinketSlotScores[sk];
+  }
+  var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
+  var r1 = findCERow(ceSheet, spec, "Trinket 1", aCol);
+  var r2 = findCERow(ceSheet, spec, "Trinket 2", aCol);
+  var s1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+  var s2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+  var nm1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
+  var nm2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+  var out = { s1: s1, s2: s2, hasItem1: nm1 !== "", hasItem2: nm2 !== "" };
+  if (optCaches) {
+    if (!optCaches.trinketSlotScores) optCaches.trinketSlotScores = {};
+    optCaches.trinketSlotScores[sk] = out;
+  }
+  return out;
+}
+
+/** True when Current Equipment row has an item name in column B (required before % Upgrade shows). */
+function plannerCeRowHasEquippedItemName_(ceSheet, row) {
+  if (!row) return false;
+  return normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue()) !== "";
+}
+
+/**
+ * Non–ring/trinket gear: CE row for spec + gear has an item to compare against.
+ */
+function plannerCeHasEquippedItemForPlannerGear_(ceSheet, spec, plannerGearType, optCaches) {
+  var g = normalizeItemName(plannerGearType);
+  if (!g) return false;
+  var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
+  var r = findCERow(ceSheet, spec, g, aCol);
+  return plannerCeRowHasEquippedItemName_(ceSheet, r);
+}
+
 /** True when this planner row is the equipped item (Stat Comparison / % Upgrade stay blank). */
 function plannerRowIsEquippedItemRow_(interestNorm, gearRow, itemNameRaw, eqRaw, eq2Raw) {
   if (normalizeItemName(itemNameRaw) === "") return false;
@@ -1149,7 +1195,7 @@ function plannerRowIsEquippedItemRow_(interestNorm, gearRow, itemNameRaw, eqRaw,
 /**
  * Baseline for % Upgrade: read "Gear Score" from Current Equipment for the equipped slot(s).
  * Uses the same score shown in CE (manual custom items and ItemDB rows). Rings/trinkets: min of the
- * two slot scores when each is positive (weaker-slot baseline).
+ * two slot scores when each is positive (weaker-slot baseline). Ring and trinket rows in L show both slots.
  */
 function plannerBaselineEquippedScore_(ss, ceSheet, spec, plannerGearType, eqN, eq2N, optCaches) {
   var g = normalizeItemName(plannerGearType);
@@ -1162,17 +1208,20 @@ function plannerBaselineEquippedScore_(ss, ceSheet, spec, plannerGearType, eqN, 
   var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
   var out = 0;
   var r0 = null;
-  var r1 = null;
-  var r2 = null;
   if (g === "Ring" || g === "Trinket") {
-    r1 = findCERow(ceSheet, spec, g === "Ring" ? "Ring 1" : "Trinket 1", aCol);
-    r2 = findCERow(ceSheet, spec, g === "Ring" ? "Ring 2" : "Trinket 2", aCol);
-    var u1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
-    var u2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
-    var d = [];
-    if (u1 > 0) d.push(u1);
-    if (u2 > 0) d.push(u2);
-    out = d.length === 0 ? 0 : Math.min.apply(null, d);
+    if (g === "Ring") {
+      var slotR = plannerRingEquippedSlotScores_(ceSheet, spec, optCaches);
+      var dR = [];
+      if (slotR.s1 > 0) dR.push(slotR.s1);
+      if (slotR.s2 > 0) dR.push(slotR.s2);
+      out = dR.length === 0 ? 0 : Math.min.apply(null, dR);
+    } else {
+      var slotT = plannerTrinketEquippedSlotScores_(ceSheet, spec, optCaches);
+      var dT = [];
+      if (slotT.s1 > 0) dT.push(slotT.s1);
+      if (slotT.s2 > 0) dT.push(slotT.s2);
+      out = dT.length === 0 ? 0 : Math.min.apply(null, dT);
+    }
   } else {
     r0 = findCERow(ceSheet, spec, g, aCol);
     out = r0 ? Number(ceSheet.getRange(r0, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
@@ -1255,6 +1304,8 @@ function plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals, optItemdbData
     ceGearCol: aCol,
     ceSheet: ceSheet,
     baselineByKey: {},
+    ringSlotScores: {},
+    trinketSlotScores: {},
     itemScoreBaseByKey: {},
     itemScoreFullByKey: {},
   };
@@ -1507,10 +1558,12 @@ function plannerItemGearScore_(ss, ceSheet, spec, itemName, optCaches) {
 /**
  * % Upgrade from "Gear Score Plus Gems" vs Current Equipment baseline for that slot.
  * @param {number} itemScorePlusGems — same value written to column R
+ * @param {boolean=} ceHasEquippedItem — when false, no item on CE for that slot → blank % (omit for ring/trinket dual path).
  */
-function upgradePctFromScores_(itemScorePlusGems, equippedBaseline, heroicDark, hideRow) {
+function upgradePctFromScores_(itemScorePlusGems, equippedBaseline, heroicDark, hideRow, ceHasEquippedItem) {
   var out = { text: "", color: "#000000" };
   if (hideRow) return out;
+  if (ceHasEquippedItem === false) return out;
   if (equippedBaseline <= 0) return out;
   var pct = ((itemScorePlusGems - equippedBaseline) / equippedBaseline) * 100;
   var rounded = Math.round(pct * 10) / 10;
@@ -1521,6 +1574,81 @@ function upgradePctFromScores_(itemScorePlusGems, equippedBaseline, heroicDark, 
   out.color =
     rounded > 0 ? posC : rounded < 0 ? negC : heroicDark ? "#EEEEEE" : "#000000";
   return out;
+}
+
+/**
+ * % Upgrade for one ring/trinket CE slot vs the planner row item gear score (stats × weights + ideal gems only).
+ * Requires hasEquippedItem true (CE Item Name set for that ring/trinket slot). If that slot's gear score is ≤0
+ * but an item is equipped, baseline is treated as 0: row score > 0 → +100%; row score ≤0 → 0%. If baseline > 0,
+ * uses (item − baseline) / baseline × 100.
+ */
+function upgradePctForRingTrinketSlot_(itemScorePlusGems, slotBaseline, heroicDark, hideRow, hasEquippedItem) {
+  var out = { text: "", color: "#000000" };
+  if (hideRow) return out;
+  if (hasEquippedItem === false) return out;
+  var item = Number(itemScorePlusGems) || 0;
+  var base = Number(slotBaseline) || 0;
+  var posC = heroicDark ? CMP_DELTA_POS_DARK_ROW : "#0d652d";
+  var negC = heroicDark ? CMP_DELTA_NEG_DARK_ROW : "#c5221f";
+  var zeroC = heroicDark ? "#EEEEEE" : "#000000";
+  if (base <= 0) {
+    if (item <= 0) {
+      out.text = "0%";
+      out.color = zeroC;
+      return out;
+    }
+    out.text = "+100%";
+    out.color = posC;
+    return out;
+  }
+  var pct = ((item - base) / base) * 100;
+  var rounded = Math.round(pct * 10) / 10;
+  var sign = rounded > 0 ? "+" : "";
+  out.text = sign + rounded + "%";
+  out.color = rounded > 0 ? posC : rounded < 0 ? negC : zeroC;
+  return out;
+}
+
+/**
+ * % Upgrade for ring/trinket: only slots with an equipped item (CE Item Name) get a line.
+ * @return {?Object} RichTextValue from build(), or null if neither slot has an item to compare.
+ */
+function buildDualSlotUpgradeRichText_(itemScorePlusGems, s1, s2, hasItem1, hasItem2, heroicDark) {
+  var itemNum = Number(itemScorePlusGems) || 0;
+  var lines = [];
+  if (hasItem1) {
+    var p1 = upgradePctForRingTrinketSlot_(itemNum, s1, heroicDark, false, true);
+    if (p1.text !== "") lines.push({ header: "Slot 1:\n", pct: p1.text, color: p1.color });
+  }
+  if (hasItem2) {
+    var p2 = upgradePctForRingTrinketSlot_(itemNum, s2, heroicDark, false, true);
+    if (p2.text !== "") lines.push({ header: "Slot 2:\n", pct: p2.text, color: p2.color });
+  }
+  if (lines.length === 0) return null;
+  var full = "";
+  var li;
+  for (li = 0; li < lines.length; li++) {
+    if (li > 0) full += "\n";
+    full += lines[li].header + lines[li].pct;
+  }
+  var slotLabC = heroicDark ? CMP_NOTICE_DARK_ROW : CMP_NOTICE_COLOR;
+  var slotLabStyle = SpreadsheetApp.newTextStyle().setForegroundColor(slotLabC).build();
+  var b = SpreadsheetApp.newRichTextValue().setText(full);
+  var pos = 0;
+  for (li = 0; li < lines.length; li++) {
+    if (li > 0) pos += 1;
+    var ln = lines[li];
+    var hLen = ln.header.length;
+    var pctLen = ln.pct.length;
+    b.setTextStyle(pos, pos + hLen, slotLabStyle);
+    b.setTextStyle(
+      pos + hLen,
+      pos + hLen + pctLen,
+      SpreadsheetApp.newTextStyle().setForegroundColor(ln.color).build()
+    );
+    pos += hLen + pctLen;
+  }
+  return b.build();
 }
 
 function flushUpgradePctCells_(bpSheet, upgradeWrites) {
@@ -1544,6 +1672,25 @@ function flushUpgradePctCells_(bpSheet, upgradeWrites) {
     var seg = segments[si];
     var r0 = seg[0].r;
     var h = seg.length;
+    var anyRich = false;
+    for (var jr = 0; jr < h; jr++) {
+      if (seg[jr].rich != null) anyRich = true;
+    }
+    if (anyRich) {
+      for (var jc = 0; jc < h; jc++) {
+        var w = seg[jc];
+        var c = bpSheet.getRange(w.r, GG_UPGRADE_COL);
+        if (w.rich != null) {
+          c.setRichTextValue(w.rich);
+        } else {
+          c.setValue(w.text == null ? "" : w.text);
+          try {
+            c.setFontColor(w.color || "#000000");
+          } catch (eOne) {}
+        }
+      }
+      continue;
+    }
     var texts = [];
     var colors = [];
     for (var j = 0; j < h; j++) {
@@ -3150,9 +3297,11 @@ function refreshComparisonRichTextInner_(
     if (ceSheet && normalizeItemName(specRow) && normalizeItemName(nmN)) {
       itemFullNum = plannerItemGearScoresBothWithCaches_(plannerCaches, specRow, nmN).full;
     }
-    var baselineEq = ceSheet
-      ? plannerBaselineEquippedScore_(ss, ceSheet, specRow, gearRow, eqN, eq2N, plannerCaches)
-      : 0;
+    var gearNorm = normalizeItemName(gearRow);
+    var baselineEq = 0;
+    if (ceSheet) {
+      baselineEq = plannerBaselineEquippedScore_(ss, ceSheet, specRow, gearRow, eqN, eq2N, plannerCaches);
+    }
 
     // Do not skip when N display is empty: leaving K unchanged preserves stale rich text (e.g. after
     // equipping). Empty CmpRaw → build returns null → mirror =RC[] so K shows blank until N fills, then
@@ -3197,13 +3346,38 @@ function refreshComparisonRichTextInner_(
       normalizeItemName(nmN) === "" ||
       !normalizeItemName(specRow) ||
       !ceSheet;
-    var uh = upgradePctFromScores_(
-      Number(itemFullNum) || 0,
-      baselineEq,
-      heroicDarkRow,
-      hidePct
-    );
-    upgradeWrites.push({ r: r, text: uh.text, color: uh.color });
+    if (!hidePct && (gearNorm === "Ring" || gearNorm === "Trinket") && ceSheet && plannerCaches) {
+      var s1s2 =
+        gearNorm === "Ring"
+          ? plannerRingEquippedSlotScores_(ceSheet, specRow, plannerCaches)
+          : plannerTrinketEquippedSlotScores_(ceSheet, specRow, plannerCaches);
+      var dualRich = buildDualSlotUpgradeRichText_(
+        Number(itemFullNum) || 0,
+        s1s2.s1,
+        s1s2.s2,
+        s1s2.hasItem1,
+        s1s2.hasItem2,
+        heroicDarkRow
+      );
+      if (dualRich) {
+        upgradeWrites.push({ r: r, rich: dualRich });
+      } else {
+        upgradeWrites.push({ r: r, text: "", color: "#000000" });
+      }
+    } else {
+      var ceHasEq =
+        ceSheet && plannerCaches
+          ? plannerCeHasEquippedItemForPlannerGear_(ceSheet, specRow, gearNorm, plannerCaches)
+          : false;
+      var uh = upgradePctFromScores_(
+        Number(itemFullNum) || 0,
+        baselineEq,
+        heroicDarkRow,
+        hidePct,
+        ceHasEq
+      );
+      upgradeWrites.push({ r: r, text: uh.text, color: uh.color });
+    }
     if (capBandSnap && fpKey != null) {
       if (!capBandSnap.cmpSkipFp) capBandSnap.cmpSkipFp = {};
       capBandSnap.cmpSkipFp[r] = fpKey;
@@ -3366,9 +3540,14 @@ function appendMergedStatSegmentsTo_(out, runs, line1, colPos, colNeg) {
       segs.push(p);
     }
   }
+  var prevC = null;
   for (var si = 0; si < segs.length; si++) {
     if (si > 0) {
+      var commaStart = out.s.length;
       out.s += ", ";
+      if (prevC) {
+        runs.push({ start: commaStart, end: out.s.length, color: prevC });
+      }
     }
     var segStart = out.s.length;
     out.s += segs[si];
@@ -3376,6 +3555,7 @@ function appendMergedStatSegmentsTo_(out, runs, line1, colPos, colNeg) {
     var c = null;
     if (s.charAt(0) === "+") c = colPos;
     else if (s.charAt(0) === "-") c = colNeg;
+    prevC = c;
     if (c) {
       runs.push({ start: segStart, end: out.s.length, color: c });
     }
@@ -3501,9 +3681,14 @@ function buildComparisonRichTextValue(display, darkFillRow) {
   var out = "";
   var runs = [];
   var si;
+  var prevC = null;
   for (si = 0; si < segs.length; si++) {
     if (si > 0) {
+      var commaStart = out.length;
       out += ", ";
+      if (prevC) {
+        runs.push({ start: commaStart, end: out.length, color: prevC });
+      }
     }
     var segStart = out.length;
     out += segs[si];
@@ -3511,6 +3696,7 @@ function buildComparisonRichTextValue(display, darkFillRow) {
     var c = null;
     if (s.charAt(0) === "+") c = colPos;
     else if (s.charAt(0) === "-") c = colNeg;
+    prevC = c;
     if (c) {
       runs.push({ start: segStart, end: out.length, color: c });
     }
@@ -3578,50 +3764,3 @@ function buildComparisonRichTextValue(display, darkFillRow) {
   return builder.build();
 }
 
-// ============================================================
-// Menu (onOpen only — SpreadsheetApp.getUi() throws if Run from the script editor)
-// ============================================================
-
-/** Safe to call from onOpen. No-op if getUi() is unavailable (editor Run, time triggers, etc.). */
-function addBISPlannerToolsMenu() {
-  try {
-    SpreadsheetApp.getUi()
-      .createMenu("BIS Planner tools")
-      .addItem("Force refresh Stat Comparison & % Upgrade", "forceRefreshComparisonColors")
-      .addItem("Rebuild equipped index (repair)", "rebuildEquippedIndexMenu_")
-      .addItem("Clear ItemDB/GemDB sheet cache", "bisClearSheetDataCachesMenu_")
-      .addToUi();
-  } catch (eMenu) {
-    // Cannot call SpreadsheetApp.getUi() from this context.
-  }
-}
-
-function rebuildEquippedIndexMenu_() {
-  var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
-  if (!bp) {
-    try {
-      SpreadsheetApp.getUi().alert('No sheet named "' + BIS_PLANNER_SHEET + '".');
-    } catch (e0) {}
-    return;
-  }
-  rebuildEquippedIndexFromPlanner_(bp);
-  try {
-    SpreadsheetApp.getUi().alert("Equipped index rebuilt from column A (Interest).");
-  } catch (e1) {}
-}
-
-/** Same idea as onOpen: sleeps + two full-sheet comparison passes (avoids per-spec timeout). */
-function forceRefreshComparisonColors() {
-  var bp = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(BIS_PLANNER_SHEET);
-  if (!bp) {
-    try {
-      SpreadsheetApp.getUi().alert('No sheet named "' + BIS_PLANNER_SHEET + '".');
-    } catch (e0) {}
-    return;
-  }
-  rebuildEquippedIndexFromPlanner_(bp);
-  refreshComparisonAllSpecs_(bp);
-  try {
-    SpreadsheetApp.getUi().alert("Stat Comparison and % Upgrade refresh finished.");
-  } catch (e1) {}
-}
