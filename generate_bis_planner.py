@@ -170,13 +170,7 @@ SHEET_FIELDS = [
     "Interest", "Spec", "Gear Type", "Name", "Phase", "Acquisition Type",
     "Quest", "Dungeon", "Difficulty", "Stats",
     "Stat Comparison", "% Upgrade", "Notes",
-    "Equip", "Equip2", "CmpRaw",
-    "Gear Score",
-    "Gear Score Plus Gems",
 ]
-
-# Hidden after CmpRaw: two blocks of per-stat Δ (Equip, then Equip2) for Ring/Trinket dual comparison.
-HELPER_DIFF_COUNT = len(STAT_COLUMNS)
 
 # Ring/Trinket rows: no plain "Equipped" (use Equipped 1 / 2). Other rows: no Equipped 1/2.
 INTEREST_OPTION_CLEAR = "----"
@@ -1977,47 +1971,20 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     )
 
     # -- Single BIS Planner sheet --
-    # A–J … M Notes; hidden N–R Equip, Equip2, CmpRaw, Gear Score, Gear Score Plus Gems; then Δ blocks.
+    # A–M: through Notes. Equip / CmpRaw / planner gear scores are resolved in Apps Script only (no N–R columns).
     ws = wb.create_sheet(title="BIS Planner")
     ws.sheet_properties.tabColor = "1565C0"
 
-    equip_col_letter = _col_letter(SHEET_FIELDS.index("Equip") + 1)
-    equip2_col_letter = _col_letter(SHEET_FIELDS.index("Equip2") + 1)
-    cmp_raw_col_letter = _col_letter(SHEET_FIELDS.index("CmpRaw") + 1)
-    gear_score_col_letter = _col_letter(SHEET_FIELDS.index("Gear Score") + 1)
-    gear_score_gems_col_letter = _col_letter(
-        SHEET_FIELDS.index("Gear Score Plus Gems") + 1
-    )
-    first_helper_col = len(SHEET_FIELDS) + 1
-    helper_diff_letters_slot1 = [
-        _col_letter(first_helper_col + i) for i in range(HELPER_DIFF_COUNT)
-    ]
-    helper_start_slot2 = first_helper_col + HELPER_DIFF_COUNT
-    helper_diff_letters_slot2 = [
-        _col_letter(helper_start_slot2 + i) for i in range(HELPER_DIFF_COUNT)
-    ]
-    bp_total_cols = len(SHEET_FIELDS) + 2 * HELPER_DIFF_COUNT
-    # Instruction merges span through Notes only (last visible column before hidden block).
+    bp_total_cols = len(SHEET_FIELDS)
     bp_visible_last_col = get_column_letter(SHEET_FIELDS.index("Notes") + 1)
 
     col_widths = {
         "A": 18, "B": 12, "C": 13, "D": 28, "E": 10, "F": 20,
         "G": 16, "H": 13, "I": 12, "J": 34, "K": 34, "L": 12, "M": 14,
-        "N": 2, "O": 2,
     }
     for col_letter, width in col_widths.items():
         ws.column_dimensions[col_letter].width = width
     ws.column_dimensions["E"].width = 16
-    ws.column_dimensions[equip_col_letter].hidden = True
-    ws.column_dimensions[equip2_col_letter].hidden = True
-    ws.column_dimensions[cmp_raw_col_letter].hidden = True
-    ws.column_dimensions[gear_score_col_letter].hidden = True
-    ws.column_dimensions[gear_score_gems_col_letter].hidden = True
-    ws.column_dimensions[gear_score_col_letter].width = 2
-    ws.column_dimensions[gear_score_gems_col_letter].width = 2
-    for hl in helper_diff_letters_slot1 + helper_diff_letters_slot2:
-        ws.column_dimensions[hl].hidden = True
-        ws.column_dimensions[hl].width = 2
 
     bp_intro_row1 = (
         "Click the down arrow on a given column to filter or sort values. "
@@ -2029,7 +1996,7 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         "For rings/trinkets use Equipped 1 or Equipped 2 (two slots on Current Equipment). "
         "Note: Interest updates may take a few seconds."
     )
-    # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:L1 and F2:L2 instruction lines (through Notes)
+    # Rows 1–2: title A1:B2; E1:E2 "Instructions:"; F1:M1 and F2:M2 instruction lines (through Notes)
     BP_HEADER_ROW = 3
     bp_text_start_col = 6
     bp_text_start_letter = get_column_letter(bp_text_start_col)
@@ -2061,21 +2028,6 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         cell.border = thin_border
         cell.alignment = wrap_align
 
-    for hi, stat_key in enumerate(STAT_COLUMNS):
-        ci = first_helper_col + hi
-        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=f"Δ1 {stat_key}")
-        cell.font = header_font
-        cell.fill = header_fill
-        cell.border = thin_border
-        cell.alignment = wrap_align
-    for hi, stat_key in enumerate(STAT_COLUMNS):
-        ci = helper_start_slot2 + hi
-        cell = ws.cell(row=BP_HEADER_ROW, column=ci, value=f"Δ2 {stat_key}")
-        cell.font = header_font
-        cell.fill = header_fill
-        cell.border = thin_border
-        cell.alignment = wrap_align
-
     ws.freeze_panes = f"E{BP_HEADER_ROW + 1}"
     filter_end = get_column_letter(bp_total_cols)
 
@@ -2099,36 +2051,10 @@ def export_xlsx(csv_path, spec_order, class_title=None):
         font = Font(color="FFFFFF", size=10) if dark_bg else Font(size=10)
 
         for ci, field in enumerate(SHEET_FIELDS, 1):
-            if field == "Equip":
-                formula = _build_equip_name_formula(
-                    excel_row, ce_spec_rows, spec_order
-                )
-                cell = ws.cell(row=excel_row, column=ci, value=formula)
-            elif field == "Equip2":
-                formula = _build_equip2_name_formula(
-                    excel_row, ce_spec_rows, spec_order
-                )
-                cell = ws.cell(row=excel_row, column=ci, value=formula)
-            elif field == "CmpRaw":
-                formula = _build_cmp_raw_formula(
-                    excel_row,
-                    equip_col_letter,
-                    equip2_col_letter,
-                    helper_diff_letters_slot1,
-                    helper_diff_letters_slot2,
-                    itemdb_range_bounded,
-                    db_num_cols,
-                )
-                cell = ws.cell(row=excel_row, column=ci, value=formula)
-            elif field == "Stat Comparison":
-                cell = ws.cell(
-                    row=excel_row,
-                    column=ci,
-                    value=f"={cmp_raw_col_letter}{excel_row}",
-                )
-            elif field == "% Upgrade":
+            if field == "Stat Comparison":
+                # Google Sheets: Apps Script writes rich text to K from CE + ItemDB (no CmpRaw column).
                 cell = ws.cell(row=excel_row, column=ci, value="")
-            elif field in ("Gear Score", "Gear Score Plus Gems"):
+            elif field == "% Upgrade":
                 cell = ws.cell(row=excel_row, column=ci, value="")
             elif field == "Interest":
                 cell = ws.cell(row=excel_row, column=ci, value="")
@@ -2144,35 +2070,6 @@ def export_xlsx(csv_path, spec_order, class_title=None):
             cell.font = font
             if fill:
                 cell.fill = fill
-
-        for hi in range(HELPER_DIFF_COUNT):
-            hci = first_helper_col + hi
-            hformula = _build_stat_diff_helper_formula(
-                excel_row,
-                equip_col_letter,
-                itemdb_range_bounded,
-                hi,
-            )
-            hcell = ws.cell(row=excel_row, column=hci, value=hformula)
-            hcell.border = thin_border
-            hcell.alignment = wrap_align
-            hcell.font = font
-            if fill:
-                hcell.fill = fill
-        for hi in range(HELPER_DIFF_COUNT):
-            hci = helper_start_slot2 + hi
-            hformula = _build_stat_diff_helper_formula(
-                excel_row,
-                equip2_col_letter,
-                itemdb_range_bounded,
-                hi,
-            )
-            hcell = ws.cell(row=excel_row, column=hci, value=hformula)
-            hcell.border = thin_border
-            hcell.alignment = wrap_align
-            hcell.font = font
-            if fill:
-                hcell.fill = fill
 
     bp_last_row = BP_HEADER_ROW + len(all_rows)
     ws.auto_filter.ref = f"A{BP_HEADER_ROW}:{filter_end}{bp_last_row}"
@@ -2194,139 +2091,6 @@ def export_xlsx(csv_path, spec_order, class_title=None):
     xlsx_path = csv_path.rsplit(".", 1)[0] + ".xlsx"
     wb.save(xlsx_path)
     log(f"Excel -> {xlsx_path} ({len(all_rows)} items, {total_db_items} in ItemDB)")
-
-
-def _build_equip_name_formula(row, ce_spec_rows, spec_order):
-    """CE slot 1 item: Ring 1 / Trinket 1 when planner Gear Type is Ring/Trinket; else MATCH(C)."""
-    ce = "'Current Equipment'"
-    slot_key = (
-        f'IF(C{row}="Ring","Ring 1",IF(C{row}="Trinket","Trinket 1",C{row}))'
-    )
-    equipped_checks = []
-    for spec_name in spec_order:
-        ce_start, ce_end = ce_spec_rows[spec_name]
-        equipped_checks.append(
-            f'B{row}="{spec_name}",'
-            f'INDEX({ce}!B{ce_start}:B{ce_end},'
-            f'MATCH({slot_key},{ce}!A{ce_start}:A{ce_end},0))'
-        )
-    return f'=IFERROR(IFS({",".join(equipped_checks)}),"")'
-
-
-def _build_equip2_name_formula(row, ce_spec_rows, spec_order):
-    """CE slot 2: Ring 2 / Trinket 2; blank for other gear types."""
-    ce = "'Current Equipment'"
-    slot_key = f'IF(C{row}="Ring","Ring 2",IF(C{row}="Trinket","Trinket 2",""))'
-    equipped_checks = []
-    for spec_name in spec_order:
-        ce_start, ce_end = ce_spec_rows[spec_name]
-        equipped_checks.append(
-            f'B{row}="{spec_name}",'
-            f'INDEX({ce}!B{ce_start}:B{ce_end},'
-            f'MATCH({slot_key},{ce}!A{ce_start}:A{ce_end},0))'
-        )
-    inner = f'IFERROR(IFS({",".join(equipped_checks)}),"")'
-    return (
-        f'=IF(OR(C{row}="Ring",C{row}="Trinket"),{inner},"")'
-    )
-
-
-def _build_stat_diff_helper_formula(row, equip_col_letter, itemdb_range, stat_index):
-    """One hidden cell: formatted diff fragment or blank (keeps CmpRaw short — CmpRaw TEXTJOINs the row range)."""
-    db_col_num = ITEMDB_FIRST_STAT_COL + stat_index
-    stat_key = STAT_COLUMNS[stat_index]
-    item_stat = f'IFERROR(VLOOKUP(D{row},{itemdb_range},{db_col_num},0),0)'
-    equip_stat = (
-        f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{db_col_num},0),0)'
-    )
-    diff = f'IFERROR(({item_stat})-({equip_stat}),0)'
-    body = (
-        f'IF({diff}=0,"",IFERROR((IF({diff}>0,"+","-")&ROUND(ABS({diff}),4))'
-        f'&" {stat_key}",""))'
-    )
-    return (
-        f'=IF(TRIM(IFERROR({equip_col_letter}{row},""))="","",{body})'
-    )
-
-
-def _cmp_attr_display_expr(va_expr: str) -> str:
-    """Break common ItemDB attribute prefixes onto new lines (Comparison / CmpRaw text)."""
-    return (
-        f'SUBSTITUTE(SUBSTITUTE(TRIM({va_expr}), " Use:", CHAR(10)&"Use:"), '
-        f'" Equip:", CHAR(10)&"Equip:")'
-    )
-
-
-def _build_cmp_raw_formula(
-    row,
-    equip_col_letter,
-    equip2_col_letter,
-    helpers1,
-    helpers2,
-    itemdb_range,
-    attr_col_num,
-):
-    """CmpRaw: single block for most gear; dual Slot 1/2 Comparison headers for Ring/Trinket."""
-    h1a, h1z = helpers1[0], helpers1[-1]
-    h2a, h2z = helpers2[0], helpers2[-1]
-    tj1 = f'TEXTJOIN(", ",TRUE,{h1a}{row}:{h1z}{row})'
-    tj2 = f'TEXTJOIN(", ",TRUE,{h2a}{row}:{h2z}{row})'
-    va1 = f'IFERROR(VLOOKUP({equip_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
-    va2 = f'IFERROR(VLOOKUP({equip2_col_letter}{row},{itemdb_range},{attr_col_num},0),"")'
-    ad1 = _cmp_attr_display_expr(va1)
-    ad2 = _cmp_attr_display_expr(va2)
-    la1 = f'IF({va1}="","","Equipped slot 1:"&CHAR(10)&{ad1})'
-    la2 = f'IF({va2}="","","Equipped slot 2"&CHAR(10)&{ad2})'
-    # One CHAR(10) between stat line and attributes (no blank paragraph).
-    inner1 = (
-        f'IF(AND({tj1}="",{va1}=""),"",'
-        f'IF({va1}="",{tj1},IF({tj1}="",{la1},{tj1}&CHAR(10)&{la1})))'
-    )
-    inner2 = (
-        f'IF(AND({tj2}="",{va2}=""),"",'
-        f'IF({va2}="",{tj2},IF({tj2}="",{la2},{tj2}&CHAR(10)&{la2})))'
-    )
-    same1 = f'TRIM(IFERROR(D{row},""))=TRIM(IFERROR({equip_col_letter}{row},""))'
-    same2 = f'TRIM(IFERROR(D{row},""))=TRIM(IFERROR({equip2_col_letter}{row},""))'
-    b1 = (
-        f'IF(OR(IFERROR({equip_col_letter}{row},"")="",{same1}),"",'
-        f'"Slot 1 Comparison:"&CHAR(10)&{inner1})'
-    )
-    b2 = (
-        f'IF(OR(IFERROR({equip2_col_letter}{row},"")="",{same2}),"",'
-        f'"Slot 2 comparison"&CHAR(10)&{inner2})'
-    )
-    dual_body = (
-        f'IF(AND({b1}="",{b2}=""),"",IF({b1}="",{b2},IF({b2}="",{b1},{b1}&CHAR(10)&{b2})))'
-    )
-    dual_guard = (
-        f'IF(AND(IFERROR({equip_col_letter}{row},"")="",IFERROR({equip2_col_letter}{row},"")=""),'
-        f'"Current Equipment Not Specified",{dual_body})'
-    )
-    is_rt = f'OR(C{row}="Ring",C{row}="Trinket")'
-
-    tj_s = tj1
-    va_s = va1
-    la_s = f'IF({va1}="","","Currently Equipped:"&CHAR(10)&{ad1})'
-    combined_s = (
-        f'IF(AND({tj_s}="",{va_s}=""),"",'
-        f'IF({va_s}="",{tj_s},IF({tj_s}="",{la_s},{tj_s}&CHAR(10)&{la_s})))'
-    )
-    same_s = same1
-    single = (
-        f'IF(IFERROR({equip_col_letter}{row},"")="","Current Equipment Not Specified",'
-        f'IF({same_s},"",{combined_s}))'
-    )
-    return f'=IF({is_rt},{dual_guard},{single})'
-
-
-def _col_letter(n):
-    """1-indexed column number to letter(s)."""
-    result = ""
-    while n > 0:
-        n, remainder = divmod(n - 1, 26)
-        result = chr(65 + remainder) + result
-    return result
 
 
 # ============================================================

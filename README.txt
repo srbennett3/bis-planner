@@ -59,17 +59,13 @@ All BIS and pre-BIS items for the class, with every spec combined on one sheet.
 | **Dungeon** | Dungeon name (blank for non-dungeon items) |
 | **Difficulty** | Normal or Heroic (blank for non-dungeon items) |
 | **Stats** | Item stats (e.g., `142 Armor; 24 Sta; 23 Int`) and, when present, on-use / equip **Attributes** text after a single space |
-| **Comparison** | Stat differences vs equipped gear (column **K**); in **Google Sheets**, Apps Script colors `+`/`−`, **Slot 1 Comparison:** / **Slot 2 comparison** headers on Ring/Trinket rows, and Attributes. In Excel, `=O` (same text as CmpRaw). |
-| **Notes** | Source details (boss name, badge cost, reputation, etc.) — last visible column before hidden helpers. |
-| **Equip** | (Hidden, column **M**) First CE slot for this planner row (**Ring 1** / **Trinket 1** when Gear Type is Ring/Trinket). Do not delete. |
-| **Equip2** | (Hidden, column **N**) Second CE slot (**Ring 2** / **Trinket 2**); blank for other gear types. Do not delete. |
-| **CmpRaw** | (Hidden, column **O**) Plain-text comparison + equipped Attributes from ItemDB; references **Δ** helper columns after **O**. Do not delete. |
-| **Δ *stat*** | (Hidden, after CmpRaw) Two blocks for Ring/Trinket (diff vs **Equip**, then vs **Equip2**); one block for other slots. Do not delete. |
+| **Comparison** | Stat differences vs equipped gear (column **K**). **Google Sheets:** Apps Script builds comparison text from **Current Equipment** + ItemDB, then writes colored rich text to **K** (`+`/`−`), Ring/Trinket slot headers, and Attributes. **Excel:** column **K** stays blank unless you open the file in Google Sheets with the script. |
+| **Notes** | Source details (boss name, badge cost, reputation, etc.) — last planner column (**M**). |
 
 **Features:**
 
 - **Interest dropdown**: Lists are **row-specific** (see table above). **Equipped** / **Equipped 1** / **Equipped 2** update Current Equipment where applicable and bold the cell. Only one planner row per spec + slot bucket can hold each equipped state; picking a new item clears the previous row in that bucket.
-- **Comparison column**: Visible column **K**; built from hidden **CmpRaw** (column **O**). On Ring/Trinket rows, CmpRaw uses **Slot 1 Comparison:** / **Slot 2 comparison** and **Equipped slot 1:** / **Equipped slot 2** before on-use text; the script colors headers and splits inline **Use:** / **Equip:** onto new lines when present. Regenerate the workbook after pulling updates so column layout matches.
+- **Comparison column**: The script fills **K** on open and when Current Equipment or planner data change (equipped items are read from **Current Equipment**, not from extra planner columns). Ring/Trinket rows use **Slot 1 Comparison:** / **Slot 2 comparison** and **Equipped slot 1:** / **Equipped slot 2** before on-use text; the script colors headers and splits inline **Use:** / **Equip:** onto new lines when present. **Regenerate the workbook** after pulling updates so the sheet layout matches the script (A–M only on BIS Planner).
 - **Filter/Sort**: Use the header dropdowns to filter by Spec, Gear Type, Acquisition Type, etc.
 - **Frozen columns**: Interest, Spec, Gear Type, and Name (columns A-D) stay visible while scrolling.
 - **Color-coded rows**: Each row is colored by acquisition type (see Row Colors below).
