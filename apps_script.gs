@@ -158,10 +158,15 @@ var CMP_RAW_R1C1_OFFSET = CMP_RAW_LEGACY_SHEET_COL - CMP_DISP_COL;
 
 /** After CE / Interest edits: one short wait before reading CmpRaw (P). */
 var EDIT_RECALC_WAIT_MS = 150;
-/** Before each spec on open / force refresh (formulas still settling). */
-var OPEN_RECALC_WAIT_MS = 550;
+/** Before full comparison refresh when a deferred trigger is not used (simple onOpen fallback). */
+var OPEN_RECALC_WAIT_MS = 200;
 /** Between two open passes so CmpRaw can finish recalculating before the second read. */
 var OPEN_SECOND_PASS_SLEEP_MS = 220;
+/**
+ * When authorized, onOpen schedules comparison refresh this many ms later (separate execution, 6 min budget).
+ * Simple onOpen often cannot create triggers; then we fall back to inline refresh after OPEN_RECALC_WAIT_MS.
+ */
+var OPEN_COMPARISON_DEFER_MS = 1200;
 
 /**
  * Prevents nested refreshComparisonRichText (e.g. installable onEdit firing while script writes K/L/Q/R),
@@ -299,8 +304,59 @@ function onOpen() {
   if (!bp) return;
   applyInterestDropdownsByGearType_(bp);
   rebuildEquippedIndexFromPlanner_(bp);
-  Utilities.sleep(OPEN_RECALC_WAIT_MS);
-  refreshComparisonRichText(bp, null, null, null, null, null, null, null);
+  try {
+    SpreadsheetApp.getUi()
+      .createMenu("BIS Planner")
+      .addItem("Recalculate stat comparisons (all rows)", "menuRecalculateStatComparisons_")
+      .addToUi();
+  } catch (eUi) {}
+  SpreadsheetApp.flush();
+  if (!bisScheduleDeferredOnOpenComparison_()) {
+    Utilities.sleep(OPEN_RECALC_WAIT_MS);
+    // Simple spreadsheet onOpen cannot create triggers → no defer. Plain K/L avoids per-row RichText (10×+ faster).
+    refreshComparisonRichText(bp, null, null, null, null, null, null, null, true);
+  }
+}
+
+/** Remove pending one-shot open comparison triggers (avoid stacking on rapid reopen). */
+function bisClearDeferredOnOpenComparisonTriggers_() {
+  try {
+    var triggers = ScriptApp.getProjectTriggers();
+    for (var i = 0; i < triggers.length; i++) {
+      if (triggers[i].getHandlerFunction() === "bisDeferredOnOpenComparison_") {
+        ScriptApp.deleteTrigger(triggers[i]);
+      }
+    }
+  } catch (e) {}
+}
+
+/**
+ * @return {boolean} true if a deferred run was scheduled (onOpen returns quickly; K/L update ~1s later).
+ * Fails for the normal spreadsheet simple onOpen (no ScriptApp.newTrigger); use menu for colored K/L after plain open.
+ */
+function bisScheduleDeferredOnOpenComparison_() {
+  try {
+    bisClearDeferredOnOpenComparisonTriggers_();
+    ScriptApp.newTrigger("bisDeferredOnOpenComparison_")
+      .timeBased()
+      .after(OPEN_COMPARISON_DEFER_MS)
+      .create();
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/** Time-based trigger target: full comparison + % Upgrade (same as inline onOpen refresh). */
+function bisDeferredOnOpenComparison_() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return;
+    var bp = ss.getSheetByName(BIS_PLANNER_SHEET);
+    if (!bp) return;
+    SpreadsheetApp.flush();
+    refreshComparisonRichText(bp, null, null, null, null, null, null, null, false);
+  } catch (e) {}
 }
 
 /** Ring/Trinket: no plain Equipped. First item ---- clears cell on select. Matches generate_bis_planner.py. */
@@ -401,6 +457,18 @@ function refreshComparisonAllSpecs_(bp) {
   refreshComparisonRichText(bp, null, null, null, sharedCaches, {
     reuseFullSheetBands: fullSheetBandSnap,
   }, null, null);
+}
+
+/**
+ * Spreadsheet menu (onOpen) and manual run: two-pass full-sheet comparison + % Upgrade refresh.
+ * Use after bulk CE edits, script paste, or if column K looks stale without toggling Equipped.
+ */
+function menuRecalculateStatComparisons_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  SpreadsheetApp.flush();
+  var bp = ss.getSheetByName(BIS_PLANNER_SHEET);
+  if (!bp) return;
+  refreshComparisonAllSpecs_(bp);
 }
 
 // ============================================================
@@ -1120,10 +1188,21 @@ function plannerRingEquippedSlotScores_(ceSheet, spec, optCaches) {
   var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
   var r1 = findCERow(ceSheet, spec, "Ring 1", aCol);
   var r2 = findCERow(ceSheet, spec, "Ring 2", aCol);
-  var s1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
-  var s2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
-  var nm1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
-  var nm2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+  var s1;
+  var s2;
+  var nm1;
+  var nm2;
+  if (optCaches && optCaches.ceGearScoreCol) {
+    s1 = r1 ? plannerCeGearScoreAtRowFromCaches_(optCaches, r1) : 0;
+    s2 = r2 ? plannerCeGearScoreAtRowFromCaches_(optCaches, r2) : 0;
+    nm1 = r1 ? plannerCeItemNameAtRowFromCaches_(optCaches, r1) : "";
+    nm2 = r2 ? plannerCeItemNameAtRowFromCaches_(optCaches, r2) : "";
+  } else {
+    s1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+    s2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+    nm1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
+    nm2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+  }
   var out = { s1: s1, s2: s2, hasItem1: nm1 !== "", hasItem2: nm2 !== "" };
   if (optCaches) {
     if (!optCaches.ringSlotScores) optCaches.ringSlotScores = {};
@@ -1149,10 +1228,21 @@ function plannerTrinketEquippedSlotScores_(ceSheet, spec, optCaches) {
   var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
   var r1 = findCERow(ceSheet, spec, "Trinket 1", aCol);
   var r2 = findCERow(ceSheet, spec, "Trinket 2", aCol);
-  var s1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
-  var s2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
-  var nm1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
-  var nm2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+  var s1;
+  var s2;
+  var nm1;
+  var nm2;
+  if (optCaches && optCaches.ceGearScoreCol) {
+    s1 = r1 ? plannerCeGearScoreAtRowFromCaches_(optCaches, r1) : 0;
+    s2 = r2 ? plannerCeGearScoreAtRowFromCaches_(optCaches, r2) : 0;
+    nm1 = r1 ? plannerCeItemNameAtRowFromCaches_(optCaches, r1) : "";
+    nm2 = r2 ? plannerCeItemNameAtRowFromCaches_(optCaches, r2) : "";
+  } else {
+    s1 = r1 ? Number(ceSheet.getRange(r1, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+    s2 = r2 ? Number(ceSheet.getRange(r2, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+    nm1 = r1 ? normalizeItemName(ceSheet.getRange(r1, CE_ITEMNAME).getValue()) : "";
+    nm2 = r2 ? normalizeItemName(ceSheet.getRange(r2, CE_ITEMNAME).getValue()) : "";
+  }
   var out = { s1: s1, s2: s2, hasItem1: nm1 !== "", hasItem2: nm2 !== "" };
   if (optCaches) {
     if (!optCaches.trinketSlotScores) optCaches.trinketSlotScores = {};
@@ -1162,8 +1252,11 @@ function plannerTrinketEquippedSlotScores_(ceSheet, spec, optCaches) {
 }
 
 /** True when Current Equipment row has an item name in column B (required before % Upgrade shows). */
-function plannerCeRowHasEquippedItemName_(ceSheet, row) {
+function plannerCeRowHasEquippedItemName_(ceSheet, row, optCaches) {
   if (!row) return false;
+  if (optCaches && optCaches.ceItemNameCol) {
+    return plannerCeItemNameAtRowFromCaches_(optCaches, row) !== "";
+  }
   return normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue()) !== "";
 }
 
@@ -1175,7 +1268,7 @@ function plannerCeHasEquippedItemForPlannerGear_(ceSheet, spec, plannerGearType,
   if (!g) return false;
   var aCol = optCaches && optCaches.ceGearCol ? optCaches.ceGearCol : null;
   var r = findCERow(ceSheet, spec, g, aCol);
-  return plannerCeRowHasEquippedItemName_(ceSheet, r);
+  return plannerCeRowHasEquippedItemName_(ceSheet, r, optCaches);
 }
 
 /** True when this planner row is the equipped item (Stat Comparison / % Upgrade stay blank). */
@@ -1224,10 +1317,46 @@ function plannerBaselineEquippedScore_(ss, ceSheet, spec, plannerGearType, eqN, 
     }
   } else {
     r0 = findCERow(ceSheet, spec, g, aCol);
-    out = r0 ? Number(ceSheet.getRange(r0, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+    if (optCaches && optCaches.ceGearScoreCol) {
+      out = r0 ? plannerCeGearScoreAtRowFromCaches_(optCaches, r0) : 0;
+    } else {
+      out = r0 ? Number(ceSheet.getRange(r0, CE_GEAR_SCORE_COL).getValue()) || 0 : 0;
+    }
   }
   if (optCaches) optCaches.baselineByKey[sk] = out;
   return out;
+}
+
+function plannerCeGearScoreAtRowFromCaches_(caches, row1Based) {
+  if (!caches || !caches.ceGearScoreCol || !row1Based) return 0;
+  var i = row1Based - 1;
+  if (i < 0 || i >= caches.ceGearScoreCol.length) return 0;
+  return Number(caches.ceGearScoreCol[i][0]) || 0;
+}
+
+function plannerCeItemNameAtRowFromCaches_(caches, row1Based) {
+  if (!caches || !caches.ceItemNameCol || !row1Based) return "";
+  var i = row1Based - 1;
+  if (i < 0 || i >= caches.ceItemNameCol.length) return "";
+  return normalizeItemName(caches.ceItemNameCol[i][0]);
+}
+
+/** Precompute ideal reg/meta gem score per socket for each spec (weights fixed per spec; was repeated per ItemDB row). */
+function plannerWarmWeightIdealGems_(caches) {
+  var st = caches.weights.specToRow;
+  for (var sk in st) {
+    if (!Object.prototype.hasOwnProperty.call(st, sk)) continue;
+    var w = caches.weights.get(sk);
+    if (!w || w.idealRegScorePerSocket != null) continue;
+    var bestRegScore = -1;
+    for (var ci = 0; ci < CE_GEM_NON_META_CATS.length; ci++) {
+      var best = bestGemInCategory_(caches.ss, CE_GEM_NON_META_CATS[ci], w.wVals, caches.gemData);
+      if (best && best.score > bestRegScore) bestRegScore = best.score;
+    }
+    w.idealRegScorePerSocket = bestRegScore >= 0 ? bestRegScore : 0;
+    var bm = bestGemInCategory_(caches.ss, "meta", w.wVals, caches.gemData);
+    w.idealMetaGemPerSocket = bm ? bm.score : 0;
+  }
 }
 
 /**
@@ -1308,7 +1437,12 @@ function plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals, optItemdbData
     trinketSlotScores: {},
     itemScoreBaseByKey: {},
     itemScoreFullByKey: {},
+    ceGearScoreCol:
+      celr >= 1 ? ceSheet.getRange(1, CE_GEAR_SCORE_COL, celr, 1).getValues() : [],
+    ceItemNameCol:
+      celr >= 1 ? ceSheet.getRange(1, CE_ITEMNAME, celr, 1).getValues() : [],
   };
+  plannerWarmWeightIdealGems_(outCaches);
   return outCaches;
 }
 
@@ -1343,8 +1477,20 @@ function plannerItemGearScoresBothWithCaches_(caches, spec, itemName) {
     base += (Number(w.wVals[i]) || 0) * (Number(row.stats[i]) || 0);
   }
   var baseR = Math.round(base * 100) / 100;
-  var plan = computeIdealGemPlan_(caches.ss, w.wVals, w.metaSockW, row.socks, caches.gemData);
-  var fullR = Math.round((base + plan.gemScore) * 100) / 100;
+  var gemScore;
+  if (w.idealRegScorePerSocket != null) {
+    var T = (row.socks.r || 0) + (row.socks.y || 0) + (row.socks.b || 0);
+    var m = row.socks.m || 0;
+    gemScore = 0;
+    if (T > 0) gemScore += T * w.idealRegScorePerSocket;
+    if (m > 0) {
+      gemScore += m * (Number(w.metaSockW) || 0);
+      gemScore += m * (w.idealMetaGemPerSocket || 0);
+    }
+  } else {
+    gemScore = computeIdealGemPlan_(caches.ss, w.wVals, w.metaSockW, row.socks, caches.gemData).gemScore;
+  }
+  var fullR = Math.round((base + gemScore) * 100) / 100;
   caches.itemScoreBaseByKey[ck] = baseR;
   caches.itemScoreFullByKey[ck] = fullR;
   return { base: baseR, full: fullR };
@@ -1651,6 +1797,22 @@ function buildDualSlotUpgradeRichText_(itemScorePlusGems, s1, s2, hasItem1, hasI
   return b.build();
 }
 
+/** Plain % Upgrade text for ring/trinket rows (batched setValues; no per-cell RichText). */
+function buildDualSlotUpgradePlainText_(itemScorePlusGems, s1, s2, hasItem1, hasItem2) {
+  var itemNum = Number(itemScorePlusGems) || 0;
+  var parts = [];
+  if (hasItem1) {
+    var p1 = upgradePctForRingTrinketSlot_(itemNum, s1, false, false, true);
+    if (p1.text !== "") parts.push("Slot 1:\n" + p1.text);
+  }
+  if (hasItem2) {
+    var p2 = upgradePctForRingTrinketSlot_(itemNum, s2, false, false, true);
+    if (p2.text !== "") parts.push("Slot 2:\n" + p2.text);
+  }
+  if (parts.length === 0) return "";
+  return parts.join("\n");
+}
+
 function flushUpgradePctCells_(bpSheet, upgradeWrites) {
   if (!upgradeWrites || upgradeWrites.length === 0) {
     return;
@@ -1677,16 +1839,33 @@ function flushUpgradePctCells_(bpSheet, upgradeWrites) {
       if (seg[jr].rich != null) anyRich = true;
     }
     if (anyRich) {
-      for (var jc = 0; jc < h; jc++) {
-        var w = seg[jc];
-        var c = bpSheet.getRange(w.r, GG_UPGRADE_COL);
-        if (w.rich != null) {
-          c.setRichTextValue(w.rich);
+      var jc = 0;
+      while (jc < h) {
+        if (seg[jc].rich != null) {
+          var jEnd = jc;
+          while (
+            jEnd + 1 < h &&
+            seg[jEnd + 1].rich != null &&
+            seg[jEnd + 1].r === seg[jEnd].r + 1
+          ) {
+            jEnd++;
+          }
+          var r0u = seg[jc].r;
+          var hu = seg[jEnd].r - r0u + 1;
+          var rtm = [];
+          for (var ju = jc; ju <= jEnd; ju++) {
+            rtm.push([seg[ju].rich]);
+          }
+          bpSheet.getRange(r0u, GG_UPGRADE_COL, hu, 1).setRichTextValues(rtm);
+          jc = jEnd + 1;
         } else {
-          c.setValue(w.text == null ? "" : w.text);
+          var w1 = seg[jc];
+          var c1 = bpSheet.getRange(w1.r, GG_UPGRADE_COL);
+          c1.setValue(w1.text == null ? "" : w1.text);
           try {
-            c.setFontColor(w.color || "#000000");
+            c1.setFontColor(w1.color || "#000000");
           } catch (eOne) {}
+          jc++;
         }
       }
       continue;
@@ -2239,6 +2418,7 @@ function handleCurrentEquipEdit(e, ceSheet) {
     var itemSt = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
     if (itemSt && ceItemNameInItemDb_(ss, itemSt)) {
       ceApplyItemDbStatsToRow_(ceSheet, row, ss, itemSt);
+      refreshCEComparisonForRow_(ceSheet, bpSheet, row);
       return;
     }
     recalculateGearScoreForRow_(ceSheet, row);
@@ -2377,6 +2557,59 @@ function findCERow(ceSheet, spec, gearType, gearColValuesOpt) {
     }
   }
   return null;
+}
+
+/**
+ * First occurrence of each (normalized spec, CE column A slot label) → 1-based row (same rules as findCERow).
+ * Used to read stat columns from CE for Stat Comparison diffs (manual + ItemDB equipped items).
+ */
+function plannerCeSlotRowMapFromColA_(colA) {
+  var map = {};
+  if (!colA || colA.length === 0) return map;
+  var curSpec = null;
+  for (var i = 0; i < colA.length; i++) {
+    var val = String(colA[i][0]);
+    if (val.indexOf("---") === 0) {
+      var parsedHdr = specDisplayNameFromSectionHeader(val);
+      curSpec = parsedHdr ? normalizeItemName(parsedHdr) : null;
+      continue;
+    }
+    if (!curSpec) continue;
+    var gt = normalizeItemName(val);
+    if (!gt || val.indexOf("---") === 0) continue;
+    if (gt === normalizeItemName(CE_WEIGHT_ROW_LABEL)) continue;
+    var key = curSpec + "\x1e" + gt;
+    if (!(key in map)) {
+      map[key] = i + 1;
+    }
+  }
+  return map;
+}
+
+/** CE stat block row (1-based) → numeric array length nStat; null if out of range. */
+function ceStatNumericArrayFromRowMatrix_(statMatrix, row1Based, nStat) {
+  if (!statMatrix || row1Based < 1 || row1Based > statMatrix.length) return null;
+  var row = statMatrix[row1Based - 1];
+  if (!row || row.length < nStat) return null;
+  var out = [];
+  for (var si = 0; si < nStat; si++) {
+    var v = row[si];
+    if (v == null || v === "") {
+      out.push(0);
+    } else {
+      var n = Number(v);
+      out.push(isNaN(n) ? 0 : n);
+    }
+  }
+  return out;
+}
+
+function plannerCeStatsForSpecSlot_(slotMap, statMatrix, spec, ceSlotLabel, nStat) {
+  if (!slotMap || !statMatrix || !ceSlotLabel) return null;
+  var key = normalizeItemName(spec) + "\x1e" + normalizeItemName(ceSlotLabel);
+  var row = slotMap[key];
+  if (!row) return null;
+  return ceStatNumericArrayFromRowMatrix_(statMatrix, row, nStat);
 }
 
 /** In-memory CE column A snapshot; same matching rules as findCERow. */
@@ -2551,17 +2784,22 @@ function plannerCmpAttrDisplayFromRaw_(raw) {
 /**
  * TEXTJOIN(", ",TRUE,…) over per-stat diff fragments for one equip slot.
  * Mirrors _build_stat_diff_helper_formula × nStat.
+ * @param {?Array<number>} optEquipCeStats — CE stat columns for that equipped slot (manual or DB); when null/short, equipped side uses ItemDB only.
  */
-function plannerStatDiffCommaJoin_(rowMap, itemName, equipName, nStat) {
+function plannerStatDiffCommaJoin_(rowMap, itemName, equipName, nStat, optEquipCeStats) {
   if (normalizeItemName(equipName) === "") return "";
   var wantItem = normalizeItemName(itemName);
   var wantEq = normalizeItemName(equipName);
   var rowI = wantItem ? rowMap[wantItem.toLowerCase()] : null;
   var rowE = wantEq ? rowMap[wantEq.toLowerCase()] : null;
+  var useCeEquip =
+    optEquipCeStats != null && optEquipCeStats.length >= nStat;
   var parts = [];
   for (var si = 0; si < nStat; si++) {
     var itemV = plannerItemdbStatNumericForDiff_(rowI, si);
-    var equipV = plannerItemdbStatNumericForDiff_(rowE, si);
+    var equipV = useCeEquip
+      ? Number(optEquipCeStats[si]) || 0
+      : plannerItemdbStatNumericForDiff_(rowE, si);
     var diff = itemV - equipV;
     if (diff === 0) continue;
     var rounded = Math.round(Math.abs(diff) * 10000) / 10000;
@@ -2590,8 +2828,19 @@ function plannerCmpSlotInner_(statJoin, attrRaw, equippedHeading) {
 
 /**
  * Full CmpRaw string for one planner row (matches generate_bis_planner.py _build_cmp_raw_formula).
+ * @param {?Array<number>} optCeStats1 — CE stat row for slot 1 / single-slot gear (when set, stat diff uses CE for equipped side).
+ * @param {?Array<number>} optCeStats2 — CE stat row for ring/trinket slot 2.
  */
-function plannerBuildCmpRawStringFromRowMap_(gearType, itemName, equipName, equip2Name, rowMap, nStat) {
+function plannerBuildCmpRawStringFromRowMap_(
+  gearType,
+  itemName,
+  equipName,
+  equip2Name,
+  rowMap,
+  nStat,
+  optCeStats1,
+  optCeStats2
+) {
   var g = normalizeItemName(gearType);
   var nm = itemName;
   var eq1 = equipName;
@@ -2603,8 +2852,8 @@ function plannerBuildCmpRawStringFromRowMap_(gearType, itemName, equipName, equi
   var rowE2 = wantE2 ? rowMap[wantE2.toLowerCase()] : null;
   var va1 = plannerItemdbAttrString_(rowE1, nStat);
   var va2 = plannerItemdbAttrString_(rowE2, nStat);
-  var tj1 = plannerStatDiffCommaJoin_(rowMap, nm, eq1, nStat);
-  var tj2 = plannerStatDiffCommaJoin_(rowMap, nm, eq2, nStat);
+  var tj1 = plannerStatDiffCommaJoin_(rowMap, nm, eq1, nStat, optCeStats1);
+  var tj2 = plannerStatDiffCommaJoin_(rowMap, nm, eq2, nStat, optCeStats2);
 
   if (g === "Ring" || g === "Trinket") {
     var inner1 = plannerCmpSlotInner_(tj1, va1, "Equipped slot 1:");
@@ -2634,6 +2883,8 @@ function plannerBuildCmpRawStringFromRowMap_(gearType, itemName, equipName, equi
 
 /**
  * Builds CmpRaw text into blockDisplay / rowNK only (layout v2: no CmpRaw sheet column).
+ * @param {?GoogleAppsScript.Spreadsheet.Sheet} optCeSheet — when set with optCeGearColVals, equipped-side stat diffs use CE stat columns (manual items).
+ * @param {?Array<Array<*>>} optCeGearColVals — CE column A rows 1..last (may be re-read if shorter than effective last row).
  */
 function plannerWriteCmpRawForComparisonRefresh_(
   bpSheet,
@@ -2641,7 +2892,9 @@ function plannerWriteCmpRawForComparisonRefresh_(
   blockDisplay,
   rowNK,
   offNInBlock,
-  optItemdbData
+  optItemdbData,
+  optCeSheet,
+  optCeGearColVals
 ) {
   var ss = bpSheet.getParent();
   var data;
@@ -2654,13 +2907,30 @@ function plannerWriteCmpRawForComparisonRefresh_(
   var nStat = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
   if (BIS_STAT_LABELS.length !== nStat) return;
   var rowMap = plannerItemdbNameToRow_(data);
+  var ceSlotMap = null;
+  var ceStatMatrix = null;
+  if (optCeSheet) {
+    var celrW = ceEffectiveLastRow_(optCeSheet);
+    if (celrW >= 1) {
+      var colAForMap = optCeGearColVals;
+      if (colAForMap == null || colAForMap.length < celrW) {
+        colAForMap = optCeSheet.getRange(1, CE_GEARTYPE, celrW, 1).getValues();
+      }
+      ceSlotMap = plannerCeSlotRowMapFromColA_(colAForMap);
+      ceStatMatrix = optCeSheet
+        .getRange(1, CE_STAT_FIRST_COL, celrW, CE_STAT_LAST_COL)
+        .getValues();
+    }
+  }
   for (var ii = 0; ii < indices.length; ii++) {
     var i = indices[ii];
+    var sp;
     var g;
     var n;
     var e1;
     var e2;
     if (blockDisplay != null) {
+      sp = blockDisplay[i][GG_SPEC - GG_SPEC];
       g = blockDisplay[i][GG_GEARTYPE - GG_SPEC];
       n = blockDisplay[i][GG_NAME - GG_SPEC];
       e1 = blockDisplay[i][GG_EQUIP - GG_SPEC];
@@ -2668,12 +2938,27 @@ function plannerWriteCmpRawForComparisonRefresh_(
     } else {
       var nk = rowNK[i];
       if (!nk) continue;
+      sp = nk.sp;
       g = nk.g;
       n = nk.n;
       e1 = nk.e;
       e2 = nk.e2;
     }
-    var s = plannerBuildCmpRawStringFromRowMap_(g, n, e1, e2, rowMap, nStat);
+    var gNorm = normalizeItemName(g);
+    var stats1 = null;
+    var stats2 = null;
+    if (ceSlotMap && ceStatMatrix) {
+      if (gNorm === "Ring") {
+        stats1 = plannerCeStatsForSpecSlot_(ceSlotMap, ceStatMatrix, sp, "Ring 1", nStat);
+        stats2 = plannerCeStatsForSpecSlot_(ceSlotMap, ceStatMatrix, sp, "Ring 2", nStat);
+      } else if (gNorm === "Trinket") {
+        stats1 = plannerCeStatsForSpecSlot_(ceSlotMap, ceStatMatrix, sp, "Trinket 1", nStat);
+        stats2 = plannerCeStatsForSpecSlot_(ceSlotMap, ceStatMatrix, sp, "Trinket 2", nStat);
+      } else if (gNorm) {
+        stats1 = plannerCeStatsForSpecSlot_(ceSlotMap, ceStatMatrix, sp, gNorm, nStat);
+      }
+    }
+    var s = plannerBuildCmpRawStringFromRowMap_(g, n, e1, e2, rowMap, nStat, stats1, stats2);
     if (blockDisplay != null) {
       blockDisplay[i][offNInBlock] = s;
     } else {
@@ -2905,6 +3190,7 @@ function plannerCmpRawRefreshRowFingerprint_(dispStr, heroicDarkRow, intN, equip
  *   pass 1 fills captureFullSheetBands with partAD/partFI; pass 2 reuses them and refreshes CE-derived equip + K formulas.
  * @param {?Array<Array<*>>} optCeGearColVals - CE column A getValues (rows 1..effective last row); skips duplicate read in cache build.
  * @param {?number} optPlannerLastRow - when >= BIS_FIRST_DATA_ROW, skip getLastRow (equip path passes fresh lastRow).
+ * @param {boolean=} optPlainComparisonDisp - full-sheet only: write plain text to K/L in bulk (fast onOpen fallback); omit for colored Rich Text.
  */
 function refreshComparisonRichText(
   bpSheet,
@@ -2914,7 +3200,8 @@ function refreshComparisonRichText(
   optSharedPlannerCaches,
   optFullSheetIo_,
   optCeGearColVals,
-  optPlannerLastRow
+  optPlannerLastRow,
+  optPlainComparisonDisp
 ) {
   var lastRow;
   if (optPlannerLastRow != null && Number(optPlannerLastRow) >= BIS_FIRST_DATA_ROW) {
@@ -2937,7 +3224,8 @@ function refreshComparisonRichText(
       lastRow,
       optSharedPlannerCaches,
       optFullSheetIo_,
-      optCeGearColVals
+      optCeGearColVals,
+      optPlainComparisonDisp
     );
   } finally {
     bisRefreshReentryDepth_--;
@@ -2952,7 +3240,8 @@ function refreshComparisonRichTextInner_(
   lastRow,
   optSharedPlannerCaches,
   optFullSheetIo_,
-  optCeGearColVals
+  optCeGearColVals,
+  optPlainComparisonDisp
 ) {
   var specFilterNorm =
     specFilter != null && String(specFilter).replace(/^\s+|\s+$/g, "") !== ""
@@ -3170,7 +3459,9 @@ function refreshComparisonRichTextInner_(
       blockDisplay,
       rowNK,
       offNInBlock,
-      threadItemdb
+      threadItemdb,
+      ceSheetInner,
+      ceGearColInner
     );
     threadGem = gemdbReadAllRows_(ssInner);
   }
@@ -3211,6 +3502,25 @@ function refreshComparisonRichTextInner_(
         threadItemdb,
         threadGem
       );
+    }
+  }
+
+  var usePlainFullSheet =
+    optPlainComparisonDisp === true &&
+    !specFilterNorm &&
+    !gearFilterNorm &&
+    cmpNumRows > 0;
+  var kPlainMat = null;
+  var lPlainTexts = null;
+  var lPlainColors = null;
+  if (usePlainFullSheet) {
+    kPlainMat = [];
+    lPlainTexts = [];
+    lPlainColors = [];
+    for (var pi = 0; pi < cmpNumRows; pi++) {
+      kPlainMat.push([""]);
+      lPlainTexts.push([""]);
+      lPlainColors.push(["#000000"]);
     }
   }
 
@@ -3284,6 +3594,7 @@ function refreshComparisonRichTextInner_(
     if (capBandSnap || (reuseBandSnap && reuseBandSnap.cmpSkipFp)) {
       fpKey = plannerCmpRawRefreshRowFingerprint_(dispStr, heroicDarkRow, intN, equippedHide);
       if (
+        !usePlainFullSheet &&
         reuseBandSnap &&
         reuseBandSnap.cmpSkipFp &&
         Object.prototype.hasOwnProperty.call(reuseBandSnap.cmpSkipFp, r) &&
@@ -3312,33 +3623,43 @@ function refreshComparisonRichTextInner_(
         if (!capBandSnap.cmpSkipFp) capBandSnap.cmpSkipFp = {};
         capBandSnap.cmpSkipFp[r] = fpKey;
       }
-      if (!cellIsCmpRawMirrorFormula_(kF, r)) {
-        writes.push({ r: r, kind: "mirror", needClearBefore: true });
-      }
-      upgradeWrites.push({
-        r: r,
-        text: "",
-        color: "#000000",
-      });
-      continue;
-    }
-    try {
-      var rich = buildComparisonRichTextValue(dispStr, heroicDarkRow);
-      if (rich) {
-        writes.push({
-          r: r,
-          kind: "rich",
-          rich: rich,
-          needClearBefore: true,
-        });
+      if (usePlainFullSheet) {
+        kPlainMat[i] = [dispStr];
+        lPlainTexts[i] = [""];
+        lPlainColors[i] = ["#000000"];
       } else {
         if (!cellIsCmpRawMirrorFormula_(kF, r)) {
           writes.push({ r: r, kind: "mirror", needClearBefore: true });
         }
+        upgradeWrites.push({
+          r: r,
+          text: "",
+          color: "#000000",
+        });
       }
-    } catch (err) {
-      if (!cellIsCmpRawMirrorFormula_(kF, r)) {
-        writes.push({ r: r, kind: "mirror", needClearBefore: true });
+      continue;
+    }
+    if (usePlainFullSheet) {
+      kPlainMat[i] = [normalizeComparisonDisplay(dispStr)];
+    } else {
+      try {
+        var rich = buildComparisonRichTextValue(dispStr, heroicDarkRow);
+        if (rich) {
+          writes.push({
+            r: r,
+            kind: "rich",
+            rich: rich,
+            needClearBefore: true,
+          });
+        } else {
+          if (!cellIsCmpRawMirrorFormula_(kF, r)) {
+            writes.push({ r: r, kind: "mirror", needClearBefore: true });
+          }
+        }
+      } catch (err) {
+        if (!cellIsCmpRawMirrorFormula_(kF, r)) {
+          writes.push({ r: r, kind: "mirror", needClearBefore: true });
+        }
       }
     }
     var hidePct =
@@ -3351,18 +3672,31 @@ function refreshComparisonRichTextInner_(
         gearNorm === "Ring"
           ? plannerRingEquippedSlotScores_(ceSheet, specRow, plannerCaches)
           : plannerTrinketEquippedSlotScores_(ceSheet, specRow, plannerCaches);
-      var dualRich = buildDualSlotUpgradeRichText_(
-        Number(itemFullNum) || 0,
-        s1s2.s1,
-        s1s2.s2,
-        s1s2.hasItem1,
-        s1s2.hasItem2,
-        heroicDarkRow
-      );
-      if (dualRich) {
-        upgradeWrites.push({ r: r, rich: dualRich });
+      if (usePlainFullSheet) {
+        lPlainTexts[i] = [
+          buildDualSlotUpgradePlainText_(
+            Number(itemFullNum) || 0,
+            s1s2.s1,
+            s1s2.s2,
+            s1s2.hasItem1,
+            s1s2.hasItem2
+          ),
+        ];
+        lPlainColors[i] = ["#000000"];
       } else {
-        upgradeWrites.push({ r: r, text: "", color: "#000000" });
+        var dualRich = buildDualSlotUpgradeRichText_(
+          Number(itemFullNum) || 0,
+          s1s2.s1,
+          s1s2.s2,
+          s1s2.hasItem1,
+          s1s2.hasItem2,
+          heroicDarkRow
+        );
+        if (dualRich) {
+          upgradeWrites.push({ r: r, rich: dualRich });
+        } else {
+          upgradeWrites.push({ r: r, text: "", color: "#000000" });
+        }
       }
     } else {
       var ceHasEq =
@@ -3376,7 +3710,12 @@ function refreshComparisonRichTextInner_(
         hidePct,
         ceHasEq
       );
-      upgradeWrites.push({ r: r, text: uh.text, color: uh.color });
+      if (usePlainFullSheet) {
+        lPlainTexts[i] = [uh.text == null ? "" : uh.text];
+        lPlainColors[i] = [uh.color || "#000000"];
+      } else {
+        upgradeWrites.push({ r: r, text: uh.text, color: uh.color });
+      }
     }
     if (capBandSnap && fpKey != null) {
       if (!capBandSnap.cmpSkipFp) capBandSnap.cmpSkipFp = {};
@@ -3384,10 +3723,17 @@ function refreshComparisonRichTextInner_(
     }
   }
 
-
-  flushComparisonWrites_(bpSheet, writes, cmpRawLetter);
+  if (usePlainFullSheet) {
+    bpSheet.getRange(BIS_FIRST_DATA_ROW, CMP_DISP_COL, cmpNumRows, 1).setValues(kPlainMat);
+    bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_UPGRADE_COL, cmpNumRows, 1).setValues(lPlainTexts);
+    try {
+      bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_UPGRADE_COL, cmpNumRows, 1).setFontColors(lPlainColors);
+    } catch (ePl) {}
+  } else {
+    flushComparisonWrites_(bpSheet, writes, cmpRawLetter);
+    flushUpgradePctCells_(bpSheet, upgradeWrites);
+  }
   flushPlannerGearScoreCells_(bpSheet, []);
-  flushUpgradePctCells_(bpSheet, upgradeWrites);
 }
 
 /**
