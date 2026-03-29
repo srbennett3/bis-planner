@@ -19,13 +19,13 @@ Beast Mastery,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP; 23 C
 Beast Mastery,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP; 17 Hit,Avatar of the Martyred
 Beast Mastery,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP; 16 Hit; 18 Crit,Blackheart the Inciter
 Beast Mastery,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,25 Badges of Justice
-Beast Mastery,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit; 31 Crit,
+Beast Mastery,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 31 Crit,
 Beast Mastery,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP; 12 Hit,
 Beast Mastery,Chest,PreRaid,Beast Lord Cuirass,Dungeon Drop,,Botanica,Normal,652 Armor; 20 Agi; 30 Sta; 24 Int; 40 AP; 4 MP5,Warp Splinter
 Beast Mastery,Chest,PreRaid,Cryptstalker Tunic,Quest,Cryptstalker Tunic (Naxx),,,658 Armor; 30 Agi; 27 Sta; 15 Int; 60 AP; 4 MP5; 10 Hit; 14 Crit,
 Beast Mastery,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit,
-Beast Mastery,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit; 17 Crit,
-Beast Mastery,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,
+Beast Mastery,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 17 Crit,
+Beast Mastery,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP,
 Beast Mastery,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,
 Beast Mastery,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
 Beast Mastery,Wrist,PreRaid,Cryptstalker Wristguards,Quest,Cryptstalker Wristguards (Naxx),,,276 Armor; 18 Agi; 16 Sta; 34 AP; 10 Hit,
@@ -39,8 +39,8 @@ Equip: Increases the damage done by your Multi-Shot by 5%",
 Beast Mastery,Hands,PreRaid,Marshal's Chain Grips,PvP,,,,"363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit
 
 Equip: Increases the damage done by your Multi-Shot by 5%",
-Beast Mastery,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit; 22 Crit,
-Beast Mastery,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP; 20 Hit,
+Beast Mastery,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 22 Crit,
+Beast Mastery,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP,
 Beast Mastery,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,
 Beast Mastery,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,Ghaz'an
 Beast Mastery,Waist,PreRaid,Cryptstalker Girdle,Quest,Cryptstalker Girdle (Naxx),,,355 Armor; 16 Agi; 22 Sta; 12 Int; 30 AP; 3 MP5; 10 Hit; 14 Crit,
@@ -48,7 +48,7 @@ Beast Mastery,Legs,PreRaid,Beast Lord Leggings,Dungeon Drop,,Steamvault,Normal,5
 Beast Mastery,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Beast Mastery,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 19 Hit,Nexus-Prince Shaffar
 Beast Mastery,Legs,PreRaid,Cryptstalker Legguards,Quest,Cryptstalker Legguards (Naxx),,,552 Armor; 28 Agi; 26 Sta; 10 Int; 56 AP; 6 MP5; 14 Crit,
-Beast Mastery,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit,
+Beast Mastery,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Beast Mastery,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP; 16 Hit
 
 Equip: Increases your effective stealth level by 1",World Drop
@@ -116,13 +116,13 @@ Marksmanship,Back,PreRaid,Vengeance Wrap,Auction House,,,,89 Armor; 52 AP; 23 Cr
 Marksmanship,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Heroic,78 Armor; 15 Agi; 15 Sta; 36 AP; 17 Hit,Avatar of the Martyred
 Marksmanship,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP; 16 Hit; 18 Crit,Blackheart the Inciter
 Marksmanship,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,25 Badges of Justice
-Marksmanship,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit; 31 Crit,
+Marksmanship,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 31 Crit,
 Marksmanship,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP; 12 Hit,
 Marksmanship,Chest,PreRaid,Beast Lord Cuirass,Dungeon Drop,,Botanica,Normal,652 Armor; 20 Agi; 30 Sta; 24 Int; 40 AP; 4 MP5,Warp Splinter
 Marksmanship,Chest,PreRaid,Cryptstalker Tunic,Quest,Cryptstalker Tunic (Naxx),,,658 Armor; 30 Agi; 27 Sta; 15 Int; 60 AP; 4 MP5; 10 Hit; 14 Crit,
 Marksmanship,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit,
-Marksmanship,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit; 17 Crit,
-Marksmanship,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,
+Marksmanship,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 17 Crit,
+Marksmanship,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP,
 Marksmanship,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,
 Marksmanship,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
 Marksmanship,Wrist,PreRaid,Cryptstalker Wristguards,Quest,Cryptstalker Wristguards (Naxx),,,276 Armor; 18 Agi; 16 Sta; 34 AP; 10 Hit,
@@ -136,8 +136,8 @@ Equip: Increases the damage done by your Multi-Shot by 5%",
 Marksmanship,Hands,PreRaid,Marshal's Chain Grips,PvP,,,,"363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit
 
 Equip: Increases the damage done by your Multi-Shot by 5%",
-Marksmanship,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit; 22 Crit,
-Marksmanship,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP; 20 Hit,
+Marksmanship,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 22 Crit,
+Marksmanship,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP,
 Marksmanship,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,
 Marksmanship,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,Ghaz'an
 Marksmanship,Waist,PreRaid,Cryptstalker Girdle,Quest,Cryptstalker Girdle (Naxx),,,355 Armor; 16 Agi; 22 Sta; 12 Int; 30 AP; 3 MP5; 10 Hit; 14 Crit,
@@ -145,7 +145,7 @@ Marksmanship,Legs,PreRaid,Beast Lord Leggings,Dungeon Drop,,Steamvault,Normal,57
 Marksmanship,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Marksmanship,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 19 Hit,Nexus-Prince Shaffar
 Marksmanship,Legs,PreRaid,Cryptstalker Legguards,Quest,Cryptstalker Legguards (Naxx),,,552 Armor; 28 Agi; 26 Sta; 10 Int; 56 AP; 6 MP5; 14 Crit,
-Marksmanship,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit,
+Marksmanship,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Marksmanship,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP; 16 Hit
 
 Equip: Increases your effective stealth level by 1",World Drop
@@ -217,7 +217,7 @@ Survival,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 
 Survival,Chest,PreRaid,Beast Lord Cuirass,Dungeon Drop,,Botanica,Normal,652 Armor; 20 Agi; 30 Sta; 24 Int; 40 AP; 4 MP5,Warp Splinter
 Survival,Chest,PreRaid,Cryptstalker Tunic,Quest,Cryptstalker Tunic (Naxx),,,658 Armor; 30 Agi; 27 Sta; 15 Int; 60 AP; 4 MP5; 10 Hit; 14 Crit,
 Survival,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit,
-Survival,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,
+Survival,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP,
 Survival,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,
 Survival,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
 Survival,Wrist,PreRaid,Cryptstalker Wristguards,Quest,Cryptstalker Wristguards (Naxx),,,276 Armor; 18 Agi; 16 Sta; 34 AP; 10 Hit,
@@ -231,7 +231,7 @@ Equip: Increases the damage done by your Multi-Shot by 5%",
 Survival,Hands,PreRaid,Marshal's Chain Grips,PvP,,,,"363 Armor; 14 Agi; 20 Sta; 4 Int; 28 AP; 14 Crit
 
 Equip: Increases the damage done by your Multi-Shot by 5%",
-Survival,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP; 20 Hit,
+Survival,Waist,PreRaid,Felstalker Belt,Auction House,,,,357 Armor; 18 Agi; 4 Sta; 17 Int; 50 AP,
 Survival,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,
 Survival,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,Ghaz'an
 Survival,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
@@ -242,7 +242,7 @@ Survival,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Arm
 Survival,Legs,PreRaid,Scaled Greaves of Patience,Dungeon Drop,,Old Hillsbrad Foothills,Normal,513 Armor; 28 Agi; 24 Sta; 13 Int; 46 AP; 4 MP5,Captain Skarloc
 Survival,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 19 Hit,Nexus-Prince Shaffar
 Survival,Legs,PreRaid,Cryptstalker Legguards,Quest,Cryptstalker Legguards (Naxx),,,552 Armor; 28 Agi; 26 Sta; 10 Int; 56 AP; 6 MP5; 14 Crit,
-Survival,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit,
+Survival,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Survival,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP; 16 Hit
 
 Equip: Increases your effective stealth level by 1",World Drop

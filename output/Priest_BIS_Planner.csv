@@ -126,7 +126,7 @@ Holy,Ranged/Relic,PreRaid,Rejuvenating Scepter,Quest,Ar'kelos the Guardian (NS),
 Holy,Ranged/Relic,PreRaid,Wand of the Seer,Quest,Turning Point (NS),,,8 Int; 5 Spi; 18 Healing; 18 Spell Dmg,
 Shadow,Head,PreRaid,Spellstrike Hood,Auction House,,,,145 Armor; 16 Sta; 12 Int; 46 Healing; 46 Spell Dmg; 16 Spell Hit; 24 Spell Crit,
 Shadow,Head,PreRaid,Hood of Oblivion,Dungeon Drop,,Arcatraz,Normal,127 Armor; 27 Sta; 32 Int; 40 Healing; 40 Spell Dmg,Harbinger Skyriss
-Shadow,Head,PreRaid,Mana-Etched Crown,Dungeon Drop,,Black Morass,Normal,"127 Armor; 27 Sta; 20 Int; 34 Healing; 34 Spell Dmg; 35 Spell Hit
+Shadow,Head,PreRaid,Mana-Etched Crown,Dungeon Drop,,Black Morass,Normal,"127 Armor; 27 Sta; 20 Int; 34 Healing; 34 Spell Dmg
 
 Equip: Increases your spell penetration by 15",Aeonus
 Shadow,Head,PreRaid,Evoker's Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"120 Armor; 12 Sta; 15 Int; 8 Spi; 35 Healing; 35 Spell Dmg; 24 Spell Crit
@@ -170,7 +170,7 @@ Shadow,Hands,PreRaid,Gloves of the Deadwatcher,Dungeon Drop,,Auchenai Crypts,Her
 Shadow,Hands,PreRaid,Jaedenfire Gloves of Annihilation,Dungeon Drop,,Shadow Labyrinth,Normal,"95 Armor; 25 Sta; 25 Int
 
 Equip: Increases damage done by Shadow spells and effects by up to 39",Ambassador Hellmaw
-Shadow,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Omor the Unscarred
+Shadow,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Omor the Unscarred
 Shadow,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Healing; 16 Spell Dmg; 15 Spell Hit,Hungarfen
 Shadow,Hands,PreRaid,Uvuros Hide Gloves,Quest,"Wanted: Uvuros, Scourge of Shadowmoon (SMV)",,,88 Armor; 16 Sta; 12 Int; 11 Spi; 35 Healing; 35 Spell Dmg,
 Shadow,Hands,PreRaid,Tempest's Touch,Quest (Dung),Return to Andormu (CoT),,,"88 Armor; 10 Sta; 20 Int; 6 Spi; 27 Healing; 27 Spell Dmg

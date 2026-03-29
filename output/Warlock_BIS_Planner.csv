@@ -10,7 +10,7 @@ Affliction,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,"133 Ar
 
 Equip: Increases damage done by Shadow spells and effects by up to 50;
 Equip: Increases damage done by Frost spells and effects by up to 50",
-Affliction,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Quagmirran
+Affliction,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Quagmirran
 Affliction,Shoulder,PreRaid,Mantle of Three Terrors,Dungeon Drop,,Black Morass,Normal,114 Armor; 29 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 12 Spell Hit,Chrono Lord Deja
 Affliction,Shoulder,PreRaid,Plagueheart Shoulderpads,Quest,Plagueheart Shoulderpads (Naxx),,,111 Armor; 22 Sta; 12 Int; 36 Healing; 36 Spell Dmg; 8 Spell Hit,
 Affliction,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Healing; 40 Spell Dmg; 18 Spell Crit,
@@ -23,7 +23,7 @@ Affliction,Chest,PreRaid,Frozen Shadoweave Robe,Auction House,,,,"178 Armor; 30 
 Equip: Increases damage done by Shadow spells and effects by up to 72;
 Equip: Increases damage done by Frost spells and effects by up to 72",
 Affliction,Chest,PreRaid,Robe of the Crimson Order,Auction House,,,,152 Armor; 23 Int; 50 Healing; 50 Spell Dmg; 30 Spell Hit,World Drop
-Affliction,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 35 Spell Hit; 17 Spell Crit,Epoch Hunter
+Affliction,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 17 Spell Crit,Epoch Hunter
 Affliction,Chest,PreRaid,Robe of Oblivion,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 30 Sta; 20 Int; 40 Healing; 40 Spell Dmg,Murmur
 Affliction,Chest,PreRaid,Plagueheart Robe,Quest,Plagueheart Robe (Naxx),,,158 Armor; 27 Sta; 22 Int; 51 Healing; 51 Spell Dmg; 8 Spell Hit; 14 Spell Crit,
 Affliction,Chest,PreRaid,Auchenai Anchorite's Robe,Quest (Dung),Everything Will Be Alright (AC),,,136 Armor; 24 Int; 28 Healing; 28 Spell Dmg; 23 Spell Hit,
@@ -33,7 +33,7 @@ Affliction,Wrist,PreRaid,Rockfury Bracers,Reputation,,,,48 Armor; 7 Sta; 27 Heal
 Affliction,Hands,PreRaid,Gloves of Pandemonium,Auction House,,,,78 Armor; 15 Int; 25 Healing; 25 Spell Dmg; 10 Spell Hit; 22 Spell Crit,World Drop
 Affliction,Hands,PreRaid,Dark Storm Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,95 Armor; 19 Sta; 15 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,C'Thun
 Affliction,Hands,PreRaid,Gloves of Oblivion,Dungeon Drop,,Shattered Halls,Normal,97 Armor; 33 Sta; 21 Int; 26 Healing; 26 Spell Dmg; 20 Spell Hit,Warchief Kargath Bladefist
-Affliction,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Omor the Unscarred
+Affliction,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Omor the Unscarred
 Affliction,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Healing; 16 Spell Dmg; 15 Spell Hit,Hungarfen
 Affliction,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg; 20 Spell Crit,
 Affliction,Waist,PreRaid,Belt of Depravity,Dungeon Drop,,Arcatraz,Heroic,105 Armor; 31 Sta; 27 Int; 34 Healing; 34 Spell Dmg; 17 Spell Hit,Harbinger Skyriss
@@ -46,7 +46,7 @@ Affliction,Legs,PreRaid,Fel Infused Leggings,Dungeon Drop,,Blasted Lands,Normal,
 
 Equip: Increases damage done by Shadow spells and effects by up to 64",Lord Kazzak
 Affliction,Legs,PreRaid,Leggings of Polarity,Dungeon Drop,,Naxxramas,Normal,128 Armor; 20 Sta; 14 Int; 44 Healing; 44 Spell Dmg; 28 Spell Crit,Thaddius
-Affliction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit; 21 Spell Crit
+Affliction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 21 Spell Crit
 
 Equip: Increases your spell penetration by 18",The Black Stalker
 Affliction,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg; 12 Spell Hit,Talon King Ikiss
@@ -120,7 +120,7 @@ Demonology,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,"133 Ar
 
 Equip: Increases damage done by Shadow spells and effects by up to 50;
 Equip: Increases damage done by Frost spells and effects by up to 50",
-Demonology,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Quagmirran
+Demonology,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Quagmirran
 Demonology,Shoulder,PreRaid,Mantle of Three Terrors,Dungeon Drop,,Black Morass,Normal,114 Armor; 29 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 12 Spell Hit,Chrono Lord Deja
 Demonology,Shoulder,PreRaid,Plagueheart Shoulderpads,Quest,Plagueheart Shoulderpads (Naxx),,,111 Armor; 22 Sta; 12 Int; 36 Healing; 36 Spell Dmg; 8 Spell Hit,
 Demonology,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Healing; 40 Spell Dmg; 18 Spell Crit,
@@ -133,7 +133,7 @@ Demonology,Chest,PreRaid,Frozen Shadoweave Robe,Auction House,,,,"178 Armor; 30 
 Equip: Increases damage done by Shadow spells and effects by up to 72;
 Equip: Increases damage done by Frost spells and effects by up to 72",
 Demonology,Chest,PreRaid,Robe of the Crimson Order,Auction House,,,,152 Armor; 23 Int; 50 Healing; 50 Spell Dmg; 30 Spell Hit,World Drop
-Demonology,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 35 Spell Hit; 17 Spell Crit,Epoch Hunter
+Demonology,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 17 Spell Crit,Epoch Hunter
 Demonology,Chest,PreRaid,Robe of Oblivion,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 30 Sta; 20 Int; 40 Healing; 40 Spell Dmg,Murmur
 Demonology,Chest,PreRaid,Plagueheart Robe,Quest,Plagueheart Robe (Naxx),,,158 Armor; 27 Sta; 22 Int; 51 Healing; 51 Spell Dmg; 8 Spell Hit; 14 Spell Crit,
 Demonology,Chest,PreRaid,Auchenai Anchorite's Robe,Quest (Dung),Everything Will Be Alright (AC),,,136 Armor; 24 Int; 28 Healing; 28 Spell Dmg; 23 Spell Hit,
@@ -143,7 +143,7 @@ Demonology,Wrist,PreRaid,Rockfury Bracers,Reputation,,,,48 Armor; 7 Sta; 27 Heal
 Demonology,Hands,PreRaid,Gloves of Pandemonium,Auction House,,,,78 Armor; 15 Int; 25 Healing; 25 Spell Dmg; 10 Spell Hit; 22 Spell Crit,World Drop
 Demonology,Hands,PreRaid,Dark Storm Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,95 Armor; 19 Sta; 15 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,C'Thun
 Demonology,Hands,PreRaid,Gloves of Oblivion,Dungeon Drop,,Shattered Halls,Normal,97 Armor; 33 Sta; 21 Int; 26 Healing; 26 Spell Dmg; 20 Spell Hit,Warchief Kargath Bladefist
-Demonology,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Omor the Unscarred
+Demonology,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Omor the Unscarred
 Demonology,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Healing; 16 Spell Dmg; 15 Spell Hit,Hungarfen
 Demonology,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg; 20 Spell Crit,
 Demonology,Waist,PreRaid,Belt of Depravity,Dungeon Drop,,Arcatraz,Heroic,105 Armor; 31 Sta; 27 Int; 34 Healing; 34 Spell Dmg; 17 Spell Hit,Harbinger Skyriss
@@ -156,7 +156,7 @@ Demonology,Legs,PreRaid,Fel Infused Leggings,Dungeon Drop,,Blasted Lands,Normal,
 
 Equip: Increases damage done by Shadow spells and effects by up to 64",Lord Kazzak
 Demonology,Legs,PreRaid,Leggings of Polarity,Dungeon Drop,,Naxxramas,Normal,128 Armor; 20 Sta; 14 Int; 44 Healing; 44 Spell Dmg; 28 Spell Crit,Thaddius
-Demonology,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit; 21 Spell Crit
+Demonology,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 21 Spell Crit
 
 Equip: Increases your spell penetration by 18",The Black Stalker
 Demonology,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg; 12 Spell Hit,Talon King Ikiss
@@ -230,7 +230,7 @@ Destruction,Shoulder,PreRaid,Frozen Shadoweave Shoulders,Auction House,,,,"133 A
 
 Equip: Increases damage done by Shadow spells and effects by up to 50;
 Equip: Increases damage done by Frost spells and effects by up to 50",
-Destruction,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Quagmirran
+Destruction,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Quagmirran
 Destruction,Shoulder,PreRaid,Mantle of Three Terrors,Dungeon Drop,,Black Morass,Normal,114 Armor; 29 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 12 Spell Hit,Chrono Lord Deja
 Destruction,Shoulder,PreRaid,Plagueheart Shoulderpads,Quest,Plagueheart Shoulderpads (Naxx),,,111 Armor; 22 Sta; 12 Int; 36 Healing; 36 Spell Dmg; 8 Spell Hit,
 Destruction,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Healing; 40 Spell Dmg; 18 Spell Crit,
@@ -247,7 +247,7 @@ Destruction,Chest,PreRaid,Spellfire Robe,Auction House,,,,"178 Armor; 4 Sta; 17 
 
 Equip: Increases damage done by Fire spells and effects by up to 72;
 Equip: Increases damage done by Arcane spells and effects by up to 72",
-Destruction,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 35 Spell Hit; 17 Spell Crit,Epoch Hunter
+Destruction,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 17 Spell Crit,Epoch Hunter
 Destruction,Chest,PreRaid,Robe of Oblivion,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 30 Sta; 20 Int; 40 Healing; 40 Spell Dmg,Murmur
 Destruction,Chest,PreRaid,Plagueheart Robe,Quest,Plagueheart Robe (Naxx),,,158 Armor; 27 Sta; 22 Int; 51 Healing; 51 Spell Dmg; 8 Spell Hit; 14 Spell Crit,
 Destruction,Chest,PreRaid,Auchenai Anchorite's Robe,Quest (Dung),Everything Will Be Alright (AC),,,136 Armor; 24 Int; 28 Healing; 28 Spell Dmg; 23 Spell Hit,
@@ -261,7 +261,7 @@ Equip: Increases damage done by Fire spells and effects by up to 50;
 Equip: Increases damage done by Arcane spells and effects by up to 50",
 Destruction,Hands,PreRaid,Dark Storm Gauntlets,Dungeon Drop,,Ahn'Qiraj,Normal,95 Armor; 19 Sta; 15 Int; 37 Healing; 37 Spell Dmg; 8 Spell Hit,C'Thun
 Destruction,Hands,PreRaid,Gloves of Oblivion,Dungeon Drop,,Shattered Halls,Normal,97 Armor; 33 Sta; 21 Int; 26 Healing; 26 Spell Dmg; 20 Spell Hit,Warchief Kargath Bladefist
-Destruction,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Omor the Unscarred
+Destruction,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Omor the Unscarred
 Destruction,Hands,PreRaid,Manaspark Gloves,Dungeon Drop,,Underbog,Normal,81 Armor; 14 Sta; 14 Int; 10 Spi; 16 Healing; 16 Spell Dmg; 15 Spell Hit,Hungarfen
 Destruction,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg; 20 Spell Crit,
 Destruction,Waist,PreRaid,Spellfire Belt,Auction House,,,,"100 Armor; 4 Sta; 18 Int; 18 Spell Crit
@@ -277,7 +277,7 @@ Destruction,Legs,PreRaid,Fel Infused Leggings,Dungeon Drop,,Blasted Lands,Normal
 
 Equip: Increases damage done by Shadow spells and effects by up to 64",Lord Kazzak
 Destruction,Legs,PreRaid,Leggings of Polarity,Dungeon Drop,,Naxxramas,Normal,128 Armor; 20 Sta; 14 Int; 44 Healing; 44 Spell Dmg; 28 Spell Crit,Thaddius
-Destruction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 35 Spell Hit; 21 Spell Crit
+Destruction,Legs,PreRaid,Mana-Etched Pantaloons,Dungeon Drop,,Underbog,Normal,"136 Armor; 34 Sta; 32 Int; 33 Healing; 33 Spell Dmg; 21 Spell Crit
 
 Equip: Increases your spell penetration by 18",The Black Stalker
 Destruction,Legs,PreRaid,Trousers of Oblivion,Dungeon Drop,,Sethekk Halls,Normal,136 Armor; 42 Sta; 33 Int; 39 Healing; 39 Spell Dmg; 12 Spell Hit,Talon King Ikiss

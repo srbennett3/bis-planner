@@ -9,31 +9,31 @@ Elemental,Head,PreRaid,Storm Master's Helmet,Dungeon Token,,,,632 Armor; 24 Sta;
 Elemental,Head,PreRaid,Shamanistic Helmet of Second Sight,Quest,"Teron Gorefiend, I am... (SMV)",,,"503 Armor; 12 Sta; 15 Int; 35 Healing; 35 Spell Dmg; 4 MP5; 24 Spell Crit
 
 Equip: Allows the bearer to see into the ghost world while in Shadowmoon Valley",
-Elemental,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Quagmirran
+Elemental,Shoulder,PreRaid,Mana-Etched Spaulders,Dungeon Drop,,Slave Pens,Heroic,117 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Quagmirran
 Elemental,Shoulder,PreRaid,Pauldrons of Wild Magic,Dungeon Drop,,Slave Pens,Heroic,583 Armor; 21 Sta; 28 Int; 33 Healing; 33 Spell Dmg; 23 Spell Crit,Quagmirran
 Elemental,Shoulder,PreRaid,Spaulders of the Torn-heart,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,111 Armor; 10 Sta; 7 Int; 8 Spi; 40 Healing; 40 Spell Dmg; 18 Spell Crit,
 Elemental,Back,PreRaid,Sethekk Oracle Cloak,Dungeon Drop,,Sethekk Halls,Normal,78 Armor; 18 Sta; 18 Int; 22 Healing; 22 Spell Dmg; 12 Spell Hit,Talon King Ikiss
 Elemental,Back,PreRaid,Shawl of Shifting Probabilities,Dungeon Token,,,,93 Armor; 18 Sta; 16 Int; 21 Healing; 21 Spell Dmg; 22 Spell Crit,25 Badges of Justice
 Elemental,Chest,PreRaid,Netherstrike Breastplate,Auction House,,,,846 Armor; 34 Sta; 23 Int; 37 Healing; 37 Spell Dmg; 8 MP5; 32 Spell Crit,
 Elemental,Chest,PreRaid,Will of Edward the Odd,Auction House,,,,170 Armor; 30 Int; 53 Healing; 53 Spell Dmg; 30 Spell Crit,World Drop
-Elemental,Chest,PreRaid,Windhawk Hauberk,Auction House,,,,"379 Armor; 28 Sta; 29 Int; 29 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 19 Spell Crit
+Elemental,Chest,PreRaid,Windhawk Hauberk,Auction House,,,,"379 Armor; 28 Sta; 29 Int; 29 Spi; 42 Healing; 14 Spell Dmg; 19 Spell Crit
 
 Equip: Increases damage and healing done by magical spells and effects by up to 32",
-Elemental,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 35 Spell Hit; 17 Spell Crit,Epoch Hunter
+Elemental,Chest,PreRaid,Mana-Etched Vestments,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,156 Armor; 25 Sta; 25 Int; 29 Healing; 29 Spell Dmg; 17 Spell Crit,Epoch Hunter
 Elemental,Wrist,PreRaid,Bracers of Havok,Auction House,,,,67 Armor; 12 Int; 30 Healing; 30 Spell Dmg,
 Elemental,Wrist,PreRaid,Netherstrike Bracers,Auction House,,,,355 Armor; 13 Sta; 13 Int; 20 Healing; 20 Spell Dmg; 6 MP5; 17 Spell Crit,
-Elemental,Wrist,PreRaid,Windhawk Bracers,Auction House,,,,"159 Armor; 22 Sta; 17 Int; 7 Spi; 31 Healing; 11 Spell Dmg; 8 MP5; 16 Spell Crit
+Elemental,Wrist,PreRaid,Windhawk Bracers,Auction House,,,,"159 Armor; 22 Sta; 17 Int; 7 Spi; 31 Healing; 11 Spell Dmg; 16 Spell Crit
 
 Equip: Increases damage and healing done by magical spells and effects by up to 16",
 Elemental,Hands,PreRaid,Gloves of Pandemonium,Auction House,,,,78 Armor; 15 Int; 25 Healing; 25 Spell Dmg; 10 Spell Hit; 22 Spell Crit,World Drop
 Elemental,Hands,PreRaid,Earth Mantle Handwraps,Dungeon Drop,,Steamvault,Normal,397 Armor; 21 Sta; 18 Int; 19 Healing; 19 Spell Dmg; 16 Spell Crit,Mekgineer Steamrigger
-Elemental,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 35 Spell Hit; 16 Spell Crit,Omor the Unscarred
+Elemental,Hands,PreRaid,Mana-Etched Gloves,Dungeon Drop,,Hellfire Ramparts,Heroic,97 Armor; 25 Sta; 17 Int; 20 Healing; 20 Spell Dmg; 16 Spell Crit,Omor the Unscarred
 Elemental,Hands,PreRaid,Thundercaller's Gauntlets,Dungeon Drop,,Mana Tombs,Normal,377 Armor; 16 Sta; 16 Int; 35 Healing; 35 Spell Dmg; 18 Spell Crit,Tavarok
 Elemental,Hands,PreRaid,Grips of the Void,Quest,Enraged Spirits of Air (SMV),,,88 Armor; 18 Sta; 11 Int; 35 Healing; 35 Spell Dmg; 10 Spell Crit,
 Elemental,Waist,PreRaid,Girdle of Ruination,Auction House,,,,100 Armor; 18 Sta; 13 Int; 39 Healing; 39 Spell Dmg; 20 Spell Crit,
 Elemental,Waist,PreRaid,Netherstrike Belt,Auction House,,,,457 Armor; 10 Sta; 17 Int; 30 Healing; 30 Spell Dmg; 9 MP5; 16 Spell Crit,
 Elemental,Waist,PreRaid,Sash of Sealed Fate,Auction House,,,,81 Armor; 15 Int; 35 Healing; 35 Spell Dmg; 23 Spell Crit,World Drop
-Elemental,Waist,PreRaid,Windhawk Belt,Auction House,,,,"205 Armor; 17 Sta; 19 Int; 20 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 12 Spell Crit
+Elemental,Waist,PreRaid,Windhawk Belt,Auction House,,,,"205 Armor; 17 Sta; 19 Int; 20 Spi; 42 Healing; 14 Spell Dmg; 12 Spell Crit
 
 Equip: Increases damage and healing done by magical spells and effects by up to 23",
 Elemental,Legs,PreRaid,Spellstrike Pants,Auction House,,,,156 Armor; 12 Sta; 8 Int; 46 Healing; 46 Spell Dmg; 22 Spell Hit; 26 Spell Crit,
@@ -98,31 +98,31 @@ Enhancement,Back,PreRaid,Auchenai Death Shroud,Dungeon Drop,,Auchenai Crypts,Her
 Enhancement,Back,PreRaid,Capacitus' Cloak of Calibration,Dungeon Drop,,Mechanar,Normal,78 Armor; 22 Str; 18 Agi; 19 Sta,The Gatewatchers
 Enhancement,Back,PreRaid,Cloak of the Inciter,Dungeon Drop,,Shadow Labyrinth,Normal,76 Armor; 15 Sta; 30 AP; 16 Hit; 18 Crit,Blackheart the Inciter
 Enhancement,Back,PreRaid,Blood Knight War Cloak,Dungeon Token,,,,93 Armor; 23 Agi; 22 Sta; 48 AP,25 Badges of Justice
-Enhancement,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 20 Hit; 31 Crit,
+Enhancement,Chest,PreRaid,Ebon Netherscale Breastplate,Auction House,,,,846 Armor; 4 Agi; 25 Sta; 23 Int; 80 AP; 8 MP5; 31 Crit,
 Enhancement,Chest,PreRaid,Primalstrike Vest,Auction House,,,,379 Armor; 38 Agi; 39 Sta; 108 AP; 12 Hit,
 Enhancement,Chest,PreRaid,Hauberk of Karabor,Quest,Varedis Must Be Stopped (SMV),,,278 Armor; 25 Agi; 18 Sta; 90 AP; 12 Hit,
-Enhancement,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 20 Hit; 17 Crit,
-Enhancement,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP; 20 Hit,
+Enhancement,Wrist,PreRaid,Ebon Netherscale Bracers,Auction House,,,,325 Armor; 2 Agi; 25 Sta; 8 Int; 38 AP; 5 MP5; 17 Crit,
+Enhancement,Wrist,PreRaid,Felstalker Bracers,Auction House,,,,283 Armor; 18 Agi; 3 Sta; 11 Int; 38 AP,
 Enhancement,Wrist,PreRaid,Primalstrike Bracers,Auction House,,,,159 Armor; 15 Agi; 21 Sta; 64 AP,
 Enhancement,Wrist,PreRaid,Nightfall Wristguards,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,153 Armor; 24 Agi; 22 Sta; 46 AP,Epoch Hunter
 Enhancement,Wrist,PreRaid,Nightstalker's Wristguards,Quest,Down With Daellis (NS),,,112 Armor; 12 Agi; 42 AP; 9 Hit,
 Enhancement,Wrist,PreRaid,Spymistress's Wristguards,Quest (Dung),The Soul Devices (SL),,,128 Armor; 18 Agi; 15 Sta; 15 Hit,
 Enhancement,Hands,PreRaid,Cobrascale Gloves,Auction House,,,,208 Armor; 33 Sta; 50 AP; 20 Hit; 25 Crit,
-Enhancement,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 20 Dodge; 17 Hit; 24 Crit,
+Enhancement,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 17 Hit; 24 Crit,
 Enhancement,Hands,PreRaid,Gloves of the Unbound,Dungeon Drop,,Arcatraz,Normal,183 Armor; 27 Agi; 20 Sta; 38 AP,Wrath-Scryer Soccothrates
 Enhancement,Hands,PreRaid,Handgrips of Assassination,Dungeon Drop,,Black Morass,Normal,183 Armor; 25 Agi; 24 Sta; 50 AP; 17 Hit,Aeonus
 Enhancement,Hands,PreRaid,Predatory Gloves,Dungeon Drop,,Mana Tombs,Heroic,183 Armor; 16 Sta; 48 AP; 19 Hit; 21 Crit,Tavarok
 Enhancement,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
-Enhancement,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 20 Hit; 22 Crit,
+Enhancement,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 22 Crit,
 Enhancement,Waist,PreRaid,Primalstrike Belt,Auction House,,,,205 Armor; 20 Agi; 32 Sta; 84 AP,
 Enhancement,Waist,PreRaid,Epoch's Whispering Cinch,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,164 Armor; 25 Agi; 24 Sta; 40 AP; 17 Hit,Epoch Hunter
 Enhancement,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
 Enhancement,Waist,PreRaid,Shattrath's Champion Belt,Quest (Dung),How to Break Into the Arcatraz (TK),,,367 Armor; 22 Int; 50 AP; 15 Hit; 21 Crit,
-Enhancement,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 20 Dodge; 25 Hit; 25 Crit,
+Enhancement,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 25 Hit; 25 Crit,
 Enhancement,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Enhancement,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
 Enhancement,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
-Enhancement,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 20 Dodge; 25 Hit; 17 Crit,
+Enhancement,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Enhancement,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP; 16 Hit
 
 Equip: Increases your effective stealth level by 1",World Drop
@@ -213,7 +213,7 @@ Restoration,Chest,PreRaid,Living Crystal Breastplate,Auction House,,,,"255 Armor
 
 Equip: Increases damage and healing done by magical spells and effects by up to 29",
 Restoration,Chest,PreRaid,Primal Mooncloth Robe,Auction House,,,,202 Armor; 20 Int; 20 Spi; 121 Healing; 41 Spell Dmg; 10 MP5,
-Restoration,Chest,PreRaid,Windhawk Hauberk,Auction House,,,,"379 Armor; 28 Sta; 29 Int; 29 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 19 Spell Crit
+Restoration,Chest,PreRaid,Windhawk Hauberk,Auction House,,,,"379 Armor; 28 Sta; 29 Int; 29 Spi; 42 Healing; 14 Spell Dmg; 19 Spell Crit
 
 Equip: Increases damage and healing done by magical spells and effects by up to 32",
 Restoration,Chest,PreRaid,Hallowed Garments,Dungeon Drop,,Shadow Labyrinth,Normal,156 Armor; 12 Sta; 26 Int; 26 Spi; 57 Healing; 19 Spell Dmg,Murmur
@@ -226,7 +226,7 @@ Restoration,Chest,PreRaid,Earthshatter Tunic,Quest,Earthshatter Tunic (Naxx),,,6
 Restoration,Chest,PreRaid,Void Slayer's Tunic,Quest,Dimensius the All-Devouring (NS),,,619 Armor; 31 Sta; 21 Int; 88 Healing; 30 Spell Dmg; 8 MP5,
 Restoration,Chest,PreRaid,Gladiator's Ringmail Armor,PvP,,,,866 Armor; 42 Sta; 23 Int; 59 Healing; 20 Spell Dmg; 7 MP5; 23 Spell Crit; 25 Resilience,
 Restoration,Wrist,PreRaid,Bracers of Havok,Auction House,,,,67 Armor; 12 Int; 30 Healing; 30 Spell Dmg,
-Restoration,Wrist,PreRaid,Windhawk Bracers,Auction House,,,,"159 Armor; 22 Sta; 17 Int; 7 Spi; 31 Healing; 11 Spell Dmg; 8 MP5; 16 Spell Crit
+Restoration,Wrist,PreRaid,Windhawk Bracers,Auction House,,,,"159 Armor; 22 Sta; 17 Int; 7 Spi; 31 Healing; 11 Spell Dmg; 16 Spell Crit
 
 Equip: Increases damage and healing done by magical spells and effects by up to 16",
 Restoration,Wrist,PreRaid,Bands of the Benevolent,Dungeon Drop,,Sethekk Halls,Heroic,81 Armor; 18 Sta; 20 Int; 18 Spi; 46 Healing; 16 Spell Dmg,Talon King Ikiss
@@ -249,7 +249,7 @@ Restoration,Hands,PreRaid,Gladiator's Ringmail Gauntlets,PvP,,,,"541 Armor; 36 S
 
 Equip: Increases the critical effect chance of your Lesser Healing Wave by 2%",
 Restoration,Waist,PreRaid,Primal Mooncloth Belt,Auction House,,,,109 Armor; 12 Int; 11 Spi; 81 Healing; 27 Spell Dmg; 8 MP5,
-Restoration,Waist,PreRaid,Windhawk Belt,Auction House,,,,"205 Armor; 17 Sta; 19 Int; 20 Spi; 42 Healing; 14 Spell Dmg; 8 MP5; 12 Spell Crit
+Restoration,Waist,PreRaid,Windhawk Belt,Auction House,,,,"205 Armor; 17 Sta; 19 Int; 20 Spi; 42 Healing; 14 Spell Dmg; 12 Spell Crit
 
 Equip: Increases damage and healing done by magical spells and effects by up to 23",
 Restoration,Waist,PreRaid,Cord of Belief,Dungeon Drop,,Slave Pens,Heroic,88 Armor; 23 Int; 20 Spi; 46 Healing; 16 Spell Dmg; 8 MP5,Mennu the Betrayer

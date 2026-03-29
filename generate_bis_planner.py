@@ -7,6 +7,8 @@ Two-step workflow:
   1. python3 generate_bis_planner.py --build-db         # fetch item stats from Wowhead (re-fetches stale cache)
   2. python3 generate_bis_planner.py paladin             # generate CSV + Excel (no API calls)
 
+Tooltip parsing strips (N) Set : … spell links so conditional set bonuses are not stored as base stats (fixes gear score / % Upgrade vs Pawn).
+
 Loon (BIS) guides: AddonReference/Loon/*.lua. Pawn weights: AddonReference/Pawn/ClassicHawsJon.lua → data/pawn_scales_tbc.json.
 TBC gem lists: Pawn/GemsBurningCrusade.lua. Excel adds Current Equipment ideal-gem columns (Apps Script), Weights row (Pawn snapshot + custom stash), Gear Score, GemDB + ItemDB socket columns; BIS Planner Stat Comparison + % Upgrade.
 
@@ -516,6 +518,24 @@ def _parse_socket_counts(html):
     return counts
 
 
+def _strip_set_bonus_blocks_from_tooltip_html(html):
+    """Remove item set bonus lines from Wowhead tooltip HTML before stat extraction.
+
+    Set bonuses use the same \"Increases your … rating\" phrasing as Equip: lines but only
+    apply when multiple set pieces are worn; they must not be stored as base item stats or
+    included in gear score (same idea as Pawn ignoring set bonuses).
+    Typical markup: (2) Set : <a href=\"…\">Increases your hit rating by 35.</a>
+    """
+    if not html:
+        return html
+    return re.sub(
+        r"\(\d+\)\s*Set\s*:\s*(?:<[^>]+>\s*)*<a[^>]*>.*?</a>",
+        "",
+        html,
+        flags=re.I | re.DOTALL,
+    )
+
+
 def parse_tooltip_to_dict(html):
     """Parse tooltip HTML into (stats_dict, special_str, slot_str, item_level, sockets_dict)."""
     if not html:
@@ -523,6 +543,7 @@ def parse_tooltip_to_dict(html):
 
     # Strip Wowhead <!--…--> placeholders (e.g. <!--rtg32-->) so "+rating by 32" patterns match.
     html = re.sub(r"<!--.*?-->", "", html, flags=re.DOTALL)
+    html = _strip_set_bonus_blocks_from_tooltip_html(html)
 
     stats = {}
 
