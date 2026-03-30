@@ -107,6 +107,7 @@ STAT_COLUMNS = [
     "Healing", "Spell Dmg", "AP", "MP5",
     "Defense", "Dodge", "Parry", "Block Rating", "Block Value",
     "Hit", "Crit", "Spell Hit", "Spell Crit", "Haste",
+    "Expertise",  # item_database.json "Expertise"; Pawn ExpertiseRating (TBC melee)
     "Resilience",  # high usage in TBC PvP gear; maps to Pawn ResilienceRating
 ]
 
@@ -158,6 +159,7 @@ STAT_COL_PAWN_WEIGHT_KEYS = [
     ("SpellHitRating",),
     ("SpellCritRating",),
     ("HasteRating", "SpellHasteRating"),
+    ("ExpertiseRating",),
     ("ResilienceRating",),
 ]
 
@@ -799,6 +801,10 @@ def _equip_segment_redundant_with_display_stats(display_stats, seg):
         (
             r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?(?:melee\s+)?haste\s+rating\s+by\s*(\d+)",
             "Haste",
+        ),
+        (
+            r"[Ii](?:ncreases?|mproves?)\s+(?:your\s+)?expertise\s+rating\s+by\s*(\d+)",
+            "Expertise",
         ),
     ]
     for pat, key in rating_specs:

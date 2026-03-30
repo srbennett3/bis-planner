@@ -25,7 +25,7 @@ Dps,Waist,PreRaid,Socrethar's Girdle,Quest,Turning Point (NS),,,156 Armor; 23 Ag
 Dps,Waist,PreRaid,Naaru Belt of Precision,Quest (Dung),How to Break Into the Arcatraz (TK),,,164 Armor; 25 Agi; 44 AP; 21 Dodge; 15 Hit,
 Dps,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 25 Hit; 25 Crit,
 Dps,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 19 Hit,Nexus-Prince Shaffar
-Dps,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
+Dps,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit; 18 Expertise,
 Dps,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Dps,Feet,PreRaid,Felboar Hide Shoes,Quest,The Cipher of Damnation - The Third Fragment Recovered (SMV),,,191 Armor; 18 Agi; 15 Sta; 68 AP; 9 Hit,
 Dps,Neck,PreRaid,Braided Eternium Chain,Auction House,,,,"21 Hit
@@ -40,7 +40,7 @@ Dps,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,Heroic,40 
 Dps,Ring,PreRaid,Band of Anguish,Quest,News of Victory (SMV),,,13 Agi; 50 AP; 10 Hit,
 Dps,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP; 10 Hit,
 Dps,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP; 10 Hit,
-Dps,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Dps,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Dps,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
 Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
@@ -64,7 +64,7 @@ Dps,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 Proc: Increases your haste rating by 212 for 10 sec",
 Dps,Main Hand,PreRaid,The Night Blade,Auction House,,,,Proc: Your attacks ignore 435 of your enemies' armor for 10 sec,World Drop
 Dps,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,38 AP; 19 Hit,The Aldor - Exalted
-Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Dps,Off Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP; 14 Expertise,Aeonus
 Dps,Off Hand,PreRaid,Searing Sunblade,Dungeon Token,,,,24 Agi; 22 Sta,50 Badges of Justice
 Dps,Ranged/Relic,PreRaid,Mama's Insurance,Quest,Declawing Doomclaw (NS),,,10 Agi; 32 AP; 6 Crit,
 Dps,Ranged/Relic,PreRaid,Mark V's Throwing Star,Quest,Mark V is Alive! (NS),,,7 Agi; 10 Sta; 14 AP; 7 Hit,

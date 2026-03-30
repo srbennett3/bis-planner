@@ -29,7 +29,7 @@ Arms,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 17 Hit;
 Arms,Hands,PreRaid,Ragesteel Gloves,Auction House,,,,728 Armor; 35 Str; 27 Crit,
 Arms,Hands,PreRaid,Doomplate Gauntlets,Dungeon Drop,,Blood Furnace,Heroic,728 Armor; 31 Str; 25 Sta,Keli'dan the Breaker
 Arms,Hands,PreRaid,Gauntlets of Annihilation,Dungeon Drop,,Ahn'Qiraj,Normal,702 Armor; 35 Str; 15 Sta; 10 Hit; 14 Crit,C'Thun
-Arms,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
+Arms,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta; 18 Expertise,
 Arms,Waist,PreRaid,Deathforge Girdle,Dungeon Drop,,Sethekk Halls,Normal,655 Armor; 22 Str; 3 Agi; 25 Sta; 20 Crit,Talon King Ikiss
 Arms,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
 Arms,Waist,PreRaid,Girdle of the Mentor,Dungeon Drop,,Naxxramas,Normal,612 Armor; 21 Str; 20 Agi; 21 Sta; 10 Hit; 14 Crit,Instructor Razuvious
@@ -39,8 +39,8 @@ Arms,Waist,PreRaid,Marshal's Plate Belt,PvP,,,,870 Armor; 27 Str; 40 Sta; 27 Cri
 Arms,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 25 Hit; 25 Crit,
 Arms,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Arms,Legs,PreRaid,Vanquisher's Legplates,Dungeon Drop,,Mechanar,Heroic,1216 Armor; 36 Str; 36 Sta; 23 Crit,Pathaleon the Calculator
-Arms,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
-Arms,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
+Arms,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit; 18 Expertise,
+Arms,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta; 22 Expertise,
 Arms,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Arms,Feet,PreRaid,Boots of the Unjust,Dungeon Drop,,Auchenai Crypts,Heroic,201 Armor; 25 Sta; 64 AP; 13 Hit; 19 Crit,Exarch Maladaar
 Arms,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,172 Armor; 16 Agi; 56 AP; 16 Crit,
@@ -58,7 +58,7 @@ Arms,Ring,PreRaid,Ring of Arathi Warlords,Dungeon Token,,,,24 Sta; 46 AP; 23 Cri
 Arms,Ring,PreRaid,Aggressor's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,24 AP; 29 Crit,
 Arms,Ring,PreRaid,Overseer's Signet,Quest,Shutting Down Manaforge Ara (NS),,,25 Str; 15 Agi; 10 Hit,
 Arms,Ring,PreRaid,A'dal's Command,Reputation,,,,29 Str; 16 Agi; 18 Sta,The Sha'tar - Exalted
-Arms,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Arms,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Arms,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
 Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
@@ -79,8 +79,8 @@ Proc: Increases your haste rating by 212 for 10 sec",
 Arms,Main Hand,PreRaid,Fel Edged Battleaxe,Auction House,,,,3 Sta; 14 Hit; 21 Crit,
 Arms,Main Hand,PreRaid,Bloodskull Destroyer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,12 Sta; 22 AP; 21 Crit,Lieutenant Drake
 Arms,Main Hand,PreRaid,Edge of the Cosmos,Dungeon Drop,,Mechanar,Normal,13 Sta; 30 AP; 16 Crit,Pathaleon the Calculator
-Arms,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,17 Str; 15 Sta,Broggok
-Arms,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Arms,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,17 Str; 15 Sta; 14 Expertise,Broggok
+Arms,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP; 14 Expertise,Aeonus
 Arms,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,16 Str; 13 Sta; 15 Crit,Exarch Maladaar
 Arms,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,38 AP; 19 Hit,The Aldor - Exalted
 Arms,Main Hand,PreRaid,Grand Marshal's Slicer,PvP,,,,18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
@@ -124,7 +124,7 @@ Fury,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 17 Hit;
 Fury,Hands,PreRaid,Ragesteel Gloves,Auction House,,,,728 Armor; 35 Str; 27 Crit,
 Fury,Hands,PreRaid,Doomplate Gauntlets,Dungeon Drop,,Blood Furnace,Heroic,728 Armor; 31 Str; 25 Sta,Keli'dan the Breaker
 Fury,Hands,PreRaid,Gauntlets of Annihilation,Dungeon Drop,,Ahn'Qiraj,Normal,702 Armor; 35 Str; 15 Sta; 10 Hit; 14 Crit,C'Thun
-Fury,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
+Fury,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta; 18 Expertise,
 Fury,Waist,PreRaid,Deathforge Girdle,Dungeon Drop,,Sethekk Halls,Normal,655 Armor; 22 Str; 3 Agi; 25 Sta; 20 Crit,Talon King Ikiss
 Fury,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
 Fury,Waist,PreRaid,Girdle of the Mentor,Dungeon Drop,,Naxxramas,Normal,612 Armor; 21 Str; 20 Agi; 21 Sta; 10 Hit; 14 Crit,Instructor Razuvious
@@ -134,8 +134,8 @@ Fury,Waist,PreRaid,Marshal's Plate Belt,PvP,,,,870 Armor; 27 Str; 40 Sta; 27 Cri
 Fury,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 25 Hit; 25 Crit,
 Fury,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Fury,Legs,PreRaid,Vanquisher's Legplates,Dungeon Drop,,Mechanar,Heroic,1216 Armor; 36 Str; 36 Sta; 23 Crit,Pathaleon the Calculator
-Fury,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
-Fury,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
+Fury,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit; 18 Expertise,
+Fury,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta; 22 Expertise,
 Fury,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Fury,Feet,PreRaid,Boots of the Unjust,Dungeon Drop,,Auchenai Crypts,Heroic,201 Armor; 25 Sta; 64 AP; 13 Hit; 19 Crit,Exarch Maladaar
 Fury,Feet,PreRaid,Farahlite Studded Boots,Quest,A Fate Worse Than Death (NS),,,172 Armor; 16 Agi; 56 AP; 16 Crit,
@@ -153,7 +153,7 @@ Fury,Ring,PreRaid,Ring of Arathi Warlords,Dungeon Token,,,,24 Sta; 46 AP; 23 Cri
 Fury,Ring,PreRaid,Aggressor's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,24 AP; 29 Crit,
 Fury,Ring,PreRaid,Overseer's Signet,Quest,Shutting Down Manaforge Ara (NS),,,25 Str; 15 Agi; 10 Hit,
 Fury,Ring,PreRaid,A'dal's Command,Reputation,,,,29 Str; 16 Agi; 18 Sta,The Sha'tar - Exalted
-Fury,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Fury,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Fury,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
 Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
@@ -174,8 +174,8 @@ Proc: Increases your haste rating by 212 for 10 sec",
 Fury,Main Hand,PreRaid,Fel Edged Battleaxe,Auction House,,,,3 Sta; 14 Hit; 21 Crit,
 Fury,Main Hand,PreRaid,Bloodskull Destroyer,Dungeon Drop,,Old Hillsbrad Foothills,Heroic,12 Sta; 22 AP; 21 Crit,Lieutenant Drake
 Fury,Main Hand,PreRaid,Edge of the Cosmos,Dungeon Drop,,Mechanar,Normal,13 Sta; 30 AP; 16 Crit,Pathaleon the Calculator
-Fury,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,17 Str; 15 Sta,Broggok
-Fury,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
+Fury,Main Hand,PreRaid,Firebrand Battleaxe,Dungeon Drop,,Blood Furnace,Heroic,17 Str; 15 Sta; 14 Expertise,Broggok
+Fury,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP; 14 Expertise,Aeonus
 Fury,Main Hand,PreRaid,The Harvester of Souls,Dungeon Drop,,Auchenai Crypts,Heroic,16 Str; 13 Sta; 15 Crit,Exarch Maladaar
 Fury,Main Hand,PreRaid,Vindicator's Brand,Reputation,,,,38 AP; 19 Hit,The Aldor - Exalted
 Fury,Main Hand,PreRaid,Grand Marshal's Slicer,PvP,,,,18 Sta; 26 AP; 8 Hit; 13 Crit; 9 Resilience,
@@ -225,7 +225,7 @@ Protection,Wrist,PreRaid,Marshal's Plate Bracers,PvP,,,,624 Armor; 19 Str; 25 St
 Protection,Hands,PreRaid,Felsteel Gloves,Auction House,,,,943 Armor; 27 Sta; 25 Defense,
 Protection,Hands,PreRaid,Gauntlets of Dissension,Dungeon Drop,,Botanica,Heroic,868 Armor; 24 Str; 23 Agi; 36 Sta; 24 Defense,Warp Splinter
 Protection,Hands,PreRaid,Gauntlets of the Bold,Dungeon Drop,,Steamvault,Normal,728 Armor; 17 Str; 16 Agi; 31 Sta; 14 Defense,Warlord Kalithresh
-Protection,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
+Protection,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta; 18 Expertise,
 Protection,Hands,PreRaid,Gauntlets of the Vanquisher,Quest,Turning Point (NS),,,691 Armor; 24 Str; 23 Agi; 30 Sta; 14 Hit,
 Protection,Hands,PreRaid,Gauntlets of the Chosen,Reputation,,,,728 Armor; 15 Agi; 30 Sta; 35 Defense,The Scryers - Revered
 Protection,Waist,PreRaid,Deathforge Girdle,Dungeon Drop,,Sethekk Halls,Normal,655 Armor; 22 Str; 3 Agi; 25 Sta; 20 Crit,Talon King Ikiss
@@ -255,7 +255,7 @@ Protection,Ring,PreRaid,Band of the Exorcist,Dungeon Token,,,,24 Sta; 34 AP; 10 
 Protection,Ring,PreRaid,Ring of Unyielding Force,Dungeon Token,,,,294 Armor; 31 Sta; 22 Defense,25 Badges of Justice
 Protection,Ring,PreRaid,Protector's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,22 Sta; 25 Defense; 15 Block Value,
 Protection,Ring,PreRaid,Wind Trader's Band,Quest,Dealing with the Overmaster (NS),,,6 Agi; 34 Sta; 12 Defense; 6 Hit,
-Protection,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Protection,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Protection,Trinket,PreRaid,Gnomish Poultryizer,Auction House,,,,"45 Sta
 
 Use: Turns the target into a chicken for 15 sec.  Well, that is assuming the transmogrification polarity has not been reversed",
@@ -288,12 +288,12 @@ Use: Reduces your threat to enemy targets within 30 yards, making them less like
 Protection,Main Hand,PreRaid,Dragonmaw,Auction House,,,,"9 Sta; 212 Haste
 
 Proc: Increases your haste rating by 212 for 10 sec",
-Protection,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP,Aeonus
-Protection,Main Hand,PreRaid,Terokk's Nightmace,Dungeon Drop,,Sethekk Halls,Normal,25 Sta,Talon King Ikiss
+Protection,Main Hand,PreRaid,Latro's Shifting Sword,Dungeon Drop,,Black Morass,Normal,15 Agi; 26 AP; 14 Expertise,Aeonus
+Protection,Main Hand,PreRaid,Terokk's Nightmace,Dungeon Drop,,Sethekk Halls,Normal,25 Sta; 19 Expertise,Talon King Ikiss
 Protection,Main Hand,PreRaid,The Bladefist,Dungeon Drop,,Shattered Halls,Heroic,"180 Haste
 
 Proc: Increases your haste rating by 180 for 10 sec",Warchief Kargath Bladefist
-Protection,Main Hand,PreRaid,The Hungering Cold,Dungeon Drop,,Naxxramas,Normal,140 Armor; 14 Sta,Kel'Thuzad
+Protection,Main Hand,PreRaid,The Hungering Cold,Dungeon Drop,,Naxxramas,Normal,140 Armor; 14 Sta; 14 Expertise,Kel'Thuzad
 Protection,Main Hand,PreRaid,The Sun Eater,Dungeon Drop,,Mechanar,Heroic,22 Sta; 13 Defense; 19 Dodge,Pathaleon the Calculator
 Protection,Main Hand,PreRaid,Grom'tor's Charge,Quest,The Cipher of Damnation (SMV),,,7 Agi; 30 Sta; 11 Defense,
 Protection,Main Hand,PreRaid,Honor's Call,Reputation,,,,13 Sta; 16 Defense; 8 Hit,Honor Hold - Exalted

@@ -30,6 +30,8 @@ var GG_NAME     = 4;  // D
 var GG_ACQ      = 6;  // F — Acquisition Type (heroic dungeon row detection; match _get_row_color)
 var GG_DUNGEON  = 8;  // H
 var GG_DIFFICULTY = 9; // I
+/** Stats column (generate_bis_planner.py SHEET_FIELDS); script appends ideal-gem summary. */
+var GG_STATS = 10;
 /** Logical columns for in-memory block (old N/O/P); not exported on BIS Planner sheet after layout v2. */
 var GG_EQUIP    = 14;
 var GG_EQUIP2   = 15;
@@ -46,11 +48,11 @@ var CE_IDEAL_GEM_COL = 3;
 var CE_IDEAL_META_COL = 4;
 var CE_TOTAL_GEM_STATS_COL = 5;
 var CE_STAT_FIRST_COL = 6;
-var CE_STAT_LAST_COL = 26;
-var CE_GEAR_SCORE_COL = 27;
-var CE_PAWN_SNAPSHOT_FIRST_COL = 28;
-var CE_CUSTOM_STASH_FIRST_COL = 49;
-var CE_META_WEIGHT_COL = 70;
+var CE_STAT_LAST_COL = 27;
+var CE_GEAR_SCORE_COL = 28;
+var CE_PAWN_SNAPSHOT_FIRST_COL = 29;
+var CE_CUSTOM_STASH_FIRST_COL = 51;
+var CE_META_WEIGHT_COL = 73;
 var CE_WEIGHT_ROW_LABEL = "Weights";
 var CE_WEIGHT_MODE_PAWN = "Pawn Default";
 var CE_WEIGHT_MODE_CUSTOM = "Custom";
@@ -89,12 +91,13 @@ var CE_PAWN_KEYS_FOR_STAT = [
   ["SpellHitRating"],
   ["SpellCritRating"],
   ["HasteRating", "SpellHasteRating"],
+  ["ExpertiseRating"],
   ["ResilienceRating"],
 ];
 
 /**
  * Stat labels in CmpRaw diff lines (+/- …); same order as generate_bis_planner.py STAT_COLUMNS /
- * CE_PAWN_KEYS_FOR_STAT (21 entries).
+ * CE_PAWN_KEYS_FOR_STAT (22 entries).
  */
 var BIS_STAT_LABELS = [
   "Armor",
@@ -117,6 +120,7 @@ var BIS_STAT_LABELS = [
   "Spell Hit",
   "Spell Crit",
   "Haste",
+  "Expertise",
   "Resilience",
 ];
 
@@ -140,7 +144,11 @@ var CE_STAT_PROTECTION_DESC = "BIS: ItemDB item stats (read-only)";
 
 // BIS Planner sheet: A–M only. K = Stat Comparison (script); L = % Upgrade. CmpRaw / equip / scores are script-only.
 var GG_UPGRADE_COL = 12;
+/** Notes column (generate_bis_planner.py SHEET_FIELDS). */
+var GG_NOTES_COL = 13;
 var CMP_DISP_COL = 11;
+/** Stat Comparison (K) rich-text font size (pt); matches typical column default after script writes. */
+var CMP_DISP_FONT_PT = 10;
 /** Logical CmpRaw column index for block assembly; legacy sheets used column P (16) for mirror formulas. */
 var CMP_RAW_COL = 16;
 var CMP_RAW_LEGACY_SHEET_COL = 16;
@@ -155,6 +163,70 @@ var CMP_ATTR_LINE_DARK_ROW = "#C8E6C9";
 var CMP_NOTICE_DARK_ROW = "#FFE082";
 // Legacy K→P mirror: R1C1 offset from K (11) to P (16)
 var CMP_RAW_R1C1_OFFSET = CMP_RAW_LEGACY_SHEET_COL - CMP_DISP_COL;
+
+/** Row fill for non–Dungeon Drop rows; matches generate_bis_planner.py ACQ_COLORS (hex, no #). */
+var PLANNER_ACQ_ROW_BG = {
+  "Auction House": "80DEEA",
+  Reputation: "A5D6A7",
+  Quest: "FFE082",
+  "Quest (Dung)": "FFE082",
+  PvP: "F48FB1",
+  "Dungeon Token": "BDBDBD",
+  "World Drop": "EEEEEE",
+  "Raid Drop": "D7CCC8",
+  Vendor: "EEEEEE",
+  Other: "EEEEEE",
+};
+
+/** Normal dungeon row fill; keys match sheet Dungeon column (generate_bis_planner.py DUNGEON_COLORS_NORMAL). */
+var PLANNER_DUNGEON_COLORS_NORMAL = {
+  "Blood Furnace": "FFD5D5",
+  "Hellfire Ramparts": "FFE0CC",
+  "Shattered Halls": "FFEABB",
+  Mechanar: "FFF5BB",
+  Botanica: "E8FFCC",
+  Arcatraz: "FFF0CC",
+  "Auchenai Crypts": "F5CCF0",
+  "Mana Tombs": "D5CCF5",
+  "Sethekk Halls": "E0CCF5",
+  "Shadow Labyrinth": "E8CCEE",
+  "Slave Pens": "CCE5FF",
+  Underbog: "CCEED8",
+  Steamvault: "CCD5F5",
+  "Old Hillsbrad Foothills": "EEE4CC",
+  "Black Morass": "CCE8D8",
+  "Dire Maul": "F0EADD",
+  "Molten Core": "FFE0D0",
+  "Blackwing Lair": "D8DEE8",
+  "Ahn'Qiraj": "F5F0CC",
+  Naxxramas: "D0EEEE",
+  "Terokkar Forest": "DEE8CC",
+};
+
+/** Heroic dungeon row fill (generate_bis_planner.py DUNGEON_COLORS_HEROIC). */
+var PLANNER_DUNGEON_COLORS_HEROIC = {
+  "Blood Furnace": "E87070",
+  "Hellfire Ramparts": "E89060",
+  "Shattered Halls": "D8A040",
+  Mechanar: "C8B030",
+  Botanica: "70B848",
+  Arcatraz: "D89838",
+  "Auchenai Crypts": "C850A8",
+  "Mana Tombs": "7858C8",
+  "Sethekk Halls": "9858C8",
+  "Shadow Labyrinth": "A848B8",
+  "Slave Pens": "4090D8",
+  Underbog: "40A878",
+  Steamvault: "4868C8",
+  "Old Hillsbrad Foothills": "B89050",
+  "Black Morass": "48A880",
+  "Dire Maul": "A89868",
+  "Molten Core": "D07050",
+  "Blackwing Lair": "7888A8",
+  "Ahn'Qiraj": "B0A040",
+  Naxxramas: "48A8B0",
+  "Terokkar Forest": "80A848",
+};
 
 /** After CE / Interest edits: one short wait before reading CmpRaw (P). */
 var EDIT_RECALC_WAIT_MS = 150;
@@ -198,6 +270,15 @@ var BIS_INTEREST_CLEAR = "----";
 /** JSON map: equippedSlotKey_(spec, gear) → row number (1-based). Rebuilt on onOpen; reconciles clearOtherEquipped. */
 var BIS_EQUIPPED_INDEX_PROP = "BIS_EQUIPPED_INDEX_JSON_V1";
 
+/**
+ * CSV/generator marks some heroic-only boss drops as Normal (source text lacks "(H)").
+ * Keys: normalized item name lowercased. Used for heroic row styling only (sheet Difficulty cell unchanged).
+ */
+var PLANNER_ITEM_FORCE_HEROIC_DUNGEON_DROP = {
+  "ring of fabled hope": true,
+  "argussian compass": true,
+};
+
 /** Lazy CE map: specNorm → Weights row (1-based). Invalidated when weights row is edited. */
 var bisCeWeightsRowMap_ = { key: "", specToWeights: null, colA: null };
 
@@ -214,6 +295,11 @@ function itemsNameMatch_(a, b) {
   var x = normalizeItemName(a);
   var y = normalizeItemName(b);
   return x !== "" && y !== "" && x.toLowerCase() === y.toLowerCase();
+}
+
+function plannerItemForceHeroicDungeonDrop_(itemName) {
+  var k = normalizeItemName(itemName).toLowerCase();
+  return k !== "" && !!PLANNER_ITEM_FORCE_HEROIC_DUNGEON_DROP[k];
 }
 
 function interestIsEquippedState_(v) {
@@ -307,7 +393,7 @@ function onOpen() {
   try {
     SpreadsheetApp.getUi()
       .createMenu("BIS Planner")
-      .addItem("Recalculate stat comparisons (all rows)", "menuRecalculateStatComparisons_")
+      .addItem("Refresh Comparisons", "menuRefreshComparisons_")
       .addToUi();
   } catch (eUi) {}
   SpreadsheetApp.flush();
@@ -454,21 +540,37 @@ function refreshComparisonAllSpecs_(bp) {
     captureFullSheetBands: fullSheetBandSnap,
   }, null, null);
   Utilities.sleep(OPEN_SECOND_PASS_SLEEP_MS);
+  // Pass 2: reuse bands only (omit cmpSkipFp on snap) so every K/L cell is rewritten with fresh rich text.
   refreshComparisonRichText(bp, null, null, null, sharedCaches, {
-    reuseFullSheetBands: fullSheetBandSnap,
+    reuseFullSheetBands: {
+      partAD: fullSheetBandSnap.partAD,
+      partFI: fullSheetBandSnap.partFI,
+    },
   }, null, null);
 }
 
 /**
- * Spreadsheet menu (onOpen) and manual run: two-pass full-sheet comparison + % Upgrade refresh.
- * Use after bulk CE edits, script paste, or if column K looks stale without toggling Equipped.
+ * BIS Planner → Refresh Comparisons: full-sheet CmpRaw, Stat Comparison rich text (incl. (gems:) colors),
+ * % Upgrade, row theme, and stats (J) gem line. Two passes with fresh band read on pass 2 so F–I / colors stay in sync.
  */
-function menuRecalculateStatComparisons_() {
+function menuRefreshComparisons_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) return;
   SpreadsheetApp.flush();
   var bp = ss.getSheetByName(BIS_PLANNER_SHEET);
-  if (!bp) return;
+  if (!bp) {
+    try {
+      SpreadsheetApp.getUi().alert('No sheet named "' + BIS_PLANNER_SHEET + '" in this spreadsheet.');
+    } catch (eA) {}
+    return;
+  }
+  try {
+    ss.toast("Refreshing comparisons (full sheet)…", "BIS Planner", 8);
+  } catch (eT) {}
   refreshComparisonAllSpecs_(bp);
+  try {
+    ss.toast("Comparisons refreshed.", "BIS Planner", 5);
+  } catch (eT2) {}
 }
 
 // ============================================================
@@ -594,6 +696,14 @@ function handleBISPlannerEdit(e, bpSheet) {
       ceGearColSync,
       lastRowEq
     );
+    return;
+  }
+
+  /** Heroic vs normal (and force-heroic items) affect Stat Comparison / % Upgrade colors on K and L. */
+  if (col === GG_DIFFICULTY || col === GG_ACQ || col === GG_DUNGEON) {
+    if (!normalizeItemName(bpSheet.getRange(row, GG_SPEC).getValue())) return;
+    SpreadsheetApp.flush();
+    refreshComparisonRichText(bpSheet, null, null, null, null, null, null, null, false, [row]);
     return;
   }
 
@@ -944,6 +1054,7 @@ function ceCopyVisibleWeightsToStash_(ceSheet, wRow) {
 
 function ceHandleWeightsEdit_(e, ceSheet, row, col) {
   ceInvalidateWeightsRowMap_();
+  var didWeights = false;
   if (col === CE_ITEMNAME) {
     var mode = normalizeItemName(e.range.getValue());
     if (mode === CE_WEIGHT_MODE_PAWN || mode === CE_WEIGHT_MODE_CUSTOM) {
@@ -951,15 +1062,25 @@ function ceHandleWeightsEdit_(e, ceSheet, row, col) {
       ceForEachGearRowInSection_(ceSheet, row, function (gr) {
         recalculateGearScoreForRow_(ceSheet, gr);
       });
+      didWeights = true;
     }
-    return;
-  }
-  if (col >= CE_STAT_FIRST_COL && col <= CE_STAT_LAST_COL) {
+  } else if (col >= CE_STAT_FIRST_COL && col <= CE_STAT_LAST_COL) {
     ceSheet.getRange(row, CE_ITEMNAME).setValue(CE_WEIGHT_MODE_CUSTOM);
     ceCopyVisibleWeightsToStash_(ceSheet, row);
     ceForEachGearRowInSection_(ceSheet, row, function (gr) {
       recalculateGearScoreForRow_(ceSheet, gr);
     });
+    didWeights = true;
+  }
+  if (didWeights) {
+    var ssW = SpreadsheetApp.getActiveSpreadsheet();
+    var bpW = ssW.getSheetByName(BIS_PLANNER_SHEET);
+    var specW = findSpecForCERow(ceSheet, row);
+    if (bpW && specW) {
+      SpreadsheetApp.flush();
+      Utilities.sleep(EDIT_RECALC_WAIT_MS);
+      refreshComparisonRichText(bpW, specW, null, null, null, null, null, null);
+    }
   }
 }
 
@@ -1441,6 +1562,10 @@ function plannerRefreshCachesBuild_(ss, ceSheet, optCeGearColVals, optItemdbData
       celr >= 1 ? ceSheet.getRange(1, CE_GEAR_SCORE_COL, celr, 1).getValues() : [],
     ceItemNameCol:
       celr >= 1 ? ceSheet.getRange(1, CE_ITEMNAME, celr, 1).getValues() : [],
+    ceRegSockDisplayCol:
+      celr >= 1 ? ceSheet.getRange(1, CE_IDEAL_GEM_COL, celr, 1).getDisplayValues() : [],
+    ceMetaSockDisplayCol:
+      celr >= 1 ? ceSheet.getRange(1, CE_IDEAL_META_COL, celr, 1).getDisplayValues() : [],
   };
   plannerWarmWeightIdealGems_(outCaches);
   return outCaches;
@@ -1625,6 +1750,7 @@ var PAWN_KEY_SHORT = {
   SpellCritRating: "Spell Crit",
   HasteRating: "Haste",
   SpellHasteRating: "Haste",
+  ExpertiseRating: "Exp",
   ResilienceRating: "Resilience",
   Versatility: "Versatility",
 };
@@ -1662,6 +1788,113 @@ function formatAggregatedGemStats_(acc) {
     parts.push((v > 0 ? "+" : "") + v + " " + short);
   }
   return parts.join(", ");
+}
+
+/** Remove script-appended "(gems: …)" from BIS Planner Stats column (J). */
+function stripPlannerStatsGemSuffix_(s) {
+  var t = String(s == null ? "" : s).replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  t = t.replace(/\n\(gems:[^\n]*\)\s*$/i, "");
+  t = t.replace(/\(gems:[^\n]*\)\s*$/i, "");
+  return t.replace(/\s+$/g, "");
+}
+
+function plannerIdealGemAccFromItemInCaches_(caches, spec, itemName) {
+  var nm = normalizeItemName(itemName);
+  if (!nm || !caches) return {};
+  var w = caches.weights.get(normalizeItemName(spec));
+  if (!w) return {};
+  var row = itemdbLookupStatsAndSocketsInData_(caches.itemdbData, nm);
+  if (!row) return {};
+  var plan = computeIdealGemPlan_(caches.ss, w.wVals, w.metaSockW, row.socks, caches.gemData);
+  return aggregateGemStats_(plan.regStats, plan.T, plan.metaStats, plan.m);
+}
+
+function plannerIdealGemParenLineForItem_(caches, spec, itemName) {
+  var acc = plannerIdealGemAccFromItemInCaches_(caches, spec, itemName);
+  var inner = formatAggregatedGemStats_(acc);
+  if (!inner) return "";
+  return "(gems: " + inner + ")";
+}
+
+function plannerIdealGemAccForCeRowWithCaches_(caches, ceRow, spec) {
+  if (!caches || !ceRow || ceRow < 1) return {};
+  var sp = normalizeItemName(spec);
+  var w = caches.weights.get(sp);
+  if (!w) return {};
+  var i = ceRow - 1;
+  if (i < 0 || i >= caches.ceItemNameCol.length) return {};
+  var item = normalizeItemName(caches.ceItemNameCol[i][0]);
+  if (!item) return {};
+  var gearLab = String(caches.ceGearCol[i][0] == null ? "" : caches.ceGearCol[i][0])
+    .trim()
+    .toLowerCase();
+  if (gearLab === "trinket 1" || gearLab === "trinket 2") return {};
+
+  var dbRow = itemdbLookupStatsAndSocketsInData_(caches.itemdbData, item);
+  var socks;
+  if (dbRow) {
+    socks = dbRow.socks;
+  } else {
+    var regD =
+      caches.ceRegSockDisplayCol && caches.ceRegSockDisplayCol[i]
+        ? caches.ceRegSockDisplayCol[i][0]
+        : "";
+    var metaD =
+      caches.ceMetaSockDisplayCol && caches.ceMetaSockDisplayCol[i]
+        ? caches.ceMetaSockDisplayCol[i][0]
+        : "";
+    var T = ceParseLeadingIntFromSocketLabel_(regD);
+    var m = ceParseLeadingIntFromSocketLabel_(metaD);
+    if (m > 1) m = 1;
+    socks = { r: T, y: 0, b: 0, m: m };
+  }
+  var plan = computeIdealGemPlan_(caches.ss, w.wVals, w.metaSockW, socks, caches.gemData);
+  return aggregateGemStats_(plan.regStats, plan.T, plan.metaStats, plan.m);
+}
+
+function formatGemStatDiffParen_(itemAcc, equipAcc) {
+  var keys = [];
+  var k;
+  for (k in itemAcc) {
+    if (Object.prototype.hasOwnProperty.call(itemAcc, k)) keys.push(k);
+  }
+  for (k in equipAcc) {
+    if (Object.prototype.hasOwnProperty.call(equipAcc, k) && keys.indexOf(k) < 0) keys.push(k);
+  }
+  if (keys.length === 0) return "";
+  keys.sort();
+  var parts = [];
+  for (var ii = 0; ii < keys.length; ii++) {
+    k = keys[ii];
+    var diff = (Number(itemAcc[k]) || 0) - (Number(equipAcc[k]) || 0);
+    if (diff === 0) continue;
+    var rounded = Math.round(Math.abs(diff) * 10000) / 10000;
+    var sign = diff > 0 ? "+" : "-";
+    var short = PAWN_KEY_SHORT[k] || k;
+    parts.push(sign + rounded + " " + short);
+  }
+  if (parts.length === 0) return "";
+  return "(gems: " + parts.join(", ") + ")";
+}
+
+function plannerGemDiffParenString_(caches, spec, plannerItemName, ceSlotLabel, ceSlotMap) {
+  if (!caches || !ceSlotMap || !spec || !plannerItemName) return "";
+  var sp = normalizeItemName(spec);
+  var nm = normalizeItemName(plannerItemName);
+  if (!sp || !nm) return "";
+  var itemAcc = plannerIdealGemAccFromItemInCaches_(caches, sp, nm);
+  var key = sp + "\x1e" + normalizeItemName(ceSlotLabel);
+  var ceRow = ceSlotMap[key];
+  var equipAcc = ceRow ? plannerIdealGemAccForCeRowWithCaches_(caches, ceRow, sp) : {};
+  return formatGemStatDiffParen_(itemAcc, equipAcc);
+}
+
+function plannerAppendGemDiffToStatJoin_(tj, gemParen) {
+  var t = tj == null ? "" : String(tj).replace(/^\s+|\s+$/g, "");
+  var g = gemParen == null ? "" : String(gemParen).replace(/^\s+|\s+$/g, "");
+  if (!g) return t;
+  if (!t) return g;
+  return t + ", " + g;
 }
 
 /** ItemDB stats × weights only (no sockets / ideal gems). */
@@ -1888,6 +2121,35 @@ function flushPlannerGearScoreCells_(bpSheet, gearWrites) {
   // Gear scores are computed in script only; planner layout v2 has no Q/R columns.
   void bpSheet;
   void gearWrites;
+}
+
+/** Apply BIS Planner Stats column (J) updates from comparison refresh (ideal gem line). */
+function flushPlannerStatsColumnWrites_(bpSheet, writes) {
+  if (!writes || writes.length === 0) return;
+  for (var wi = 0; wi < writes.length; wi++) {
+    bpSheet.getRange(writes[wi].r, GG_STATS).setValue(writes[wi].v);
+  }
+}
+
+/**
+ * Row background A–M and font A–J + M (not K Stat Comparison / L % Upgrade — those keep script colors).
+ * @param {Array<{r:number, bg:string, textMain:string}>} writes
+ */
+function flushPlannerBisRowThemeWrites_(bpSheet, writes) {
+  if (!writes || writes.length === 0) return;
+  var nBg = GG_NOTES_COL - GG_INTEREST + 1;
+  var nFontMain = GG_STATS - GG_INTEREST + 1;
+  for (var ti = 0; ti < writes.length; ti++) {
+    var tw = writes[ti];
+    var rr = tw.r;
+    var bg = tw.bg;
+    var tc = tw.textMain;
+    try {
+      bpSheet.getRange(rr, GG_INTEREST, 1, nBg).setBackground(bg);
+      bpSheet.getRange(rr, GG_INTEREST, 1, nFontMain).setFontColor(tc);
+      bpSheet.getRange(rr, GG_NOTES_COL, 1, 1).setFontColor(tc);
+    } catch (eTh) {}
+  }
 }
 
 function ceItemNameInItemDb_(ss, itemName) {
@@ -2778,6 +3040,8 @@ function plannerCmpAttrDisplayFromRaw_(raw) {
   if (!t) return "";
   t = t.replace(/ Use:/g, "\nUse:");
   t = t.replace(/ Equip:/g, "\nEquip:");
+  t = t.replace(/ Proc:/gi, "\nProc:");
+  t = t.replace(/ Chance on hit:/gi, "\nChance on hit:");
   return t;
 }
 
@@ -2839,7 +3103,10 @@ function plannerBuildCmpRawStringFromRowMap_(
   rowMap,
   nStat,
   optCeStats1,
-  optCeStats2
+  optCeStats2,
+  optGemParen1,
+  optGemParen2,
+  optGemParenSingle
 ) {
   var g = normalizeItemName(gearType);
   var nm = itemName;
@@ -2854,6 +3121,8 @@ function plannerBuildCmpRawStringFromRowMap_(
   var va2 = plannerItemdbAttrString_(rowE2, nStat);
   var tj1 = plannerStatDiffCommaJoin_(rowMap, nm, eq1, nStat, optCeStats1);
   var tj2 = plannerStatDiffCommaJoin_(rowMap, nm, eq2, nStat, optCeStats2);
+  tj1 = plannerAppendGemDiffToStatJoin_(tj1, optGemParen1);
+  tj2 = plannerAppendGemDiffToStatJoin_(tj2, optGemParen2);
 
   if (g === "Ring" || g === "Trinket") {
     var inner1 = plannerCmpSlotInner_(tj1, va1, "Equipped slot 1:");
@@ -2871,7 +3140,7 @@ function plannerBuildCmpRawStringFromRowMap_(
     return b1 + "\n" + b2;
   }
 
-  var tjS = tj1;
+  var tjS = plannerAppendGemDiffToStatJoin_(tj1, optGemParenSingle);
   var vaS = va1;
   var innerS = plannerCmpSlotInner_(tjS, vaS, "Currently Equipped:");
   var sameS = itemsNameMatch_(nm, eq1);
@@ -2894,7 +3163,8 @@ function plannerWriteCmpRawForComparisonRefresh_(
   offNInBlock,
   optItemdbData,
   optCeSheet,
-  optCeGearColVals
+  optCeGearColVals,
+  optPlannerCaches
 ) {
   var ss = bpSheet.getParent();
   var data;
@@ -2958,7 +3228,33 @@ function plannerWriteCmpRawForComparisonRefresh_(
         stats1 = plannerCeStatsForSpecSlot_(ceSlotMap, ceStatMatrix, sp, gNorm, nStat);
       }
     }
-    var s = plannerBuildCmpRawStringFromRowMap_(g, n, e1, e2, rowMap, nStat, stats1, stats2);
+    var gemP1 = "";
+    var gemP2 = "";
+    var gemPS = "";
+    if (optPlannerCaches && ceSlotMap && normalizeItemName(sp) && normalizeItemName(n)) {
+      if (gNorm === "Ring") {
+        gemP1 = plannerGemDiffParenString_(optPlannerCaches, sp, n, "Ring 1", ceSlotMap);
+        gemP2 = plannerGemDiffParenString_(optPlannerCaches, sp, n, "Ring 2", ceSlotMap);
+      } else if (gNorm === "Trinket") {
+        gemP1 = plannerGemDiffParenString_(optPlannerCaches, sp, n, "Trinket 1", ceSlotMap);
+        gemP2 = plannerGemDiffParenString_(optPlannerCaches, sp, n, "Trinket 2", ceSlotMap);
+      } else if (gNorm) {
+        gemPS = plannerGemDiffParenString_(optPlannerCaches, sp, n, gNorm, ceSlotMap);
+      }
+    }
+    var s = plannerBuildCmpRawStringFromRowMap_(
+      g,
+      n,
+      e1,
+      e2,
+      rowMap,
+      nStat,
+      stats1,
+      stats2,
+      gemP1,
+      gemP2,
+      gemPS
+    );
     if (blockDisplay != null) {
       blockDisplay[i][offNInBlock] = s;
     } else {
@@ -3048,7 +3344,9 @@ function flushComparisonWrites_(bpSheet, writes, cmpRawColLetter) {
           for (var t = sub; t <= subEnd; t++) {
             matrix.push([seg[t].rich]);
           }
-          bpSheet.getRange(r0, CMP_DISP_COL, h, 1).setRichTextValues(matrix);
+          var kOut = bpSheet.getRange(r0, CMP_DISP_COL, h, 1);
+          kOut.setRichTextValues(matrix);
+          kOut.setWrap(true);
           sub = subEnd + 1;
         }
         j = runEnd + 1;
@@ -3186,11 +3484,12 @@ function plannerCmpRawRefreshRowFingerprint_(dispStr, heroicDarkRow, intN, equip
  *   to BIS_FIRST_DATA_ROW; when spec+gear scoped, skips a second B+C read (equip path passes B:C only).
  * @param {?Object} optSharedPlannerCaches - from plannerRefreshCachesBuild_; when set (e.g. force refresh), skip rebuilding
  *   ItemDB/GemDB/CE caches so pass 2 reuses pass 1 memoization.
- * @param {?{captureFullSheetBands:?Object, reuseFullSheetBands:?Object}} optFullSheetIo_ - force-refresh pass 2 only:
- *   pass 1 fills captureFullSheetBands with partAD/partFI; pass 2 reuses them and refreshes CE-derived equip + K formulas.
+ * @param {?{captureFullSheetBands:?Object, reuseFullSheetBands:?Object}} optFullSheetIo_ - pass 1 fills capture with partAD/partFI;
+ *   pass 2 reuses them (pass an object without cmpSkipFp so K/L are always rewritten).
  * @param {?Array<Array<*>>} optCeGearColVals - CE column A getValues (rows 1..effective last row); skips duplicate read in cache build.
  * @param {?number} optPlannerLastRow - when >= BIS_FIRST_DATA_ROW, skip getLastRow (equip path passes fresh lastRow).
  * @param {boolean=} optPlainComparisonDisp - full-sheet only: write plain text to K/L in bulk (fast onOpen fallback); omit for colored Rich Text.
+ * @param {?Array<number>} optRestrictPlannerRows - 1-based BIS Planner sheet rows to refresh only (fast path for F–I edits).
  */
 function refreshComparisonRichText(
   bpSheet,
@@ -3201,7 +3500,8 @@ function refreshComparisonRichText(
   optFullSheetIo_,
   optCeGearColVals,
   optPlannerLastRow,
-  optPlainComparisonDisp
+  optPlainComparisonDisp,
+  optRestrictPlannerRows
 ) {
   var lastRow;
   if (optPlannerLastRow != null && Number(optPlannerLastRow) >= BIS_FIRST_DATA_ROW) {
@@ -3225,7 +3525,8 @@ function refreshComparisonRichText(
       optSharedPlannerCaches,
       optFullSheetIo_,
       optCeGearColVals,
-      optPlainComparisonDisp
+      optPlainComparisonDisp,
+      optRestrictPlannerRows
     );
   } finally {
     bisRefreshReentryDepth_--;
@@ -3241,7 +3542,8 @@ function refreshComparisonRichTextInner_(
   optSharedPlannerCaches,
   optFullSheetIo_,
   optCeGearColVals,
-  optPlainComparisonDisp
+  optPlainComparisonDisp,
+  optRestrictPlannerRows
 ) {
   var specFilterNorm =
     specFilter != null && String(specFilter).replace(/^\s+|\s+$/g, "") !== ""
@@ -3291,7 +3593,56 @@ function refreshComparisonRichTextInner_(
    */
   var metaAcqDungeonDiff = null;
 
-  if (!specFilterNorm && !gearFilterNorm) {
+  var rowsOnlyList = null;
+  if (optRestrictPlannerRows != null && optRestrictPlannerRows.length > 0) {
+    var seenIdx = {};
+    for (var zr = 0; zr < optRestrictPlannerRows.length; zr++) {
+      var rr = Number(optRestrictPlannerRows[zr]);
+      if (rr < BIS_FIRST_DATA_ROW || rr > lastRow) continue;
+      seenIdx[rr - BIS_FIRST_DATA_ROW] = true;
+    }
+    var sk = Object.keys(seenIdx);
+    if (sk.length > 0) {
+      rowsOnlyList = sk
+        .map(function (x) {
+          return Number(x);
+        })
+        .sort(function (a, b) {
+          return a - b;
+        });
+    }
+  }
+
+  if (rowsOnlyList && rowsOnlyList.length > 0) {
+    indices = rowsOnlyList.slice();
+    interestAll = new Array(cmpNumRows);
+    rowNK = {};
+    for (var uo = 0; uo < indices.length; uo++) {
+      var iOnly = indices[uo];
+      var rAbs = BIS_FIRST_DATA_ROW + iOnly;
+      interestAll[iOnly] = bpSheet.getRange(rAbs, GG_INTEREST, 1, 1).getDisplayValues()[0];
+      var kOnly = bpSheet.getRange(rAbs, CMP_DISP_COL, 1, 1).getFormulas()[0][0];
+      var nmOnly = bpSheet.getRange(rAbs, GG_NAME, 1, 1).getDisplayValues()[0][0];
+      var grOnly = bpSheet.getRange(rAbs, GG_GEARTYPE, 1, 1).getDisplayValues()[0][0];
+      var spOnly = bpSheet.getRange(rAbs, GG_SPEC, 1, 1).getDisplayValues()[0][0];
+      var eqOnly = plannerResolveEquippedNamesForPlannerRow_(
+        ceSheetInner,
+        spOnly,
+        grOnly,
+        ceGearColInner,
+        ceEquipSnap
+      );
+      rowNK[iOnly] = {
+        d: "",
+        k: kOnly,
+        n: nmOnly,
+        e: eqOnly.e1,
+        e2: eqOnly.e2,
+        g: grOnly,
+        sp: spOnly,
+      };
+    }
+  } else if (!specFilterNorm && !gearFilterNorm) {
     var rData = BIS_FIRST_DATA_ROW;
     var wAD = GG_NAME - GG_INTEREST + 1;
     var wFI = GG_DIFFICULTY - GG_ACQ + 1;
@@ -3451,8 +3802,19 @@ function refreshComparisonRichTextInner_(
 
   var threadItemdb = null;
   var threadGem = null;
+  var plannerCachesPre = null;
   if (indices.length > 0) {
     threadItemdb = itemdbReadAllStatRows_(ssInner);
+    threadGem = gemdbReadAllRows_(ssInner);
+    if (ceSheetInner && !optSharedPlannerCaches) {
+      plannerCachesPre = plannerRefreshCachesBuild_(
+        ssInner,
+        ceSheetInner,
+        ceGearColInner,
+        threadItemdb,
+        threadGem
+      );
+    }
     plannerWriteCmpRawForComparisonRefresh_(
       bpSheet,
       indices,
@@ -3461,11 +3823,10 @@ function refreshComparisonRichTextInner_(
       offNInBlock,
       threadItemdb,
       ceSheetInner,
-      ceGearColInner
+      ceGearColInner,
+      optSharedPlannerCaches || plannerCachesPre
     );
-    threadGem = gemdbReadAllRows_(ssInner);
   }
-
 
   if (blockDisplay == null && indices.length > 0) {
     var metaW = GG_DIFFICULTY - GG_ACQ + 1;
@@ -3491,6 +3852,8 @@ function refreshComparisonRichTextInner_(
   if (ceSheet) {
     if (optSharedPlannerCaches) {
       plannerCaches = optSharedPlannerCaches;
+    } else if (plannerCachesPre) {
+      plannerCaches = plannerCachesPre;
     } else {
       // Use ceGearColInner (resolved above), not optCeGearColVals: after CE writes in the same run,
       // effective last row can grow so the caller snapshot is too short — inner re-reads col A, but
@@ -3505,11 +3868,27 @@ function refreshComparisonRichTextInner_(
     }
   }
 
+  var statsColDisplay = [];
+  if (cmpNumRows > 0) {
+    if (rowsOnlyList && rowsOnlyList.length > 0) {
+      statsColDisplay = new Array(cmpNumRows);
+      for (var sj = 0; sj < rowsOnlyList.length; sj++) {
+        var ij = rowsOnlyList[sj];
+        var rj = BIS_FIRST_DATA_ROW + ij;
+        statsColDisplay[ij] = [bpSheet.getRange(rj, GG_STATS, 1, 1).getDisplayValues()[0][0]];
+      }
+    } else {
+      statsColDisplay = bpSheet.getRange(BIS_FIRST_DATA_ROW, GG_STATS, cmpNumRows, 1).getDisplayValues();
+    }
+  }
+  var statsColumnWrites = [];
+
   var usePlainFullSheet =
     optPlainComparisonDisp === true &&
     !specFilterNorm &&
     !gearFilterNorm &&
-    cmpNumRows > 0;
+    cmpNumRows > 0 &&
+    !(rowsOnlyList && rowsOnlyList.length > 0);
   var kPlainMat = null;
   var lPlainTexts = null;
   var lPlainColors = null;
@@ -3524,6 +3903,7 @@ function refreshComparisonRichTextInner_(
     }
   }
 
+  var bisRowStyleWrites = [];
   for (var ki = 0; ki < indices.length; ki++) {
     var i = indices[ki];
     var r = i + BIS_FIRST_DATA_ROW;
@@ -3558,6 +3938,17 @@ function refreshComparisonRichTextInner_(
       interestAll.length > i && interestAll[i]
         ? normalizeItemName(interestAll[i][0])
         : "";
+    var fiTriple =
+      blockDisplay != null
+        ? [
+            blockDisplay[i][GG_ACQ - GG_SPEC],
+            blockDisplay[i][GG_DUNGEON - GG_SPEC],
+            blockDisplay[i][GG_DIFFICULTY - GG_SPEC],
+          ]
+        : [metaAcqDungeonDiff[i][0], metaAcqDungeonDiff[i][2], metaAcqDungeonDiff[i][3]];
+    var heroicDarkRow = plannerRowIsHeroicDungeonDarkFill_(fiTriple, nmN);
+    var rowTh = plannerBisPlannerRowThemeFromTriple_(fiTriple, nmN);
+    bisRowStyleWrites.push({ r: r, bg: rowTh.bg, textMain: rowTh.textMain });
     if (normalizeItemName(nmN) !== "") {
       if (gearIsRingOrTrinket_(gearRow)) {
         var e1 = normalizeItemName(eqN);
@@ -3573,19 +3964,22 @@ function refreshComparisonRichTextInner_(
         dispStr = "";
       }
     }
-    var heroicDarkRow = plannerRowIsHeroicDungeonDarkFill_(
-      blockDisplay != null
-        ? [
-            blockDisplay[i][GG_ACQ - GG_SPEC],
-            blockDisplay[i][GG_DUNGEON - GG_SPEC],
-            blockDisplay[i][GG_DIFFICULTY - GG_SPEC]
-          ]
-        : [
-            metaAcqDungeonDiff[i][0],
-            metaAcqDungeonDiff[i][2],
-            metaAcqDungeonDiff[i][3]
-          ]
-    );
+
+    if (plannerCaches && normalizeItemName(nmN) && normalizeItemName(specRow)) {
+      var gemLineJ = plannerIdealGemParenLineForItem_(plannerCaches, specRow, nmN);
+      var baseDispJ =
+        statsColDisplay.length > i && statsColDisplay[i] ? statsColDisplay[i][0] : "";
+      var baseJ = stripPlannerStatsGemSuffix_(baseDispJ);
+      var newStatsJ =
+        gemLineJ !== ""
+          ? baseJ !== ""
+            ? baseJ + "\n" + gemLineJ
+            : gemLineJ
+          : baseJ;
+      if (String(newStatsJ) !== String(baseDispJ == null ? "" : baseDispJ)) {
+        statsColumnWrites.push({ r: r, v: newStatsJ });
+      }
+    }
 
     var equippedHide = plannerRowIsEquippedItemRow_(intN, gearRow, nmN, eqN, eq2N);
     var capBandSnap = optFullSheetIo_ && optFullSheetIo_.captureFullSheetBands;
@@ -3733,6 +4127,8 @@ function refreshComparisonRichTextInner_(
     flushComparisonWrites_(bpSheet, writes, cmpRawLetter);
     flushUpgradePctCells_(bpSheet, upgradeWrites);
   }
+  flushPlannerStatsColumnWrites_(bpSheet, statsColumnWrites);
+  flushPlannerBisRowThemeWrites_(bpSheet, bisRowStyleWrites);
   flushPlannerGearScoreCells_(bpSheet, []);
 }
 
@@ -3755,6 +4151,8 @@ function normalizeComparisonDisplay(s) {
   }
   t = t.replace(/ Use:/g, "\nUse:");
   t = t.replace(/ Equip:/g, "\nEquip:");
+  t = t.replace(/ Proc:/gi, "\nProc:");
+  t = t.replace(/ Chance on hit:/gi, "\nChance on hit:");
   return t;
 }
 
@@ -3797,14 +4195,78 @@ function applyCurrentlyEquippedAttrLabel_(line1, line2) {
 /**
  * Matches generate_bis_planner.py _get_row_color / white-text heroic dungeon rows.
  * @param {Array<*>} triple — [Acquisition Type, Dungeon, Difficulty]
+ * @param {string=} optItemName — when set, PLANNER_ITEM_FORCE_HEROIC_DUNGEON_DROP overrides Normal → heroic styling
  */
-function plannerRowIsHeroicDungeonDarkFill_(triple) {
+/** Case-insensitive match for manual Difficulty cell edits ("heroic", "HEROIC", …). */
+function plannerDifficultyCellIsHeroic_(diffCell) {
+  return String(normalizeItemName(diffCell) || "")
+    .toLowerCase()
+    .replace(/\u2212/g, "-")
+    .trim() === "heroic";
+}
+
+function plannerRowIsHeroicDungeonDarkFill_(triple, optItemName) {
   if (!triple || triple.length < 3) return false;
-  if (normalizeItemName(triple[2]) !== "Heroic") return false;
   if (normalizeItemName(triple[0]) !== "Dungeon Drop") return false;
   var dung = normalizeItemName(triple[1]);
   if (!dung || dung.indexOf("---") === 0) return false;
-  return true;
+  if (plannerDifficultyCellIsHeroic_(triple[2])) return true;
+  if (optItemName && plannerItemForceHeroicDungeonDrop_(optItemName)) return true;
+  return false;
+}
+
+/** Match generate_bis_planner.py _get_row_color dungeon key normalization. */
+function plannerNormalizeDungeonKeyForPalette_(dungeonRaw) {
+  var d = normalizeItemName(dungeonRaw);
+  if (!d || d.indexOf("---") === 0) return "";
+  if (d === "Mana-Tombs") return "Mana Tombs";
+  return d;
+}
+
+function plannerHexColorForBisRow_(hexNoHash) {
+  var h = String(hexNoHash == null ? "" : hexNoHash).replace(/^#/, "").replace(/\s+/g, "");
+  if (h.length === 6) return "#" + h;
+  return "#FFFFFF";
+}
+
+/**
+ * Row fill + default text color for columns A–J and M (heroic dungeon → white text).
+ * @param {Array<*>} triple — [Acquisition, Dungeon, Difficulty]
+ * @return {{bg:string, textMain:string}}
+ */
+function plannerBisPlannerRowThemeFromTriple_(triple, itemName) {
+  if (!triple || triple.length < 3) {
+    return { bg: "#FFFFFF", textMain: "#000000" };
+  }
+  var acq = normalizeItemName(triple[0]);
+  var heroicDark = plannerRowIsHeroicDungeonDarkFill_(triple, itemName);
+  if (acq === "Dungeon Drop") {
+    var dkey = plannerNormalizeDungeonKeyForPalette_(triple[1]);
+    var rawHex;
+    if (heroicDark) {
+      rawHex =
+        dkey && Object.prototype.hasOwnProperty.call(PLANNER_DUNGEON_COLORS_HEROIC, dkey)
+          ? PLANNER_DUNGEON_COLORS_HEROIC[dkey]
+          : "D89838";
+    } else {
+      rawHex =
+        dkey && Object.prototype.hasOwnProperty.call(PLANNER_DUNGEON_COLORS_NORMAL, dkey)
+          ? PLANNER_DUNGEON_COLORS_NORMAL[dkey]
+          : "FFF0CC";
+    }
+    return {
+      bg: plannerHexColorForBisRow_(rawHex),
+      textMain: heroicDark ? "#FFFFFF" : "#000000",
+    };
+  }
+  if (!acq) {
+    return { bg: "#FFFFFF", textMain: "#000000" };
+  }
+  var acqHex = PLANNER_ACQ_ROW_BG[acq];
+  if (acqHex == null || acqHex === "") {
+    return { bg: "#FFFFFF", textMain: "#000000" };
+  }
+  return { bg: plannerHexColorForBisRow_(acqHex), textMain: "#000000" };
 }
 
 /** @return {boolean} */
@@ -3870,6 +4332,83 @@ function labelSlotBodyForCmpRaw_(bodyLines) {
   return { line1: line1, line2: line2 };
 }
 
+/** New comma-separated fragment: +/- stat diff or "(gems: …)" (do not merge into previous segment). */
+function cmpLineLooksLikeNewStatFragment_(p) {
+  if (!p || p.length === 0) return false;
+  var c0 = p.charAt(0);
+  if (
+    c0 === "+" ||
+    c0 === "-" ||
+    c0 === "\u2212" ||
+    c0 === "\uFE63" ||
+    c0 === "\uFF0D" ||
+    c0 === "\uFF0B"
+  ) {
+    return true;
+  }
+  return /^\(gems:/i.test(p);
+}
+
+/** Rich-text color for "(gems: +5 Str)" / "(gems: -10 Agi)" segments in Stat Comparison. */
+function cmpGemsParenSegmentColor_(segment, colPos, colNeg) {
+  var t = String(segment == null ? "" : segment).replace(/^\s+|\s+$/g, "");
+  var m = t.match(/^\(gems:\s*(.+)\)$/i);
+  if (!m) return null;
+  var inner = String(m[1] || "").replace(/\s+$/g, "");
+  if (inner === "") return null;
+  var parts = inner.split(/\s*,\s*/);
+  var hasNeg = false;
+  var hasPos = false;
+  for (var gi = 0; gi < parts.length; gi++) {
+    var frag = parts[gi].replace(/^\s+|\s+$/g, "");
+    if (!frag) continue;
+    var ch = frag.charAt(0);
+    if (ch === "-" || ch === "\u2212" || ch === "\uFE63" || ch === "\uFF0D") hasNeg = true;
+    else if (ch === "+" || ch === "\uFF0B") hasPos = true;
+  }
+  if (hasNeg && !hasPos) return colNeg;
+  if (hasPos && !hasNeg) return colPos;
+  if (hasNeg) return colNeg;
+  if (hasPos) return colPos;
+  return null;
+}
+
+function cmpRichColorForStatSegment_(segment, colPos, colNeg) {
+  var g = cmpGemsParenSegmentColor_(segment, colPos, colNeg);
+  if (g) return g;
+  var s = String(segment == null ? "" : segment).replace(/^\s+|\s+$/g, "");
+  if (!s) return null;
+  var c0 = s.charAt(0);
+  if (c0 === "+" || c0 === "\uFF0B") return colPos;
+  if (c0 === "-" || c0 === "\u2212" || c0 === "\uFE63" || c0 === "\uFF0D") return colNeg;
+  return null;
+}
+
+/** Stat Comparison (K): colored run at fixed font size so cells stay 10pt after script updates. */
+function cmpDispTextStyle_(foregroundHex) {
+  return SpreadsheetApp.newTextStyle()
+    .setForegroundColor(foregroundHex)
+    .setFontSize(CMP_DISP_FONT_PT)
+    .build();
+}
+
+/**
+ * Paint every "(gems: …)" span with gem-aware +/- colors after other runs (e.g. line2 attribute color)
+ * so gem coloring is correct even when the stat/attr split mis-classifies the segment.
+ */
+function cmpOverlayGemsParenStylesOnBuilder_(builder, fullText, colPos, colNeg) {
+  var re = new RegExp("\\(\\s*gems\\s*:[^)]+\\)", "gi");
+  var m;
+  for (var cap = 0; cap < 400 && (m = re.exec(fullText)) !== null; cap++) {
+    var seg = m[0];
+    var gc = cmpGemsParenSegmentColor_(seg, colPos, colNeg);
+    if (!gc) continue;
+    var rs = m.index;
+    var reEnd = rs + seg.length;
+    builder.setTextStyle(rs, reEnd, cmpDispTextStyle_(gc));
+  }
+}
+
 /** Append comma-merged +/- stat segments to out; pushes color runs (positions relative to current out). */
 function appendMergedStatSegmentsTo_(out, runs, line1, colPos, colNeg) {
   var L1 = line1 == null ? "" : String(line1);
@@ -3878,7 +4417,7 @@ function appendMergedStatSegmentsTo_(out, runs, line1, colPos, colNeg) {
   for (var pi = 0; pi < rawParts.length; pi++) {
     var p = rawParts[pi].trim();
     if (p.length === 0) continue;
-    if (/^[+-]/.test(p)) {
+    if (cmpLineLooksLikeNewStatFragment_(p)) {
       segs.push(p);
     } else if (segs.length > 0) {
       segs[segs.length - 1] += ", " + p;
@@ -3897,10 +4436,7 @@ function appendMergedStatSegmentsTo_(out, runs, line1, colPos, colNeg) {
     }
     var segStart = out.s.length;
     out.s += segs[si];
-    var s = segs[si];
-    var c = null;
-    if (s.charAt(0) === "+") c = colPos;
-    else if (s.charAt(0) === "-") c = colNeg;
+    var c = cmpRichColorForStatSegment_(segs[si], colPos, colNeg);
     prevC = c;
     if (c) {
       runs.push({ start: segStart, end: out.s.length, color: c });
@@ -3950,18 +4486,20 @@ function buildDualComparisonRichTextValue_(blocks, colPos, colNeg, colAttr, colN
   var fullLen = fullText.length;
 
   var builder = SpreadsheetApp.newRichTextValue().setText(fullText);
+  builder.setTextStyle(
+    0,
+    fullLen,
+    SpreadsheetApp.newTextStyle().setFontSize(CMP_DISP_FONT_PT).setForegroundColor("#000000").build()
+  );
   for (var j = 0; j < runs.length; j++) {
     var rr = runs[j];
     var rs = Math.max(0, Math.min(rr.start + po, fullLen));
     var re = Math.max(0, Math.min(rr.end + po, fullLen));
     if (rs < re) {
-      builder.setTextStyle(
-        rs,
-        re,
-        SpreadsheetApp.newTextStyle().setForegroundColor(rr.color).build()
-      );
+      builder.setTextStyle(rs, re, cmpDispTextStyle_(rr.color));
     }
   }
+  cmpOverlayGemsParenStylesOnBuilder_(builder, fullText, colPos, colNeg);
   return builder.build();
 }
 
@@ -4015,7 +4553,7 @@ function buildComparisonRichTextValue(display, darkFillRow) {
   for (var pi = 0; pi < rawParts.length; pi++) {
     var p = rawParts[pi].trim();
     if (p.length === 0) continue;
-    if (/^[+-]/.test(p)) {
+    if (cmpLineLooksLikeNewStatFragment_(p)) {
       segs.push(p);
     } else if (segs.length > 0) {
       segs[segs.length - 1] += ", " + p;
@@ -4038,10 +4576,7 @@ function buildComparisonRichTextValue(display, darkFillRow) {
     }
     var segStart = out.length;
     out += segs[si];
-    var s = segs[si];
-    var c = null;
-    if (s.charAt(0) === "+") c = colPos;
-    else if (s.charAt(0) === "-") c = colNeg;
+    var c = cmpRichColorForStatSegment_(segs[si], colPos, colNeg);
     prevC = c;
     if (c) {
       runs.push({ start: segStart, end: out.length, color: c });
@@ -4069,16 +4604,17 @@ function buildComparisonRichTextValue(display, darkFillRow) {
   var fullLen = fullText.length;
 
   var builder = SpreadsheetApp.newRichTextValue().setText(fullText);
+  builder.setTextStyle(
+    0,
+    fullLen,
+    SpreadsheetApp.newTextStyle().setFontSize(CMP_DISP_FONT_PT).setForegroundColor("#000000").build()
+  );
   for (var j = 0; j < runs.length; j++) {
     var rr = runs[j];
     var rs = Math.max(0, Math.min(rr.start + po, fullLen));
     var re = Math.max(0, Math.min(rr.end + po, fullLen));
     if (rs < re) {
-      builder.setTextStyle(
-        rs,
-        re,
-        SpreadsheetApp.newTextStyle().setForegroundColor(rr.color).build()
-      );
+      builder.setTextStyle(rs, re, cmpDispTextStyle_(rr.color));
     }
   }
   // No +/- stat runs — muted notice except "Current Equipment Not Specified" (always black).
@@ -4089,24 +4625,17 @@ function buildComparisonRichTextValue(display, darkFillRow) {
       var plainL1 = String(line1 == null ? "" : line1).replace(/^\s+|\s+$/g, "");
       var noticeFill =
         plainL1 === CMP_RAW_EQUIP_NOT_SPECIFIED ? "#000000" : colNotice;
-      builder.setTextStyle(
-        n1s,
-        n1e,
-        SpreadsheetApp.newTextStyle().setForegroundColor(noticeFill).build()
-      );
+      builder.setTextStyle(n1s, n1e, cmpDispTextStyle_(noticeFill));
     }
   }
   if (line2) {
     var l2s = Math.max(0, Math.min(line2Start + po, fullLen));
     var l2e = fullLen;
     if (l2s < l2e) {
-      builder.setTextStyle(
-        l2s,
-        l2e,
-        SpreadsheetApp.newTextStyle().setForegroundColor(colAttr).build()
-      );
+      builder.setTextStyle(l2s, l2e, cmpDispTextStyle_(colAttr));
     }
   }
+  cmpOverlayGemsParenStylesOnBuilder_(builder, fullText, colPos, colNeg);
   return builder.build();
 }
 

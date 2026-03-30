@@ -196,7 +196,7 @@ Bear,Hands,PreRaid,Cobrascale Gloves,Auction House,,,,208 Armor; 33 Sta; 50 AP; 
 Bear,Hands,PreRaid,Windslayer Wraps,Auction House,,,,208 Armor; 36 Str; 18 Agi; 25 Sta; 17 Hit,
 Bear,Hands,PreRaid,Gloves of the Unbound,Dungeon Drop,,Arcatraz,Normal,183 Armor; 27 Agi; 20 Sta; 38 AP,Wrath-Scryer Soccothrates
 Bear,Hands,PreRaid,Wastewalker Gloves,Dungeon Drop,,Shattered Halls,Normal,183 Armor; 32 Agi; 33 Sta; 16 AP,Warchief Kargath Bladefist
-Bear,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
+Bear,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta; 18 Expertise,
 Bear,Hands,PreRaid,Verdant Gloves,Quest,Akama's Promise (SMV),,,393 Armor; 26 Str; 14 Agi; 27 Sta,
 Bear,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
 Bear,Waist,PreRaid,Tree-Mender's Belt,Dungeon Drop,,Hellfire Ramparts,Heroic,406 Armor; 27 Str; 27 Agi; 22 Sta; 21 Int,Vazruden
@@ -207,8 +207,8 @@ Bear,Legs,PreRaid,Heavy Clefthoof Leggings,Auction House,,,,503 Armor; 33 Sta; 2
 Bear,Legs,PreRaid,Forestwalker Kilt,Dungeon Drop,,Mana Tombs,Heroic,459 Armor; 33 Str; 26 Agi; 24 Sta; 27 Int,Nexus-Prince Shaffar
 Bear,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Bear,Legs,PreRaid,Ash Tempered Legguards,Quest,Thwart the Dark Conclave (SMV),,,475 Armor; 29 Str; 16 Agi; 31 Sta,
-Bear,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
-Bear,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
+Bear,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit; 18 Expertise,
+Bear,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta; 22 Expertise,
 Bear,Feet,PreRaid,Heavy Clefthoof Boots,Auction House,,,,394 Armor; 30 Sta; 21 Defense,
 Bear,Feet,PreRaid,Barkchip Boots,Dungeon Drop,,Underbog,Normal,352 Armor; 24 Str; 24 Agi; 36 Sta; 21 Int,The Black Stalker
 Bear,Feet,PreRaid,Boots of the Shadow Flame,Dungeon Drop,,Blackwing Lair,Normal,310 Armor; 22 Sta; 44 AP; 20 Hit,Nefarian
@@ -230,7 +230,7 @@ Bear,Ring,PreRaid,Nexus-Prince's Ring of Balance,Dungeon Drop,,Mana-Tombs,Heroic
 Bear,Ring,PreRaid,Ravenclaw Band,Dungeon Drop,,Sethekk Halls,Normal,20 Agi; 15 Sta; 30 AP; 13 Hit,Talon King Ikiss
 Bear,Ring,PreRaid,Band of the Exorcist,Dungeon Token,,,,24 Sta; 34 AP; 10 Hit; 16 Crit; 11 Resilience,50 Spirit Shards
 Bear,Ring,PreRaid,Ring of Unyielding Force,Dungeon Token,,,,294 Armor; 31 Sta; 22 Defense,25 Badges of Justice
-Bear,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Bear,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Bear,Trinket,PreRaid,Gnomish Poultryizer,Auction House,,,,"45 Sta
 
 Use: Turns the target into a chicken for 15 sec.  Well, that is assuming the transmogrification polarity has not been reversed",
@@ -264,8 +264,8 @@ Bear,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,34 
 Bear,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
 Bear,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
 Bear,Two Hand,PreRaid,Greatstaff of the Leviathan,Dungeon Drop,,Underbog,Normal,360 Armor; 39 Str; 36 Sta; 539 AP,Ghaz'an
-Bear,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit,
-Bear,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 39 Sta; 712 AP; 27 Defense,Cenarion Expedition - Exalted
+Bear,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit; 17 Expertise,
+Bear,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 39 Sta; 712 AP; 27 Defense; 24 Expertise,Cenarion Expedition - Exalted
 Bear,Two Hand,PreRaid,Grand Marshal's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
 Bear,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
 Bear,Ranged/Relic,PreRaid,Idol of Brutality,Dungeon Drop,,Stratholme,Normal,Equip: Increases the damage dealt by your Maul ability by 50 and Swipe ability by 10,Magistrate Barthilas
@@ -305,8 +305,8 @@ Cat,Legs,PreRaid,Fel Leather Leggings,Auction House,,,,249 Armor; 52 AP; 25 Hit;
 Cat,Legs,PreRaid,Forestwalker Kilt,Dungeon Drop,,Mana Tombs,Heroic,459 Armor; 33 Str; 26 Agi; 24 Sta; 27 Int,Nexus-Prince Shaffar
 Cat,Legs,PreRaid,Midnight Legguards,Dungeon Drop,,Slave Pens,Heroic,305 Armor; 30 Sta; 64 AP; 17 Hit; 27 Crit,Quagmirran
 Cat,Legs,PreRaid,Wastewalker Leggings,Dungeon Drop,,Mana Tombs,Heroic,256 Armor; 31 Agi; 27 Sta; 28 AP; 19 Hit,Nexus-Prince Shaffar
-Cat,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
-Cat,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
+Cat,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit; 18 Expertise,
+Cat,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta; 22 Expertise,
 Cat,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Cat,Feet,PreRaid,The Master's Treads,Auction House,,,,"191 Armor; 24 Agi; 19 Sta; 48 AP; 16 Hit
 
@@ -328,7 +328,7 @@ Cat,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,Heroic,40 
 Cat,Ring,PreRaid,Kaylaan's Signet,Quest,Deathblow to the Legion (NS),,,15 Agi; 50 AP; 10 Hit,
 Cat,Ring,PreRaid,Overseer's Signet,Quest,Shutting Down Manaforge Ara (NS),,,25 Str; 15 Agi; 10 Hit,
 Cat,Ring,PreRaid,Slayer's Mark of the Redemption,Quest,Dissension Amongst the Ranks... (SMV),,,15 Agi; 50 AP; 10 Hit,
-Cat,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Cat,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Cat,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
 Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
@@ -355,8 +355,8 @@ Equip: Reduces the base Mana cost of your shapeshifting spells by 200",World Dro
 Cat,Two Hand,PreRaid,Draenic Wildstaff,Dungeon Drop,,Auchenai Crypts,Heroic,34 Str; 32 Agi; 33 Sta; 539 AP; 22 Hit,Avatar of the Martyred
 Cat,Two Hand,PreRaid,Dreamer's Dragonstaff,Dungeon Drop,,Botanica,Normal,46 Str; 27 Agi; 28 Sta; 539 AP,Thorngrin the Tender
 Cat,Two Hand,PreRaid,Feral Staff of Lashing,Dungeon Drop,,Botanica,Heroic,300 Armor; 36 Str; 35 Agi; 34 Sta; 754 AP,Warp Splinter
-Cat,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit,
-Cat,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 39 Sta; 712 AP; 27 Defense,Cenarion Expedition - Exalted
+Cat,Two Hand,PreRaid,Fleshling Simulation Staff,Quest,Nexus-King Salhadaar (NS),,,27 Str; 27 Agi; 27 Sta; 457 AP; 26 Hit; 17 Expertise,
+Cat,Two Hand,PreRaid,Earthwarden,Reputation,,,,500 Armor; 39 Sta; 712 AP; 27 Defense; 24 Expertise,Cenarion Expedition - Exalted
 Cat,Two Hand,PreRaid,Grand Marshal's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
 Cat,Two Hand,PreRaid,High Warlord's Maul,PvP,,,,28 Str; 42 Sta; 539 AP; 18 Hit; 28 Crit; 19 Resilience,
 Cat,Ranged/Relic,PreRaid,Idol of Feral Shadows,Dungeon Drop,,Arcatraz,Normal,Equip: Increases periodic damage done by Rip by 7 per combo point,Zereketh the Unbound

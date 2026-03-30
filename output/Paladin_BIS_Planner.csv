@@ -363,17 +363,17 @@ Retribution,Wrist,PreRaid,Marshal's Scaled Bracers,PvP,,,,624 Armor; 26 Str; 22 
 Retribution,Hands,PreRaid,Fel Leather Gloves,Auction House,,,,169 Armor; 36 AP; 17 Hit; 24 Crit,
 Retribution,Hands,PreRaid,Ragesteel Gloves,Auction House,,,,728 Armor; 35 Str; 27 Crit,
 Retribution,Hands,PreRaid,Windstrike Gloves,Auction House,,,,465 Armor; 36 Str; 18 Agi; 25 Sta; 17 Hit,
-Retribution,Hands,PreRaid,Aged Core Leather Gloves,Dungeon Drop,,Molten Core,Normal,148 Armor; 15 Str; 15 Sta; 14 Crit,Middle Bosses
+Retribution,Hands,PreRaid,Aged Core Leather Gloves,Dungeon Drop,,Molten Core,Normal,148 Armor; 15 Str; 15 Sta; 14 Crit; 12 Expertise,Middle Bosses
 Retribution,Hands,PreRaid,Doomplate Gauntlets,Dungeon Drop,,Blood Furnace,Heroic,728 Armor; 31 Str; 25 Sta,Keli'dan the Breaker
-Retribution,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta,
+Retribution,Hands,PreRaid,Flesh Handler's Gauntlets,Quest,The Flesh Lies... (NS),,,165 Armor; 18 Str; 17 Agi; 27 Sta; 18 Expertise,
 Retribution,Waist,PreRaid,Ebon Netherscale Belt,Auction House,,,,457 Armor; 3 Agi; 21 Sta; 14 Int; 48 AP; 8 MP5; 22 Crit,
 Retribution,Waist,PreRaid,Deathforge Girdle,Dungeon Drop,,Sethekk Halls,Normal,655 Armor; 22 Str; 3 Agi; 25 Sta; 20 Crit,Talon King Ikiss
 Retribution,Waist,PreRaid,Dunewind Sash,Dungeon Drop,,Underbog,Normal,164 Armor; 21 Agi; 16 Sta; 50 AP,Ghaz'an
 Retribution,Waist,PreRaid,Girdle of Gallantry,Dungeon Drop,,Underbog,Normal,655 Armor; 27 Str; 14 Agi; 22 Sta; 13 Int,Ghaz'an
 Retribution,Waist,PreRaid,Girdle of the Deathdealer,Dungeon Drop,,Black Morass,Heroic,196 Armor; 28 Agi; 28 Sta; 56 AP; 20 Hit,Aeonus
 Retribution,Legs,PreRaid,Vanquisher's Legplates,Dungeon Drop,,Mechanar,Heroic,1216 Armor; 36 Str; 36 Sta; 23 Crit,Pathaleon the Calculator
-Retribution,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit,
-Retribution,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta,
+Retribution,Legs,PreRaid,Clefthoof Hide Leggings,Quest,Showdown (BEM),,,243 Armor; 30 Str; 30 Agi; 24 Sta; 17 Hit; 18 Expertise,
+Retribution,Legs,PreRaid,Shattrath Leggings,Quest,Special Delivery to Shattrath City (Shattrath City),,,243 Armor; 35 Str; 25 Agi; 27 Sta; 22 Expertise,
 Retribution,Feet,PreRaid,Fel Leather Boots,Auction House,,,,196 Armor; 36 AP; 25 Hit; 17 Crit,
 Retribution,Feet,PreRaid,Boots of the Unjust,Dungeon Drop,,Auchenai Crypts,Heroic,201 Armor; 25 Sta; 64 AP; 13 Hit; 19 Crit,Exarch Maladaar
 Retribution,Feet,PreRaid,Obsidian Clodstompers,Dungeon Drop,,Botanica,Normal,800 Armor; 34 Str; 30 Sta,High Botanist Freywinn
@@ -389,7 +389,7 @@ Retribution,Ring,PreRaid,Shaffar's Band of Brutality,Dungeon Drop,,Mana-Tombs,He
 Retribution,Ring,PreRaid,Acrobat's Mark of the Sha'tar,Quest,Battle of the Crimson Watch (SMV),,,29 Str; 12 Agi,
 Retribution,Ring,PreRaid,Overseer's Signet,Quest,Shutting Down Manaforge Ara (NS),,,25 Str; 15 Agi; 10 Hit,
 Retribution,Ring,PreRaid,A'dal's Command,Reputation,,,,29 Str; 16 Agi; 18 Sta,The Sha'tar - Exalted
-Retribution,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta,Lower City - Exalted
+Retribution,Ring,PreRaid,Shapeshifter's Signet,Reputation,,,,25 Agi; 18 Sta; 20 Expertise,Lower City - Exalted
 Retribution,Trinket,PreRaid,Abacus of Violent Odds,Dungeon Drop,,Mechanar,Normal,"64 AP; 260 Haste
 
 Use: Increases haste rating by 260 for 10 sec",Pathaleon the Calculator
