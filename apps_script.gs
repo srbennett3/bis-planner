@@ -1035,6 +1035,25 @@ function ceForEachGearRowInSection_(ceSheet, weightsRow, fn) {
   }
 }
 
+/** Clear ideal-gem block (C–E) background only; does not touch values. */
+function ceClearIdealGemBlockBackground_(ceSheet, row) {
+  ceSheet.getRange(row, CE_IDEAL_GEM_COL, 1, CE_TOTAL_GEM_STATS_COL - CE_IDEAL_GEM_COL + 1).setBackground(null);
+}
+
+/**
+ * True for rows between "--- Spec ---" and that spec's Weights row (real gear slots).
+ * Rows below Weights still belong to the same spec when scanning column A up, but must not be treated
+ * as gear rows (footer / padding) — avoids grey gem cells on template rows past the last Weights.
+ */
+function ceRowIsPlannedGearSlotRow_(ceSheet, row, gearTypeCell) {
+  if (row < CE_FIRST_DATA_ROW) return false;
+  var gt = String(gearTypeCell == null ? ceSheet.getRange(row, CE_GEARTYPE).getValue() : gearTypeCell).trim();
+  if (!gt || gt.indexOf("---") === 0 || normalizeItemName(gt) === CE_WEIGHT_ROW_LABEL) return false;
+  var wRow = ceFindWeightsRowForSection_(ceSheet, row);
+  if (wRow == null) return false;
+  return row < wRow;
+}
+
 function ceApplyWeightMode_(ceSheet, wRow, mode) {
   var n = CE_STAT_LAST_COL - CE_STAT_FIRST_COL + 1;
   if (mode === CE_WEIGHT_MODE_PAWN) {
@@ -2418,7 +2437,7 @@ function ceRecalculateManualIdealGemsAndScore_(ceSheet, row, ss, wRow) {
 function ceUpdateIdealGemCellsAndScore_(ceSheet, row) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var wRow = ceFindWeightsRowForSection_(ceSheet, row);
-  if (!wRow) return;
+  if (!wRow || row >= wRow) return;
   var item = normalizeItemName(ceSheet.getRange(row, CE_ITEMNAME).getValue());
   if (!item) {
     ceRemoveStatRowProtection_(ceSheet, row);
@@ -2506,6 +2525,10 @@ function ceRefreshAllDerived_(ceSheet) {
     var r = CE_FIRST_DATA_ROW + i;
     var gt = String(ab[i][0]).trim();
     if (normalizeItemName(gt) === CE_WEIGHT_ROW_LABEL) continue;
+    if (!ceRowIsPlannedGearSlotRow_(ceSheet, r, ab[i][0])) {
+      ceClearIdealGemBlockBackground_(ceSheet, r);
+      continue;
+    }
     if (!gt || gt.indexOf("---") === 0) continue;
     var item = normalizeItemName(ab[i][1]);
     if (item) {
@@ -2547,6 +2570,10 @@ function ceLockGemRowsWithoutItem_(ceSheet) {
     var r = CE_FIRST_DATA_ROW + i;
     var gt = String(ab[i][0]).trim();
     if (normalizeItemName(gt) === CE_WEIGHT_ROW_LABEL) continue;
+    if (!ceRowIsPlannedGearSlotRow_(ceSheet, r, ab[i][0])) {
+      ceClearIdealGemBlockBackground_(ceSheet, r);
+      continue;
+    }
     if (!gt || gt.indexOf("---") === 0) continue;
     if (normalizeItemName(ab[i][1])) continue;
     emptyGearRows.push(r);
@@ -2576,6 +2603,10 @@ function ceRefreshDerivedOnOpen_(ceSheet) {
     var r = CE_FIRST_DATA_ROW + i;
     var gt = String(ab[i][0]).trim();
     if (normalizeItemName(gt) === CE_WEIGHT_ROW_LABEL) continue;
+    if (!ceRowIsPlannedGearSlotRow_(ceSheet, r, ab[i][0])) {
+      ceClearIdealGemBlockBackground_(ceSheet, r);
+      continue;
+    }
     if (!gt || gt.indexOf("---") === 0) continue;
     var item = normalizeItemName(ab[i][1]);
     if (!item) continue;
@@ -2635,6 +2666,7 @@ function ceEnsureWeightsModeValidation_(ceSheet) {
 
 function refreshCEComparisonForRow_(ceSheet, bpSheet, row) {
   if (!bpSheet) return;
+  if (!ceRowIsPlannedGearSlotRow_(ceSheet, row)) return;
   var spec = findSpecForCERow(ceSheet, row);
   if (!spec) return;
   var ceSlotLabel = normalizeItemName(ceSheet.getRange(row, CE_GEARTYPE).getValue());
@@ -2658,6 +2690,8 @@ function handleCurrentEquipEdit(e, ceSheet) {
     ceHandleWeightsEdit_(e, ceSheet, row, col);
     return;
   }
+
+  if (!ceRowIsPlannedGearSlotRow_(ceSheet, row, ceSheet.getRange(row, CE_GEARTYPE).getValue())) return;
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var bpSheet = ss.getSheetByName(BIS_PLANNER_SHEET);
@@ -2739,6 +2773,7 @@ function findSpecForCERow(ceSheet, targetRow) {
  * recalculate gear score. Callers flush before the next sheet read (e.g. handleBISPlannerEdit, refreshCEComparisonForRow_).
  */
 function ceRefreshStatsAndGearScoreForRow_(ceSheet, row, oldItemName, newItemName, ss) {
+  if (!ceRowIsPlannedGearSlotRow_(ceSheet, row)) return;
   var newN = normalizeItemName(newItemName);
   if (!newN) return;
   var oldN = normalizeItemName(oldItemName);
